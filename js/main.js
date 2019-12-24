@@ -1,6 +1,6 @@
 $(document).ready(function(){
   header.init();
-})
+}) 
 
 header = {
   scrolling:function(scroll){
