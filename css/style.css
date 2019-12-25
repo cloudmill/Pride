@@ -692,7 +692,7 @@ body .wrapper * {
   z-index: 1;
 }
 .wrapper .page .banner_print img {
-  animation: rotatePrint 30s linear infinite forwards;
+  animation: rotatePrint 30s linear infinite;
   user-select: none;
   pointer-events: none;
 }
@@ -701,7 +701,7 @@ body .wrapper * {
     transform: rotate(0);
   }
   100% {
-    transform: rotate(369deg);
+    transform: rotate(360deg);
   }
 }
 .wrapper .page .banner_lines {
