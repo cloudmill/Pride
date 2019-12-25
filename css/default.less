@@ -187,16 +187,16 @@
     url("../fonts/HelveticaNeueCyr-UltraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
-} 
+}
 
 @font-face {
-  font-family: 'Druk Wide Medium Cy';
+  font-family: "Druk Wide Medium Cy";
   src: url("../fonts/Druk_Wide_Medium_Cy.otf");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Druk Wide Medium Cy';
+  font-family: "Druk Wide Medium Cy";
   src: url("../fonts/Druk_Wide_Medium_Italic_Cy.otf");
   font-weight: normal;
   font-style: italic;
@@ -207,6 +207,7 @@ body {
   padding: 0;
   border: 0;
   .wrapper {
+    overflow: hidden;
     * {
       box-sizing: border-box;
       text-decoration: none;
@@ -267,5 +268,13 @@ body {
       width: 19px;
       height: 22.8px;
     }
+  }
+  .inner {
+    width: ~"calc(100% - 180px)";
+    margin: auto;
+  }
+  .content {
+    width: ~"calc(100% - 400px)";
+    margin: auto;
   }
 }

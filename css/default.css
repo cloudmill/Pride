@@ -111,13 +111,13 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Druk Wide Medium Cy';
+  font-family: "Druk Wide Medium Cy";
   src: url("../fonts/Druk_Wide_Medium_Cy.otf");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Druk Wide Medium Cy';
+  font-family: "Druk Wide Medium Cy";
   src: url("../fonts/Druk_Wide_Medium_Italic_Cy.otf");
   font-weight: normal;
   font-style: italic;
@@ -126,6 +126,9 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+}
+body .wrapper {
+  overflow: hidden;
 }
 body .wrapper * {
   box-sizing: border-box;
@@ -206,4 +209,12 @@ body .wrapper * {
   background-image: url(../images/user.svg);
   width: 19px;
   height: 22.8px;
+}
+.wrapper .inner {
+  width: calc(100% - 180px);
+  margin: auto;
+}
+.wrapper .content {
+  width: calc(100% - 400px);
+  margin: auto;
 }
