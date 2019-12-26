@@ -1467,6 +1467,7 @@ body .wrapper * {
   opacity: 0;
   transition: all 0.3s ease-in-out;
   margin-top: auto;
+  z-index: 2;
 }
 .wrapper .page .blockCross_item .item_plus {
   position: absolute;
@@ -1857,6 +1858,7 @@ body .wrapper * {
   opacity: 0;
   transition: all 0.3s ease-in-out;
   margin-top: auto;
+  z-index: 2;
 }
 .wrapper .page .news_item .item_plus {
   position: absolute;
