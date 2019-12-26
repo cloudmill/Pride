@@ -2,6 +2,7 @@ $(document).ready(function() {
   header.init();
   custom.init();
   svgMap.init();
+  priceSlider.init();
 });
 
 header = {
@@ -25,7 +26,7 @@ header = {
 custom = {
   animateHover: {
     events: function() {
-      $(".hoverLineMoved").hover(function() {
+      $(".hoverLineMoved,.btn-orange,.btn-gray").hover(function() {
         $(this).addClass("ready");
       });
     },
@@ -33,8 +34,38 @@ custom = {
       this.events();
     }
   },
+  tabs: {
+    createTabs: function() {
+      $(".tabs").each(function(i, parent) {
+        var tabsLink = $(this).find(".tabs_link");
+        tabsLink.each(function(key, item) {
+          var index = parseInt(Math.random() * 1000);
+          var tab = $(parent)
+            .find(".tab")
+            .eq(key);
+          $(this).attr("href", "#target-" + index);
+          tab.attr("id", "target-" + index);
+        });
+      });
+    },
+    events: function() {
+      $(document).on("click", ".tabs_link", function(e) {
+        e.preventDefault();
+        var parent = $(this).closest(".tabs");
+        parent.find(".tabs_link").removeClass("active");
+        $(this).addClass("active");
+        parent.find(".tab").removeClass("active");
+        parent.find(".tab" + $(this).attr("href")).addClass("active");
+      });
+    },
+    init: function() {
+      this.createTabs();
+      this.events();
+    }
+  },
   init: function() {
     this.animateHover.init();
+    this.tabs.init();
   }
 };
 svgMap = {
@@ -47,7 +78,7 @@ svgMap = {
       centerMode: false,
       infinite: false,
       arrows: true,
-      swipe:false,
+      swipe: false
     });
   },
   setPos: function(target) {
@@ -89,13 +120,35 @@ svgMap = {
     $(".dillerMap_slider").on("beforeChange", function(slider, a, b, target) {
       _this.setPos(target);
     });
-    $(document).on('click','.slick-slide:not(.slick-current)',function(){
-      $(".dillerMap_slider").slick('slickGoTo',$(this).attr('data-slick-index'))
-    })
+    $(document).on("click", ".slick-slide:not(.slick-current)", function() {
+      $(".dillerMap_slider").slick(
+        "slickGoTo",
+        $(this).attr("data-slick-index")
+      );
+    });
   },
   init: function() {
     this.slider();
     this.events();
     this.setPos(0);
+  }
+};
+priceSlider = {
+  create: function() {
+    $(".pS_slider").each(function() {
+      $(this).slick({
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        speed: 1000,
+        dots: false,
+        infinite: true,
+        arrows: true,
+        swipe: true,
+        rows: 0
+      });
+    });
+  },
+  init: function() {
+    this.create();
   }
 };
