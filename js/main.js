@@ -26,7 +26,7 @@ header = {
 custom = {
   animateHover: {
     events: function() {
-      $(".hoverLineMoved,.btn-orange,.btn-gray").hover(function() {
+      $(".hoverLineMoved,.btn-orange,.btn-gray,.news_item").hover(function() {
         $(this).addClass("ready");
       });
     },
@@ -144,7 +144,23 @@ priceSlider = {
         infinite: true,
         arrows: true,
         swipe: true,
-        rows: 0
+        rows: 0,
+        responsive: [
+          {
+            breakpoint: 951,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 621,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
       });
     });
   },

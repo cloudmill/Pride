@@ -199,6 +199,46 @@ body .wrapper * {
   width: 17px;
   height: 17px;
 }
+.wrapper .icon-phone {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/phone.svg);
+  width: 17px;
+  height: 17px;
+}
+.wrapper .icon-fb {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/fb.svg);
+  width: 8px;
+  height: 16px;
+}
+.wrapper .icon-vk {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/vk.svg);
+  width: 19px;
+  height: 11px;
+}
+.wrapper .icon-inst {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/inst.svg);
+  width: 18px;
+  height: 18px;
+}
 .wrapper .icon-user {
   background-size: contain;
   background-repeat: no-repeat;
@@ -435,5 +475,26 @@ body .wrapper * {
   }
   100% {
     transform: translateY(-100%);
+  }
+}
+@media (max-width: 1440px) {
+  .wrapper .content {
+    width: calc(100% - 360px);
+  }
+}
+@media (max-width: 1240px) {
+  .wrapper .content {
+    width: calc(100% - 100px);
+  }
+  .wrapper .inner {
+    width: calc(100% - 100px);
+  }
+}
+@media (max-width: 950px) {
+  .wrapper .inner {
+    width: calc(100% - 30px);
+  }
+  .wrapper .content {
+    width: calc(100% - 30px);
   }
 }
