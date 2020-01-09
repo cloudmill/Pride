@@ -13,6 +13,46 @@ header = {
       $(".header").removeClass("scrolled");
     }
   },
+  closeEnother: function(name) {
+    if (name != "burger") {
+      $(".burger").removeClass("active");
+      $(".burger-but").removeClass("active");
+    }
+    if (name != "basket") {
+      $(".basket").removeClass("active");
+      $(".header .cart").removeClass("active");
+    }
+  },
+  burgerOpen: function() {
+    var _this = this;
+    $(document).on("click", ".burger-but", function(e) {
+      e.preventDefault();
+      $(".burger").toggleClass("active");
+      $(this).toggleClass("active");
+
+      _this.closeEnother("burger");
+    });
+    $(window).resize(function() {
+      if ($(window).width() > 950) {
+        $(".burger").removeClass("active");
+        $(".burger-but").removeClass("active");
+      }
+    });
+  },
+  cartOpen: function() {
+    var _this = this;
+    $(document).on("click", ".header .cart", function(e) {
+      e.preventDefault();
+      $(".basket").toggleClass("active");
+      $(this).toggleClass("active");
+      _this.closeEnother("basket");
+    });
+    $(document).on("click", ".basket_close", function(e) {
+      e.preventDefault();
+      $(".basket").removeClass("active");
+      $(".header .cart").removeClass("active");
+    });
+  },
   events: function() {
     var _this = this;
     $(document).on("scroll", function() {
@@ -21,6 +61,8 @@ header = {
   },
   init: function() {
     this.events();
+    this.burgerOpen();
+    this.cartOpen();
   }
 };
 custom = {
@@ -63,9 +105,78 @@ custom = {
       this.events();
     }
   },
+  preloaderInit: function() {
+    var imgs = $(".wrapper").find("*:not(script)");
+    var items = [];
+    imgs.each(function() {
+      var url = "";
+      if ($(this).css("background-image") != "none") {
+        var url = $(this).css("background-image");
+      } else if (
+        typeof $(this).attr("src") != "undefined" &&
+        $(this).attr("tagName") == "img"
+      ) {
+        var url = $(this).attr("src");
+      }
+
+      url = url.replace('url("', "");
+      url = url.replace("url(", "");
+      url = url.replace('")', "");
+      url = url.replace(")", "");
+
+      if (url.length > 0) {
+        items.push(url);
+      }
+    });
+    var imgCount = items.length;
+    var progress = 0;
+    function refreshPreloader() {
+      progress++;
+      var percent = Math.round((progress / imgCount) * 100);
+      var preloaderBar = document.querySelector(".preloader_progress .bar");
+      $(".preloader_img .gray").css("height", 100 - percent + "%");
+      $(".preloader_progress .bar").css("height", percent + "%");
+      $({
+        numberValue: parseInt(
+          $(".preloader_progress .count")
+            .text()
+            .replace("%", "")
+        )
+      }).animate(
+        { numberValue: percent },
+        {
+          duration: 300,
+          easing: "linear",
+          step: function(val) {
+            $(".preloader_progress .count").text(Math.ceil(val) + "%");
+          }
+        }
+      );
+      if (imgCount == progress) {
+        setTimeout(function() {
+          document.querySelector(".preloader").className =
+            document.querySelector(".preloader").className + " loaded";
+        }, 100);
+      }
+    }
+    setTimeout(function() {
+      document.querySelector(".preloader").className =
+        document.querySelector(".preloader").className + " loaded";
+    }, 40000);
+
+    items.forEach(function(item) {
+      var imgLoad = $("<img></img>");
+      $(imgLoad).attr("src", item);
+      $(imgLoad).unbind("load");
+      $(imgLoad).bind("load", function() {
+        refreshPreloader();
+      });
+    });
+  },
   init: function() {
     this.animateHover.init();
     this.tabs.init();
+    this.preloaderInit();
   }
 };
 svgMap = {
@@ -128,9 +239,11 @@ svgMap = {
     });
   },
   init: function() {
-    this.slider();
-    this.events();
-    this.setPos(0);
+    if($('.dillerMap_slider').length>0){
+      this.slider();
+      this.events();
+      this.setPos(0);
+    }
   }
 };
 priceSlider = {
