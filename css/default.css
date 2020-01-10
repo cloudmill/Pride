@@ -304,7 +304,6 @@ body .wrapper * {
   opacity: 1;
 }
 .wrapper .btn .def {
-  font-family: Helvetica Neue;
   font-size: 16px;
   line-height: 75px;
   text-align: center;
@@ -352,7 +351,6 @@ body .wrapper * {
   animation-name: BtnHover;
 }
 .wrapper .btn-gray {
-  font-family: Helvetica Neue;
   font-size: 16px;
   line-height: 75px;
   text-align: center;
@@ -407,7 +405,6 @@ body .wrapper * {
   background: #e5e5e5;
 }
 .wrapper .btn-orange {
-  font-family: Helvetica Neue;
   font-size: 16px;
   line-height: 75px;
   text-align: center;
