@@ -168,6 +168,26 @@ body .wrapper * {
   width: 21px;
   height: 21px;
 }
+.wrapper .icon-list {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/list.svg);
+  width: 21px;
+  height: 21px;
+}
+.wrapper .icon-filter {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/filter.svg);
+  width: 25px;
+  height: 29px;
+}
 .wrapper .icon-search {
   background-size: contain;
   background-repeat: no-repeat;

@@ -105,6 +105,37 @@ custom = {
       this.events();
     }
   },
+  filter: {
+    setup: function() {
+      $(".filter_select").each(function() {
+        $(this).select2({
+          minimumResultsForSearch: Infinity,
+          closeOnSelect: false,
+          multiple: true
+        });
+      });
+      if($('.filter').height()< $('.filter .content').height()){
+        $('.filter_showAll').addClass('active')
+      }
+    },
+    events:function(){
+      $('.filter_showAll').click(function(e){
+        e.preventDefault();
+        if(!$('.filter').hasClass('opened')){
+          $('.filter').addClass('opened')
+          $('.filter').height($('.filter .content').height());
+        }else{
+          $('.filter').removeClass('opened')
+          $('.filter').attr('style','');
+        }
+        
+      })
+    },
+    init: function() {
+      this.setup();
+      this.events();
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -176,6 +207,7 @@ custom = {
   init: function() {
     this.animateHover.init();
     this.tabs.init();
+    this.filter.init();
     this.preloaderInit();
   }
 };
@@ -239,7 +271,7 @@ svgMap = {
     });
   },
   init: function() {
-    if($('.dillerMap_slider').length>0){
+    if ($(".dillerMap_slider").length > 0) {
       this.slider();
       this.events();
       this.setPos(0);
