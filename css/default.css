@@ -270,6 +270,17 @@ body .wrapper * {
   width: 19px;
   height: 22.8px;
 }
+.wrapper .icon-close {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  filter: contrast(0) brightness(0);
+  background-image: url(../images/close.svg);
+  width: 15px;
+  height: 15px;
+}
 .wrapper .inner {
   width: calc(100% - 180px);
   margin: auto;
@@ -277,6 +288,10 @@ body .wrapper * {
 .wrapper .content {
   width: calc(100% - 400px);
   margin: auto;
+}
+.wrapper .content.border {
+  border-left: 1px solid #E5E5E5;
+  border-right: 1px solid #E5E5E5;
 }
 .wrapper .tabs {
   position: relative;
@@ -334,6 +349,9 @@ body .wrapper * {
   padding: 0;
   white-space: nowrap;
   position: relative;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 .wrapper .btn .def i {
   margin-right: 15px;
@@ -381,6 +399,9 @@ body .wrapper * {
   padding: 0;
   white-space: nowrap;
   position: relative;
+  background: none;
+  border: 0;
+  cursor: pointer;
   color: #292929;
 }
 .wrapper .btn-gray i {
@@ -435,6 +456,9 @@ body .wrapper * {
   padding: 0;
   white-space: nowrap;
   position: relative;
+  background: none;
+  border: 0;
+  cursor: pointer;
   color: #ffffff;
 }
 .wrapper .btn-orange i {

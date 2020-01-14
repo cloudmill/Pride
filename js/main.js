@@ -107,29 +107,172 @@ custom = {
   },
   filter: {
     setup: function() {
+      formatItem = function(state, f) {
+        if ($(state.element).length == 0) return $(state.element).text();
+        var elem = $("<span>" + $(state.element).text() + "</span>");
+        return elem;
+      };
       $(".filter_select").each(function() {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           closeOnSelect: false,
-          multiple: true
+          multiple: true,
+          dropdownParent: $(".wrapper .page"),
+          templateResult: formatItem,
+          templateSelection: formatItem,
+          dropdownCssClass: "filter_select2"
         });
       });
-      if($('.filter').height()< $('.filter .content').height()){
-        $('.filter_showAll').addClass('active')
+
+      if ($(".filter").height() < $(".filter .content").height()) {
+        $(".filter_showAll").addClass("active");
       }
     },
-    events:function(){
-      $('.filter_showAll').click(function(e){
+    events: function() {
+      function selects() {
+        $(".filter_select").on("select2:close", function() {
+          $(this).parent().removeClass('active')
+        })
+        $(".filter_select").on("select2:open", function() {
+          $(this).parent().addClass('active')
+          $(".select2-results")
+            .find(".select2_products-count")
+            .remove();
+          $(".select2-results")
+            .find(".select2_buts")
+            .remove();
+          var buts =
+            "<div class='select2_buts'><a href='' class='btn btn-gray select2_clear'>Сбросить</a><a href='' class='btn btn-orange select2_set'>Применить</a></div>";
+          $(".select2-results").append(buts);
+        });
+        $(document).on("click", ".select2_clear,.select2_set", function(e) {
+          e.preventDefault();
+          var count = 1;
+          if (
+            $(".select2-results").find(".select2_products-count").length == 0
+          ) {
+            $(".select2-results").append(
+              '<div class="select2_products-count">Найдено товаров: ' +
+                count +
+                "</div>"
+            );
+            $(".select2-results")
+              .find(".select2_products-count")
+              .animate(
+                {
+                  height: "50px"
+                },
+                300
+              );
+          } else {
+            $(".select2-results")
+              .find(".select2_products-count")
+              .text("Найдено товаров: " + count);
+          }
+        });
+      }
+      function sliders() {
+        close = function(item) {
+          if ($(".filter_slider_box .filter_slider_base").attr("data-value")) {
+            var val = $(".filter_slider_box .filter_slider_base")
+              .attr("data-value")
+              .split(",");
+            $(".filter_slider_box .filter_slider_base").attr(
+              "data-slider-value",
+              "[" + val[0] + "," + val[1] + "]"
+            );
+          }
+          $(".filter_slider_box").find(".filter_slider_products-count").remove()
+          if($(".filter_slider_box").length>0)
+          $(".filter_slider_base").slider("destroy");
+          var newHtml = $(".page")
+            .find(".filter_slider_box")
+            .html();
+          item.find(".filter_hide").html(newHtml);
+          $(".page")
+            .find(".filter_slider_box")
+            .remove();
+        };
+        $(".filter_slider_open").click(function(e) {
+          e.preventDefault();
+          
+          var html = $(this)
+            .find(".filter_hide")
+            .html();
+          if (!$(this).hasClass("active")) {
+            $(".wrapper .page").append(
+              '<div class="filter_slider_box">' + html + "</div>"
+            );
+            $(".page")
+              .find(".filter_slider_box")
+              .css("left", $(this).offset().left);
+            $(".page")
+              .find(".filter_slider_box")
+              .css("top", $(this).offset().top + $(this).height());
+
+            var val = $("input.filter_slider_base")
+              .attr("data-slider-value")
+              .split(",");
+            val[0] = val[0].replace("[", "");
+            val[1] = val[1].replace("]", "");
+            $(".filter_slider_min span").text(val[0]);
+            $(".filter_slider_max span").text(val[1]);
+            $(".filter_slider_base").slider({});
+          } else {
+            close($(this));
+          }
+          $(this).toggleClass("active");
+        });
+        $(document).mouseup(function(e) {
+          var container = $(".filter_slider_open,.filter_slider_box");
+          if (!container.is(e.target) && container.has(e.target).length === 0) {
+            close($(this));
+            $(".filter_slider_open").removeClass("active");
+          }
+        });
+        $(document).on("slide", ".filter_slider_base", function(slideEvt) {
+          $(".filter_slider_min span").text(slideEvt.value[0]);
+          $(".filter_slider_max span").text(slideEvt.value[1]);
+        });
+        $(document).on("click", ".filter_slider_clear,.filter_slider_set", function(e) {
+          e.preventDefault();
+          var count = 1;
+          if (
+            $(".filter_slider_box").find(".filter_slider_products-count").length == 0
+          ) {
+            $(".filter_slider_box").append(
+              '<div class="filter_slider_products-count">Найдено товаров: ' +
+                count +
+                "</div>"
+            );
+            $(".filter_slider_box")
+              .find(".filter_slider_products-count")
+              .animate(
+                {
+                  height: "50px"
+                },
+                300
+              );
+          } else {
+            $(".filter_slider_box")
+              .find(".filter_slider_products-count")
+              .text("Найдено товаров: " + count);
+          }
+        });
+      }
+
+      $(".filter_showAll").click(function(e) {
         e.preventDefault();
-        if(!$('.filter').hasClass('opened')){
-          $('.filter').addClass('opened')
-          $('.filter').height($('.filter .content').height());
-        }else{
-          $('.filter').removeClass('opened')
-          $('.filter').attr('style','');
-        }
-        
-      })
+        $(".filter").addClass("opened");
+      });
+      $(".filter_close").click(function(e) {
+        e.preventDefault();
+        $(".filter").removeClass("opened");
+        $(".filter").attr("style", "");
+      });
+
+      sliders();
+      selects();
     },
     init: function() {
       this.setup();
@@ -141,7 +284,12 @@ custom = {
     var items = [];
     imgs.each(function() {
       var url = "";
-      if ($(this).css("background-image") != "none") {
+      if (
+        $(this).css("background-image") != "none" &&
+        $(this)
+          .css("background-image")
+          .split("-")[0] != "linear"
+      ) {
         var url = $(this).css("background-image");
       } else if (
         typeof $(this).attr("src") != "undefined" &&

@@ -304,6 +304,13 @@ body {
       width: 19px;
       height: 22.8px;
     }
+    &-close{
+      .def-icon;
+      filter: contrast(0) brightness(0);
+      background-image: url(../images/close.svg);
+      width: 15px;
+      height: 15px;
+    }
   }
   .inner {
     width: ~"calc(100% - 180px)";
@@ -312,6 +319,10 @@ body {
   .content {
     width: ~"calc(100% - 400px)";
     margin: auto;
+    &.border{
+      border-left: 1px solid #E5E5E5;
+      border-right: 1px solid #E5E5E5;
+    }
   }
   .tabs {
     position: relative;
@@ -374,6 +385,9 @@ body {
       padding: 0;
       white-space: nowrap;
       position: relative;
+      background: none;
+      border: 0;
+      cursor: pointer;
       i {
         margin-right: 15px;
         &.icon-cart {
