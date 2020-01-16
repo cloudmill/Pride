@@ -281,6 +281,16 @@ body .wrapper * {
   width: 15px;
   height: 15px;
 }
+.wrapper .icon-str-left {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/str_left.svg);
+  width: 25px;
+  height: 16px;
+}
 .wrapper .inner {
   width: calc(100% - 180px);
   margin: auto;

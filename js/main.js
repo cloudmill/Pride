@@ -107,19 +107,12 @@ custom = {
   },
   filter: {
     setup: function() {
-      formatItem = function(state, f) {
-        if ($(state.element).length == 0) return $(state.element).text();
-        var elem = $("<span>" + $(state.element).text() + "</span>");
-        return elem;
-      };
       $(".filter_select").each(function() {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           closeOnSelect: false,
           multiple: true,
           dropdownParent: $(".wrapper .page"),
-          templateResult: formatItem,
-          templateSelection: formatItem,
           dropdownCssClass: "filter_select2"
         });
       });
@@ -131,10 +124,14 @@ custom = {
     events: function() {
       function selects() {
         $(".filter_select").on("select2:close", function() {
-          $(this).parent().removeClass('active')
-        })
+          $(this)
+            .parent()
+            .removeClass("active");
+        });
         $(".filter_select").on("select2:open", function() {
-          $(this).parent().addClass('active')
+          $(this)
+            .parent()
+            .addClass("active");
           $(".select2-results")
             .find(".select2_products-count")
             .remove();
@@ -182,9 +179,11 @@ custom = {
               "[" + val[0] + "," + val[1] + "]"
             );
           }
-          $(".filter_slider_box").find(".filter_slider_products-count").remove()
-          if($(".filter_slider_box").length>0)
-          $(".filter_slider_base").slider("destroy");
+          $(".filter_slider_box")
+            .find(".filter_slider_products-count")
+            .remove();
+          if ($(".filter_slider_box").length > 0)
+            $(".filter_slider_base").slider("destroy");
           var newHtml = $(".page")
             .find(".filter_slider_box")
             .html();
@@ -195,7 +194,7 @@ custom = {
         };
         $(".filter_slider_open").click(function(e) {
           e.preventDefault();
-          
+
           var html = $(this)
             .find(".filter_hide")
             .html();
@@ -205,7 +204,12 @@ custom = {
             );
             $(".page")
               .find(".filter_slider_box")
-              .css("left", $(this).offset().left);
+              .css("left", $(this).offset().left)
+              .width(
+                $(this)
+                  .parent()
+                  .width() - 60
+              );
             $(".page")
               .find(".filter_slider_box")
               .css("top", $(this).offset().top + $(this).height());
@@ -234,31 +238,36 @@ custom = {
           $(".filter_slider_min span").text(slideEvt.value[0]);
           $(".filter_slider_max span").text(slideEvt.value[1]);
         });
-        $(document).on("click", ".filter_slider_clear,.filter_slider_set", function(e) {
-          e.preventDefault();
-          var count = 1;
-          if (
-            $(".filter_slider_box").find(".filter_slider_products-count").length == 0
-          ) {
-            $(".filter_slider_box").append(
-              '<div class="filter_slider_products-count">Найдено товаров: ' +
-                count +
-                "</div>"
-            );
-            $(".filter_slider_box")
-              .find(".filter_slider_products-count")
-              .animate(
-                {
-                  height: "50px"
-                },
-                300
+        $(document).on(
+          "click",
+          ".filter_slider_clear,.filter_slider_set",
+          function(e) {
+            e.preventDefault();
+            var count = 1;
+            if (
+              $(".filter_slider_box").find(".filter_slider_products-count")
+                .length == 0
+            ) {
+              $(".filter_slider_box").append(
+                '<div class="filter_slider_products-count">Найдено товаров: ' +
+                  count +
+                  "</div>"
               );
-          } else {
-            $(".filter_slider_box")
-              .find(".filter_slider_products-count")
-              .text("Найдено товаров: " + count);
+              $(".filter_slider_box")
+                .find(".filter_slider_products-count")
+                .animate(
+                  {
+                    height: "50px"
+                  },
+                  300
+                );
+            } else {
+              $(".filter_slider_box")
+                .find(".filter_slider_products-count")
+                .text("Найдено товаров: " + count);
+            }
           }
-        });
+        );
       }
 
       $(".filter_showAll").click(function(e) {
@@ -273,6 +282,51 @@ custom = {
 
       sliders();
       selects();
+    },
+    init: function() {
+      this.setup();
+      this.events();
+    }
+  },
+  example: {
+    events: function() {
+      $(document).on("click", ".example", function() {
+        $(this).toggleClass("opened");
+      });
+    },
+    init: function() {
+      this.events();
+    }
+  },
+  sort: {
+    setup: function() {
+      $(".sort_select").each(function() {
+        $(this).select2({
+          minimumResultsForSearch: Infinity,
+          multiple: false,
+          dropdownParent: $(".wrapper .page"),
+          dropdownCssClass: "sort_select2"
+        });
+      });
+    },
+    events: function() {
+      $(document).on("click", ".sort_pos button", function() {
+        $(".sort_pos button").removeClass("active");
+        $(".catList_typePos").removeClass("grid");
+        $(".catList_typePos").removeClass("list");
+        $(".catList_typePos").addClass($(this).attr("data-class"));
+        $(this).addClass("active");
+      });
+      $(window).on("resize", function() {
+        if (
+          $(".catList_typePos").length > 0 &&
+          $(".catList_typePos").hasClass("list") &&
+          $(window).width() < 768
+        ) {
+          $(".catList_typePos").addClass("grid");
+          $(".catList_typePos").removeClass("list");
+        }
+      });
     },
     init: function() {
       this.setup();
@@ -355,7 +409,9 @@ custom = {
   init: function() {
     this.animateHover.init();
     this.tabs.init();
-    this.filter.init();
+    if ($(".filter").length > 0) this.filter.init();
+    if ($(".sort").length > 0) this.sort.init();
+    if ($(".example").length > 0) this.example.init();
     this.preloaderInit();
   }
 };
