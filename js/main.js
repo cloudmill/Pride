@@ -389,6 +389,8 @@ custom = {
         setTimeout(function() {
           document.querySelector(".preloader").className =
             document.querySelector(".preloader").className + " loaded";
+            var event = new Event('preloadingFinish');
+            document.dispatchEvent(event);
         }, 100);
       }
     }
@@ -478,7 +480,10 @@ svgMap = {
     if ($(".dillerMap_slider").length > 0) {
       this.slider();
       this.events();
-      this.setPos(0);
+      var _this =this;
+      $(document).on('preloadingFinish',function(){
+        _this.setPos(0);
+      })
     }
   }
 };

@@ -4214,6 +4214,11 @@ body .wrapper * {
     line-height: 150%;
     padding: 0 10px;
   }
+  .wrapper .page .filter_select2 {
+    max-width: 290px;
+    min-width: 290px;
+    padding: 15px;
+  }
 }
 @media (max-width: 450px) {
   .wrapper .page .filter.opened .filter_buts {
