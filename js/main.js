@@ -333,6 +333,35 @@ custom = {
       this.events();
     }
   },
+  detailGaleryImgs: {
+    setup: function() {
+      var galleryThumbs = new Swiper(".detail_imgs_list", {
+        spaceBetween: 30,
+        slidesPerView: 6,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        direction: 'horizontal',
+        followFinger: false,
+        breakpoints:{
+          1000: {
+            direction: 'vertical'
+          }
+        }
+      });
+      var galleryTop = new Swiper(".detail_imgs_box", {
+        spaceBetween: 30,
+        slidesPerView: 1,
+        thumbs: {
+          swiper: galleryThumbs
+        }
+      });
+    },
+    events: function() {},
+    init: function() {
+      this.setup();
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -389,8 +418,8 @@ custom = {
         setTimeout(function() {
           document.querySelector(".preloader").className =
             document.querySelector(".preloader").className + " loaded";
-            var event = new Event('preloadingFinish');
-            document.dispatchEvent(event);
+          var event = new Event("preloadingFinish");
+          document.dispatchEvent(event);
         }, 100);
       }
     }
@@ -414,6 +443,7 @@ custom = {
     if ($(".filter").length > 0) this.filter.init();
     if ($(".sort").length > 0) this.sort.init();
     if ($(".example").length > 0) this.example.init();
+    if($(".detail_imgs").length > 0) this.detailGaleryImgs.init()
     this.preloaderInit();
   }
 };
@@ -480,10 +510,10 @@ svgMap = {
     if ($(".dillerMap_slider").length > 0) {
       this.slider();
       this.events();
-      var _this =this;
-      $(document).on('preloadingFinish',function(){
+      var _this = this;
+      $(document).on("preloadingFinish", function() {
         _this.setPos(0);
-      })
+      });
     }
   }
 };
@@ -522,3 +552,4 @@ priceSlider = {
     this.create();
   }
 };
+

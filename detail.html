@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="libs/boostrap_slider/boostrap_slider.min.css"
+    />
+    <link rel="stylesheet" href="libs/swiper/swiper.min.css">
+    <link rel="stylesheet" href="libs/select2/select2.min.css" />
+    <link rel="stylesheet" href="libs/slick/slick.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Подраздел каталога</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="preloader">
+        <div class="content">
+          <div class="preloader_img">
+            <div class="gray"></div>
+            <div class="orange"></div>
+          </div>
+          <div class="preloader_progress">
+            <div class="count">0%</div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="header">
+        <div class="box_col-2 box_logo">
+          <a href="index.html" class="logo">
+            <img src="images/logo.svg" alt="" />
+          </a>
+        </div>
+        <div class="box_col-auto">
+          <div class="box_row">
+            <div class="box_col-auto">
+              <div class="menu">
+                <a href="about.html" class="menu_item">О нас</a>
+                <a href="actions.html" class="menu_item">Акции</a>
+                <a href="brands.html" class="menu_item">Бренды</a>
+                <a href="service.html" class="menu_item">Гарантия и сервис</a>
+                <a href="delivery.html" class="menu_item">Доставка и оплата</a>
+                <a href="partners.html" class="menu_item">Партнерам</a>
+                <a href="contacts.html" class="menu_item">Контакты</a>
+              </div>
+            </div>
+            <div class="box_col-2 box_phone">
+              <a href="tel:8 495 664-21-77" class="phone">8 495 664-21-77</a>
+            </div>
+          </div>
+          <div class="box_row">
+            <div class="box_col-2">
+              <a href="whereBuy.html" class="map">
+                <i class="icon-loc"></i>
+                Где купить
+              </a>
+            </div>
+            <div class="box_col-2">
+              <a href="catalog.html" class="catalog">
+                <i class="icon-grid"></i>
+                Каталог
+              </a>
+            </div>
+            <input
+              type="text"
+              class="box_col-auto search_input"
+              placeholder="Что вы хотите найти?"
+            />
+            <button type="submit" class="search_but box_col-1">
+              <i class="icon-search"></i>
+            </button>
+            <a href="" class="box_col-1 only-mob phone-mob">
+              <i class="icon-phone"></i>
+            </a>
+            <a href="" class="box_col-1 cart">
+              <span class="count">0</span> <i class="icon-cart"></i>
+            </a>
+            <a href="" class="box_col-1 user noborder">
+              <i class="icon-user"></i>
+            </a>
+            <a href="" class="box_col-1 only-mob burger-but"><span></span></a>
+          </div>
+        </div>
+        <div class="burger">
+          <div class="content">
+            <div class="burger_menu">
+              <a href="about.html" class="burger_menu_item">О нас</a>
+              <a href="actions.html" class="burger_menu_item">Акции</a>
+              <a href="brands.html" class="burger_menu_item">Бренды</a>
+              <a href="service.html" class="burger_menu_item"
+                >Гарантия и сервис</a
+              >
+              <a href="delivery.html" class="burger_menu_item"
+                >Доставка и оплата</a
+              >
+              <a href="partners.html" class="burger_menu_item">Партнерам</a>
+              <a href="contacts.html" class="burger_menu_item">Контакты</a>
+            </div>
+            <a href="whereBuy.html" class="burger_whereBuy">
+              <i class="icon-loc"></i>
+              Где купить
+            </a>
+            <a href="tel:8 495 664-21-77" class="burger_phone">
+              8 495 664-21-77
+            </a>
+            <a href="" class="burger_user">
+              <i class="icon-user"></i>
+              Личный кабинет
+            </a>
+          </div>
+        </div>
+        <div class="basket">
+          <div class="basket_title">
+            Корзина <a href="" class="basket_close"></a>
+          </div>
+          <div class="basket_list">
+            <div class="basket_item">
+              <div class="basket_item_img">
+                <img src="images/item_1.png" alt="" />
+              </div>
+              <div class="basket_item_box">
+                <a href="" class="basket_item_name"
+                  >Ремонтный комплект для заклепочника V1002</a
+                >
+                <div class="basket_item_price">8 660 ₽<span>9 410 ₽</span></div>
+                <div class="basket_item_buts">
+                  <div class="basket_item_count">
+                    <a href="" class="less"></a>
+                    <span class="count">2</span>
+                    <a href="" class="more"></a>
+                  </div>
+                  <a href="" class="basket_item_remove">Удалить</a>
+                </div>
+              </div>
+            </div>
+            <div class="basket_item">
+              <div class="basket_item_img">
+                <img src="images/item_1.png" alt="" />
+              </div>
+              <div class="basket_item_box">
+                <a href="" class="basket_item_name"
+                  >Ремонтный комплект для заклепочника V1002</a
+                >
+                <div class="basket_item_price">8 660 ₽<span>9 410 ₽</span></div>
+                <div class="basket_item_buts">
+                  <div class="basket_item_count">
+                    <a href="" class="less"></a>
+                    <span class="count">2</span>
+                    <a href="" class="more"></a>
+                  </div>
+                  <a href="" class="basket_item_remove">Удалить</a>
+                </div>
+              </div>
+            </div>
+            <div class="basket_item">
+              <div class="basket_item_img">
+                <img src="images/item_1.png" alt="" />
+              </div>
+              <div class="basket_item_box">
+                <a href="" class="basket_item_name"
+                  >Ремонтный комплект для заклепочника V1002</a
+                >
+                <div class="basket_item_price">8 660 ₽<span>9 410 ₽</span></div>
+                <div class="basket_item_buts">
+                  <div class="basket_item_count">
+                    <a href="" class="less"></a>
+                    <span class="count">2</span>
+                    <a href="" class="more"></a>
+                  </div>
+                  <a href="" class="basket_item_remove">Удалить</a>
+                </div>
+              </div>
+            </div>
+            <div class="basket_item">
+              <div class="basket_item_img">
+                <img src="images/item_1.png" alt="" />
+              </div>
+              <div class="basket_item_box">
+                <a href="" class="basket_item_name"
+                  >Ремонтный комплект для заклепочника V1002</a
+                >
+                <div class="basket_item_price">8 660 ₽<span>9 410 ₽</span></div>
+                <div class="basket_item_buts">
+                  <div class="basket_item_count">
+                    <a href="" class="less"></a>
+                    <span class="count">2</span>
+                    <a href="" class="more"></a>
+                  </div>
+                  <a href="" class="basket_item_remove">Удалить</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="basket_result">
+            <div class="basket_result_value">
+              Итого
+              <span>8 660 ₽</span>
+            </div>
+            <div class="basket_result_buts">
+              <a href="" class="btn btn-orange">Оформить заказ</a>
+              <a href="" class="btn btn-gray">Продолжить покупки</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page">
+        <div class="content">
+          <div class="page_head">
+            <div class="breadcrumbs">
+              <a href="/" class="b_link">Главная</a>
+              <a href="/catalog.html" class="b_link">Каталог</a>
+              <a href="/catalog.html" class="b_link">Инструмент специального назначения</a>
+              <span class="b_link">Приспособление для замены трансмиссионных жидкостей, 7,5 л./span>
+            </div>
+            
+          </div>
+        </div>
+        <div class="detail">
+          <div class="detail_box">
+            <div class="detail_imgs">
+              <div class="swiper-container detail_imgs_box">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_1.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_2.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_3.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_4.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_5.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-container detail_imgs_list">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_1.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_2.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_3.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_4.png" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="detail_img" src="images/detail_5.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="detail_inf">
+              <div class="detail_tags">
+                <a href="" class="detail_tag">Новинка</a>
+                <a href="" class="detail_tag">скидка</a>
+                <a href="" class="detail_tag">выбор покупателей</a>
+              </div>
+              <h1 class="detail_title">Приспособление для замены трансмиссионных жидкостей, 7,5 л.</h1>
+              <div class="detail_row">
+                  <div class="detail_props">
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        Артикул
+                      </div>
+                      <div class="detail_props-value">
+                        D03PR06S
+                      </div>
+                    </div>
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        код товара
+                      </div>
+                      <div class="detail_props-value">
+                        5547563
+                      </div>
+                    </div>
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        в наличии
+                      </div>
+                      <div class="detail_props-value">
+                        3 шт.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="detail_props right">
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        страна производитель
+                      </div>
+                      <div class="detail_props-value">
+                        Тайвань
+                      </div>
+                    </div>
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        вес
+                      </div>
+                      <div class="detail_props-value">
+                        7 кг.
+                      </div>
+                    </div>
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        штук в упаковке
+                      </div>
+                      <div class="detail_props-value">
+                        60/240
+                      </div>
+                    </div>
+                    <div class="detail_props-item">
+                      <div class="detail_props-name">
+                        масса упаковки (брутто)
+                      </div>
+                      <div class="detail_props-value">
+                        5,72/23,3
+                      </div>
+                    </div>
+                    <button class="detail_props-show_more hoverLineMoved def-gray">Показать все</button>
+                  </div>
+                  <div class="detail_price">
+                    8 660 ₽
+                    <span class="old">9 410 ₽</span>
+                  </div>
+                  <div class="detail_count">
+                    <button class="detail_count-minus"></button>
+                    <div class="detail_count-value">2</div>
+                    <button class="detail_count-plus"></button>
+                  </div>
+                  <div class="detail_buts">
+                    <a href="" class="detail_but-left btn-orange">
+                      <i class="icon-cart"></i>
+                      Добавить в корзину
+                    </a>
+                    <a href="" class="detail_but-right btn-gray">
+                      Купить в 1 клик
+                    </a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="content">
+          <div class="footer_col">
+            <a href="tel:8 495 664-21-77" class="footer_phone">
+              8 495 664-21-77
+            </a>
+            <div class="footer_work-time">Пн. — Пт. 9:00 — 19:00</div>
+            <a href="mailto:pride@pride.ru" class="footer_mail">
+              pride@pride.ru
+            </a>
+            <div class="footer_copyright">© Прайд, 2019</div>
+          </div>
+          <div class="footer_col">
+            <div class="footer_menu">
+              <a href="" class="footer_menu_link">О нас</a>
+              <a href="" class="footer_menu_link">Новости</a>
+              <a href="" class="footer_menu_link">Партнерам</a>
+              <a href="" class="footer_menu_link">Контакты</a>
+              <a href="" class="footer_menu_link">Каталог</a>
+              <a href="" class="footer_menu_link">Бренды</a>
+              <a href="" class="footer_menu_link">Акции</a>
+              <a href="" class="footer_menu_link">Где купить</a>
+              <a href="" class="footer_menu_link">Гарантия и сервис</a>
+              <a href="" class="footer_menu_link">Доставка и оплата</a>
+            </div>
+            <div class="footer_copyright">Политика конфиденциальности</div>
+          </div>
+          <div class="footer_col">
+            <div class="footer_social">
+              <a href="" class="footer_social_item">
+                <i class="icon-fb"></i>
+              </a>
+              <a href="" class="footer_social_item">
+                <i class="icon-vk"></i>
+              </a>
+              <a href="" class="footer_social_item">
+                <i class="icon-inst"></i>
+              </a>
+            </div>
+            <a href="" class="footer_menu_link footer_lk">
+              <i class="icon-user"></i>
+              Личный кабинет
+            </a>
+            <div class="footer_copyright mobile">
+              Политика конфиденциальности
+            </div>
+            <div class="footer_copyright mobile">© Прайд, 2019</div>
+            <div class="footer_copyright">
+              Сделано в <img src="images/cloudmill.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/jquery-3.3.1.js"></script>
+  <script src="libs/swiper/swiper.min.js"></script>
+  <script src="libs/boostrap_slider/boostrap_slider.min.js"></script>
+  <script src="libs/select2/select2.min.js"></script>
+  <script src="libs/slick/slick.js"></script>
+  <script src="js/main.js"></script>
+</html>
