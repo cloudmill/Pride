@@ -337,15 +337,19 @@ custom = {
     setup: function() {
       var galleryThumbs = new Swiper(".detail_imgs_list", {
         spaceBetween: 30,
-        slidesPerView: 6,
-        freeMode: true,
+        slidesPerView: 4,
+        //freeMode: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
         direction: 'horizontal',
         followFinger: false,
         breakpoints:{
           1000: {
+            slidesPerView: 6,
             direction: 'vertical'
+          },
+          768: {
+            slidesPerView: 5,
           }
         }
       });
