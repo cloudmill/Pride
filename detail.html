@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="libs/swiper/swiper.min.css">
     <link rel="stylesheet" href="libs/select2/select2.min.css" />
     <link rel="stylesheet" href="libs/slick/slick.css" />
+    <link rel="stylesheet" href="libs/NBrain/NBrain.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Подраздел каталога</title>
   </head>
@@ -271,7 +272,7 @@
               <div class="detail_row">
                   <div class="detail_props">
                     <div class="detail_props-item">
-                      <div class="detail_props-name">
+                      <div class="detail_props-name nbp-open" data-id='callback'>
                         Артикул
                       </div>
                       <div class="detail_props-value">
@@ -406,6 +407,26 @@
           </div>
         </div>
       </div>
+      <div class="nbp-container" id="nbp-container">
+        <div class="nbp-inner">
+            <div class="nbp-item" id="callback" data-bg-color='#fff'>
+                <div class="nbp-content">
+                    <div class="nbp-title">заголовок</div>
+                    <div class="nbp-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem hic harum enim cupiditate tenetur in aut. Maxime, quia velit. Ut.</div>
+                    <div class="nbp-button">кнопка</div>
+                </div>
+            </div>
+            <div class="nbp-item" id="callback2">
+                <div class="nbp-content">
+                    <div class="nbp-title">заголовок2</div>
+                    <div class="nbp-text">2Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem hic harum enim cupiditate tenetur in aut. Maxime, quia velit. Ut.</div>
+                    <div class="nbp-button">2кнопка</div>
+                </div>
+            </div>
+        </div>
+        <div class="nbp-background" id="nbp-background"></div>
+        <div class="nbp-close"><span></span></div>
+    </div>
     </div>
   </body>
   <script src="js/jquery-3.3.1.js"></script>
@@ -413,5 +434,6 @@
   <script src="libs/boostrap_slider/boostrap_slider.min.js"></script>
   <script src="libs/select2/select2.min.js"></script>
   <script src="libs/slick/slick.js"></script>
+  <script src="libs/NBrain/NBrain.js"></script>
   <script src="js/main.js"></script>
 </html>

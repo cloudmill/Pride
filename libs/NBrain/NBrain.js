@@ -26,7 +26,7 @@ var NbPopup = {
     }
   },
   init: function() {
-    this.wrapper = document.getElementById("nbp-cotainer");
+    this.wrapper = document.getElementById("nbp-container");
     this.bg = document.getElementById("nbp-background")
     this.items = document.getElementsByClassName("nbp-item");
     this.btnsOpen = document.getElementsByClassName("nbp-open");
