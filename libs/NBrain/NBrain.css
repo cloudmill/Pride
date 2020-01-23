@@ -1,4 +1,4 @@
-.nbp-container {
+.nbm-container {
   position: fixed;
   padding: 0 !important;
   margin: 0 !important;
@@ -7,22 +7,22 @@
   z-index: 9999;
   width: 100%;
   height: 100vh;
-  display: none;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: none;
 }
-.nbp-container.active {
-  display: block;
+.nbm-container.active {
+  pointer-events: auto;
 }
-.nbp-container.open {
-  display: block;
+.nbm-container.open {
+  pointer-events: auto;
   opacity: 1;
 }
-.nbp-container-inner {
+.nbm-container-inner {
   width: 100%;
   height: 100%;
 }
-.nbp-background {
+.nbm-background {
   background-color: #fff;
   position: absolute;
   z-index: -1;
@@ -31,46 +31,46 @@
   height: 100%;
   width: 100%;
 }
-.nbp-item {
+.nbm-item {
   padding: 30px 40px;
   display: none;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
   background: #fff;
 }
-.nbp-item.active {
+.nbm-item.active {
   display: block;
 }
-.nbp-item.open {
+.nbm-item.open {
   opacity: 1;
   display: block;
 }
-.nbp-item * {
+.nbm-item * {
   font-family: Arial, Helvetica, sans-serif;
 }
-.nbp-content {
+.nbm-content {
   text-align: center;
 }
-.nbp-title {
+.nbm-title {
   font-size: 23px;
   line-height: 46px;
   margin-bottom: 40px;
   text-align: center;
 }
-.nbp-text {
+.nbm-text {
   font-size: 16px;
   line-height: 130%;
   text-align: center;
   margin: 15px;
 }
-.nbp-btn {
+.nbm-btn {
   font-size: 16px;
   line-height: 46px;
   padding: 0 20px;
   border-radius: 200px;
   display: inline-block;
 }
-.nbp-close {
+.nbm-close {
   position: absolute;
   top: 30px;
   right: 30px;
@@ -78,7 +78,7 @@
   cursor: pointer;
   height: 15px;
 }
-.nbp-close span {
+.nbm-close span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
   height: 100%;
   transform: rotate(45deg);
 }
-.nbp-close span:before {
+.nbm-close span:before {
   content: '';
   display: block;
   position: absolute;
@@ -98,7 +98,7 @@
   height: 2px;
   background-color: #C4C4C4;
 }
-.nbp-close span:after {
+.nbm-close span:after {
   content: '';
   display: block;
   position: absolute;

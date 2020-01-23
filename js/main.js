@@ -2,6 +2,7 @@ $(document).ready(function() {
   header.init();
   custom.init();
   svgMap.init();
+  popups.init();
   priceSlider.init();
   $(document).on('flopOpen',function(e){
     console.log(e.detail)
@@ -425,6 +426,22 @@ custom = {
     this.preloaderInit();
   }
 };
+popups = {
+  setup:function(){
+    this.buyOneClick = new NbModal("buyOneClick", {
+      bacground: "#ffffff"
+    });
+    this.properties = new NbModal("properties", {
+      bacground: "rgba(0, 0, 0, 0.15)",
+      windowClass: "popupFadeInRight",
+      windowPos: ["right", "center"],
+      wrapperClass:'page',
+    });
+  },
+  init: function(){
+    this.setup();
+  }
+},
 svgMap = {
   slider: function() {
     $(".dillerMap_slider").slick({

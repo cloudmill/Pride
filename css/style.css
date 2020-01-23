@@ -5609,7 +5609,7 @@ body .wrapper * {
     display: none !important;
   }
 }
-.wrapper .nbp-container .popupFadeInRight {
+.wrapper .nbm-container .popupFadeInRight {
   padding: 70px 100px;
   padding-right: 50px;
   max-width: 500px;
@@ -5618,14 +5618,14 @@ body .wrapper * {
   float: right;
   overflow: auto;
 }
-.wrapper .nbp-container .popupFadeInRight::-webkit-scrollbar-track {
+.wrapper .nbm-container .popupFadeInRight::-webkit-scrollbar-track {
   background: #e8e8e8;
 }
-.wrapper .nbp-container .popupFadeInRight::-webkit-scrollbar {
+.wrapper .nbm-container .popupFadeInRight::-webkit-scrollbar {
   width: 8px;
   background: #e8e8e8;
 }
-.wrapper .nbp-container .popupFadeInRight::-webkit-scrollbar-thumb {
+.wrapper .nbm-container .popupFadeInRight::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
 .imgBg {
@@ -5647,6 +5647,9 @@ body .wrapper * {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.hidden-inf {
+  display: none !important;
 }
 .hoverLineMoved {
   position: relative;

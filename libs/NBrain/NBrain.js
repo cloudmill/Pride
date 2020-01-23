@@ -1,123 +1,6 @@
 ////////
 //
 //
-//попапы
-//
-var NbPopup = {
-  _popupOpen: false,
-  _bodyScrollPos: 0,
-  _setPopups: function() {
-    var _this = this;
-    var hiddenBoxs = document.getElementsByClassName("nbp-hidden-inf");
-    if (hiddenBoxs.length > 0) {
-      for (elem of hiddenBoxs) {
-        var newPopup = document.createElement("div");
-        var attrs = elem.attributes;
-        for (attr of attrs) {
-          if (attr.name != "data-id" && attr.name != "data-custom-class")
-            newPopup.setAttribute(attr.name, attr.value);
-        }
-        newPopup.className = "nbp-item";
-        newPopup.classList.add(elem.getAttribute("data-custom-class"));
-        newPopup.id = elem.getAttribute("data-id");
-        newPopup.innerHTML =
-          '<div class="nbp-content">' +
-          elem.getElementsByClassName("nbp-hidden-box")[0].innerHTML +
-          "</div>";
-        _this.wrapper
-          .getElementsByClassName("nbp-container-inner")[0]
-          .append(newPopup);
-        elem.remove();
-      }
-    }
-    this.items = document.getElementsByClassName("nbp-item");
-  },
-  _setDefOpts: function() {
-    this.wrapper = document.getElementById("nbp-container");
-    this.bg = document.getElementById("nbp-background");
-    this.btnsOpen = document.getElementsByClassName("nbp-open");
-    this.btnsClose = document.getElementsByClassName("nbp-close");
-    this.popups = [];
-    this.baseTimeAnimate = 300;
-  },
-  _setup: function() {
-    this._setDefOpts();
-    this._setPopups();
-
-    var _this = this;
-    for (elem of this.items) {
-      _this.popups[elem.id] = {
-        id: elem.id,
-        body: elem,
-        bg: {
-          color: elem.getAttribute("data-nbp-bgColor")
-        }
-      };
-    }
-  },
-  _events: function() {
-    var _this = this;
-    for (elem of this.btnsOpen) {
-      elem.addEventListener("click", function() {
-        var temp_id = this.getAttribute("data-id");
-        _this.open(_this.popups[temp_id]);
-      });
-    }
-    for (elem of this.btnsClose) {
-      elem.addEventListener("click", function() {
-        _this.close();
-      });
-    }
-    document.addEventListener("mousewhell", function(e) {
-      // if (_this._popupOpen) e.detail.e.preventDefault();
-    });
-    window.addEventListener("scroll", function() {
-      if (_this._popupOpen) {
-        document.documentElement.scrollTop = _this._bodyScrollPos;
-      }
-    });
-  },
-  _init: function() {
-    this._setup();
-    this._events();
-  },
-  open: function(item) {
-    this.wrapper.classList.add("active");
-    item.body.classList.add("active");
-    this.bg.style.backgroundColor = item.bg.color;
-    var _this = this;
-    this._popupOpen = true;
-    this._bodyScrollPos = document.documentElement.scrollTop;
-    setTimeout(function() {
-      _this.wrapper.classList.add("open");
-      _this.wrapper.classList.remove("active");
-      item.body.classList.add("open");
-      item.body.classList.remove("active");
-    }, this.baseTimeAnimate);
-  },
-  close: function() {
-    this.wrapper.classList.remove("open");
-    this.wrapper.classList.add("active");
-    this.bg.setAttribute("style", "");
-    for (item of this.items) {
-      if (item.classList.contains("open")) {
-        item.classList.remove("open");
-        item.classList.add("active");
-      }
-    }
-    var _this = this;
-    setTimeout(function() {
-      _this.wrapper.classList.remove("active");
-      for (item of _this.items) {
-        item.classList.remove("active");
-      }
-      _this._popupOpen = false;
-    }, this.baseTimeAnimate);
-  }
-};
-////////
-//
-//
 //событие колесика мыши
 //
 //////
@@ -201,7 +84,7 @@ var NbTabs = {
       };
       var index = 0;
       for (but of _this.tabs[indexCont].butsList) {
-        var tempIdTab = tempId+"-nbtItem_" + index;
+        var tempIdTab = tempId + "-nbtItem_" + index;
         but.setAttribute("data-id", tempIdTab);
         but.setAttribute("data-index", index);
         _this.tabs[indexCont].tabsList[index].id = tempIdTab;
@@ -290,20 +173,20 @@ var NbFlops = {
             target.classList.remove("active");
             document.dispatchEvent(
               new CustomEvent("flopClose", {
-                detail: { target: target}
+                detail: { target: target }
               })
             );
           } else {
             target.classList.add("active");
             document.dispatchEvent(
               new CustomEvent("flopOpen", {
-                detail: { target: target}
+                detail: { target: target }
               })
             );
           }
         }
       },
-      
+
       false
     );
   },
@@ -311,15 +194,172 @@ var NbFlops = {
     this._events();
   }
 };
-////////
-//
-//
-//инициализация
-//
-//////
+
+var NbModal = window.NbModal || {};
 (function() {
-  NbPopup._init();
+  ////////
+  //
+  //ModalsWindows
+  //
+  ////////
+  "use strict";
+  NbModal = (function() {
+    var initialID = 0;
+    var wrapperContainer = null;
+    var wrapperContainerInner = null;
+    var wrapperContainerBg = null;
+    NbModal = function(ID, opts) {
+      var T = this;
+
+      T.initialID = initialID++;
+      if (T.initialID === 0) {
+        wrapperContainer = document.createElement("div");
+        wrapperContainer.classList.add("nbm-container");
+        wrapperContainer.id = "nbm-container";
+        wrapperContainer.innerHTML =
+          '<div class="nbm-container-inner" id="nbm-container-inner">' +
+          '<div class="nbm-background" id="nbm-background"></div>' +
+          '<div class="nbm-close"><span></span></div></div>';
+        if (document.getElementsByClassName("wrapper"))
+          document
+            .getElementsByClassName("wrapper")[0]
+            .append(wrapperContainer);
+        else
+          document.body.append(
+            '<div class="wrapper">' + wrapperContainer.OuterHTML + "</div>"
+          );
+        wrapperContainer = document.getElementById("nbm-container");
+        wrapperContainerInner = document.getElementById("nbm-container-inner");
+        wrapperContainerBg = document.getElementById("nbm-background");
+      }
+      T.defaults = {
+        wrapperContainer: wrapperContainer,
+        wrapperContainerInner: wrapperContainerInner,
+        defaultClassItem: "nbm-item",
+        wrapperContainerBg: wrapperContainerBg,
+        timeAnimation: 300
+      };
+      T.initials = {
+        windowID: ID,
+        serialNumber: "nbm-modal-" + T.initialID,
+        windowType: "modal",
+        windowPos: ["center", "center"],
+        bacground: "#ffffff",
+        windowClass: null,
+        wrapperClass: null,
+        windowTypeAnimate: "fade",
+        typeInit: "normal"
+      };
+      T = Object.assign(T, T.defaults);
+      T.options = Object.assign({}, T.initials, opts);
+      T.popup = document.getElementById(ID);
+      if (!T.popup) return false;
+      T.init(true);
+    };
+    return NbModal;
+  })();
+
+  NbModal.prototype.bodyScrollPos = null;
+
+  NbModal.prototype.setEvents = function() {
+    var T = this;
+
+    for (elem of document.querySelectorAll(
+      ".nbm-open[data-id=" + T.options.windowID + "]"
+    )) {
+      elem.addEventListener("click", function() {
+        T.open();
+      });
+    }
+    for (elem of document.querySelectorAll(".nbm-close")) {
+      elem.addEventListener("click", function() {
+        T.close();
+      });
+    }
+    if (T.initialID === 0) {
+      window.addEventListener("scroll", function() {
+        var wrapper = document.getElementById("nbm-container");
+        if (wrapper.classList.contains("open") || wrapper.classList.contains("active")) {
+          document.documentElement.scrollTop = T.__proto__.bodyScrollPos;
+        }
+      });
+    }
+  };
+  NbModal.prototype.init = function(creation) {
+    var T = this;
+
+    var itemHTML = document.createElement("div");
+    itemHTML.classList.add(T.defaultClassItem);
+    if (creation) {
+      T.options.windowClass ? itemHTML.classList.add(T.options.windowClass) : 1;
+      itemHTML.id = T.options.windowID;
+    }
+
+    itemHTML.innerHTML =
+      "<div class='nbm-item-content'>" + T.popup.innerHTML + "</div>";
+    T.wrapperContainerInner.append(itemHTML);
+    T.popup.remove();
+    T.popup = document.getElementById(T.options.windowID);
+
+    document.dispatchEvent(
+      new CustomEvent("NbModal-init", {
+        detail: { modal: T }
+      })
+    );
+
+    T.setEvents();
+  };
+  NbModal.prototype.open = function() {
+    var T = this;
+
+    T.__proto__.bodyScrollPos = document.documentElement.scrollTop;
+    T.wrapperContainer.classList.add("active");
+    T.wrapperContainer.classList.add(T.options.wrapperClass);
+    T.popup.classList.add("active");
+    T.wrapperContainerBg.style.backgroundColor = T.options.bacground;
+
+    setTimeout(function() {
+      T.wrapperContainer.classList.add("open");
+      T.wrapperContainer.classList.remove("active");
+      T.popup.classList.add("open");
+      T.popup.classList.remove("active");
+
+      document.dispatchEvent(
+        new CustomEvent("NbModal-open", {
+          detail: { modal: T }
+        })
+      );
+
+    }, T.timeAnimation);
+  };
+  NbModal.prototype.close = function(all) {
+    var T = this;
+    if(T.popup.classList.contains('open')){
+
+      T.wrapperContainer.classList.add("active");
+      T.wrapperContainer.classList.remove("open");
+      T.popup.classList.add("active");
+      T.popup.classList.remove("open");
+      setTimeout(function() {
+        T.wrapperContainerBg.setAttribute("style", "");
+        T.wrapperContainer.classList.remove("active");
+        T.wrapperContainer.classList.remove(T.options.wrapperClass);
+        T.popup.classList.remove("active");
+
+        document.dispatchEvent(
+          new CustomEvent("NbModal-close", {
+            detail: { modal: T }
+          })
+        );
+
+      }, T.timeAnimation);
+    }
+  };
+})();
+(function() {
   NbWhellEvent._init();
   NbTabs._init();
   NbFlops._init();
+  
+  
 })();
