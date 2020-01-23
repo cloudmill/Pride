@@ -2462,6 +2462,9 @@ body .wrapper * {
 .wrapper .page .priceSlider {
   border-top: 1px solid #e5e5e5;
 }
+.wrapper .page .priceSlider.offsetBottom {
+  padding-bottom: 120px;
+}
 .wrapper .page .priceSlider .pS_head {
   padding-top: 120px;
   padding-bottom: 70px;
@@ -2477,6 +2480,35 @@ body .wrapper * {
   margin: 0 40px;
   display: inline-block;
   margin-bottom: 10px;
+  position: relative;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+.wrapper .page .priceSlider .pS_head_link.link_hovered {
+  cursor: pointer;
+}
+.wrapper .page .priceSlider .pS_head_link.link_hovered:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background: #c4c4c4;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(10px);
+}
+.wrapper .page .priceSlider .pS_head_link.link_hovered:hover:not(.active):before {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.wrapper .page .priceSlider .pS_head_link.link_hovered.active:before {
+  background: #ff570f !important;
+  opacity: 1;
+  transform: translateY(0px);
 }
 .wrapper .page .priceSlider .pS_head_link .count {
   font-size: 16px;
@@ -2678,12 +2710,15 @@ body .wrapper * {
   transform: translate(-50%, -50%);
 }
 @media (max-width: 950px) {
-  .wrapper .page .priceSlider > .tabs > .content {
+  .wrapper .page .priceSlider.offsetBottom {
+    padding-bottom: 70px;
+  }
+  .wrapper .page .priceSlider > .priceSlider_box > .content:first-child {
     overflow-x: scroll;
     overflow-y: hidden;
     height: 116px;
   }
-  .wrapper .page .priceSlider > .tabs > .content .pS_head {
+  .wrapper .page .priceSlider > .priceSlider_box > .content:first-child .pS_head {
     width: auto;
     flex-wrap: nowrap;
     align-items: flex-start;
@@ -2694,10 +2729,10 @@ body .wrapper * {
     display: flex;
     padding-right: 40px;
   }
-  .wrapper .page .priceSlider > .tabs > .content .pS_head_link {
+  .wrapper .page .priceSlider > .priceSlider_box > .content:first-child .pS_head_link {
     white-space: nowrap;
   }
-  .wrapper .page .priceSlider > .tabs > .content .pS_head_link:first-child {
+  .wrapper .page .priceSlider > .priceSlider_box > .content:first-child .pS_head_link:first-child {
     margin-left: 0;
   }
   .wrapper .page .priceSlider .pS_head {
@@ -2795,7 +2830,7 @@ body .wrapper * {
   border-top: 0;
   display: flex;
 }
-.wrapper .page .news_head .tabs_head {
+.wrapper .page .news_head .pS_head-full {
   flex-basis: calc(100% / 3 * 2);
 }
 .wrapper .page .news_head_link {
@@ -2806,6 +2841,35 @@ body .wrapper * {
   margin: 0 40px;
   display: inline-block;
   margin-bottom: 10px;
+  position: relative;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+.wrapper .page .news_head_link.link_hovered {
+  cursor: pointer;
+}
+.wrapper .page .news_head_link.link_hovered:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background: #c4c4c4;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(10px);
+}
+.wrapper .page .news_head_link.link_hovered:hover:not(.active):before {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.wrapper .page .news_head_link.link_hovered.active:before {
+  background: #ff570f !important;
+  opacity: 1;
+  transform: translateY(0px);
 }
 .wrapper .page .news_all {
   flex-basis: calc(100% / 3);
@@ -2958,7 +3022,7 @@ body .wrapper * {
   }
 }
 @media (max-width: 950px) {
-  .wrapper .page .news .tabs_head {
+  .wrapper .page .news .pS_head-full {
     flex-basis: 100%;
   }
   .wrapper .page .news_all {
@@ -2978,12 +3042,12 @@ body .wrapper * {
   .wrapper .page .news .content:after {
     content: none;
   }
-  .wrapper .page .news > .tabs > .content {
+  .wrapper .page .news > .priceSlider_box > .content {
     overflow-x: scroll;
     overflow-y: hidden;
     height: 116px;
   }
-  .wrapper .page .news > .tabs > .content .news_head {
+  .wrapper .page .news > .priceSlider_box > .content .news_head {
     width: auto;
     flex-wrap: nowrap;
     align-items: flex-start;
@@ -2994,10 +3058,10 @@ body .wrapper * {
     display: flex;
     padding-right: 40px;
   }
-  .wrapper .page .news > .tabs > .content .news_head_link {
+  .wrapper .page .news > .priceSlider_box > .content .news_head_link {
     white-space: nowrap;
   }
-  .wrapper .page .news > .tabs > .content .news_head_link:first-child {
+  .wrapper .page .news > .priceSlider_box > .content .news_head_link:first-child {
     margin-left: 0;
   }
   .wrapper .page .news_head {
@@ -4848,6 +4912,11 @@ body .wrapper * {
 .wrapper .page .detail_buts {
   display: flex;
 }
+@media (max-width: 1500px) {
+  .wrapper .page .detail_row {
+    padding-right: 260px;
+  }
+}
 @media (max-width: 1440px) {
   .wrapper .page .detail_row {
     padding-right: 250px;
@@ -5019,11 +5088,9 @@ body .wrapper * {
   border-right: 1px solid #e5e5e5;
 }
 .wrapper .page .tabsBox_content {
-  padding: 110px 80px;
   flex-basis: calc(100% - 400px);
 }
 .wrapper .page .tabsBox_content p {
-  font-family: Helvetica Neue;
   font-size: 16px;
   line-height: 28px;
   color: #292929;
@@ -5031,6 +5098,9 @@ body .wrapper * {
 }
 .wrapper .page .tabsBox_content p b {
   font-weight: 500;
+}
+.wrapper .page .tabsBox_offset {
+  padding: 110px 80px;
 }
 .wrapper .page .tabsBox_item {
   font-family: Druk Wide Medium Cy;
@@ -5054,6 +5124,160 @@ body .wrapper * {
 }
 .wrapper .page .tabsBox_item:last-child {
   margin-bottom: 0;
+}
+.wrapper .page .tabsBox_opts {
+  width: 100%;
+  display: inline;
+}
+.wrapper .page .tabsBox_opts-content {
+  column-count: 2;
+  column-gap: 80px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #292929;
+}
+@media (max-width: 1200px) {
+  .wrapper .page .tabsBox_opts-content {
+    column-gap: 20px;
+  }
+}
+@media (max-width: 1000px) {
+  .wrapper .page .tabsBox_opts-content {
+    column-count: 1;
+  }
+}
+.wrapper .page .tabsBox_faq {
+  padding-top: 120px;
+}
+.wrapper .page .tabsBox_faq .faq_item {
+  padding: 20px 40px;
+  padding-right: 60px;
+  position: relative;
+  border-top: 1px solid #292929;
+  border-bottom: 1px solid #292929;
+  margin-top: -1px;
+  cursor: pointer;
+}
+.wrapper .page .tabsBox_faq .faq_item:before {
+  content: "";
+  width: 40px;
+  height: 1px;
+  right: 40px;
+  top: 40px;
+  display: block;
+  position: absolute;
+  background: #ff570f;
+}
+.wrapper .page .tabsBox_faq .faq_item:after {
+  content: "";
+  height: 40px;
+  width: 1px;
+  right: 60px;
+  top: 20px;
+  display: block;
+  position: absolute;
+  background: #ff570f;
+  transition: all 0.3s ease-in-out;
+}
+.wrapper .page .tabsBox_faq .faq_item.active:after {
+  height: 0;
+  top: 40px;
+}
+.wrapper .page .tabsBox_faq .faq_item.active .faq_text {
+  display: block;
+  opacity: 1;
+  height: auto;
+  pointer-events: auto;
+}
+.wrapper .page .tabsBox_faq .faq_title {
+  font-family: Druk Wide Medium Cy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #292929;
+  margin-bottom: 20px;
+  margin-right: 30px;
+}
+.wrapper .page .tabsBox_faq .faq_name {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 135%;
+  color: #8a8a8a;
+}
+.wrapper .page .tabsBox_faq .faq_text {
+  font-style: normal;
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+.wrapper .page .tabsBox_faq .faq_make {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 50px;
+  text-align: center;
+  color: #292929;
+  border: 0;
+  padding: 0 20px;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-bottom: 120px;
+  cursor: pointer;
+}
+.wrapper .page .tabsBox_doc {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper .page .tabsBox_doc .doc_item {
+  flex-basis: calc((100% - 10px)/2);
+  background: #F5F5F5;
+  padding: 20px 40px;
+  position: relative;
+  padding-bottom: 60px;
+  min-height: 180px;
+  margin-bottom: 10px;
+}
+.wrapper .page .tabsBox_doc .doc_item:nth-of-type(2n-1) {
+  margin-right: 10px;
+}
+.wrapper .page .tabsBox_doc .doc_name {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #292929;
+}
+.wrapper .page .tabsBox_doc .doc_size {
+  font-family: Helvetica Neue;
+  font-size: 14px;
+  line-height: 24px;
+  color: #292929;
+  position: absolute;
+  left: 40px;
+  bottom: 20px;
+}
+.wrapper .page .tabsBox_doc .doc_type {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: right;
+  color: #292929;
+  position: absolute;
+  right: 40px;
+  bottom: 20px;
 }
 .wrapper .page_head {
   border-left: 1px solid #e5e5e5;

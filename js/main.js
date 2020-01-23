@@ -3,6 +3,10 @@ $(document).ready(function() {
   custom.init();
   svgMap.init();
   priceSlider.init();
+  $(document).on('flopOpen',function(e){
+    console.log(e.detail)
+    console.log(e.target)
+  })
 });
 
 header = {
@@ -73,35 +77,6 @@ custom = {
       });
     },
     init: function() {
-      this.events();
-    }
-  },
-  tabs: {
-    createTabs: function() {
-      $(".tabs").each(function(i, parent) {
-        var tabsLink = $(this).find(".tabs_link");
-        tabsLink.each(function(key, item) {
-          var index = parseInt(Math.random() * 1000);
-          var tab = $(parent)
-            .find(".tab")
-            .eq(key);
-          $(this).attr("href", "#target-" + index);
-          tab.attr("id", "target-" + index);
-        });
-      });
-    },
-    events: function() {
-      $(document).on("click", ".tabs_link", function(e) {
-        e.preventDefault();
-        var parent = $(this).closest(".tabs");
-        parent.find(".tabs_link").removeClass("active");
-        $(this).addClass("active");
-        parent.find(".tab").removeClass("active");
-        parent.find(".tab" + $(this).attr("href")).addClass("active");
-      });
-    },
-    init: function() {
-      this.createTabs();
       this.events();
     }
   },
@@ -443,7 +418,6 @@ custom = {
   },
   init: function() {
     this.animateHover.init();
-    this.tabs.init();
     if ($(".filter").length > 0) this.filter.init();
     if ($(".sort").length > 0) this.sort.init();
     if ($(".example").length > 0) this.example.init();

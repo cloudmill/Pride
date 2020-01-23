@@ -1,3 +1,8 @@
+////////
+//
+//
+//попапы
+//
 var NbPopup = {
   _popupOpen: false,
   _bodyScrollPos: 0,
@@ -110,6 +115,12 @@ var NbPopup = {
     }, this.baseTimeAnimate);
   }
 };
+////////
+//
+//
+//событие колесика мыши
+//
+//////
 var NbWhellEvent = {
   _getDelta: function(e) {
     e = e || window.event;
@@ -165,6 +176,12 @@ var NbWhellEvent = {
     this._setEvents();
   }
 };
+////////
+//
+//
+//табы
+//
+//////
 var NbTabs = {
   _setup: function() {
     var tabsContainers = document.getElementsByClassName("nbt-container");
@@ -172,53 +189,73 @@ var NbTabs = {
     var _this = this;
     var indexCont = 0;
     for (elem of tabsContainers) {
-      var tempId = "nbt_" + parseInt(Math.random() * 10000);
+      var tempId = "nbt_" + indexCont;
       elem.id = tempId;
+      elem.setAttribute("data-index", indexCont);
       _this.tabs[indexCont] = {
         wrapper: elem,
         id: indexCont,
+        XMLid: tempId,
         butsList: elem.querySelectorAll(".nbt-menu-item"),
-        tabsList: elem.querySelectorAll(".nbt-tab"),
-        buts: [],
-        tabs: []
+        tabsList: elem.querySelectorAll(".nbt-tab")
       };
       var index = 0;
       for (but of _this.tabs[indexCont].butsList) {
-        var tempIdTab = "nbt_item_" + parseInt(Math.random() * 10000);
+        var tempIdTab = tempId+"-nbtItem_" + index;
         but.setAttribute("data-id", tempIdTab);
         but.setAttribute("data-index", index);
         _this.tabs[indexCont].tabsList[index].id = tempIdTab;
         _this.tabs[indexCont].tabsList[index].setAttribute("data-index", index);
-        _this.tabs[indexCont].buts[index] = { but: but, id: index };
-        _this.tabs[indexCont].tabs[index] = {
-          tab: _this.tabs[indexCont].tabsList[index],
-          id: index
-        };
         index++;
       }
       _this.tabs[indexCont].butsList = elem.querySelectorAll(".nbt-menu-item");
       _this.tabs[indexCont].tabsList = elem.querySelectorAll(".nbt-tab");
+      indexCont++;
     }
   },
   _events: function() {
     var _this = this;
-    for (elemTab of this.tabs) {
-      document.addEventListener(
-        "click",
-        function(e) {
-          var index = e.target.getAttribute('data-index')
-          console.log(e.target);
-          for (item of elemTab.butsList) {
+    document.addEventListener(
+      "click",
+      function(e) {
+        var clicked = false;
+        var target = e.target;
+        if (
+          e.target.closest(".nbt-menu-item") ||
+          e.target.classList.contains("nbt-menu-item")
+        ) {
+          clicked = true;
+          target = e.target.classList.contains("nbt-menu-item")
+            ? e.target
+            : e.target.closest(".nbt-menu-item");
+        }
+        if (clicked) {
+          var index = target.getAttribute("data-index");
+          var parent_id = target
+            .closest(".nbt-container")
+            .getAttribute("data-index");
+          for (item of _this.tabs[parent_id].butsList) {
             item.classList.remove("active");
           }
-          e.target.classList.add("active");
-          for (item of elemTab.tabsList) {
+          target.classList.add("active");
+          for (item of _this.tabs[parent_id].tabsList) {
             item.classList.remove("active");
           }
-          elemTab.tabs[index].tab.classList.add("active");
-        },
-        false
-      );
+          _this.tabs[parent_id].tabsList[index].classList.add("active");
+        }
+      },
+      false
+    );
+  },
+  get: function(tab, action) {
+    parent = document.querySelectorAll(tab)[0];
+    if (action == "currentTab") {
+      return parent.querySelectorAll(".nbt-tab.active")[0];
+    }
+    if (action == "currentIndex") {
+      return parent
+        .querySelectorAll(".nbt-tab.active")[0]
+        .getAttribute("data-index");
     }
   },
   _init: function() {
@@ -226,8 +263,63 @@ var NbTabs = {
     this._events();
   }
 };
+////////
+//
+//
+//переключатель
+//
+//////
+var NbFlops = {
+  _events: function() {
+    document.addEventListener(
+      "click",
+      function(e) {
+        var clicked = false;
+        var target = e.target;
+        if (
+          e.target.closest(".nbf-item") ||
+          e.target.classList.contains("nbf-item")
+        ) {
+          clicked = true;
+          target = e.target.classList.contains("nbf-item")
+            ? e.target
+            : e.target.closest(".nbf-item");
+        }
+        if (clicked) {
+          if (target.classList.contains("active")) {
+            target.classList.remove("active");
+            document.dispatchEvent(
+              new CustomEvent("flopClose", {
+                detail: { target: target}
+              })
+            );
+          } else {
+            target.classList.add("active");
+            document.dispatchEvent(
+              new CustomEvent("flopOpen", {
+                detail: { target: target}
+              })
+            );
+          }
+        }
+      },
+      
+      false
+    );
+  },
+  _init: function() {
+    this._events();
+  }
+};
+////////
+//
+//
+//инициализация
+//
+//////
 (function() {
   NbPopup._init();
   NbWhellEvent._init();
   NbTabs._init();
+  NbFlops._init();
 })();
