@@ -8,6 +8,12 @@ $(document).ready(function() {
     console.log(e.detail)
     console.log(e.target)
   })
+  $(document).on('XHR-loadNewDoc',function(e){
+    console.log(e.detail)
+  })
+  var XHR_links = new NbXHR({
+    classLink: 'catalog'
+  })
 });
 
 header = {

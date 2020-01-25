@@ -194,7 +194,8 @@ var NbFlops = {
     this._events();
   }
 };
-
+//
+//ModalsWindows
 var NbModal = window.NbModal || {};
 (function() {
   ////////
@@ -279,7 +280,10 @@ var NbModal = window.NbModal || {};
     if (T.initialID === 0) {
       window.addEventListener("scroll", function() {
         var wrapper = document.getElementById("nbm-container");
-        if (wrapper.classList.contains("open") || wrapper.classList.contains("active")) {
+        if (
+          wrapper.classList.contains("open") ||
+          wrapper.classList.contains("active")
+        ) {
           document.documentElement.scrollTop = T.__proto__.bodyScrollPos;
         }
       });
@@ -329,13 +333,11 @@ var NbModal = window.NbModal || {};
           detail: { modal: T }
         })
       );
-
     }, T.timeAnimation);
   };
   NbModal.prototype.close = function(all) {
     var T = this;
-    if(T.popup.classList.contains('open')){
-
+    if (T.popup.classList.contains("open")) {
       T.wrapperContainer.classList.add("active");
       T.wrapperContainer.classList.remove("open");
       T.popup.classList.add("active");
@@ -351,15 +353,283 @@ var NbModal = window.NbModal || {};
             detail: { modal: T }
           })
         );
-
       }, T.timeAnimation);
     }
+  };
+})();
+//
+//XHRequests
+var NbXHR = window.NbXHR || {};
+(function() {
+  ////////
+  //
+  //XHRequests
+  //
+  ////////
+  "use strict";
+  NbXHR = (function() {
+    var inited_NbXHR = false;
+    NbXHR = function(opts) {
+      var T = this;
+      this.store = [];
+      this.pause = 300;
+      this.currentPage_id = 0;
+      this.offsetPage = 0;
+      T.defaults = {};
+      T.initials = {
+        classLink: "nbx-link",
+        workWithPopButs: true
+      };
+      T = Object.assign(T, T.defaults);
+      T.options = Object.assign({}, T.initials, opts);
+      T.init();
+      inited_NbXHR = true;
+    };
+    if (inited_NbXHR) {
+      new console.error("failed inited");
+      return false;
+    }
+    return NbXHR;
+  })();
+
+  NbXHR.prototype._pullStory = function() {
+    var T = this;
+    if (history.length == 2) {
+      var href = document.location.href;
+      var pageInf = {
+        id: 0,
+        href: href
+      };
+      T.store.push(pageInf);
+      history.replaceState(pageInf, null, href);
+    } else {
+      for (var i = 0; i < history.length - 1; i++) {
+        T.store.push({
+          id: i,
+          url: null
+        });
+      }
+    }
+  };
+  NbXHR.prototype._setEvents = function() {
+    var T = this;
+    $(document).on("click", "." + T.options.classLink, function(e) {
+      var href = $(this).attr("href");
+      if (
+        href[0] != "#" &&
+        href.indexOf("tel:") != 0 &&
+        href.indexOf("mailto:") != 0 &&
+        href.indexOf("callto:") != 0 &&
+        href != "" &&
+        !$(this).is("[download]") &&
+        (!$(this).attr("target") || $(this).attr("target") != "_blank")
+      ) {
+        if ($(this).attr("data-fail-xhr") == undefined) {
+          e.preventDefault();
+          T.hrefTo = href;
+          T.targetClick = $(this);
+          T.newPage();
+        }
+      }
+    });
+    if (T.options.workWithPopButs)
+      window.addEventListener("popstate", function(e) {
+        if (e.state) {
+          T.hrefTo = e.state.href;
+          if (e.state.id < T.currentPage_id) {
+            T.backPage();
+          } else if (e.state.id > T.currentPage_id) {
+            T.nextPage();
+          }
+        }
+      });
+  };
+  NbXHR.prototype.newPage = function() {
+    var T = this;
+    var succes = function() {
+      var T = this;
+      if (T.offsetPage < 0) {
+        T.store.splice(
+          T.currentPage_id + 1,
+          T.store.length - 1 - T.currentPage_id
+        );
+      }
+      var lastStore = T.store[T.store.length - 1];
+      var next_id = lastStore ? lastStore.id + 1 : 0;
+      var pageInf = {
+        id: next_id,
+        href: T.hrefTo
+      };
+      T.store.push(pageInf);
+      history.pushState(pageInf, null, T.hrefTo);
+      T.currentPage_id = next_id;
+      if (!document.location.href.split("#")[1])
+        $("body,html").animate({ scrollTop: 0 }, 1000);
+    }.bind(T);
+    var failed = function() {
+      var T = this;
+      console.log("failed__________new-page");
+      if (T.targetClick) {
+        T.targetClick.attr("data-fail-xhr", "fail");
+        T.targetClick[0].click();
+      }
+    }.bind(this);
+    document.dispatchEvent(
+      new CustomEvent("XHR-newPage", {
+        detail: { xhr: T }
+      })
+    );
+    T.createRequest(succes, failed);
+  };
+  NbXHR.prototype.backPage = function() {
+    var T = this;
+    T.currentPage_id--;
+    T.offsetPage--;
+    var succes = function() {
+      console.log("succes");
+    }.bind(T);
+    var failed = function() {
+      console.log("failed");
+    }.bind(T);
+    document.dispatchEvent(
+      new CustomEvent("XHR-backPage", {
+        detail: { xhr: T }
+      })
+    );
+    T.createRequest(succes, failed);
+  };
+  NbXHR.prototype.nextPage = function() {
+    var T = this;
+    T.currentPage_id++;
+    T.offsetPage++;
+    var succes = function() {}.bind(T);
+    var failed = function() {}.bind(T);
+    document.dispatchEvent(
+      new CustomEvent("XHR-nextPage", {
+        detail: { xhr: T }
+      })
+    );
+    T.createRequest(succes, failed);
+  };
+  NbXHR.prototype.refreshState = function() {
+    var T = this;
+    T.targetClick = null;
+    T.hrefTo = null;
+  };
+  NbXHR.prototype.createRequest = function(succes, failed, href) {
+    var T = this;
+    if (href) T.hrefTo = href;
+    if (window.XMLHttpRequest) {
+      T.XHR = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+      T.XHR = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    T.XHR.onload = function() {
+      document.dispatchEvent(
+        new CustomEvent("XHR-load", {
+          detail: { xhr: T }
+        })
+      );
+      setTimeout(function() {
+        var elem_ = document.getElementsByClassName("iframeDoc");
+        if (elem_.length > 1) {
+          elem_[1].parentNode.removeChild(elem_[1]);
+        }
+        if (T.XHR.status == 200 || T.XHR.status == 404) {
+          succes();
+          T.reloadPageDoing(T.XHR.response);
+          T.XHR.onload = null;
+        } else {
+          failed();
+        }
+        T.refreshState();
+      }, T.pause);
+    };
+    T.XHR.onerror = function() {
+      failed();
+      T.XHR.onerror = null;
+      T.refreshState();
+    };
+    T.XHR.open("POST", T.hrefTo, true);
+    T.XHR.send();
+  };
+  NbXHR.prototype.subDocument = function(string) {
+    var iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.className = "iframeDoc";
+    document.body.appendChild(iframe);
+    var head = string.slice(
+      string.indexOf("<head>") + 6,
+      string.indexOf("</head>")
+    );
+    var body = string.slice(
+      string.indexOf("<body>") + 6,
+      string.indexOf("</body>")
+    );
+    iframe.contentDocument.body.innerHTML = body;
+
+    iframe.contentDocument.head.innerHTML = head;
+    return iframe;
+  };
+  NbXHR.prototype.reloadPageDoing = function(temp_html) {
+    var T = this;
+    var iframe = T.subDocument(temp_html);
+    iframe.onload = function() {
+      document.dispatchEvent(
+        new CustomEvent("XHR-loadNewDoc", {
+          detail: { xhr: T }
+        })
+      );
+      var html = this.contentDocument;
+      console.log("reload ________");
+      function replaceDOM(_class, _parent) {
+        var _old = document.getElementsByClassName(_class)[0];
+        var _new = html.getElementsByClassName(_class)[0];
+        if (!_old) {
+          _parent.append(_new);
+        } else {
+          _parent.replaceChild(_new, _old);
+        }
+      }
+      var wrapper = document.getElementsByClassName("wrapper")[0];
+      var newWrapper = document.getElementsByClassName("wrapper")[0];
+      replaceDOM("page", wrapper);
+      replaceDOM("header", wrapper);
+      replaceDOM("footer", wrapper);
+      document.documentElement.replaceChild(html.head, document.head);
+      wrapper.classList.remove("only-fp");
+      wrapper.classList.add(newWrapper.classList);
+      if (document.readyState === "complete") {
+        document.dispatchEvent(
+          new CustomEvent("XHR-complate", {
+            detail: { xhr: T }
+          })
+        );
+      } else {
+        window.onload = function() {
+          document.dispatchEvent(
+            new CustomEvent("XHR-complate", {
+              detail: { xhr: T }
+            })
+          );
+          window.onload = null;
+        };
+      }
+    };
+  };
+  NbXHR.prototype.init = function() {
+    var T = this;
+    T._pullStory();
+    T._setEvents();
+    document.dispatchEvent(
+      new CustomEvent("XHR-init", {
+        detail: { xhr: T }
+      })
+    );
   };
 })();
 (function() {
   NbWhellEvent._init();
   NbTabs._init();
   NbFlops._init();
-  
-  
 })();
