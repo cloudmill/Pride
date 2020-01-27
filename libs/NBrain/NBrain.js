@@ -413,6 +413,32 @@ var NbXHR = window.NbXHR || {};
   };
   NbXHR.prototype._setEvents = function() {
     var T = this;
+    document.addEventListener(
+      "click",
+      function() {
+        if (this.classLink.contains(T.options.classLink)) {
+          var href = this.getAttribute("href");
+          if (
+            href[0] != "#" &&
+            href.indexOf("tel:") != 0 &&
+            href.indexOf("mailto:") != 0 &&
+            href.indexOf("callto:") != 0 &&
+            href != "" &&
+            !this.hasAttribute("download") &&
+            (!this.hasAttribute("target") ||
+              this.getAttribute("target") != "_blank")
+          ) {
+            if (!this.hasAttribute("data-fail-xhr")) {
+              e.preventDefault();
+              T.hrefTo = href;
+              T.targetClick = this;
+              T.newPage();
+            }
+          }
+        }
+      },
+      false
+    );
     $(document).on("click", "." + T.options.classLink, function(e) {
       var href = $(this).attr("href");
       if (
@@ -463,15 +489,22 @@ var NbXHR = window.NbXHR || {};
       T.store.push(pageInf);
       history.pushState(pageInf, null, T.hrefTo);
       T.currentPage_id = next_id;
-      if (!document.location.href.split("#")[1])
-        $("body,html").animate({ scrollTop: 0 }, 1000);
+      if (!document.location.href.split("#")[1]) {
+        var top_ = document.body.scrollTop;
+        var timeInterval_ = setInterval(function() {
+          document.body.scrollTop -= top_ / 100;
+          if (document.body.scrollTop == 0) {
+            clearInterval(timeInterval_);
+          }
+        }, 10);
+      }
     }.bind(T);
     var failed = function() {
       var T = this;
       console.log("failed__________new-page");
       if (T.targetClick) {
-        T.targetClick.attr("data-fail-xhr", "fail");
-        T.targetClick[0].click();
+        T.targetClick.setAttribute("data-fail-xhr", "fail");
+        T.targetClick.click();
       }
     }.bind(this);
     document.dispatchEvent(
@@ -628,6 +661,8 @@ var NbXHR = window.NbXHR || {};
     );
   };
 })();
+//
+//Init all
 (function() {
   NbWhellEvent._init();
   NbTabs._init();
