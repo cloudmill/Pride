@@ -208,6 +208,7 @@ var NbModal = window.NbModal || {};
     var wrapperContainer = null;
     var wrapperContainerInner = null;
     var wrapperContainerBg = null;
+    var wrapperClose = null;
     NbModal = function(ID, opts) {
       var T = this;
 
@@ -219,7 +220,7 @@ var NbModal = window.NbModal || {};
         wrapperContainer.innerHTML =
           '<div class="nbm-container-inner" id="nbm-container-inner">' +
           '<div class="nbm-background" id="nbm-background"></div>' +
-          '<div class="nbm-close"><span></span></div></div>';
+          '<div class="nbm-close" id="nbm-close"><span></span></div></div>';
         if (document.getElementsByClassName("wrapper"))
           document
             .getElementsByClassName("wrapper")[0]
@@ -231,12 +232,14 @@ var NbModal = window.NbModal || {};
         wrapperContainer = document.getElementById("nbm-container");
         wrapperContainerInner = document.getElementById("nbm-container-inner");
         wrapperContainerBg = document.getElementById("nbm-background");
+        wrapperClose = document.getElementById("nbm-close");
       }
       T.defaults = {
         wrapperContainer: wrapperContainer,
         wrapperContainerInner: wrapperContainerInner,
         defaultClassItem: "nbm-item",
         wrapperContainerBg: wrapperContainerBg,
+        wrapperClose: wrapperClose,
         timeAnimation: 300
       };
       T.initials = {
@@ -244,11 +247,18 @@ var NbModal = window.NbModal || {};
         serialNumber: "nbm-modal-" + T.initialID,
         windowType: "modal",
         windowPos: ["center", "center"],
-        bacground: "#ffffff",
+        background: "#ffffff",
         windowClass: null,
         wrapperClass: null,
         windowTypeAnimate: "fade",
-        typeInit: "normal"
+        typeInit: "normal",
+        butClose: {
+          butInPopup: false,
+          offset: {
+            x: 5,
+            y: 5
+          }
+        }
       };
       T = Object.assign(T, T.defaults);
       T.options = Object.assign({}, T.initials, opts);
@@ -264,14 +274,15 @@ var NbModal = window.NbModal || {};
   NbModal.prototype.setEvents = function() {
     var T = this;
 
-    for (elem of document.querySelectorAll(
+    for (var elem of document.querySelectorAll(
       ".nbm-open[data-id=" + T.options.windowID + "]"
     )) {
-      elem.addEventListener("click", function() {
+      elem.addEventListener("click", function(event) {
+        event.preventDefault();
         T.open();
       });
     }
-    for (elem of document.querySelectorAll(".nbm-close")) {
+    for (var elem of document.querySelectorAll(".nbm-close")) {
       elem.addEventListener("click", function() {
         T.close();
       });
@@ -279,7 +290,10 @@ var NbModal = window.NbModal || {};
     if (T.initialID === 0) {
       window.addEventListener("scroll", function() {
         var wrapper = document.getElementById("nbm-container");
-        if (wrapper.classList.contains("open") || wrapper.classList.contains("active")) {
+        if (
+          wrapper.classList.contains("open") ||
+          wrapper.classList.contains("active")
+        ) {
           document.documentElement.scrollTop = T.__proto__.bodyScrollPos;
         }
       });
@@ -316,8 +330,23 @@ var NbModal = window.NbModal || {};
     T.wrapperContainer.classList.add("active");
     T.wrapperContainer.classList.add(T.options.wrapperClass);
     T.popup.classList.add("active");
-    T.wrapperContainerBg.style.backgroundColor = T.options.bacground;
+    T.wrapperContainerBg.style.backgroundColor = T.options.background;
 
+    if (T.options.butClose.butInPopup) {
+      T.wrapperClose.style.top =
+        T.popup.offsetTop -
+        T.popup.offsetHeight / 2 +
+        T.options.butClose.offset.y +
+        "px";
+      T.wrapperClose.style.left =
+        T.popup.offsetLeft +
+        T.popup.offsetWidth / 2 -
+        17 -
+        T.options.butClose.offset.x +
+        "px";
+    } else {
+      T.wrapperClose.setAttribute("style", "");
+    }
     setTimeout(function() {
       T.wrapperContainer.classList.add("open");
       T.wrapperContainer.classList.remove("active");
@@ -329,13 +358,11 @@ var NbModal = window.NbModal || {};
           detail: { modal: T }
         })
       );
-
     }, T.timeAnimation);
   };
   NbModal.prototype.close = function(all) {
     var T = this;
-    if(T.popup.classList.contains('open')){
-
+    if (T.popup.classList.contains("open")) {
       T.wrapperContainer.classList.add("active");
       T.wrapperContainer.classList.remove("open");
       T.popup.classList.add("active");
@@ -351,7 +378,6 @@ var NbModal = window.NbModal || {};
             detail: { modal: T }
           })
         );
-
       }, T.timeAnimation);
     }
   };
@@ -360,6 +386,4 @@ var NbModal = window.NbModal || {};
   NbWhellEvent._init();
   NbTabs._init();
   NbFlops._init();
-  
-  
 })();

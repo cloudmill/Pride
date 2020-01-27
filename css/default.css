@@ -301,8 +301,8 @@ body .wrapper * {
   margin: auto;
 }
 .wrapper .content.border {
-  border-left: 1px solid #E5E5E5;
-  border-right: 1px solid #E5E5E5;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
 }
 .wrapper .tabs {
   position: relative;
@@ -528,6 +528,103 @@ body .wrapper * {
   100% {
     transform: translateY(-100%);
   }
+}
+.wrapper .def-form-title {
+  font-family: Druk Wide Medium Cy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #292929;
+}
+.wrapper .def-form-textarea {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  height: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  resize: none;
+}
+.wrapper .def-form-input {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.wrapper .def-form-input-file {
+  position: relative;
+  padding-top: 30px;
+  margin-bottom: 50px;
+}
+.wrapper .def-form-input-file input {
+  display: none;
+}
+.wrapper .def-form-input-file label {
+  font-family: Helvetica Neue;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #292929;
+}
+.wrapper .def-form-input-file label::before {
+  content: "";
+  width: 20px;
+  height: 12px;
+  display: block;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(../images/file.svg);
+}
+.wrapper .def-form-checkbox input {
+  display: none;
+}
+.wrapper .def-form-checkbox input:checked + label::after {
+  opacity: 1;
+}
+.wrapper .def-form-checkbox label {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  position: relative;
+  color: #292929;
+  padding-left: 50px;
+  display: block;
+}
+.wrapper .def-form-checkbox label a {
+  text-decoration: underline;
+  color: inherit;
+}
+.wrapper .def-form-checkbox label:before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 @media (max-width: 1440px) {
   .wrapper .content {

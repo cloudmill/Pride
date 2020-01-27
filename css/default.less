@@ -305,14 +305,14 @@ body {
       width: 19px;
       height: 22.8px;
     }
-    &-close{
+    &-close {
       .def-icon;
       filter: contrast(0) brightness(0);
       background-image: url(../images/close.svg);
       width: 15px;
       height: 15px;
     }
-    &-str-left{
+    &-str-left {
       .def-icon;
       background-image: url(../images/str_left.svg);
       width: 25px;
@@ -326,9 +326,9 @@ body {
   .content {
     width: ~"calc(100% - 400px)";
     margin: auto;
-    &.border{
-      border-left: 1px solid #E5E5E5;
-      border-right: 1px solid #E5E5E5;
+    &.border {
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
     }
   }
   .tabs {
@@ -362,7 +362,7 @@ body {
         }
       }
     }
-    &_box{
+    &_box {
       position: relative;
     }
     .tab {
@@ -473,21 +473,126 @@ body {
       }
     }
   }
-  @media(max-width:1440px){
+  .def-form {
+    &-title {
+      font-family: Druk Wide Medium Cy;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 130%;
+      color: #292929;
+    }
+    &-textarea{
+      font-family: Helvetica Neue;
+      width: 100%;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 28px;
+      color: #292929;
+      border: 0;
+      background: transparent;
+      padding: 30px 0;
+      height: 100%;
+      border-bottom: 1px solid #e5e5e5;
+      resize: none;
+    }
+    &-input {
+      font-family: Helvetica Neue;
+      width: 100%;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 28px;
+      color: #292929;
+      border: 0;
+      background: transparent;
+      padding: 30px 0;
+      border-bottom: 1px solid #e5e5e5;
+      &-file {
+        position: relative;
+        padding-top: 30px;
+        margin-bottom: 50px;
+        input {
+          display: none;
+        }
+        label {
+          font-family: Helvetica Neue;
+          cursor: pointer;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          color: #292929;
+          &::before {
+            content: "";
+            width: 20px;
+            height: 12px;
+            display: block;
+            margin-right: 10px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            background-image: url(../images/file.svg);
+          }
+        }
+      }
+    }
+    &-checkbox {
+      input {
+        display: none;
+        &:checked {
+          & + label {
+            &::after {
+              opacity: 1;
+            }
+          }
+        }
+      }
+      label {
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+        position: relative;
+        color: #292929;
+        padding-left: 50px;
+        display: block;
+        a {
+          text-decoration: underline;
+          color: inherit;
+        }
+        &:before {
+          content: "";
+          display: block;
+          width: 28px;
+          height: 28px;
+          border: 1px solid #e5e5e5;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 1440px) {
     .content {
       width: ~"calc(100% - 360px)";
     }
   }
-  @media(max-width:1240px){
+  @media (max-width: 1240px) {
     .content {
       width: ~"calc(100% - 100px)";
     }
-    .inner{
+    .inner {
       width: ~"calc(100% - 100px)";
     }
   }
-  @media(max-width: 950px){
-    .inner{
+  @media (max-width: 950px) {
+    .inner {
       width: ~"calc(100% - 30px)";
     }
     .content {
@@ -495,4 +600,3 @@ body {
     }
   }
 }
-
