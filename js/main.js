@@ -319,6 +319,21 @@ custom = {
       this.events();
     }
   },
+  title_select: {
+    setup: function() {
+      $(".title_select").each(function() {
+        $(this).select2({
+          minimumResultsForSearch: Infinity,
+          multiple: false,
+          dropdownParent: $(".wrapper .page"),
+          dropdownCssClass: "title_select2"
+        });
+      });
+    },
+    init: function() {
+      this.setup();
+    }
+  },
   detailGaleryImgs: {
     setup: function() {
       var galleryThumbs = new Swiper(".detail_imgs_list", {
@@ -441,9 +456,10 @@ custom = {
   },
   init: function() {
     this.animateHover.init();
-    if ($(".filter").length > 0) this.filter.init();
+    if ($(".filter_select").length > 0) this.filter.init();
     if ($(".filterMap").length > 0) this.filterInMap.init();
-    if ($(".sort").length > 0) this.sort.init();
+    if ($(".title_select").length > 0) this.title_select.init();
+    if ($(".sort_select").length > 0) this.sort.init();
     if ($(".example").length > 0) this.example.init();
     if ($(".detail_imgs").length > 0) this.detailGaleryImgs.init();
     if ($(".tabsBox_menu").length > 0) this.detailTabsDoing.init();
@@ -452,66 +468,25 @@ custom = {
 };
 popups = {
   setup: function() {
-    if ($("#buyOneClick").length > 0)
-      this.buyOneClick = new NbModal("buyOneClick", {
-        background: "rgba(0, 0, 0, 0.15)",
-        windowClass: "popupCenter",
-        wrapperClass: "page",
-        butClose: {
-          butInPopup: true,
-          offset: {
-            x: 30,
-            y: 30
-          }
-        }
-      });
-    if ($("#question").length > 0)
-      this.question = new NbModal("question", {
-        background: "rgba(0, 0, 0, 0.15)",
-        windowClass: "popupCenter",
-        wrapperClass: "page",
-        butClose: {
-          butInPopup: true,
-          offset: {
-            x: 30,
-            y: 30
-          }
-        }
-      });
     if ($("#properties").length > 0)
       this.properties = new NbModal("properties", {
-        background: "rgba(0, 0, 0, 0.15)",
         windowClass: "popupFadeInRight",
-        windowPos: ["right", "center"],
         wrapperClass: "page"
       });
-    if ($("#collback_success").length > 0)
-      this.collback_success = new NbModal("collback_success", {
-        background: "rgba(0, 0, 0, 0.15)",
-        windowClass: "popupSuccess",
+    this.buyOneClick = document.getPopup("buyOneClick");
+    this.question = document.getPopup("question");
+    this.collback_success = document.getPopup("collback_success");
+    this.question_success = document.getPopup("question_success");
+    this.succes = document.newPopup(
+      "succes",
+      {
+        windowClass: "popupCenter",
         wrapperClass: "page",
-        butClose: {
-          butInPopup: true,
-          offset: {
-            x: 30,
-            y: 30
-          }
-        }
-      });
-    if ($("#question_success").length > 0)
-      this.collback_success = new NbModal("question_success", {
-        background: "rgba(0, 0, 0, 0.15)",
-        windowClass: "popupSuccess",
-        wrapperClass: "page",
-        butClose: {
-          butInPopup: true,
-          offset: {
-            x: 30,
-            y: 30
-          }
-        }
-      });
-    //this.question.open();
+        butCloseInPopup: true
+      },
+      "<h3>заголовок</h3><p>текст</p>"
+    );
+    //this.succes.open();
   },
   init: function() {
     this.setup();

@@ -626,6 +626,9 @@ body .wrapper * {
   top: 0;
   left: 0;
 }
+.wrapper .nbm-background {
+  background: rgba(0, 0, 0, 0.15);
+}
 @media (max-width: 1440px) {
   .wrapper .content {
     width: calc(100% - 360px);

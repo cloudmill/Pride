@@ -168,7 +168,10 @@ var NbFlops = {
             ? e.target
             : e.target.closest(".nbf-item");
         }
-        if (clicked) {
+        var width_ =
+          !target.hasAttribute("data-width") ||
+          window.innerWidth <= Number(target.getAttribute("data-width"));
+        if (clicked && width_) {
           if (target.classList.contains("active")) {
             target.classList.remove("active");
             document.dispatchEvent(
@@ -195,6 +198,35 @@ var NbFlops = {
   }
 };
 //
+//NbEasyDOM
+var NbEasyDOM = window.NbEasyDOM || {};
+var nbe;
+(function() {
+  ////////
+  //
+  //NbEasyDOM
+  //
+  ////////
+  "use strict";
+  NbEasyDOM = (function() {
+    NbEasyDOM = function(opts) {
+      var T = this;
+      T.defaults = {};
+      T.initials = {};
+      T = Object.assign(T, T.defaults);
+      T.options = Object.assign({}, T.initials, opts);
+      //T.init();
+    };
+    return NbEasyDOM;
+  })();
+  NbEasyDOM.prototype.$ = function(selector, parent) {
+    if (parent)
+      return Array.prototype.slice.call(parent.querySelectorAll(selector));
+    else return Array.prototype.slice.call(document.querySelectorAll(selector));
+  };
+  nbe = new NbEasyDOM();
+})();
+//
 //ModalsWindows
 var NbModal = window.NbModal || {};
 (function() {
@@ -204,13 +236,15 @@ var NbModal = window.NbModal || {};
   //
   ////////
   "use strict";
+  var popups = [];
+  var bodyScrollPos = null;
   NbModal = (function() {
     var initialID = 0;
     var wrapperContainer = null;
     var wrapperContainerInner = null;
     var wrapperContainerBg = null;
     var wrapperClose = null;
-    NbModal = function(ID, opts) {
+    NbModal = function(ID, opts, content) {
       var T = this;
 
       T.initialID = initialID++;
@@ -241,37 +275,39 @@ var NbModal = window.NbModal || {};
         defaultClassItem: "nbm-item",
         wrapperContainerBg: wrapperContainerBg,
         wrapperClose: wrapperClose,
-        timeAnimation: 300
+        timeAnimation: 300,
+        butOffset: {
+          x: 30,
+          y: 30
+        }
       };
       T.initials = {
         windowID: ID,
         serialNumber: "nbm-modal-" + T.initialID,
         windowType: "modal",
-        windowPos: ["center", "center"],
-        background: "#ffffff",
+        background: false,
         windowClass: null,
         wrapperClass: null,
         windowTypeAnimate: "fade",
         typeInit: "normal",
-        butClose: {
-          butInPopup: false,
-          offset: {
-            x: 5,
-            y: 5
-          }
-        }
+        butCloseInPopup: false
       };
       T = Object.assign(T, T.defaults);
       T.options = Object.assign({}, T.initials, opts);
-      T.popup = document.getElementById(ID);
+      if (content) {
+        var popup = document.createElement("div");
+        popup.innerHTML = content;
+        T.popup = popup;
+      } else {
+        T.popup = document.getElementById(ID);
+      }
+
       if (!T.popup) return false;
       T.init(true);
+      popups[T.options.windowID] = T;
     };
     return NbModal;
   })();
-
-  NbModal.prototype.bodyScrollPos = null;
-
   NbModal.prototype.setEvents = function() {
     var T = this;
 
@@ -295,8 +331,12 @@ var NbModal = window.NbModal || {};
           wrapper.classList.contains("open") ||
           wrapper.classList.contains("active")
         ) {
-          document.documentElement.scrollTop = T.__proto__.bodyScrollPos;
+          document.documentElement.scrollTop = bodyScrollPos;
         }
+      });
+      window.addEventListener("resize", function() {
+        var id = nbe.$(".nbm-item.open,.nbm-item.active")[0].id;
+        popups[id].refresh();
       });
     }
   };
@@ -324,26 +364,40 @@ var NbModal = window.NbModal || {};
 
     T.setEvents();
   };
-  NbModal.prototype.open = function() {
+  NbModal.prototype.refresh = function() {
     var T = this;
 
-    T.__proto__.bodyScrollPos = document.documentElement.scrollTop;
-    T.wrapperContainer.classList.add("active");
-    T.wrapperContainer.classList.add(T.options.wrapperClass);
-    T.popup.classList.add("active");
-    T.wrapperContainerBg.style.backgroundColor = T.options.background;
-
-    if (T.options.butClose.butInPopup) {
+    if (T.options.butCloseInPopup) {
       T.wrapperClose.style.top =
-        T.popup.offsetTop -
-        T.popup.offsetHeight / 2 +
-        T.options.butClose.offset.y +
-        "px";
+        T.popup.offsetTop - T.popup.offsetHeight / 2 + T.butOffset.y + "px";
       T.wrapperClose.style.left =
         T.popup.offsetLeft +
         T.popup.offsetWidth / 2 -
         17 -
-        T.options.butClose.offset.x +
+        T.butOffset.x +
+        "px";
+    } else {
+      T.wrapperClose.setAttribute("style", "");
+    }
+  };
+  NbModal.prototype.open = function() {
+    var T = this;
+
+    bodyScrollPos = document.documentElement.scrollTop;
+    T.wrapperContainer.classList.add("active");
+    T.wrapperContainer.classList.add(T.options.wrapperClass);
+    T.popup.classList.add("active");
+    if (T.options.background)
+      T.wrapperContainerBg.style.backgroundColor = T.options.background;
+
+    if (T.options.butCloseInPopup) {
+      T.wrapperClose.style.top =
+        T.popup.offsetTop - T.popup.offsetHeight / 2 + T.butOffset.y + "px";
+      T.wrapperClose.style.left =
+        T.popup.offsetLeft +
+        T.popup.offsetWidth / 2 -
+        17 -
+        T.butOffset.x +
         "px";
     } else {
       T.wrapperClose.setAttribute("style", "");
@@ -361,7 +415,7 @@ var NbModal = window.NbModal || {};
       );
     }, T.timeAnimation);
   };
-  NbModal.prototype.close = function(all) {
+  NbModal.prototype.close = function() {
     var T = this;
     if (T.popup.classList.contains("open")) {
       T.wrapperContainer.classList.add("active");
@@ -382,6 +436,29 @@ var NbModal = window.NbModal || {};
       }, T.timeAnimation);
     }
   };
+  function setInDataAttr() {
+    nbe.$(".popup[data-nbm-popup-init]").forEach(function(item) {
+      var opts = {
+        windowType: item.getAttribute("data-windowType") || "modal",
+        background: item.getAttribute("data-background") ? 1 : false,
+        windowClass: item.getAttribute("data-windowClass") || null,
+        wrapperClass: item.getAttribute("data-wrapperClass") || null,
+        windowTypeAnimate:
+          item.getAttribute("data-windowTypeAnimate") || "fade",
+        typeInit: item.getAttribute("data-typeInit") || "normal",
+        butCloseInPopup: item.getAttribute("data-butCloseInPopup") || false
+      };
+      popups[item.id] = new NbModal(item.id, opts);
+    });
+  }
+  Document.prototype.getPopup = function(id) {
+    return popups[id];
+  };
+  Document.prototype.newPopup = function(id, opts, content) {
+    popups[id] = new NbModal(id, opts, content);
+    return popups[id];
+  };
+  setInDataAttr();
 })();
 //
 //XHRequests
@@ -655,7 +732,18 @@ var NbXHR = window.NbXHR || {};
       replaceDOM("page", wrapper);
       replaceDOM("header", wrapper);
       replaceDOM("footer", wrapper);
-      document.documentElement.replaceChild(html.head, document.head);
+      nbe
+        .$('title,meta,[type="image/png"]', document.head)
+        .forEach(function(elem) {
+          if (elem.remove) elem.remove();
+        });
+      nbe.$("*", _html.head).forEach(function(elem) {
+        var find = false;
+        nbe.$("*", document.head).forEach(function(elem2) {
+          if (elem2.outerHTML == elem.outerHTML) find = true;
+        });
+        if (!find && elem.tagName) document.head.appendChild(elem);
+      });
       wrapper.classList.remove("only-fp");
       wrapper.classList.add(newWrapper.classList);
       if (document.readyState === "complete") {

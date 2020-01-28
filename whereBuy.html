@@ -217,6 +217,13 @@
                 Где купить
               </span>
             </div>
+            <h1 class="title">
+              Где купить
+              <select id="sort_type" class="title_select" name="sort_type">
+                <option value="1">в России</option>
+                <option value="2">не в России</option>
+              </select>
+            </h1>
           </div>
         </div>
         <div class="filterMap">
@@ -236,7 +243,7 @@
                 </select>
               </label>
             </div>
-            <div class="filterMap_box">
+            <div class="filterMap_box nbf-item" data-width="768">
               <div class="filterMap_item checkbox">
                 <input type="checkbox" name="check1" id="check1" />
                 <label for="check1" class="filterMap_label">
@@ -257,6 +264,19 @@
               </div>
             </div>
           </form>
+        </div>
+        <div class="searchSpace">
+          <div class="content border">
+            <form method="POST" action="" class="searchSpace_box">
+              <div class="searchSpace_input">
+                <input
+                  type="text"
+                  placeholder="Введите название, телефон или адрес "
+                />
+              </div>
+              <button type="submit" class="searchSpace_btn"></button>
+            </form>
+          </div>
         </div>
       </div>
       <div class="footer">
@@ -313,7 +333,15 @@
         </div>
       </div>
       <div class="popups">
-        <div class="popup" id="buyOneClick">
+        <!-- popup buyOneClick -->
+        <div
+          class="popup"
+          id="buyOneClick"
+          data-nbm-popup-init
+          data-wrapperClass="page"
+          data-windowClass="popupCenter"
+          data-butCloseInPopup="true"
+        >
           <div class="popupCenter_title def-form-title">Купить в 1 клик</div>
           <form action="">
             <div class="popupCenter_row">
@@ -339,7 +367,7 @@
                 <input type="checkbox" name="pp1" id="pp1" />
                 <label for="pp1">
                   Согласие на обработку персональных данных в соответствии с
-                  <a href="">политикой конфиденциальности</a>
+                  <a href=""> политикой конфиденциальности </a>
                 </label>
               </div>
               <button type="submit" class="btn-orange popupCenter_btn">
@@ -348,7 +376,15 @@
             </div>
           </form>
         </div>
-        <div class="popup" id="question">
+        <!-- popup question -->
+        <div
+          class="popup"
+          id="question"
+          data-nbm-popup-init
+          data-wrapperClass="page"
+          data-windowClass="popupCenter"
+          data-butCloseInPopup="true"
+        >
           <div class="popupCenter_title def-form-title">Задать свой вопрос</div>
           <form action="">
             <div class="popupCenter_row">
@@ -382,7 +418,7 @@
                 <div class="popupCenter_input">
                   <div class="def-form-input-file">
                     <input type="file" name="file" id="file" />
-                    <label for="file">Прикрепить файл</label>
+                    <label for="file"> Прикрепить файл </label>
                   </div>
                 </div>
               </div>
@@ -392,7 +428,8 @@
                   name="question"
                   id=""
                   placeholder="Ваш вопрос"
-                ></textarea>
+                >
+                </textarea>
               </div>
             </div>
             <div class="popupCenter_row">
@@ -400,7 +437,7 @@
                 <input type="checkbox" name="pp1" id="pp1" />
                 <label for="pp1">
                   Согласие на обработку персональных данных в соответствии с
-                  <a href="">политикой конфиденциальности</a>
+                  <a href=""> политикой конфиденциальности </a>
                 </label>
               </div>
               <button type="submit" class="btn-orange popupCenter_btn">
@@ -409,14 +446,30 @@
             </div>
           </form>
         </div>
-        <div class="popup" id="collback_success">
+        <!-- popup collback_success -->
+        <div
+          class="popup"
+          id="collback_success"
+          data-nbm-popup-init
+          data-wrapperClass="page"
+          data-windowClass="popupSuccess"
+          data-butCloseInPopup="true"
+        >
           <div class="popupCenter_title def-form-title">
             Мы приняли вашу заявку и совсем скоро перезвоним для уточнения
             заказа.
           </div>
           <button type="submit" class="btn-orange">Понятно</button>
         </div>
-        <div class="popup" id="question_success">
+        <!-- popup question_success -->
+        <div
+          class="popup"
+          id="question_success"
+          data-nbm-popup-init
+          data-wrapperClass="page"
+          data-windowClass="popupSuccess"
+          data-butCloseInPopup="true"
+        >
           <div class="popupCenter_title def-form-title">
             Ваш вопрос поступил в обработку. Ответим, как только сможем.
           </div>
