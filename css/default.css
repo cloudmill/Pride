@@ -629,6 +629,16 @@ body .wrapper * {
 .wrapper .nbm-background {
   background: rgba(0, 0, 0, 0.15);
 }
+.wrapper .anim-item {
+  will-change: transform;
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+}
+.wrapper .is-Hidden {
+  -webkit-transform: translate3d(-120%, 0, 0) !important;
+  transform: translate3d(-120%, 0, 0) !important;
+  opacity: 0;
+}
 @media (max-width: 1440px) {
   .wrapper .content {
     width: calc(100% - 360px);

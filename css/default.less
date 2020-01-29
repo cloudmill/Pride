@@ -482,7 +482,7 @@ body {
       line-height: 130%;
       color: #292929;
     }
-    &-textarea{
+    &-textarea {
       font-family: Helvetica Neue;
       width: 100%;
       font-style: normal;
@@ -578,10 +578,21 @@ body {
       }
     }
   }
-  .nbm{
-    &-background{
+  .nbm {
+    &-background {
       background: rgba(0, 0, 0, 0.15);
     }
+  }
+  /////
+  .anim-item{
+    will-change: transform;
+    transform: translate3d(0px, 0px, 0px);
+    transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+  }
+  .is-Hidden {
+    -webkit-transform: translate3d(-120%, 0, 0) !important;
+    transform: translate3d(-120%, 0, 0) !important;
+    opacity: 0;
   }
   @media (max-width: 1440px) {
     .content {

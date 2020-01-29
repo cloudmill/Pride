@@ -629,6 +629,16 @@ body .wrapper * {
 .wrapper .nbm-background {
   background: rgba(0, 0, 0, 0.15);
 }
+.wrapper .anim-item {
+  will-change: transform;
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+}
+.wrapper .is-Hidden {
+  -webkit-transform: translate3d(-120%, 0, 0) !important;
+  transform: translate3d(-120%, 0, 0) !important;
+  opacity: 0;
+}
 @media (max-width: 1440px) {
   .wrapper .content {
     width: calc(100% - 360px);
@@ -1762,6 +1772,7 @@ body .wrapper * {
   position: relative;
   border-left: 1px solid #e5e5e5;
   border-right: 1px solid #e5e5e5;
+  overflow: hidden;
 }
 .wrapper .page .choice_box:before {
   content: "";
@@ -1804,6 +1815,7 @@ body .wrapper * {
   margin-bottom: 90px;
   padding-left: 70px;
   position: relative;
+  overflow: hidden;
 }
 .wrapper .page .choice_item:nth-child(3) {
   transform: translateX(-1px);
@@ -1815,6 +1827,7 @@ body .wrapper * {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
+  height: 50px;
 }
 .wrapper .page .choice_item .item_num {
   font-size: 16px;
@@ -2108,6 +2121,7 @@ body .wrapper * {
   line-height: 135%;
   color: #ffffff;
   position: relative;
+  padding-top: 8px;
 }
 .wrapper .page .dillerMap_link + .dillerMap_link {
   margin-left: 70px;
@@ -2118,6 +2132,10 @@ body .wrapper * {
   line-height: 130%;
   color: #ffffff;
   margin-left: 40px;
+  overflow: hidden;
+}
+.wrapper .page .dillerMap_head span {
+  font-family: inherit;
 }
 .wrapper .page .dillerMap_slider {
   width: 50%;
@@ -2235,6 +2253,7 @@ body .wrapper * {
   list-style: none;
   margin-top: 230px;
   margin-left: -40px;
+  overflow: hidden;
 }
 .wrapper .page .dillerMap_conditions li {
   display: block;
@@ -2383,6 +2402,7 @@ body .wrapper * {
   display: flex;
   flex-wrap: wrap;
   color: #292929;
+  overflow: hidden;
 }
 .wrapper .page .blockCross:hover {
   color: #ffffff;
@@ -2414,13 +2434,19 @@ body .wrapper * {
   top: 0;
 }
 .wrapper .page .blockCross_item .item_name {
-  font-family: Druk Wide Medium Cy;
-  font-size: 26px;
-  line-height: 130%;
   transition: all 0.3s ease-in-out;
   position: relative;
   color: inherit;
   width: 100%;
+  overflow: hidden;
+  font-family: Druk Wide Medium Cy;
+  font-size: 26px;
+  line-height: 130%;
+}
+.wrapper .page .blockCross_item .item_name .name {
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
 }
 .wrapper .page .blockCross_item .item_name .num {
   font-size: 20px;
@@ -2485,7 +2511,7 @@ body .wrapper * {
   bottom: 0;
   z-index: -1;
   left: 0;
-  transition: all 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 .wrapper .page .blockCross_item:hover {
   background: rgba(0, 0, 0, 0.35);
@@ -2660,6 +2686,9 @@ body .wrapper * {
   padding-top: 10px;
   position: relative;
   transition: all 0.3s ease-in-out;
+}
+.wrapper .page .priceSlider .pS_slider .slider_item_content {
+  overflow-x: hidden;
 }
 .wrapper .page .priceSlider .pS_slider .slider_item_img {
   padding-top: 310px;
@@ -6096,6 +6125,7 @@ body .wrapper * {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow: hidden;
 }
 .wrapper .footer_phone {
   font-family: Druk Wide Medium Cy;

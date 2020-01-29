@@ -77,6 +77,70 @@ custom = {
       this.events();
     }
   },
+  animateScroll: {
+    checkAndDo: function() {
+      var count = 0;
+      var start_anim = function(item) {
+        if (count > 5) {
+          item.removeClass("is-Hidden");
+        } else {
+          setTimeout(function() {
+            item.removeClass("is-Hidden");
+          }, count * 100);
+        }
+        count++;
+      };
+      $(document)
+        .find(".is-Hidden.anim-item")
+        .each(function() {
+          if (
+            $(this).offset().top <
+              $(document).scrollTop() + $(window).height() &&
+            $(this).offset().top > $(document).scrollTop()
+          ) {
+            start_anim($(this));
+          }
+        });
+    },
+    events: function() {
+      var _this = this;
+      $(document).on("scroll", function() {
+        _this.checkAndDo();
+      });
+    },
+    init: function() {
+      this.events();
+      var _this = this;
+      $(document).on("preloadingFinish", function() {
+        _this.checkAndDo();
+      });
+    }
+  },
+  animateZoomOut: {
+    zoomed: function() {
+      $(document)
+        .find(".zoom-item")
+        .each(function() {
+          var pos =
+            $(this).offset().top + $(this).height() - $(document).scrollTop();
+          var k = 0.1;
+          var zoom = (pos / $(window).height()) * k + 1;
+
+          console.log(zoom);
+          $(this).css("transform", "scale(" + zoom + ")");
+        });
+    },
+    events: function() {
+      var _this = this;
+      $(document).on("scroll", function() {
+        _this.zoomed();
+      });
+    },
+    init: function() {
+      this.events();
+      this.zoomed();
+    }
+  },
   filter: {
     setup: function() {
       $(".filter_select").each(function() {
@@ -463,6 +527,8 @@ custom = {
     if ($(".example").length > 0) this.example.init();
     if ($(".detail_imgs").length > 0) this.detailGaleryImgs.init();
     if ($(".tabsBox_menu").length > 0) this.detailTabsDoing.init();
+    if ($(".anim-item").length > 0) this.animateScroll.init();
+    if ($(".zoom-item").length > 0) this.animateZoomOut.init();
     this.preloaderInit();
   }
 };
