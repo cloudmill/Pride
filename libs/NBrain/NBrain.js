@@ -199,8 +199,6 @@ var NbFlops = {
 };
 //
 //NbEasyDOM
-var NbEasyDOM = window.NbEasyDOM || {};
-var nbe;
 (function() {
   ////////
   //
@@ -208,27 +206,85 @@ var nbe;
   //
   ////////
   "use strict";
-  NbEasyDOM = (function() {
-    NbEasyDOM = function(opts) {
-      var T = this;
-      T.defaults = {};
-      T.initials = {};
-      T = Object.assign(T, T.defaults);
-      T.options = Object.assign({}, T.initials, opts);
-      //T.init();
+  var NbEasyDOM = window.NbEasyDOM || {};
+  window.NbEasyDOM = NbEasyDOM;
+  NbEasyDOM = function(selector) {
+    var elems;
+    if (typeof selector === "string") {
+      elems = document.querySelectorAll(selector);
+    } else if (selector) {
+      elems = selector;
+    } else {
+      elems = {};
+      elems.length = 0;
+    }
+    var obj = (function() {
+      var NbEasyDOM = function() {
+        this.length = elems.length;
+        for (var i = 0; i < this.length; i++) {
+          this[i] = elems[i];
+        }
+      };
+      return new NbEasyDOM();
+    })(document);
+
+    obj.__proto__.constructor = function() {
+      return obj;
     };
-    return NbEasyDOM;
-  })();
-  NbEasyDOM.prototype.$ = function(selector, parent) {
-    if (parent)
-      return Array.prototype.slice.call(parent.querySelectorAll(selector));
-    else return Array.prototype.slice.call(document.querySelectorAll(selector));
+    obj.__proto__.refresh = function() {
+      obj.length = elems.length;
+      for (var i = 0; i < obj.length; i++) {
+        obj[i] = elems[i];
+      }
+    };
+    obj.__proto__.find = function(selector) {
+      if (typeof selector === "string") {
+        var stack = obj.pushStack();
+        for (var i = 0; i < obj.length; i++) {
+          obj.findSelf(selector, obj[i], stack);
+        }
+        return stack;
+      }
+      return obj;
+    };
+    obj.__proto__.findSelf = function(selector, elem, stack) {
+      var findes = elem.querySelectorAll(selector);
+      stack.pushStack(findes);
+    };
+    obj.__proto__.pushStack = function(findes) {
+      if (!findes) return $n();
+      for (var i = 0; i < findes.length; i++) {
+        obj[obj.length] = findes[i];
+        obj.length++;
+      }
+      return obj;
+    };
+    obj.__proto__.each = function(handler) {
+      for (var i = 0; i < elems.length; i++) {
+        handler(elems[i], i);
+      }
+      return obj;
+    };
+    obj.__proto__.append = function(elem) {
+      elems.appendChild(elem);
+      return obj;
+    };
+    obj.__proto__.on = function(event, handler) {
+      obj.each(function(elem) {
+        elem.addEventListener(event, handler);
+      });
+    };
+    obj.__proto__.off = function(event, handler) {
+      obj.each(function(elem) {
+        elem.removeEventListener(event, handler);
+      });
+    };
+    return obj;
   };
-  nbe = new NbEasyDOM();
+  window.$n = NbEasyDOM;
 })();
 //
 //ModalsWindows
-var NbModal = window.NbModal || {};
 (function() {
   ////////
   //
@@ -236,6 +292,8 @@ var NbModal = window.NbModal || {};
   //
   ////////
   "use strict";
+  var NbModal = window.NbModal || {};
+  window.NbModal = NbModal;
   var popups = [];
   var bodyScrollPos = null;
   NbModal = (function() {
@@ -310,20 +368,16 @@ var NbModal = window.NbModal || {};
   })();
   NbModal.prototype.setEvents = function() {
     var T = this;
+    $n(".nbm-open[data-id=" + T.options.windowID + "]").on("click", function(
+      e
+    ) {
+      e.preventDefault();
+      T.open();
+    });
+    $n(".nbm-close").on("click", function() {
+      T.close();
+    });
 
-    for (var elem of document.querySelectorAll(
-      ".nbm-open[data-id=" + T.options.windowID + "]"
-    )) {
-      elem.addEventListener("click", function(event) {
-        event.preventDefault();
-        T.open();
-      });
-    }
-    for (var elem of document.querySelectorAll(".nbm-close")) {
-      elem.addEventListener("click", function() {
-        T.close();
-      });
-    }
     if (T.initialID === 0) {
       window.addEventListener("scroll", function() {
         var wrapper = document.getElementById("nbm-container");
@@ -335,7 +389,7 @@ var NbModal = window.NbModal || {};
         }
       });
       window.addEventListener("resize", function() {
-        var id = nbe.$(".nbm-item.open,.nbm-item.active")[0].id;
+        var id = $n(".nbm-item.open,.nbm-item.active")[0].id;
         popups[id].refresh();
       });
     }
@@ -437,7 +491,7 @@ var NbModal = window.NbModal || {};
     }
   };
   function setInDataAttr() {
-    nbe.$(".popup[data-nbm-popup-init]").forEach(function(item) {
+    $n(".popup[data-nbm-popup-init]").each(function(item) {
       var opts = {
         windowType: item.getAttribute("data-windowType") || "modal",
         background: item.getAttribute("data-background") ? 1 : false,
@@ -462,7 +516,6 @@ var NbModal = window.NbModal || {};
 })();
 //
 //XHRequests
-var NbXHR = window.NbXHR || {};
 (function() {
   ////////
   //
@@ -470,6 +523,8 @@ var NbXHR = window.NbXHR || {};
   //
   ////////
   "use strict";
+  var NbXHR = window.NbXHR || {};
+  window.NbXHR = NbXHR;
   NbXHR = (function() {
     var inited_NbXHR = false;
     NbXHR = function(opts) {
@@ -542,25 +597,6 @@ var NbXHR = window.NbXHR || {};
       },
       false
     );
-    $(document).on("click", "." + T.options.classLink, function(e) {
-      var href = $(this).attr("href");
-      if (
-        href[0] != "#" &&
-        href.indexOf("tel:") != 0 &&
-        href.indexOf("mailto:") != 0 &&
-        href.indexOf("callto:") != 0 &&
-        href != "" &&
-        !$(this).is("[download]") &&
-        (!$(this).attr("target") || $(this).attr("target") != "_blank")
-      ) {
-        if ($(this).attr("data-fail-xhr") == undefined) {
-          e.preventDefault();
-          T.hrefTo = href;
-          T.targetClick = $(this);
-          T.newPage();
-        }
-      }
-    });
     if (T.options.workWithPopButs)
       window.addEventListener("popstate", function(e) {
         if (e.state) {
@@ -732,18 +768,24 @@ var NbXHR = window.NbXHR || {};
       replaceDOM("page", wrapper);
       replaceDOM("header", wrapper);
       replaceDOM("footer", wrapper);
-      nbe
-        .$('title,meta,[type="image/png"]', document.head)
-        .forEach(function(elem) {
+      $n(document.head)
+        .find('title,meta,[type="image/png"]')
+        .each(function(elem) {
           if (elem.remove) elem.remove();
         });
-      nbe.$("*", _html.head).forEach(function(elem) {
-        var find = false;
-        nbe.$("*", document.head).forEach(function(elem2) {
-          if (elem2.outerHTML == elem.outerHTML) find = true;
+      $n(_html.head)
+        .find("*")
+        .each(function(elem) {
+          var find = false;
+          $n(document.head)
+            .find("*")
+            .each(function(elem2) {
+              if (elem2.outerHTML == elem.outerHTML) find = true;
+            });
+
+          if (!find && elem.tagName) $n(document.head).append(elem);
         });
-        if (!find && elem.tagName) document.head.appendChild(elem);
-      });
+
       wrapper.classList.remove("only-fp");
       wrapper.classList.add(newWrapper.classList);
       if (document.readyState === "complete") {
@@ -781,4 +823,4 @@ var NbXHR = window.NbXHR || {};
   NbWhellEvent._init();
   NbTabs._init();
   NbFlops._init();
-})();
+})(document);

@@ -1,12 +1,4 @@
-$(document).ready(function() {
-  header.init();
-  custom.init();
-  svgMap.init();
-  popups.init();
-  priceSlider.init();
-});
-
-header = {
+var header = {
   scrolling: function(scroll) {
     if (scroll > 100) {
       $(".header").addClass("scrolled");
@@ -66,7 +58,7 @@ header = {
     this.cartOpen();
   }
 };
-custom = {
+var custom = {
   animateHover: {
     events: function() {
       $(".hoverLineMoved,.btn-orange,.btn-gray,.news_item").hover(function() {
@@ -126,7 +118,6 @@ custom = {
           var k = 0.1;
           var zoom = (pos / $(window).height()) * k + 1;
 
-          console.log(zoom);
           $(this).css("transform", "scale(" + zoom + ")");
         });
     },
@@ -532,7 +523,7 @@ custom = {
     this.preloaderInit();
   }
 };
-popups = {
+var popups = {
   setup: function() {
     if ($("#properties").length > 0)
       this.properties = new NbModal("properties", {
@@ -558,7 +549,7 @@ popups = {
     this.setup();
   }
 };
-svgMap = {
+var svgMap = {
   slider: function() {
     $(".dillerMap_slider").slick({
       slidesToShow: 1,
@@ -628,7 +619,7 @@ svgMap = {
     }
   }
 };
-priceSlider = {
+var priceSlider = {
   create: function() {
     $(".pS_slider").each(function() {
       $(this).slick({
@@ -663,3 +654,13 @@ priceSlider = {
     this.create();
   }
 };
+
+(function() {
+
+  custom.init();
+  header.init();
+  svgMap.init();
+  popups.init();
+  priceSlider.init();
+  
+})(jQuery)
