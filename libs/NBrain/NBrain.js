@@ -197,6 +197,21 @@ var NbFlops = {
     this._events();
   }
 };
+
+//
+//NbFlops
+(function() {
+  ////////
+  //
+  //NbFlops
+  //
+  ////////
+  "use strict";
+  var NbFlops = window.NbFlops || {};
+  window.NbFlops = NbFlops;
+  NbFlops = function() {};
+})();
+
 //
 //NbEasyDOM
 (function() {
@@ -209,77 +224,114 @@ var NbFlops = {
   var NbEasyDOM = window.NbEasyDOM || {};
   window.NbEasyDOM = NbEasyDOM;
   NbEasyDOM = function(selector) {
-    var elems;
+    var elems = {};
     if (typeof selector === "string") {
       elems = document.querySelectorAll(selector);
     } else if (selector) {
-      elems = selector;
+      elems[0] = selector;
+      elems.length = 1;
     } else {
       elems = {};
       elems.length = 0;
     }
-    var obj = (function() {
-      var NbEasyDOM = function() {
+    var NbEDOM = (function() {
+      ///////////////////////////
+      ///////////////////////BASE
+      var obj = function() {
         this.length = elems.length;
+        this.eventsList = [];
         for (var i = 0; i < this.length; i++) {
           this[i] = elems[i];
         }
       };
-      return new NbEasyDOM();
+      obj.prototype.constructor = function() {
+        return obj;
+      };
+      ///////////////////////////
+      //////////////////////ELEMS
+      obj.prototype.find = function(selector) {
+        if (typeof selector === "string") {
+          var stack = obj.pushStack();
+          obj.each(function(item, key) {
+            obj.findSelf(selector, item, stack);
+          });
+          return stack;
+        }
+        return obj;
+      };
+      obj.prototype.findSelf = function(selector, elem, stack) {
+        var findes = elem.querySelectorAll(selector);
+        stack.pushStack(findes);
+      };
+      obj.prototype.pushStack = function(findes) {
+        if (!findes) return $n();
+        for (var i = 0; i < findes.length; i++) {
+          obj[obj.length] = findes[i];
+          obj.length++;
+        }
+        return obj;
+      };
+      obj.prototype.each = function(handler) {
+        for (var i = 0; i < elems.length; i++) {
+          handler(elems[i], i);
+        }
+        return obj;
+      };
+      obj.prototype.append = function(elem) {
+        elems.appendChild(elem);
+        return obj;
+      };
+
+      ///////////////////////////
+      /////////////////////EVENTS
+      obj.prototype.on = function(event, handler) {
+        if (obj.length >= 1) {
+          var handlerElem = function(e) {
+            var data = e.detail.data;
+            handler(e, data.a, data.b, data.c, data.d);
+          };
+          obj.each(function(elem) {
+            elem.addEventListener(event, handlerElem);
+          });
+
+          obj.eventsList.push({ name: event, handler: handlerElem });
+          return true;
+        }
+      };
+      obj.prototype.off = function(event, handler) {
+        obj.each(function(elem) {
+          elem.removeEventListener(event, handler);
+        });
+      };
+      obj.prototype.trigger = function(name, a, b, c, d) {
+        var data = {
+          a: a == "self" ? obj : a,
+          b: b,
+          c: c,
+          d: d
+        };
+        document.dispatchEvent(
+          new CustomEvent(name, {
+            detail: { data: data }
+          })
+        );
+      };
+
+      ///////////////////////////
+      /////////////////ATTRIBUTES
+      obj.prototype.attr = function(name, value) {
+        if (!value) {
+          return obj[0].getAttribute(name);
+        }
+        obj.each(function(elem) {
+          elem.setAttribute(name, value);
+        });
+        return obj;
+      };
+      return new obj();
     })(document);
 
-    obj.__proto__.constructor = function() {
-      return obj;
-    };
-    obj.__proto__.refresh = function() {
-      obj.length = elems.length;
-      for (var i = 0; i < obj.length; i++) {
-        obj[i] = elems[i];
-      }
-    };
-    obj.__proto__.find = function(selector) {
-      if (typeof selector === "string") {
-        var stack = obj.pushStack();
-        for (var i = 0; i < obj.length; i++) {
-          obj.findSelf(selector, obj[i], stack);
-        }
-        return stack;
-      }
-      return obj;
-    };
-    obj.__proto__.findSelf = function(selector, elem, stack) {
-      var findes = elem.querySelectorAll(selector);
-      stack.pushStack(findes);
-    };
-    obj.__proto__.pushStack = function(findes) {
-      if (!findes) return $n();
-      for (var i = 0; i < findes.length; i++) {
-        obj[obj.length] = findes[i];
-        obj.length++;
-      }
-      return obj;
-    };
-    obj.__proto__.each = function(handler) {
-      for (var i = 0; i < elems.length; i++) {
-        handler(elems[i], i);
-      }
-      return obj;
-    };
-    obj.__proto__.append = function(elem) {
-      elems.appendChild(elem);
-      return obj;
-    };
-    obj.__proto__.on = function(event, handler) {
-      obj.each(function(elem) {
-        elem.addEventListener(event, handler);
-      });
-    };
-    obj.__proto__.off = function(event, handler) {
-      obj.each(function(elem) {
-        elem.removeEventListener(event, handler);
-      });
-    };
-    return obj;
+    return NbEDOM;
   };
   window.$n = NbEasyDOM;
 })();
@@ -389,7 +441,8 @@ var NbFlops = {
         }
       });
       window.addEventListener("resize", function() {
-        var id = $n(".nbm-item.open,.nbm-item.active")[0].id;
+        console.log($n(".nbm-item.open,.nbm-item.active"));
+        var id = $n(".nbm-item.open,.nbm-item.active").attr("id");
         popups[id].refresh();
       });
     }
