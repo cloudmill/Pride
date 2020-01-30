@@ -61,7 +61,9 @@ var header = {
 var custom = {
   animateHover: {
     events: function() {
-      $(".hoverLineMoved,.btn-orange,.btn-gray,.news_item").hover(function() {
+      $(
+        ".hoverLineMoved,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white"
+      ).hover(function() {
         $(this).addClass("ready");
       });
     },
@@ -74,16 +76,16 @@ var custom = {
       var count = 0;
       var start_anim = function(item) {
         if (count > 5) {
-          item.removeClass("is-Hidden");
+          item.removeClass("is-hidden");
         } else {
           setTimeout(function() {
-            item.removeClass("is-Hidden");
+            item.removeClass("is-hidden");
           }, count * 100);
         }
         count++;
       };
       $(document)
-        .find(".is-Hidden.anim-item")
+        .find(".is-hidden.anim-item")
         .each(function() {
           if (
             $(this).offset().top <
@@ -130,6 +132,138 @@ var custom = {
     init: function() {
       this.events();
       this.zoomed();
+    }
+  },
+  animateFadeInLeftString: {
+    create: function() {
+      $(document)
+        .find(".string-anim")
+        .each(function() {
+          var item = this;
+          var stiring = item.innerHTML.replace("\n", "").replace("\t", "");
+          var _wordsAr = stiring.split(" ");
+          var wordsAr = [];
+          _wordsAr.forEach(function(item, key) {
+            if (item != "") {
+              wordsAr.push(item);
+            }
+          });
+          var temp = document.createElement("div");
+          temp.innerWidth = item.innerWidth;
+          temp.className = "string-anim-temp";
+          item.append(temp);
+          var height = 0;
+          var stringCount = 0;
+          var stringAr = [];
+          var stringBeforeAppend = "";
+          for (var i = 0; i < wordsAr.length; i++) {
+            if (stringBeforeAppend.length > 0) {
+              stringBeforeAppend += " ";
+            }
+            if (temp.innerHTML.length > 0) {
+              temp.innerHTML += " ";
+            }
+            temp.innerHTML += wordsAr[i];
+            if (height == temp.scrollHeight) {
+              stringBeforeAppend += wordsAr[i];
+            } else {
+              height = temp.scrollHeight;
+              stringCount++;
+              if (stringCount > 1) {
+                stringAr.push(stringBeforeAppend);
+                stringBeforeAppend = wordsAr[i];
+                if (wordsAr.length - 1 == i) {
+                  stringAr.push(stringBeforeAppend);
+                }
+              } else {
+                stringBeforeAppend += wordsAr[i];
+              }
+            }
+          }
+          item.innerHTML = "";
+          stringAr.forEach(function(line) {
+            item.innerHTML +=
+              '<span class="string-anim-line is-hidden"><span class="string-anim-paralax">' +
+              line +
+              "</span></span>";
+          });
+          temp.remove()
+        });
+    },
+    checkAndDo: function() {
+      var count = 0;
+      var start_anim = function(item) {
+        if (count > 5) {
+          item.removeClass("is-hidden");
+        } else {
+          setTimeout(function() {
+            item.removeClass("is-hidden");
+          }, count * 100);
+        }
+        count++;
+      };
+      $(document)
+        .find(".is-hidden.string-anim-line")
+        .each(function() {
+          if (
+            $(this).offset().top <
+              $(document).scrollTop() + $(window).height() &&
+            $(this).offset().top > $(document).scrollTop()
+          ) {
+            start_anim($(this));
+          }
+        });
+    },
+    events: function() {
+      var _this = this;
+      $(document).on("scroll", function() {
+        _this.checkAndDo();
+      });
+    },
+    init: function() {
+      var _this = this;
+      $(document).on("preloadingFinish", function() {
+        _this.create();
+        _this.events();
+        _this.checkAndDo();
+      });
+    }
+  },
+  animateParalaxString: {
+    paralax: function() {
+      $(document)
+        .find(".paralax-child")
+        .each(function() {
+          var count = 0;
+          $(this)
+            .find(".string-anim-paralax")
+            .each(function() {
+              var pos =
+                $(this).offset().top +
+                $(this).height() / 2 -
+                $(document).scrollTop() -
+                $(window).height() / 2;
+              var k = 70 + count*10;
+              var paralax = (pos / $(window).height()) * k;
+              if(Math.abs(paralax) < 70)
+              $(this).css("transform", "translateY(" + paralax + "px)");
+              count++;
+              this.setAttribute('count',count)
+            });
+        });
+    },
+    events: function() {
+      var _this = this;
+      $(document).on("scroll", function() {
+        _this.paralax();
+      });
+    },
+    init: function() {
+      var _this = this;
+      $(document).on("preloadingFinish", function() {
+        _this.events();
+        _this.paralax();
+      });
     }
   },
   filter: {
@@ -520,6 +654,8 @@ var custom = {
     if ($(".tabsBox_menu").length > 0) this.detailTabsDoing.init();
     if ($(".anim-item").length > 0) this.animateScroll.init();
     if ($(".zoom-item").length > 0) this.animateZoomOut.init();
+    if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
+    if ($(".paralax-child").length > 0) this.animateParalaxString.init();
     this.preloaderInit();
   }
 };
@@ -656,11 +792,9 @@ var priceSlider = {
 };
 
 (function() {
-
   custom.init();
   header.init();
   svgMap.init();
   popups.init();
   priceSlider.init();
-  
-})(jQuery)
+})(jQuery);

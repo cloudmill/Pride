@@ -395,12 +395,7 @@ body {
       background: none;
       border: 0;
       cursor: pointer;
-      i {
-        margin-right: 15px;
-        &.icon-cart {
-          filter: invert(1) brightness(2);
-        }
-      }
+
       &:before {
         content: "";
         display: block;
@@ -448,12 +443,38 @@ body {
     }
     &-orange {
       .def;
+      i {
+        margin-right: 15px;
+        &.icon-cart {
+          filter: invert(1) brightness(2);
+        }
+      }
       color: #ffffff;
       &:after {
         background: #ff570f;
       }
       &:before {
         background: #f34900;
+      }
+    }
+    &-orange-white {
+      .def;
+      color: #ffffff;
+      &:after {
+        background: #ffffff;
+      }
+      &:before {
+        background: #f34900;
+      }
+    }
+    &-gray-white {
+      .def;
+      color: #292929;
+      &:before {
+        background: #f5f5f5;
+      }
+      &:after {
+        background: #ffffff;
       }
     }
     @keyframes BtnHover {
@@ -584,16 +605,48 @@ body {
     }
   }
   /////
-  .anim-item{
+  .anim-item {
     will-change: transform;
     transform: translate3d(0px, 0px, 0px);
     transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+    &.is-hidden {
+      -webkit-transform: translate3d(-120%, 0, 0) !important;
+      transform: translate3d(-120%, 0, 0) !important;
+      opacity: 0;
+    }
   }
-  .is-Hidden {
-    -webkit-transform: translate3d(-120%, 0, 0) !important;
-    transform: translate3d(-120%, 0, 0) !important;
-    opacity: 0;
+  .string-anim {
+    position: relative;
+    &-temp {
+      all: inherit;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100000;
+    }
+    &-paralax{
+      all: inherit;
+      margin: 0 !important;
+      padding: 0 !important;
+      transition: all 0s !important;
+    }
+    &-line{
+      all: inherit;
+      margin: 0 !important;
+      padding: 0 !important;
+      will-change: transform;
+      transform: translate3d(0px, 0px, 0px);
+      transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+      &.is-hidden {
+        -webkit-transform: translate3d(-120%, 0, 0) !important;
+        transform: translate3d(-120%, 0, 0) !important;
+        opacity: 0;
+      }
+    }
   }
+
   @media (max-width: 1440px) {
     .content {
       width: ~"calc(100% - 360px)";
