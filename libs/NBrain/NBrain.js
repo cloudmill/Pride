@@ -1,3 +1,48 @@
+if (typeof Object.assign != "function") {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, "assign", {
+    value: function assign(target, varArgs) {
+      // .length of function is 2
+      "use strict";
+      if (target == null) {
+        // TypeError if undefined or null
+        throw new TypeError("Cannot convert undefined or null to object");
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource != null) {
+          // Skip over if undefined or null
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
+if (!('remove' in Element.prototype)) {
+  Element.prototype.remove = function() {
+      if (this.parentNode) {
+          this.parentNode.removeChild(this);
+      }
+  };
+}
+
+
+
+
+
+
 ////////
 //
 //
@@ -16,11 +61,7 @@ var NbWhellEvent = {
         document.addEventListener(
           "wheel",
           function(e) {
-            document.dispatchEvent(
-              new CustomEvent("mousewhell", {
-                detail: { e: e, delta: _this._getDelta(e) }
-              })
-            );
+            $n(document).trigger("mousewhell", _this._getDelta(e));
           },
           { passive: false }
         );
@@ -28,11 +69,7 @@ var NbWhellEvent = {
         document.addEventListener(
           "mousewheel",
           function(e) {
-            document.dispatchEvent(
-              new CustomEvent("mousewhell", {
-                detail: { e: e, delta: _this._getDelta(e) }
-              })
-            );
+            $n(document).trigger("mousewhell", _this._getDelta(e));
           },
           { passive: false }
         );
@@ -40,11 +77,7 @@ var NbWhellEvent = {
         document.addEventListener(
           "MozMousePixelScroll",
           function(e) {
-            document.dispatchEvent(
-              new CustomEvent("mousewhell", {
-                detail: { e: e, delta: _this._getDelta(e) }
-              })
-            );
+            $n(document).trigger("mousewhell", _this._getDelta(e));
           },
           {
             passive: false
@@ -71,7 +104,7 @@ var NbTabs = {
     this.tabs = [];
     var _this = this;
     var indexCont = 0;
-    for (elem of tabsContainers) {
+    $n(".nbt-container").each(function(elem) {
       var tempId = "nbt_" + indexCont;
       elem.id = tempId;
       elem.setAttribute("data-index", indexCont);
@@ -83,7 +116,8 @@ var NbTabs = {
         tabsList: elem.querySelectorAll(".nbt-tab")
       };
       var index = 0;
-      for (but of _this.tabs[indexCont].butsList) {
+      for (var i = 0; i < _this.tabs[indexCont].butsList.length; i++) {
+        var but = _this.tabs[indexCont].butsList[i];
         var tempIdTab = tempId + "-nbtItem_" + index;
         but.setAttribute("data-id", tempIdTab);
         but.setAttribute("data-index", index);
@@ -94,7 +128,7 @@ var NbTabs = {
       _this.tabs[indexCont].butsList = elem.querySelectorAll(".nbt-menu-item");
       _this.tabs[indexCont].tabsList = elem.querySelectorAll(".nbt-tab");
       indexCont++;
-    }
+    });
   },
   _events: function() {
     var _this = this;
@@ -117,11 +151,13 @@ var NbTabs = {
           var parent_id = target
             .closest(".nbt-container")
             .getAttribute("data-index");
-          for (item of _this.tabs[parent_id].butsList) {
+          for (var i = 0; i < _this.tabs[parent_id].butsList.length; i++) {
+            var item = _this.tabs[parent_id].butsList[i];
             item.classList.remove("active");
           }
           target.classList.add("active");
-          for (item of _this.tabs[parent_id].tabsList) {
+          for (var i = 0; i < _this.tabs[parent_id].tabsList.length; i++) {
+            var item = _this.tabs[parent_id].tabsList[i];
             item.classList.remove("active");
           }
           _this.tabs[parent_id].tabsList[index].classList.add("active");
@@ -174,18 +210,10 @@ var NbFlops = {
         if (clicked && width_) {
           if (target.classList.contains("active")) {
             target.classList.remove("active");
-            document.dispatchEvent(
-              new CustomEvent("flopClose", {
-                detail: { target: target }
-              })
-            );
+            $n(document).trigger("flopClose", target);
           } else {
             target.classList.add("active");
-            document.dispatchEvent(
-              new CustomEvent("flopOpen", {
-                detail: { target: target }
-              })
-            );
+            $n(document).trigger("flopOpen", target);
           }
         }
       },
@@ -238,95 +266,114 @@ var NbFlops = {
       ///////////////////////////
       ///////////////////////BASE
       var obj = function() {
-        this.length = elems.length;
-        this.eventsList = [];
-        for (var i = 0; i < this.length; i++) {
-          this[i] = elems[i];
+        var ob = this;
+        ob.length = elems.length;
+        ob.eventsList = [];
+        for (var i = 0; i < ob.length; i++) {
+          ob[i] = elems[i];
         }
+        return ob;
       };
       obj.prototype.constructor = function() {
-        return obj;
+        var ob = this;
+        return ob;
       };
       ///////////////////////////
       //////////////////////ELEMS
       obj.prototype.find = function(selector) {
+        var ob = this;
         if (typeof selector === "string") {
-          var stack = obj.pushStack();
-          obj.each(function(item, key) {
-            obj.findSelf(selector, item, stack);
+          var stack = ob.pushStack();
+          ob.each(function(item, key) {
+            ob.findSelf(selector, item, stack);
           });
           return stack;
         }
-        return obj;
+        return ob;
       };
       obj.prototype.findSelf = function(selector, elem, stack) {
         var findes = elem.querySelectorAll(selector);
         stack.pushStack(findes);
       };
       obj.prototype.pushStack = function(findes) {
+        var ob = this;
         if (!findes) return $n();
         for (var i = 0; i < findes.length; i++) {
-          obj[obj.length] = findes[i];
-          obj.length++;
+          ob[ob.length] = findes[i];
+          ob.length++;
         }
-        return obj;
+        return ob;
       };
       obj.prototype.each = function(handler) {
+        var ob = this;
         for (var i = 0; i < elems.length; i++) {
           handler(elems[i], i);
         }
-        return obj;
+        return ob;
       };
       obj.prototype.append = function(elem) {
+        var ob = this;
         elems.appendChild(elem);
-        return obj;
+        return ob;
       };
 
       ///////////////////////////
       /////////////////////EVENTS
       obj.prototype.on = function(event, handler) {
-        if (obj.length >= 1) {
+        var ob = this;
+        if (ob.length >= 1) {
           var handlerElem = function(e) {
-            var data = e.detail.data;
-            handler(e, data.a, data.b, data.c, data.d);
+            /* var data = e.detail.data; */
+            handler(e/* , data.a, data.b, data.c, data.d */);
           };
-          obj.each(function(elem) {
+          ob.each(function(elem) {
             elem.addEventListener(event, handlerElem);
           });
 
-          obj.eventsList.push({ name: event, handler: handlerElem });
+          ob.eventsList.push({ name: event, handler: handlerElem });
           return true;
         }
       };
       obj.prototype.off = function(event, handler) {
-        obj.each(function(elem) {
+        var ob = this;
+        ob.each(function(elem) {
           elem.removeEventListener(event, handler);
         });
       };
       obj.prototype.trigger = function(name, a, b, c, d) {
+        var ob = this;
         var data = {
-          a: a == "self" ? obj : a,
+          a: a == "self" ? ob : a,
           b: b,
           c: c,
           d: d
         };
-        document.dispatchEvent(
-          new CustomEvent(name, {
-            detail: { data: data }
-          })
-        );
+        var event;
+        if (typeof Event === "function") {
+          event = new Event(name);
+        } else {
+          event = document.createEvent("Event");
+          event.initEvent(name, true, true);
+        }
+        document.dispatchEvent(event);
       };
 
       ///////////////////////////
       /////////////////ATTRIBUTES
       obj.prototype.attr = function(name, value) {
+        var ob = this;
+        console.log("dd", ob);
+        if (ob.length == 0) ob = document.documentElement;
         if (!value) {
-          return obj[0].getAttribute(name);
+          if (ob.hasAttribute(name)) return ob.getAttribute(name);
+          else {
+            return null;
+          }
         }
-        obj.each(function(elem) {
+        ob.each(function(elem) {
           elem.setAttribute(name, value);
         });
-        return obj;
+        return ob;
       };
       return new obj();
     })(document);
@@ -338,12 +385,13 @@ var NbFlops = {
 //
 //ModalsWindows
 (function() {
+ 
   ////////
   //
   //ModalsWindows
   //
   ////////
-  "use strict";
+  ("use strict");
   var NbModal = window.NbModal || {};
   window.NbModal = NbModal;
   var popups = [];
@@ -369,7 +417,7 @@ var NbFlops = {
         if (document.getElementsByClassName("wrapper"))
           document
             .getElementsByClassName("wrapper")[0]
-            .append(wrapperContainer);
+            .appendChild(wrapperContainer);
         else
           document.body.append(
             '<div class="wrapper">' + wrapperContainer.OuterHTML + "</div>"
@@ -459,15 +507,11 @@ var NbFlops = {
 
     itemHTML.innerHTML =
       "<div class='nbm-item-content'>" + T.popup.innerHTML + "</div>";
-    T.wrapperContainerInner.append(itemHTML);
+    T.wrapperContainerInner.appendChild(itemHTML);
     T.popup.remove();
     T.popup = document.getElementById(T.options.windowID);
 
-    document.dispatchEvent(
-      new CustomEvent("NbModal-init", {
-        detail: { modal: T }
-      })
-    );
+    $n(document).trigger("NbModal-init", T);
 
     T.setEvents();
   };
@@ -514,12 +558,7 @@ var NbFlops = {
       T.wrapperContainer.classList.remove("active");
       T.popup.classList.add("open");
       T.popup.classList.remove("active");
-
-      document.dispatchEvent(
-        new CustomEvent("NbModal-open", {
-          detail: { modal: T }
-        })
-      );
+      $n(document).trigger("NbModal-open", T);
     }, T.timeAnimation);
   };
   NbModal.prototype.close = function() {
@@ -535,11 +574,7 @@ var NbFlops = {
         T.wrapperContainer.classList.remove(T.options.wrapperClass);
         T.popup.classList.remove("active");
 
-        document.dispatchEvent(
-          new CustomEvent("NbModal-close", {
-            detail: { modal: T }
-          })
-        );
+        $n(document).trigger("NbModal-close", T);
       }, T.timeAnimation);
     }
   };
@@ -699,11 +734,8 @@ var NbFlops = {
         T.targetClick.click();
       }
     }.bind(this);
-    document.dispatchEvent(
-      new CustomEvent("XHR-newPage", {
-        detail: { xhr: T }
-      })
-    );
+    $n(document).trigger("XHR-newPage", T);
+
     T.createRequest(succes, failed);
   };
   NbXHR.prototype.backPage = function() {
@@ -716,11 +748,8 @@ var NbFlops = {
     var failed = function() {
       console.log("failed");
     }.bind(T);
-    document.dispatchEvent(
-      new CustomEvent("XHR-backPage", {
-        detail: { xhr: T }
-      })
-    );
+    $n(document).trigger("XHR-backPage", T);
+
     T.createRequest(succes, failed);
   };
   NbXHR.prototype.nextPage = function() {
@@ -729,11 +758,8 @@ var NbFlops = {
     T.offsetPage++;
     var succes = function() {}.bind(T);
     var failed = function() {}.bind(T);
-    document.dispatchEvent(
-      new CustomEvent("XHR-nextPage", {
-        detail: { xhr: T }
-      })
-    );
+
+    $n(document).trigger("XHR-nextPage", T);
     T.createRequest(succes, failed);
   };
   NbXHR.prototype.refreshState = function() {
@@ -750,15 +776,12 @@ var NbFlops = {
       T.XHR = new ActiveXObject("Microsoft.XMLHTTP");
     }
     T.XHR.onload = function() {
-      document.dispatchEvent(
-        new CustomEvent("XHR-load", {
-          detail: { xhr: T }
-        })
-      );
+      $n(document).trigger("XHR-load", T);
+
       setTimeout(function() {
         var elem_ = document.getElementsByClassName("iframeDoc");
         if (elem_.length > 1) {
-          elem_[1].parentNode.removeChild(elem_[1]);
+          elem_[1].remove();
         }
         if (T.XHR.status == 200 || T.XHR.status == 404) {
           succes();
@@ -800,11 +823,8 @@ var NbFlops = {
     var T = this;
     var iframe = T.subDocument(temp_html);
     iframe.onload = function() {
-      document.dispatchEvent(
-        new CustomEvent("XHR-loadNewDoc", {
-          detail: { xhr: T }
-        })
-      );
+      $n(document).trigger("XHR-loadNewDoc", T);
+
       var html = this.contentDocument;
       console.log("reload ________");
       function replaceDOM(_class, _parent) {
@@ -842,18 +862,11 @@ var NbFlops = {
       wrapper.classList.remove("only-fp");
       wrapper.classList.add(newWrapper.classList);
       if (document.readyState === "complete") {
-        document.dispatchEvent(
-          new CustomEvent("XHR-complate", {
-            detail: { xhr: T }
-          })
-        );
+        $n(document).trigger("XHR-complate", T);
       } else {
         window.onload = function() {
-          document.dispatchEvent(
-            new CustomEvent("XHR-complate", {
-              detail: { xhr: T }
-            })
-          );
+          $n(document).trigger("XHR-complate", T);
+
           window.onload = null;
         };
       }
@@ -863,11 +876,7 @@ var NbFlops = {
     var T = this;
     T._pullStory();
     T._setEvents();
-    document.dispatchEvent(
-      new CustomEvent("XHR-init", {
-        detail: { xhr: T }
-      })
-    );
+    $n(document).trigger("XHR-init", T);
   };
 })();
 //

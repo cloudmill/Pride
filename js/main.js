@@ -62,7 +62,7 @@ var custom = {
   animateHover: {
     events: function() {
       $(
-        ".hoverLineMoved,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white"
+        ".hoverLineMoved,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white,.btn-orange-gray"
       ).hover(function() {
         $(this).addClass("ready");
       });
@@ -151,7 +151,7 @@ var custom = {
           var temp = document.createElement("div");
           temp.innerWidth = item.innerWidth;
           temp.className = "string-anim-temp";
-          item.append(temp);
+          item.appendChild(temp);
           var height = 0;
           var stringCount = 0;
           var stringAr = [];
@@ -187,7 +187,7 @@ var custom = {
               line +
               "</span></span>";
           });
-          temp.remove()
+          temp.remove();
         });
     },
     checkAndDo: function() {
@@ -264,6 +264,18 @@ var custom = {
         _this.events();
         _this.paralax();
       });
+    }
+  },
+  animateWordToPlus:{
+    events:function(){
+      $('.itemToPlusParent').hover(function(){
+        $(this).find('.itemToPlus').removeClass('plus')
+      },function(){
+        $(this).find('.itemToPlus').addClass('plus')
+      })
+    },
+    init:function(){
+      this.events()
     }
   },
   filter: {
@@ -624,8 +636,7 @@ var custom = {
         setTimeout(function() {
           document.querySelector(".preloader").className =
             document.querySelector(".preloader").className + " loaded";
-          var event = new Event("preloadingFinish");
-          document.dispatchEvent(event);
+          $n(document).trigger("preloadingFinish");
         }, 100);
       }
     }
@@ -656,6 +667,7 @@ var custom = {
     if ($(".zoom-item").length > 0) this.animateZoomOut.init();
     if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
+    if ($(".itemToPlusParent").length > 0) this.animateWordToPlus.init();
     this.preloaderInit();
   }
 };
