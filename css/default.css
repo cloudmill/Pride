@@ -777,12 +777,10 @@ body .wrapper * {
   background: rgba(0, 0, 0, 0.15);
 }
 .wrapper .anim-item {
-  will-change: transform;
   transform: translate3d(0px, 0px, 0px);
-  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+  transition: transform 800ms;
 }
 .wrapper .anim-item.is-hidden {
-  -webkit-transform: translate3d(-120%, 0, 0) !important;
   transform: translate3d(-120%, 0, 0) !important;
   opacity: 0;
 }
@@ -799,21 +797,26 @@ body .wrapper * {
   z-index: 100000;
 }
 .wrapper .string-anim-paralax {
-  all: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   margin: 0 !important;
   padding: 0 !important;
   transition: all 0s !important;
 }
 .wrapper .string-anim-line {
-  all: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: block;
   margin: 0 !important;
   padding: 0 !important;
-  will-change: transform;
   transform: translate3d(0px, 0px, 0px);
-  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+  transition: transform 800ms;
 }
 .wrapper .string-anim-line.is-hidden {
-  -webkit-transform: translate3d(-120%, 0, 0) !important;
   transform: translate3d(-120%, 0, 0) !important;
   opacity: 0;
 }

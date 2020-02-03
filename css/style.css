@@ -777,12 +777,10 @@ body .wrapper * {
   background: rgba(0, 0, 0, 0.15);
 }
 .wrapper .anim-item {
-  will-change: transform;
   transform: translate3d(0px, 0px, 0px);
-  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+  transition: transform 800ms;
 }
 .wrapper .anim-item.is-hidden {
-  -webkit-transform: translate3d(-120%, 0, 0) !important;
   transform: translate3d(-120%, 0, 0) !important;
   opacity: 0;
 }
@@ -799,21 +797,26 @@ body .wrapper * {
   z-index: 100000;
 }
 .wrapper .string-anim-paralax {
-  all: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   margin: 0 !important;
   padding: 0 !important;
   transition: all 0s !important;
 }
 .wrapper .string-anim-line {
-  all: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: block;
   margin: 0 !important;
   padding: 0 !important;
-  will-change: transform;
   transform: translate3d(0px, 0px, 0px);
-  transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+  transition: transform 800ms;
 }
 .wrapper .string-anim-line.is-hidden {
-  -webkit-transform: translate3d(-120%, 0, 0) !important;
   transform: translate3d(-120%, 0, 0) !important;
   opacity: 0;
 }
@@ -1752,14 +1755,32 @@ body .wrapper * {
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: -1;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .wrapper .page .banner_img img {
   min-height: 100%;
-  min-width: 100%;
+}
+@media (min-width: 1601px) {
+  .wrapper .page .banner_img img {
+    width: 100%;
+  }
+}
+@media (max-width: 1600px) {
+  .wrapper .page .banner_img img {
+    height: 100%;
+  }
+}
+@media (min-width: 1440px) {
+  .wrapper .page .banner_img img {
+    min-width: 100%;
+  }
 }
 .wrapper .page .banner_word {
   position: absolute;
@@ -2286,6 +2307,17 @@ body .wrapper * {
 }
 .wrapper .page .dillerMap_map img {
   transition: all 2s ease-in-out;
+  position: absolute;
+  left: 500px;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  width: auto;
+  height: auto;
+}
+.wrapper .page .dillerMap_map img.active {
+  z-index: 2;
+  opacity: 1;
 }
 .wrapper .page .dillerMap_bottom {
   position: absolute;
@@ -2903,7 +2935,7 @@ body .wrapper * {
   display: block;
   width: 100%;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .wrapper .page .priceSlider .pS_slider .slider_item_img img {
   max-width: 100%;
@@ -2957,7 +2989,7 @@ body .wrapper * {
 .wrapper .page .priceSlider .pS_slider .slider_item_price_old {
   font-size: 18px;
   line-height: 135%;
-  text-decoration-line: line-through;
+  text-decoration: line-through;
   color: #8a8a8a;
   margin-left: 15px;
 }

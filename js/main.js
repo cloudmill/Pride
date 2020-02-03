@@ -711,13 +711,15 @@ var svgMap = {
     });
   },
   setPos: function(target) {
-    var img = $(".dillerMap_map img");
-    var width = img[0].naturalWidth;
-    var height = img[0].naturalHeight;
+    var imgs = $(".dillerMap_map img");
+    var img = $(".dillerMap_map img").eq(0);
+    var width = img[0].naturalWidth ? img[0].naturalWidth : img.width();
+    var height = img[0].naturalHeight ? img[0].naturalHeight : img.height();
     var left = 0;
     var top = 0;
+    console.log(img)
     if (target == 1) {
-      top = -600;
+      top = -430;
       width = 3140;
       height = 2224;
     }
@@ -728,7 +730,7 @@ var svgMap = {
       width = 2355;
     }
     if (target == 3) {
-      top = -940;
+      top = -840;
       left = 100;
       width = 4378;
       height = 2853;
@@ -739,10 +741,13 @@ var svgMap = {
       width = 6520;
       height = 3863;
     }
-    img.css("height", height + "px");
-    img.css("width", width + "px");
-    img.css("margin-top", top + "px");
-    img.css("margin-left", left + "px");
+    console.log(img[0].naturalWidth)
+    imgs.removeClass('active')
+    imgs.eq(target).addClass('active')
+    imgs.css("height", height + "px");
+    imgs.css("width", width + "px");
+    imgs.css("margin-top", top + "px");
+    imgs.css("margin-left", left + "px");
   },
   events: function() {
     var _this = this;
@@ -762,6 +767,14 @@ var svgMap = {
       this.events();
       var _this = this;
       $(document).on("preloadingFinish", function() {
+        if (document.readyState === "complete") {
+          _this.setPos(0);
+        } else {
+          window.onload = function() {
+            _this.setPos(0);
+            window.onload = null;
+          };
+        }
         _this.setPos(0);
       });
     }

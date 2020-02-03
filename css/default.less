@@ -616,11 +616,9 @@ body {
   }
   /////
   .anim-item {
-    will-change: transform;
     transform: translate3d(0px, 0px, 0px);
-    transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+    transition: transform 800ms;
     &.is-hidden {
-      -webkit-transform: translate3d(-120%, 0, 0) !important;
       transform: translate3d(-120%, 0, 0) !important;
       opacity: 0;
     }
@@ -637,20 +635,26 @@ body {
       z-index: 100000;
     }
     &-paralax{
-      all: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
       margin: 0 !important;
       padding: 0 !important;
       transition: all 0s !important;
     }
     &-line{
-      all: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      display: block;
       margin: 0 !important;
       padding: 0 !important;
-      will-change: transform;
       transform: translate3d(0px, 0px, 0px);
-      transition: transform 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
+      transition: transform 800ms;
       &.is-hidden {
-        -webkit-transform: translate3d(-120%, 0, 0) !important;
+        
         transform: translate3d(-120%, 0, 0) !important;
         opacity: 0;
       }
