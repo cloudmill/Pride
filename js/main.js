@@ -243,12 +243,12 @@ var custom = {
                 $(this).height() / 2 -
                 $(document).scrollTop() -
                 $(window).height() / 2;
-              var k = 70 + count*10;
+              var k = 70 + count * 10;
               var paralax = (pos / $(window).height()) * k;
-              if(Math.abs(paralax) < 70)
-              $(this).css("transform", "translateY(" + paralax + "px)");
+              if (Math.abs(paralax) < 70)
+                $(this).css("transform", "translateY(" + paralax + "px)");
               count++;
-              this.setAttribute('count',count)
+              this.setAttribute("count", count);
             });
         });
     },
@@ -266,16 +266,123 @@ var custom = {
       });
     }
   },
-  animateWordToPlus:{
-    events:function(){
-      $('.itemToPlusParent').hover(function(){
-        $(this).find('.itemToPlus').removeClass('plus')
-      },function(){
-        $(this).find('.itemToPlus').addClass('plus')
-      })
+  animateWordToPlus: {
+    events: function() {
+      $(".itemToPlusParent").hover(
+        function() {
+          $(this)
+            .find(".itemToPlus")
+            .removeClass("plus");
+        },
+        function() {
+          $(this)
+            .find(".itemToPlus")
+            .addClass("plus");
+        }
+      );
     },
-    init:function(){
-      this.events()
+    init: function() {
+      this.events();
+    }
+  },
+  animateChangeImgCanvas: {
+    createApp: function() {
+      var T = this;
+      var _width = $(".blockCross").width();
+      var _height = $(".blockCross").height();
+      T.renderer = PIXI.autoDetectRenderer(_width, _height, {
+        antialias: true,
+        transparent: true
+      });
+      T.renderer.autoResize = true;
+      T.container = new PIXI.Container();
+      T.sprite = new PIXI.Sprite.fromImage(
+        "https://thumbs.dreamstime.com/b/seamless-geometric-pattern-grayscale-background-vector-63275851.jpg"
+      );
+      T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+      T.filter = new PIXI.filters.DisplacementFilter(T.sprite);
+
+      T.container.filters = [T.filter];
+      T.container.addChild(T.sprite);
+      T.renderer.render(T.container);
+
+      $(document)
+        .find(".blockCross")
+        .append(T.renderer.view);
+    },
+    setImg: function() {
+      var T = this;
+      T.imgs = [];
+      $(".blockCross img").each(function() {
+        var src = $(this).attr("src");
+        const texture = new PIXI.Texture.fromImage(src);
+        T.imgs.push(new PIXI.Sprite(texture));
+
+        T.imgs[T.imgs.length - 1].width = T.renderer.width;
+        T.imgs[T.imgs.length - 1].height = T.renderer.height;
+        T.container.addChild(T.imgs[T.imgs.length - 1]);
+        T.imgs[T.imgs.length - 1].alpha = 0;
+      });
+    },
+    updateFrame:function(){
+      var T = this;
+      cancelAnimationFrame(T.interval);
+      T.renderer.render(T.container);
+      T.interval = requestAnimationFrame(T.updateFrame.bind(T));
+    },
+    events: function() {
+      var T = this;
+      $(".blockCross_item").hover(
+        function() {
+          T.update($(this).index());
+        },
+        function() {
+          //T.hide($(this).index())
+        }
+      );
+      $(".blockCross").hover(
+        function() {
+          T.updateFrame(true);
+        },
+        function() {
+          cancelAnimationFrame(T.interval);
+        }
+      );
+    },
+    hide: function(id) {
+      var T = this;
+      T.imgs[id].filter = [T.filterOut];
+    },
+    update: function(id) {
+      var T = this;
+      var time_r = .3
+      if (T.active != id) {
+        
+        if(!T.active && T.active != 0){
+          T.filter.scale.x = -20
+          T.imgs.forEach(function(item, key) {
+            if (key != id) item.alpha = 0;
+          });
+          T.imgs[id].alpha = 1;
+          TweenMax.to(T.filter.scale, time_r, { x: 0, });
+        }else{
+          TweenMax.to(T.filter.scale, time_r, { x: -20,onComplete:function(){
+            T.imgs.forEach(function(item, key) {
+              if (key != id) item.alpha = 0;
+            });
+            T.imgs[id].alpha = 1;
+            TweenMax.to(T.filter.scale, time_r/2, { x: 0, });
+          }})
+        }
+        T.active = id;
+      }
+    },
+    init: function() {
+      var T = this;
+      T.createApp();
+      T.setImg();
+      T.events();
     }
   },
   filter: {
@@ -668,6 +775,7 @@ var custom = {
     if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
     if ($(".itemToPlusParent").length > 0) this.animateWordToPlus.init();
+    if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
     this.preloaderInit();
   }
 };
@@ -717,7 +825,7 @@ var svgMap = {
     var height = img[0].naturalHeight ? img[0].naturalHeight : img.height();
     var left = 0;
     var top = 0;
-    console.log(img)
+    console.log(img);
     if (target == 1) {
       top = -430;
       width = 3140;
@@ -741,9 +849,9 @@ var svgMap = {
       width = 6520;
       height = 3863;
     }
-    console.log(img[0].naturalWidth)
-    imgs.removeClass('active')
-    imgs.eq(target).addClass('active')
+    console.log(img[0].naturalWidth);
+    imgs.removeClass("active");
+    imgs.eq(target).addClass("active");
     imgs.css("height", height + "px");
     imgs.css("width", width + "px");
     imgs.css("margin-top", top + "px");

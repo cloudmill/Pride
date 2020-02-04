@@ -1790,12 +1790,14 @@
       flex-wrap: wrap;
       color: #292929;
       overflow: hidden;
+      position: relative;
       &:hover {
         color: #ffffff;
       }
       &_item {
         position: relative;
         padding: 60px 100px;
+        z-index: 2;
         padding-right: 120px;
         flex-basis: 50%;
         max-width: 50%;
@@ -1898,15 +1900,7 @@
             }
           }
           &_img {
-            position: absolute;
-            opacity: 0;
-            height: 200%;
-            min-width: 200%;
-            min-height: 200%;
-            bottom: 0;
-            z-index: -1;
-            left: 0;
-            transition: opacity 0.3s ease-in-out;
+            display: none;
           }
         }
         &:hover {
@@ -1915,11 +1909,23 @@
             &_link {
               color: inherit;
             }
-            &_img {
-              opacity: 1;
-            }
           }
         }
+      }
+      &:hover{
+        canvas{
+          opacity:1;
+        }
+      }
+      canvas{
+        position: absolute;
+        z-index: 1;
+        left:0;
+        top:0;
+        width:100%;
+        opacity:0;
+        height: 100%;
+        transition: all 0.3s;
       }
       @media (max-width: 1440px) {
         &_item {
@@ -1952,12 +1958,6 @@
           border-bottom: 1px solid #e5e5e5;
           border-left: 0 !important;
           .item {
-            &_img {
-              min-width: 100%;
-              min-height: 100%;
-              height: 100%;
-              opacity: 1;
-            }
             &_link {
               left: 50px;
             }
