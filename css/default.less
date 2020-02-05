@@ -617,7 +617,7 @@ body {
   /////
   .anim-item {
     transform: translate3d(0px, 0px, 0px);
-    transition: transform 800ms;
+    transition: transform 800ms,opacity 0.3s;
     &.is-hidden {
       transform: translate3d(-120%, 0, 0) !important;
       opacity: 0;
@@ -635,6 +635,7 @@ body {
       z-index: 100000;
     }
     &-paralax{
+      display: block;
       font-family: inherit;
       font-size: inherit;
       font-weight: inherit;
@@ -642,6 +643,7 @@ body {
       margin: 0 !important;
       padding: 0 !important;
       transition: all 0s !important;
+      overflow: hidden;
     }
     &-line{
       font-family: inherit;
@@ -654,13 +656,78 @@ body {
       transform: translate3d(0px, 0px, 0px);
       transition: transform 800ms;
       &.is-hidden {
-        
         transform: translate3d(-120%, 0, 0) !important;
         opacity: 0;
       }
     }
   }
-
+  .anim-scale{
+    transition: transform 2s,opacity 0.7s;
+    width: 100%;
+    &.is-hidden {
+      transform: scale(1.1) !important;
+      opacity: 0;
+    }
+  }
+  .plusBox{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    &_link{
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+      transition: all 0.3s ease-in-out;
+    }
+    &_plus{
+        height: 40px;
+        width: 40px;
+        transition: all 0.3s ease-in-out;
+        transform: translateY(-45px);
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        left: 0;
+        &:before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.3s;
+          background: #ff570f;
+          position: absolute;
+          animation-name: none;
+        }
+        &:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%) rotate(90deg);
+          background: #ff570f;
+          transition: all 0.3s;
+          position: absolute;
+          animation-name: none;
+        }
+    }
+    &:hover{
+      .plusBox{
+        &_plus{
+          transform: translateY(0);
+        }
+        &_link{
+          transform: translateY(45px);
+        }
+      }
+    }
+  }
   @media (max-width: 1440px) {
     .content {
       width: ~"calc(100% - 360px)";

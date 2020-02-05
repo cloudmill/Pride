@@ -183,7 +183,7 @@ var custom = {
           item.innerHTML = "";
           stringAr.forEach(function(line) {
             item.innerHTML +=
-              '<span class="string-anim-line is-hidden"><span class="string-anim-paralax">' +
+              '<span class="string-anim-paralax"><span class="string-anim-line is-hidden">' +
               line +
               "</span></span>";
           });
@@ -266,43 +266,33 @@ var custom = {
       });
     }
   },
-  animateWordToPlus: {
-    events: function() {
-      $(".itemToPlusParent").hover(
-        function() {
-          $(this)
-            .find(".itemToPlus")
-            .removeClass("plus");
-        },
-        function() {
-          $(this)
-            .find(".itemToPlus")
-            .addClass("plus");
-        }
-      );
-    },
-    init: function() {
-      this.events();
-    }
-  },
   animateChangeImgCanvas: {
     createApp: function() {
       var T = this;
       var _width = $(".blockCross").width();
       var _height = $(".blockCross").height();
-      T.renderer = PIXI.autoDetectRenderer(_width, _height, {
+      console.log(_width, _height);
+      this.app = new PIXI.Application({
+        width: _width,
+        height: _height,
+        backgroundColor: 0xffffff,
+        resolution: window.devicePixelRatio || 1
+      });
+      T.renderer = PIXI.autoDetectRenderer({
+        width: _width,
+        height: _height,
         antialias: true,
         transparent: true
       });
-      T.renderer.autoResize = true;
+      //T.renderer.autoResize = true;
       T.container = new PIXI.Container();
-      T.sprite = new PIXI.Sprite.fromImage(
-        "https://thumbs.dreamstime.com/b/seamless-geometric-pattern-grayscale-background-vector-63275851.jpg"
-      );
+      T.sprite = new PIXI.Sprite.fromImage("/images/blur.jpg");
       T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-
+      T.sprite.x = 0;
+      T.sprite.y = 0;
       T.filter = new PIXI.filters.DisplacementFilter(T.sprite);
-
+      T.filter.scale.x = 0;
+      T.filter.scale.y = 0;
       T.container.filters = [T.filter];
       T.container.addChild(T.sprite);
       T.renderer.render(T.container);
@@ -314,18 +304,26 @@ var custom = {
     setImg: function() {
       var T = this;
       T.imgs = [];
+
       $(".blockCross img").each(function() {
         var src = $(this).attr("src");
         const texture = new PIXI.Texture.fromImage(src);
         T.imgs.push(new PIXI.Sprite(texture));
 
-        T.imgs[T.imgs.length - 1].width = T.renderer.width;
-        T.imgs[T.imgs.length - 1].height = T.renderer.height;
+        var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
+        if (T.renderer.width / k < T.renderer.height) {
+          T.imgs[T.imgs.length - 1].width = T.renderer.height * k;
+          T.imgs[T.imgs.length - 1].height = T.renderer.height;
+        } else {
+          T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
+          T.imgs[T.imgs.length - 1].width = T.renderer.width;
+        }
+
         T.container.addChild(T.imgs[T.imgs.length - 1]);
         T.imgs[T.imgs.length - 1].alpha = 0;
       });
     },
-    updateFrame:function(){
+    updateFrame: function() {
       var T = this;
       cancelAnimationFrame(T.interval);
       T.renderer.render(T.container);
@@ -356,33 +354,67 @@ var custom = {
     },
     update: function(id) {
       var T = this;
-      var time_r = .3
+      var time_r = 1.2;
+      var lenght = 80;
+
       if (T.active != id) {
-        
-        if(!T.active && T.active != 0){
-          T.filter.scale.x = -20
+        if (!T.active && T.active != 0) {
+          T.filter.scale.x = -lenght;
           T.imgs.forEach(function(item, key) {
             if (key != id) item.alpha = 0;
           });
           T.imgs[id].alpha = 1;
-          TweenMax.to(T.filter.scale, time_r, { x: 0, });
-        }else{
-          TweenMax.to(T.filter.scale, time_r, { x: -20,onComplete:function(){
-            T.imgs.forEach(function(item, key) {
-              if (key != id) item.alpha = 0;
-            });
-            T.imgs[id].alpha = 1;
-            TweenMax.to(T.filter.scale, time_r/2, { x: 0, });
-          }})
+          TweenMax.to(T.filter.scale, time_r, { x: 0 });
+        } else {
+          TweenMax.killAll(false, true, false);
+          T.imgs.forEach(function(item, key) {
+            if (key != id) item.alpha = 0;
+          });
+          T.filter.scale.x = -lenght;
+          T.imgs[id].alpha = 1;
+          T.filter.scale.x = -lenght;
+          TweenMax.to(T.filter.scale, time_r, { x: 0 });
         }
         T.active = id;
       }
     },
     init: function() {
       var T = this;
-      T.createApp();
-      T.setImg();
-      T.events();
+      if ($(window).width() > 950) {
+        $(document).on("preloadingFinish", function() {
+          T.createApp();
+          T.setImg();
+          T.events();
+        });
+      }
+    }
+  },
+  animateScaleIn: {
+    checkAndDo: function() {
+      var count = 0;
+      var start_anim = function(item) {
+        if (count > 5) {
+          item.removeClass("is-hidden");
+        } else {
+          setTimeout(function() {
+            item.removeClass("is-hidden");
+          }, count * 100);
+        }
+        count++;
+      };
+      $(document)
+        .find(".is-hidden.anim-scale")
+        .each(function() {
+          {
+            start_anim($(this));
+          }
+        });
+    },
+    init: function() {
+      var _this = this;
+      $(document).on("preloadingFinish", function() {
+        _this.checkAndDo();
+      });
     }
   },
   filter: {
@@ -774,8 +806,8 @@ var custom = {
     if ($(".zoom-item").length > 0) this.animateZoomOut.init();
     if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
-    if ($(".itemToPlusParent").length > 0) this.animateWordToPlus.init();
     if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
+    if ($(".anim-scale").length > 0) this.animateScaleIn.init();
     this.preloaderInit();
   }
 };
@@ -819,43 +851,95 @@ var svgMap = {
     });
   },
   setPos: function(target) {
-    var imgs = $(".dillerMap_map img");
-    var img = $(".dillerMap_map img").eq(0);
-    var width = img[0].naturalWidth ? img[0].naturalWidth : img.width();
-    var height = img[0].naturalHeight ? img[0].naturalHeight : img.height();
+    var imgs = $(".dillerMap_map .box");
+    var img = $(".dillerMap_map img");
+    var imgOne = $(".dillerMap_map img").eq(0);
+    var widthPerfect = imgOne[0].naturalWidth
+      ? imgOne[0].naturalWidth
+      : imgOne.width();
+    var heightPerfect = imgOne[0].naturalHeight
+      ? imgOne[0].naturalHeight
+      : imgOne.height();
+    var width = widthPerfect;
     var left = 0;
-    var top = 0;
-    console.log(img);
-    if (target == 1) {
-      top = -430;
-      width = 3140;
-      height = 2224;
+    var top = 50;
+    if ($(window).width() < 600) {
+      top = 20;
+      width = widthPerfect * 0.7;
+      if (target == 1) {
+        left = -100;
+        top = -133;
+        width = 2840;
+      }
+      if (target == 2) {
+        top = -580;
+        left = -450;
+        width = 2155;
+      }
+      if (target == 3) {
+        top = -560;
+        left = -50;
+        width = 4078;
+      }
+      if (target == 4) {
+        top = -2540;
+        left = -850;
+        width = 6320;
+      }
+    } else if ($(window).width() < 950) {
+      top = 20;
+      width = widthPerfect * 0.7;
+      if (target == 1) {
+        top = -133;
+        width = 2840;
+      }
+      if (target == 2) {
+        top = -580;
+        left = -300;
+        width = 2155;
+      }
+      if (target == 3) {
+        top = -560;
+        left = 100;
+        width = 4078;
+      }
+      if (target == 4) {
+        top = -2540;
+        left = -700;
+        width = 6320;
+      }
+    } else {
+      if (target == 1) {
+        top = -93;
+        width = 3140;
+      }
+      if (target == 2) {
+        top = -580;
+        left = -300;
+        width = 2355;
+      }
+      if (target == 3) {
+        top = -560;
+        left = 100;
+        width = 4378;
+      }
+      if (target == 4) {
+        top = -2540;
+        left = -700;
+        width = 6520;
+      }
     }
-    if (target == 2) {
-      top = -800;
-      left = -300;
-      height = 1623;
-      width = 2355;
-    }
-    if (target == 3) {
-      top = -840;
-      left = 100;
-      width = 4378;
-      height = 2853;
-    }
-    if (target == 4) {
-      top = -2920;
-      left = -400;
-      width = 6520;
-      height = 3863;
-    }
-    console.log(img[0].naturalWidth);
-    imgs.removeClass("active");
-    imgs.eq(target).addClass("active");
-    imgs.css("height", height + "px");
-    imgs.css("width", width + "px");
-    imgs.css("margin-top", top + "px");
-    imgs.css("margin-left", left + "px");
+
+    img.removeClass("active");
+    img.eq(target).addClass("active");
+    var scale = width / widthPerfect;
+    imgs.css("height", heightPerfect + "px");
+    imgs.css("width", widthPerfect + "px");
+    scale = parseInt(scale * 100) / 100;
+    imgs.css(
+      "transform",
+      "translate(" + left + "px," + top + "px) scale(" + scale + ")"
+    );
   },
   events: function() {
     var _this = this;
