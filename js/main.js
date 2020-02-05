@@ -115,12 +115,18 @@ var custom = {
       $(document)
         .find(".zoom-item")
         .each(function() {
-          var pos =
-            $(this).offset().top + $(this).height() - $(document).scrollTop();
-          var k = 0.1;
-          var zoom = (pos / $(window).height()) * k + 1;
-
-          $(this).css("transform", "scale(" + zoom + ")");
+          var zoom;
+          var paralaxY = 0;
+            var k = 0.5;
+          if($(this).hasClass('in')){
+            var pos = $(window).height() + $(document).scrollTop() - $(this).offset().top;
+            zoom = 1 + (pos) * k/10000;
+          }else{
+            var pos =  $(document).scrollTop() - $(this).offset().top- $(this).height();
+            zoom = 1 - (pos) * k/10000;
+          }
+          paralaxY = ($(document).scrollTop() -  $(this).offset().top)/5
+          $(this).css("transform", "translateY("+paralaxY+"px) scale(" + zoom + ")");
         });
     },
     events: function() {
