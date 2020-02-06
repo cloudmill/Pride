@@ -201,7 +201,39 @@
   font-weight: normal;
   font-style: italic;
 }
+@anim-duration: 0.4s;
+@anim-function: easy-out;
+@anim-default: @anim-duration @anim-function;
+@anim-long: 1s; //cubic-bezier(.26,.88,.66,1.01);
 
+html,
+body {
+  .def_scroll{
+    scrollbar-color:  #ff570f white;
+    scrollbar-width: thin;
+    scrollbar-base-color: white;
+    scrollbar-face-color: #ff570f;
+    scrollbar-3dlight-color: white;
+    scrollbar-highlight-color: white;
+    scrollbar-track-color: white;
+    scrollbar-arrow-color: white;
+    scrollbar-shadow-color: #ff570f;
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb  {
+      background: #ff570f;
+    }
+    &::-webkit-scrollbar-track {
+      background: white;
+      border-left: 1px solid #e3e3e3;
+    }
+  }
+  .def_scroll;
+  * {
+    .def_scroll;
+  }
+}
 body {
   margin: 0;
   padding: 0;
@@ -215,7 +247,7 @@ body {
       list-style: none;
       outline: none;
       color: inherit;
-      font-family:Helvetica Neue;
+      font-family: Helvetica Neue;
       font-size: inherit;
       font-weight: inherit;
     }
@@ -616,8 +648,9 @@ body {
   }
   /////
   .anim-item {
+    will-change: transform;
     transform: translate3d(0px, 0px, 0px);
-    transition: transform 800ms cubic-bezier(0.38, 0.38, 0.25, 1.01),opacity 0.3s;
+    transition: transform @anim-long, opacity @anim-long;
     &.is-hidden {
       transform: translate3d(-120%, 0, 0) !important;
       opacity: 0;
@@ -634,7 +667,7 @@ body {
       left: 0;
       z-index: 100000;
     }
-    &-paralax{
+    &-paralax {
       display: block;
       font-family: inherit;
       font-size: inherit;
@@ -642,10 +675,11 @@ body {
       line-height: inherit;
       margin: 0 !important;
       padding: 0 !important;
-      transition: none!important;
+      transition: none !important;
       overflow: hidden;
     }
-    &-line{
+    &-line {
+      will-change: transform;
       font-family: inherit;
       font-size: inherit;
       font-weight: inherit;
@@ -654,75 +688,75 @@ body {
       margin: 0 !important;
       padding: 0 !important;
       transform: translate3d(0px, 0px, 0px);
-      transition: transform 800ms cubic-bezier(0.38, 0.38, 0.25, 1.01);
+      transition: transform @anim-long;
       &.is-hidden {
         transform: translate3d(-120%, 0, 0) !important;
         opacity: 0;
       }
     }
   }
-  .anim-scale{
-    transition: transform 2s,opacity 0.7s;
+  .anim-scale {
+    transition: transform 2s @anim-function, opacity 0.7s @anim-function;
     width: 100%;
     &.is-hidden {
       transform: scale(1.1) !important;
       opacity: 0;
     }
   }
-  .plusBox{
+  .plusBox {
     display: flex;
     align-items: center;
     height: 40px;
     overflow: hidden;
     position: relative;
-    &_link{
+    &_link {
       font-size: inherit;
       line-height: inherit;
       color: inherit;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s @anim-function;
     }
-    &_plus{
-        height: 40px;
-        width: 40px;
-        transition: all 0.3s ease-in-out;
-        transform: translateY(-45px);
-        position: absolute;
+    &_plus {
+      height: 40px;
+      width: 40px;
+      transition: all 0.3s @anim-function;
+      transform: translateY(-45px);
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      left: 0;
+      &:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        left: 50%;
         top: 50%;
-        margin-top: -20px;
-        left: 0;
-        &:before {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1px;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          transition: all 0.3s;
-          background: #ff570f;
-          position: absolute;
-          animation-name: none;
-        }
-        &:after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1px;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) rotate(90deg);
-          background: #ff570f;
-          transition: all 0.3s;
-          position: absolute;
-          animation-name: none;
-        }
+        transform: translate(-50%, -50%);
+        transition: all 0.3s;
+        background: #ff570f;
+        position: absolute;
+        animation-name: none;
+      }
+      &:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        background: #ff570f;
+        transition: all 0.3s;
+        position: absolute;
+        animation-name: none;
+      }
     }
-    &:hover{
-      .plusBox{
-        &_plus{
+    &:hover {
+      .plusBox {
+        &_plus {
           transform: translateY(0);
         }
-        &_link{
+        &_link {
           transform: translateY(45px);
         }
       }

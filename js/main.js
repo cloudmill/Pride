@@ -276,7 +276,7 @@ var custom = {
     createApp: function() {
       var T = this;
       var _width = $(".blockCross").width();
-      var _height = $(".blockCross").height();
+      var _height = $(window).height();
       console.log(_width, _height);
       this.app = new PIXI.Application({
         width: _width,
@@ -315,7 +315,7 @@ var custom = {
         var src = $(this).attr("src");
         const texture = new PIXI.Texture.fromImage(src);
         T.imgs.push(new PIXI.Sprite(texture));
-
+        
         var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
         if (T.renderer.width / k < T.renderer.height) {
           T.imgs[T.imgs.length - 1].width = T.renderer.height * k;
@@ -324,10 +324,11 @@ var custom = {
           T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
           T.imgs[T.imgs.length - 1].width = T.renderer.width;
         }
-
+        console.log(k)
         T.container.addChild(T.imgs[T.imgs.length - 1]);
         T.imgs[T.imgs.length - 1].alpha = 0;
       });
+      
     },
     updateFrame: function() {
       var T = this;
@@ -353,6 +354,11 @@ var custom = {
           cancelAnimationFrame(T.interval);
         }
       );
+      $(document).on("scroll", function() {
+        var scroll = ($(document).scrollTop() - $('.blockCross canvas').offset().top )/5;
+        $('.blockCross canvas').css('transform','translateY('+scroll+'px)');
+      });
+      
     },
     hide: function(id) {
       var T = this;
@@ -387,11 +393,9 @@ var custom = {
     init: function() {
       var T = this;
       if ($(window).width() > 950) {
-        $(document).on("preloadingFinish", function() {
           T.createApp();
           T.setImg();
           T.events();
-        });
       }
     }
   },
