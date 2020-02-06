@@ -3731,6 +3731,7 @@ body .fancybox-container * {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: background 1s cubic-bezier(0.26, 0.88, 0.66, 1.01);
 }
 .wrapper .page .blockCross_item:nth-child(2n) {
   border-left: 1px solid #e5e5e5;
