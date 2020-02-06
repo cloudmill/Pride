@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="libs/boostrap_slider/boostrap_slider.min.css"/>
     <link rel="stylesheet" href="libs/select2/select2.min.css" />
     <link rel="stylesheet" href="libs/slick/slick.css" />
+    <link rel="stylesheet" href="libs/fancybox/fancybox.min.css" />
     <link rel="stylesheet" href="libs/NBrain/NBrain.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Список эллементов каталога</title>
@@ -740,14 +741,7 @@
       </div>
       <div class="popups">
         <!-- popup buyOneClick -->
-        <div
-          class="popup"
-          id="buyOneClick"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupCenter"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup"  id="buyOneClick"  >
           <div class="popupCenter_title def-form-title">Купить в 1 клик</div>
           <form action="">
             <div class="popupCenter_row">
@@ -783,14 +777,7 @@
           </form>
         </div>
         <!-- popup question -->
-        <div
-          class="popup"
-          id="question"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupCenter"
-          data-butCloseInPopup="true"
-        >
+        <div  class="popup" id="question" >
           <div class="popupCenter_title def-form-title">Задать свой вопрос</div>
           <form action="">
             <div class="popupCenter_row">
@@ -840,8 +827,8 @@
             </div>
             <div class="popupCenter_row">
               <div class="popupCenter_pp def-form-checkbox">
-                <input type="checkbox" name="pp1" id="pp1" />
-                <label for="pp1">
+                <input type="checkbox" name="pp2" id="pp2" />
+                <label for="pp2">
                   Согласие на обработку персональных данных в соответствии с
                   <a href=""> политикой конфиденциальности </a>
                 </label>
@@ -853,14 +840,7 @@
           </form>
         </div>
         <!-- popup collback_success -->
-        <div
-          class="popup"
-          id="collback_success"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupSuccess"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup" id="collback_success" >
           <div class="popupCenter_title def-form-title">
             Мы приняли вашу заявку и совсем скоро перезвоним для уточнения
             заказа.
@@ -868,14 +848,7 @@
           <button type="submit" class="btn-orange">Понятно</button>
         </div>
         <!-- popup question_success -->
-        <div
-          class="popup"
-          id="question_success"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupSuccess"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup"  id="question_success" >
           <div class="popupCenter_title def-form-title">
             Ваш вопрос поступил в обработку. Ответим, как только сможем.
           </div>
@@ -889,7 +862,9 @@
   <script src="libs/boostrap_slider/boostrap_slider.min.js"></script>
   <script src="libs/select2/select2.min.js"></script>
   <script src="libs/slick/slick.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
   <script src="libs/pixijs/pixi.min.js"></script>
+  <script src="libs/fancybox/fancybox.min.js"></script>
   <script src="libs/NBrain/NBrain.js"></script>
   <script src="js/main.js"></script>
 </html>

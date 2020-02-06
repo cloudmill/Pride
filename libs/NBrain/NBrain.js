@@ -709,7 +709,7 @@ var NbTabs = {
     popups[id] = new NbModal(id, opts, content);
     return popups[id];
   };
-  setInDataAttr();
+ // setInDataAttr();
 })();
 //
 //XHRequests

@@ -823,7 +823,8 @@ var custom = {
 };
 var popups = {
   setup: function() {
-    if ($("#properties").length > 0)
+    $(".modalbox").fancybox();
+    /* if ($("#properties").length > 0)
       this.properties = new NbModal("properties", {
         windowClass: "popupFadeInRight",
         wrapperClass: "page"
@@ -840,8 +841,11 @@ var popups = {
         butCloseInPopup: true
       },
       "<h3>заголовок</h3><p>текст</p>"
-    );
+    ); */
     //this.succes.open();
+    if ($("#properties").length > 0){
+
+    }
   },
   init: function() {
     this.setup();

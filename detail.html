@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="libs/swiper/swiper.min.css" />
     <link rel="stylesheet" href="libs/select2/select2.min.css" />
     <link rel="stylesheet" href="libs/slick/slick.css" />
+    <link rel="stylesheet" href="libs/fancybox/fancybox.min.css" />
     <link rel="stylesheet" href="libs/NBrain/NBrain.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Карточка товара</title>
@@ -278,7 +279,7 @@
               <div class="detail_row">
                 <div class="detail_props">
                   <div class="detail_props-item">
-                    <div class="detail_props-name nbm-open" data-id="callback">
+                    <div class="detail_props-name modalbox" href='#callback'>
                       Артикул
                     </div>
                     <div class="detail_props-value">
@@ -336,8 +337,8 @@
                     </div>
                   </div>
                   <button
-                    class="detail_props-show_more hoverLineMoved def-gray nbm-open"
-                    data-id="properties"
+                    class="detail_props-show_more hoverLineMoved def-gray modalbox"
+                    href="#properties"
                   >
                     Показать все
                   </button>
@@ -357,16 +358,15 @@
                     Добавить в корзину
                   </a>
                   <a
-                    href=""
-                    class="detail_but-right btn-gray nbm-open"
-                    data-id="buyOneClick"
+                    class="detail_but-right btn-gray modalbox"
+                    href="#buyOneClick"
                   >
                     Купить в 1 клик
                   </a>
                 </div>
               </div>
             </div>
-            <div class="hidden-inf" id="properties">
+            <div class="hidden-inf popupFadeInRight" id="properties">
               <div class="detail_props-popup">
                 <div class="detail_props-popup_title">
                   Характеристики товара
@@ -614,7 +614,7 @@
                       поверхность.
                     </div>
                   </div>
-                  <button class="faq_make btn-gray nbm-open" data-id='question'>Задать свой вопрос</button>
+                  <button class="faq_make btn-gray modalbox" href='#question'>Задать свой вопрос</button>
                 </div>
               </div>
               <div class="tabsBox_tab nbt-tab">
@@ -1353,14 +1353,7 @@
       </div>
       <div class="popups">
         <!-- popup buyOneClick -->
-        <div
-          class="popup"
-          id="buyOneClick"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupCenter"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup"  id="buyOneClick"  >
           <div class="popupCenter_title def-form-title">Купить в 1 клик</div>
           <form action="">
             <div class="popupCenter_row">
@@ -1396,14 +1389,7 @@
           </form>
         </div>
         <!-- popup question -->
-        <div
-          class="popup"
-          id="question"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupCenter"
-          data-butCloseInPopup="true"
-        >
+        <div  class="popup" id="question" >
           <div class="popupCenter_title def-form-title">Задать свой вопрос</div>
           <form action="">
             <div class="popupCenter_row">
@@ -1453,8 +1439,8 @@
             </div>
             <div class="popupCenter_row">
               <div class="popupCenter_pp def-form-checkbox">
-                <input type="checkbox" name="pp1" id="pp1" />
-                <label for="pp1">
+                <input type="checkbox" name="pp2" id="pp2" />
+                <label for="pp2">
                   Согласие на обработку персональных данных в соответствии с
                   <a href=""> политикой конфиденциальности </a>
                 </label>
@@ -1466,14 +1452,7 @@
           </form>
         </div>
         <!-- popup collback_success -->
-        <div
-          class="popup"
-          id="collback_success"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupSuccess"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup" id="collback_success" >
           <div class="popupCenter_title def-form-title">
             Мы приняли вашу заявку и совсем скоро перезвоним для уточнения
             заказа.
@@ -1481,14 +1460,7 @@
           <button type="submit" class="btn-orange">Понятно</button>
         </div>
         <!-- popup question_success -->
-        <div
-          class="popup"
-          id="question_success"
-          data-nbm-popup-init
-          data-wrapperClass="page"
-          data-windowClass="popupSuccess"
-          data-butCloseInPopup="true"
-        >
+        <div class="popup"  id="question_success" >
           <div class="popupCenter_title def-form-title">
             Ваш вопрос поступил в обработку. Ответим, как только сможем.
           </div>
@@ -1502,7 +1474,9 @@
   <script src="libs/boostrap_slider/boostrap_slider.min.js"></script>
   <script src="libs/select2/select2.min.js"></script>
   <script src="libs/slick/slick.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
   <script src="libs/pixijs/pixi.min.js"></script>
+  <script src="libs/fancybox/fancybox.min.js"></script>
   <script src="libs/NBrain/NBrain.js"></script>
   <script src="js/main.js"></script>
 </html>

@@ -206,10 +206,12 @@ body {
   border: 0;
   scroll-behavior: smooth;
 }
-body .wrapper {
+body .wrapper,
+body .fancybox-container {
   overflow: hidden;
 }
-body .wrapper * {
+body .wrapper *,
+body .fancybox-container * {
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
@@ -427,6 +429,120 @@ body .wrapper * {
 .wrapper .tabs .tab.active {
   opacity: 1;
 }
+.wrapper .nbm-background {
+  background: rgba(0, 0, 0, 0.15);
+}
+.wrapper .anim-item {
+  will-change: transform;
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 1s, opacity 1s;
+}
+.wrapper .anim-item.is-hidden {
+  transform: translate3d(-120%, 0, 0) !important;
+  opacity: 0;
+}
+.wrapper .string-anim {
+  position: relative;
+}
+.wrapper .string-anim-temp {
+  all: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+}
+.wrapper .string-anim-paralax {
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: none !important;
+  overflow: hidden;
+}
+.wrapper .string-anim-line {
+  will-change: transform;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translate3d(0px, 0px, 0px);
+  transition: transform 1s;
+}
+.wrapper .string-anim-line.is-hidden {
+  transform: translate3d(-120%, 0, 0) !important;
+  opacity: 0;
+}
+.wrapper .anim-scale {
+  transition: transform 2s ease-out, opacity 0.7s ease-out;
+  width: 100%;
+}
+.wrapper .anim-scale.is-hidden {
+  transform: scale(1.1) !important;
+  opacity: 0;
+}
+.wrapper .plusBox {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.wrapper .plusBox_link {
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  transition: all 0.3s ease-out;
+}
+.wrapper .plusBox_plus {
+  height: 40px;
+  width: 40px;
+  transition: all 0.3s ease-out;
+  transform: translateY(-45px);
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  left: 0;
+}
+.wrapper .plusBox_plus:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+  background: #ff570f;
+  position: absolute;
+  animation-name: none;
+}
+.wrapper .plusBox_plus:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  background: #ff570f;
+  transition: all 0.3s;
+  position: absolute;
+  animation-name: none;
+}
+.wrapper .plusBox:hover .plusBox_plus {
+  transform: translateY(0);
+}
+.wrapper .plusBox:hover .plusBox_link {
+  transform: translateY(45px);
+}
 .wrapper .btn .def {
   font-size: 16px;
   line-height: 75px;
@@ -441,6 +557,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
 }
 .wrapper .btn .def:before {
@@ -486,6 +603,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
   color: #292929;
 }
@@ -538,6 +656,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
   color: #ffffff;
 }
@@ -596,6 +715,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
   color: #ffffff;
 }
@@ -648,6 +768,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
   color: #ffffff;
 }
@@ -700,6 +821,7 @@ body .wrapper * {
   position: relative;
   background: none;
   border: 0;
+  z-index: 2;
   cursor: pointer;
   color: #292929;
 }
@@ -851,119 +973,19 @@ body .wrapper * {
   top: 0;
   left: 0;
 }
-.wrapper .nbm-background {
-  background: rgba(0, 0, 0, 0.15);
-}
-.wrapper .anim-item {
-  will-change: transform;
-  transform: translate3d(0px, 0px, 0px);
-  transition: transform 1s, opacity 1s;
-}
-.wrapper .anim-item.is-hidden {
-  transform: translate3d(-120%, 0, 0) !important;
-  opacity: 0;
-}
-.wrapper .string-anim {
-  position: relative;
-}
-.wrapper .string-anim-temp {
-  all: inherit;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100000;
-}
-.wrapper .string-anim-paralax {
-  display: block;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  margin: 0 !important;
-  padding: 0 !important;
-  transition: none !important;
-  overflow: hidden;
-}
-.wrapper .string-anim-line {
-  will-change: transform;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  display: block;
-  margin: 0 !important;
-  padding: 0 !important;
-  transform: translate3d(0px, 0px, 0px);
-  transition: transform 1s;
-}
-.wrapper .string-anim-line.is-hidden {
-  transform: translate3d(-120%, 0, 0) !important;
-  opacity: 0;
-}
-.wrapper .anim-scale {
-  transition: transform 2s easy-out, opacity 0.7s easy-out;
-  width: 100%;
-}
-.wrapper .anim-scale.is-hidden {
-  transform: scale(1.1) !important;
-  opacity: 0;
-}
-.wrapper .plusBox {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  overflow: hidden;
-  position: relative;
-}
-.wrapper .plusBox_link {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  transition: all 0.3s easy-out;
-}
-.wrapper .plusBox_plus {
-  height: 40px;
-  width: 40px;
-  transition: all 0.3s easy-out;
-  transform: translateY(-45px);
-  position: absolute;
-  top: 50%;
-  margin-top: -20px;
-  left: 0;
-}
-.wrapper .plusBox_plus:before {
+.wrapper .def-form-checkbox label:after {
   content: "";
   display: block;
-  width: 100%;
-  height: 1px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s;
-  background: #ff570f;
+  width: 14px;
+  height: 9px;
   position: absolute;
-  animation-name: none;
-}
-.wrapper .plusBox_plus:after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
-  background: #ff570f;
   transition: all 0.3s;
-  position: absolute;
-  animation-name: none;
-}
-.wrapper .plusBox:hover .plusBox_plus {
-  transform: translateY(0);
-}
-.wrapper .plusBox:hover .plusBox_link {
-  transform: translateY(45px);
+  opacity: 0;
+  background-image: url(../images/check_orange.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 11px;
+  left: 8px;
 }
 @media (max-width: 1440px) {
   .wrapper .content {
@@ -985,4 +1007,892 @@ body .wrapper * {
   .wrapper .content {
     width: calc(100% - 30px);
   }
+}
+.fancybox-container .btn .def {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.fancybox-container .btn .def:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn .def:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn .def.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn .def:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-gray {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #292929;
+}
+.fancybox-container .btn-gray:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn-gray:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn-gray.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn-gray:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-gray:before {
+  background: #c4c4c4;
+}
+.fancybox-container .btn-gray:after {
+  background: #e5e5e5;
+}
+.fancybox-container .btn-orange {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.fancybox-container .btn-orange:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn-orange:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn-orange.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn-orange:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-orange i {
+  margin-right: 15px;
+}
+.fancybox-container .btn-orange i.icon-cart {
+  filter: invert(1) brightness(2);
+}
+.fancybox-container .btn-orange:after {
+  background: #ff570f;
+}
+.fancybox-container .btn-orange:before {
+  background: #f34900;
+}
+.fancybox-container .btn-orange-white {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.fancybox-container .btn-orange-white:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn-orange-white:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn-orange-white.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn-orange-white:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-orange-white:after {
+  background: #ffffff;
+}
+.fancybox-container .btn-orange-white:before {
+  background: #f34900;
+}
+.fancybox-container .btn-orange-gray {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.fancybox-container .btn-orange-gray:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn-orange-gray:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn-orange-gray.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn-orange-gray:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-orange-gray:after {
+  background: #f9f9f9;
+}
+.fancybox-container .btn-orange-gray:before {
+  background: #f34900;
+}
+.fancybox-container .btn-gray-white {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #292929;
+}
+.fancybox-container .btn-gray-white:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.fancybox-container .btn-gray-white:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.fancybox-container .btn-gray-white.ready:before {
+  animation-name: BtnBlur;
+}
+.fancybox-container .btn-gray-white:hover:before {
+  animation-name: BtnHover;
+}
+.fancybox-container .btn-gray-white:before {
+  background: #f5f5f5;
+}
+.fancybox-container .btn-gray-white:after {
+  background: #ffffff;
+}
+@keyframes BtnHover {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes BtnBlur {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.fancybox-container .def-form-title {
+  font-family: Druk Wide Medium Cy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #292929;
+}
+.fancybox-container .def-form-textarea {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  height: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  resize: none;
+}
+.fancybox-container .def-form-input {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.fancybox-container .def-form-input-file {
+  position: relative;
+  padding-top: 30px;
+  margin-bottom: 50px;
+}
+.fancybox-container .def-form-input-file input {
+  display: none;
+}
+.fancybox-container .def-form-input-file label {
+  font-family: Helvetica Neue;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #292929;
+}
+.fancybox-container .def-form-input-file label::before {
+  content: "";
+  width: 20px;
+  height: 12px;
+  display: block;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(../images/file.svg);
+}
+.fancybox-container .def-form-checkbox input {
+  display: none;
+}
+.fancybox-container .def-form-checkbox input:checked + label::after {
+  opacity: 1;
+}
+.fancybox-container .def-form-checkbox label {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  position: relative;
+  color: #292929;
+  padding-left: 50px;
+  display: block;
+}
+.fancybox-container .def-form-checkbox label a {
+  text-decoration: underline;
+  color: inherit;
+}
+.fancybox-container .def-form-checkbox label:before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.fancybox-container .def-form-checkbox label:after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 9px;
+  position: absolute;
+  transition: all 0.3s;
+  opacity: 0;
+  background-image: url(../images/check_orange.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 11px;
+  left: 8px;
+}
+.default-buttons .def {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.default-buttons .def:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons .def:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons .def.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons .def:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-gray {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #292929;
+}
+.default-buttons-gray:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons-gray:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons-gray.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons-gray:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-gray:before {
+  background: #c4c4c4;
+}
+.default-buttons-gray:after {
+  background: #e5e5e5;
+}
+.default-buttons-orange {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.default-buttons-orange:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons-orange:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons-orange.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons-orange:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-orange i {
+  margin-right: 15px;
+}
+.default-buttons-orange i.icon-cart {
+  filter: invert(1) brightness(2);
+}
+.default-buttons-orange:after {
+  background: #ff570f;
+}
+.default-buttons-orange:before {
+  background: #f34900;
+}
+.default-buttons-orange-white {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.default-buttons-orange-white:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons-orange-white:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons-orange-white.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons-orange-white:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-orange-white:after {
+  background: #ffffff;
+}
+.default-buttons-orange-white:before {
+  background: #f34900;
+}
+.default-buttons-orange-gray {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #ffffff;
+}
+.default-buttons-orange-gray:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons-orange-gray:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons-orange-gray.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons-orange-gray:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-orange-gray:after {
+  background: #f9f9f9;
+}
+.default-buttons-orange-gray:before {
+  background: #f34900;
+}
+.default-buttons-gray-white {
+  font-size: 16px;
+  line-height: 75px;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  background: none;
+  border: 0;
+  z-index: 2;
+  cursor: pointer;
+  color: #292929;
+}
+.default-buttons-gray-white:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.6s;
+  z-index: -1;
+  animation-fill-mode: forwards;
+  transform: translateY(101%);
+}
+.default-buttons-gray-white:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.default-buttons-gray-white.ready:before {
+  animation-name: BtnBlur;
+}
+.default-buttons-gray-white:hover:before {
+  animation-name: BtnHover;
+}
+.default-buttons-gray-white:before {
+  background: #f5f5f5;
+}
+.default-buttons-gray-white:after {
+  background: #ffffff;
+}
+@keyframes BtnHover {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes BtnBlur {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.default-forms-title {
+  font-family: Druk Wide Medium Cy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #292929;
+}
+.default-forms-textarea {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  height: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  resize: none;
+}
+.default-forms-input {
+  font-family: Helvetica Neue;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #292929;
+  border: 0;
+  background: transparent;
+  padding: 30px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.default-forms-input-file {
+  position: relative;
+  padding-top: 30px;
+  margin-bottom: 50px;
+}
+.default-forms-input-file input {
+  display: none;
+}
+.default-forms-input-file label {
+  font-family: Helvetica Neue;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #292929;
+}
+.default-forms-input-file label::before {
+  content: "";
+  width: 20px;
+  height: 12px;
+  display: block;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(../images/file.svg);
+}
+.default-forms-checkbox input {
+  display: none;
+}
+.default-forms-checkbox input:checked + label::after {
+  opacity: 1;
+}
+.default-forms-checkbox label {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  position: relative;
+  color: #292929;
+  padding-left: 50px;
+  display: block;
+}
+.default-forms-checkbox label a {
+  text-decoration: underline;
+  color: inherit;
+}
+.default-forms-checkbox label:before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.default-forms-checkbox label:after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 9px;
+  position: absolute;
+  transition: all 0.3s;
+  opacity: 0;
+  background-image: url(../images/check_orange.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 11px;
+  left: 8px;
 }
