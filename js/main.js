@@ -292,7 +292,7 @@ var custom = {
       });
       //T.renderer.autoResize = true;
       T.container = new PIXI.Container();
-      T.sprite = new PIXI.Sprite.fromImage("/images/blur.jpg");
+      T.sprite = new PIXI.Sprite.fromImage("../images/blur.jpg");
       T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
       T.sprite.x = 0;
       T.sprite.y = 0;
@@ -843,12 +843,18 @@ var popups = {
       "<h3>заголовок</h3><p>текст</p>"
     ); */
     //this.succes.open();
-    if ($("#properties").length > 0){
+   
+  },
+  submits:function(){
+    
 
-    }
+    $(document).on('submit','#question form',function(){
+      $.fancybox.open({type:'modal', href:'#question_success'})
+    })
   },
   init: function() {
     this.setup();
+    this.submits();
   }
 };
 var svgMap = {

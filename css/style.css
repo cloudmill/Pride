@@ -4137,7 +4137,7 @@ body .fancybox-container * {
 .wrapper .page .priceSlider .pS_slider .slick-arrow:before {
   content: "";
   display: block;
-  background-image: url(/images/strSmall.svg);
+  background-image: url(../images/strSmall.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
