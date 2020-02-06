@@ -329,7 +329,7 @@ var custom = {
           T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
           T.imgs[T.imgs.length - 1].width = T.renderer.width;
         }
-        console.log(k)
+        console.log($(this))
         T.container.addChild(T.imgs[T.imgs.length - 1]);
         T.imgs[T.imgs.length - 1].alpha = 0;
       });
