@@ -276,7 +276,7 @@ var custom = {
     createApp: function() {
       var T = this;
       var _width = $(".blockCross").width();
-      var _height = $(window).height();
+      var _height = $(".blockCross").height()>$(window).height()?$(".blockCross").height():$(window).height();
       console.log(_width, _height);
       this.app = new PIXI.Application({
         width: _width,
