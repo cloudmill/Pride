@@ -291,9 +291,11 @@ var custom = {
         transparent: true
       });
       //T.renderer.autoResize = true;
-      
+      var href = location.href.split('?')[0];
+      var root = href.replace(href.split('/')[href.split('/').length-1],'');
+
       T.container = new PIXI.Container();
-      T.sprite = new PIXI.Sprite.fromImage("images/blur.jpg");
+      T.sprite = new PIXI.Sprite.fromImage(root+"images/blur.jpg");
       T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
       T.sprite.x = 0;
       T.sprite.y = 0;
