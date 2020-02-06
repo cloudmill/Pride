@@ -133,6 +133,7 @@ body {
   scrollbar-track-color: white;
   scrollbar-arrow-color: white;
   scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
 }
 html .def_scroll,
 body .def_scroll {
@@ -145,6 +146,7 @@ body .def_scroll {
   scrollbar-track-color: white;
   scrollbar-arrow-color: white;
   scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
 }
 html .def_scroll::-webkit-scrollbar,
 body .def_scroll::-webkit-scrollbar {
@@ -183,6 +185,7 @@ body * {
   scrollbar-track-color: white;
   scrollbar-arrow-color: white;
   scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
 }
 html *::-webkit-scrollbar,
 body *::-webkit-scrollbar {

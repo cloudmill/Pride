@@ -133,6 +133,33 @@ body {
   scrollbar-track-color: white;
   scrollbar-arrow-color: white;
   scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
+}
+html .def_scroll,
+body .def_scroll {
+  scrollbar-color: #ff570f white;
+  scrollbar-width: thin;
+  scrollbar-base-color: white;
+  scrollbar-face-color: #ff570f;
+  scrollbar-3dlight-color: white;
+  scrollbar-highlight-color: white;
+  scrollbar-track-color: white;
+  scrollbar-arrow-color: white;
+  scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
+}
+html .def_scroll::-webkit-scrollbar,
+body .def_scroll::-webkit-scrollbar {
+  width: 7px;
+}
+html .def_scroll::-webkit-scrollbar-thumb,
+body .def_scroll::-webkit-scrollbar-thumb {
+  background: #ff570f;
+}
+html .def_scroll::-webkit-scrollbar-track,
+body .def_scroll::-webkit-scrollbar-track {
+  background: white;
+  border-left: 1px solid #e3e3e3;
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
@@ -151,6 +178,14 @@ html *,
 body * {
   scrollbar-color: #ff570f white;
   scrollbar-width: thin;
+  scrollbar-base-color: white;
+  scrollbar-face-color: #ff570f;
+  scrollbar-3dlight-color: white;
+  scrollbar-highlight-color: white;
+  scrollbar-track-color: white;
+  scrollbar-arrow-color: white;
+  scrollbar-shadow-color: #ff570f;
+  scrollbar-width: 7px;
 }
 html *::-webkit-scrollbar,
 body *::-webkit-scrollbar {
