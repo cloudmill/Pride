@@ -291,6 +291,7 @@ var custom = {
         transparent: true
       });
       //T.renderer.autoResize = true;
+      
       T.container = new PIXI.Container();
       T.sprite = new PIXI.Sprite.fromImage("images/blur.jpg");
       T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
@@ -313,9 +314,11 @@ var custom = {
 
       $(".blockCross img").each(function() {
         var src = $(this).attr("src");
-        const texture = new PIXI.Texture.fromImage(src);
+        var href = location.href.split('?')[0];
+        var root = href.replace(href.split('/')[href.split('/').length-1],'');
+        console.log(root+src)
+        const texture = new PIXI.Texture.fromImage(root+src);
         T.imgs.push(new PIXI.Sprite(texture));
-        
         var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
         if (T.renderer.width / k < T.renderer.height) {
           T.imgs[T.imgs.length - 1].width = T.renderer.height * k;
