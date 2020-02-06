@@ -400,8 +400,10 @@ var custom = {
       var T = this;
       if ($(window).width() > 950) {
           T.createApp();
-          T.setImg();
+          $(document).on("preloadingFinish", function() {
+            T.setImg();
           T.events();
+          });
       }
     }
   },
