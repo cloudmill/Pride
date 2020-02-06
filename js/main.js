@@ -319,9 +319,10 @@ var custom = {
         var href = location.href.split('?')[0];
         var root = href.replace(href.split('/')[href.split('/').length-1],'');
         console.log(root+src)
-        const texture = new PIXI.Texture.fromImage(root+src);
+        var texture = new PIXI.Texture.fromImage(root+src);
         T.imgs.push(new PIXI.Sprite(texture));
         var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
+        console.log($(this),$(this)[0],$(this)[0].naturalWidth,$(this)[0].naturalHeight,k)
         if (T.renderer.width / k < T.renderer.height) {
           T.imgs[T.imgs.length - 1].width = T.renderer.height * k;
           T.imgs[T.imgs.length - 1].height = T.renderer.height;
@@ -329,7 +330,7 @@ var custom = {
           T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
           T.imgs[T.imgs.length - 1].width = T.renderer.width;
         }
-        console.log($(this))
+        
         T.container.addChild(T.imgs[T.imgs.length - 1]);
         T.imgs[T.imgs.length - 1].alpha = 0;
       });
