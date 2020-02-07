@@ -278,10 +278,11 @@ var custom = {
       var _width = $(".blockCross").width();
       var _height = $(".blockCross").height()>$(window).height()?$(".blockCross").height():$(window).height();
       console.log(_width, _height);
+      this.animedThisMoment = false;
       this.app = new PIXI.Application({
         width: _width,
         height: _height,
-        backgroundColor: 0xffffff,
+        backgroundColor: 0xcdcdcd,
         resolution: window.devicePixelRatio || 1
       });
       T.renderer = PIXI.autoDetectRenderer({
@@ -372,26 +373,45 @@ var custom = {
     },
     update: function(id) {
       var T = this;
-      var time_r = 1.2;
-      var lenght = 80;
-
-      if (T.active != id) {
-        if (!T.active && T.active != 0) {
+      var time_r = 1;
+      var lenght = 150;
+      var offsetImg = lenght/10
+      if (T.active != id ) {
+        TweenMax.killAll(false, true, false);
+        if (!T.active && T.active != 0 ) {
           T.filter.scale.x = -lenght;
           T.imgs.forEach(function(item, key) {
-            if (key != id) item.alpha = 0;
+            TweenMax.to(item, time_r, { alpha: (key == id ?1:0 )});
           });
-          T.imgs[id].alpha = 1;
-          TweenMax.to(T.filter.scale, time_r, { x: 0 });
+          TweenMax.to(T.filter.scale, time_r, { x: 0, onComplete:function(){
+          } });
         } else {
-          TweenMax.killAll(false, true, false);
           T.imgs.forEach(function(item, key) {
-            if (key != id) item.alpha = 0;
+            if(key == id){
+              TweenMax.to(item, time_r/2, {ease: Power0.easeNone, x: offsetImg});
+              item.zIndex = -1;
+            }else{
+              TweenMax.to(item, time_r/2, {ease: Power0.easeNone, x: -offsetImg});
+              item.zIndex = 1;
+            }
           });
-          T.filter.scale.x = -lenght;
-          T.imgs[id].alpha = 1;
-          T.filter.scale.x = -lenght;
-          TweenMax.to(T.filter.scale, time_r, { x: 0 });
+          TweenMax.to(T.filter.scale, time_r/2, {ease: Power0.easeNone, x: -lenght, onComplete:function(){
+            TweenMax.to(T.filter.scale, time_r/2, {ease: Power0.easeNone, x: 0 });
+              T.imgs.forEach(function(item,key) {
+                if(key != id){
+                  TweenMax.to(item, time_r, {ease: Power0.easeNone, alpha: 0 ,onComplete:function(){
+                  }});
+                }else{
+                  TweenMax.to(item, time_r, {ease: Power0.easeNone, alpha: 1});
+                  TweenMax.to(item, time_r/2, { x: 0});
+                }
+                
+              });
+            
+          }});
+          
+          
+          //TweenMax.to(T.filter.scale, time_r, { x: 0,delay: time_r });
         }
         T.active = id;
       }
