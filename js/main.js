@@ -757,6 +757,22 @@ var custom = {
       this.events();
     }
   },
+  mapPointsOpenClose:{
+    events:function(){
+      $('.point .point_btn').click(function(){
+        $(this).parent().toggleClass('active');
+        if($(this).parent().hasClass('active')){
+          var height = $(this).parent().find('.point_item').height();
+          $(this).parent().find('.point_content').height(height+50)
+        }else{
+          $(this).parent().find('.point_content').attr('style','')
+        }
+      })
+    },
+    init:function(){
+      this.events();
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -846,36 +862,15 @@ var custom = {
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
     if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
     if ($(".anim-scale").length > 0) this.animateScaleIn.init();
+    if ($('.point .point_btn').length > 0) this.mapPointsOpenClose.init();
     this.preloaderInit();
   }
 };
 var popups = {
   setup: function() {
     $(".modalbox").fancybox();
-    /* if ($("#properties").length > 0)
-      this.properties = new NbModal("properties", {
-        windowClass: "popupFadeInRight",
-        wrapperClass: "page"
-      });
-    this.buyOneClick = document.getPopup("buyOneClick");
-    this.question = document.getPopup("question");
-    this.collback_success = document.getPopup("collback_success");
-    this.question_success = document.getPopup("question_success");
-    this.succes = document.newPopup(
-      "succes",
-      {
-        windowClass: "popupCenter",
-        wrapperClass: "page",
-        butCloseInPopup: true
-      },
-      "<h3>заголовок</h3><p>текст</p>"
-    ); */
-    //this.succes.open();
-   
   },
   submits:function(){
-    
-
     $(document).on('submit','#question form',function(){
       $.fancybox.open({type:'modal', href:'#question_success'})
     })
