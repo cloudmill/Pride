@@ -773,6 +773,142 @@ var custom = {
       this.events();
     }
   },
+  mapWhereBuy:{
+    center: null,
+      createPlaceMark: function(coords, src, sity, name, link) {
+        var width = 400;
+        if ($(window).width() <= 600) width = 320;
+        return new ymaps.Placemark(
+          coords,
+          {
+            balloonContentHeader:
+              '<div class="yaMap_head">' +
+              '<img src="' +
+              src +
+              '" class="" height="174" width="' +
+              width +
+              '"/>' +
+              "</div>",
+            balloonContentBody:
+              '<div class="yaMap_content">' +
+              "<p>" +
+              sity +
+              "</p>" +
+              "<h3>" +
+              name +
+              "</h3>" +
+              '<a href="' +
+              link +
+              '" class="default-btn btn-gray">Перейти к проекту<a>' +
+              "</div>",
+            maxHeight: $(window).width() < 600 ? 174 : 260,
+            balloonContentFooter: "",
+            hintContent: name
+          },
+          {
+            hideIconOnBalloonOpen: false,
+            iconLayout: "default#image",
+            iconImageHref: "images/map.png",
+            iconImageSize: [44, 44],
+            iconImageOffset: [-22, -22]
+          }
+        );
+      },
+      create: function() {
+        var _this = this;
+        myMap = new ymaps.Map(
+          "map",
+          {
+            center: _this.center,
+            zoom: 6,
+            controls: [],
+          },
+          {
+            searchControlProvider: "yandex#search"
+          }
+        );
+        clusterer = new ymaps.Clusterer({
+          preset: 'islands#invertedVioletClusterIcons',
+          clusterIcons: [
+            {
+              href: "images/map.png",
+              size: [66, 66],
+              offset: [-33, -33]
+            }
+          ],
+          groupByCoordinates: false,
+          clusterIconColor: "black",
+          clusterHideIconOnBalloonOpen: false,
+          geoObjectHideIconOnBalloonOpen: false
+        });
+        if ($(".map_data .placeMark").length > 0) {
+          $(".map_data .placeMark").each(function() {
+            clusterer.add(
+              _this.createPlaceMark(
+                $(this)
+                  .attr("data-cords")
+                  .split(","),
+                $(this).attr("data-img"),
+                $(this).attr("data-sity"),
+                $(this).attr("data-name"),
+                $(this).attr("data-link")
+              )
+            );
+          });
+        }
+        myMap.geoObjects.add(clusterer);
+        if ($("#map").hasClass("hasBalloon"))
+          myMap.geoObjects.options.set({ hasBalloon: false });
+        if ($(window).width() < 768) {
+          myMap.behaviors.disable("drag");
+        }
+        myMap.events.add("click", function() {
+          myMap.balloon.close();
+        });
+        myMap.behaviors.disable("scrollZoom");
+        myMap.controls.add(new ymaps.control.ZoomControl({
+          options: {
+            size: "auto",
+            float: "none",
+            position: { right: 10, bottom: 40 }
+          }
+        }));
+      },
+    init:function(){
+      console.log("map_init");
+      var _this = this;
+      this.center =
+        $(".map_data .placeMark").length > 0
+          ? $(".map_data .placeMark")
+              .eq(0)
+              .attr("data-cords")
+              .split(",")
+          : [55.751574, 37.573856];
+      function initMap() {
+        console.log("map_ready");
+        _this.create();
+      }
+      ymaps.ready(function() {
+        initMap();
+      });
+    }
+  },
+  mapSliderInf:{
+    create:function(){
+      var sliderInf = new Swiper('.sliderRight_right .slider', {
+        slidesPerView: 1,
+      });
+      $(document).on('click','.sliderRight_prev',function(){
+        sliderInf.slidePrevz()
+      })
+      $(document).on('click','.sliderRight_next',function(){
+        sliderInf.slideNext()
+      })
+    },
+    init:function(){
+      this.create();
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -863,6 +999,8 @@ var custom = {
     if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
     if ($(".anim-scale").length > 0) this.animateScaleIn.init();
     if ($('.point .point_btn').length > 0) this.mapPointsOpenClose.init();
+    if ($('#map').length > 0) this.mapWhereBuy.init();
+    if ($('.sliderRight_right').length > 0) this.mapSliderInf.init();
     this.preloaderInit();
   }
 };

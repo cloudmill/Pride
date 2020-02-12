@@ -156,8 +156,8 @@ html .def_scroll::-webkit-scrollbar-thumb,
 body .def_scroll::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html .def_scroll::-webkit-scrollbar-track,
-body .def_scroll::-webkit-scrollbar-track {
+html .def_scroll::-webkit-scrollbar-track:vertical,
+body .def_scroll::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
@@ -169,8 +169,8 @@ html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track:vertical,
+body::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
@@ -195,8 +195,8 @@ html *::-webkit-scrollbar-thumb,
 body *::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html *::-webkit-scrollbar-track,
-body *::-webkit-scrollbar-track {
+html *::-webkit-scrollbar-track:vertical,
+body *::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
@@ -7374,29 +7374,40 @@ body .fancybox-container * {
 }
 .wrapper .page .wbMap {
   position: relative;
+  border-bottom: 1px solid #e5e5e5;
+}
+.wrapper .page .wbMap .content {
+  position: relative;
 }
 .wrapper .page .wbMap_points {
   width: 400px;
   height: 580px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+}
+.wrapper .page .wbMap_points::-webkit-scrollbar-track:vertical {
+  border-left: 0;
+  background: #e8e8e8;
 }
 .wrapper .page .wbMap_points .point {
   transition: background 0.3s;
+  width: 100%;
 }
 .wrapper .page .wbMap_points .point_item {
   padding: 25px 40px;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 .wrapper .page .wbMap_points .point_btn {
   padding: 25px 40px;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   border-left: 0;
   border-right: 0;
   position: relative;
   cursor: pointer;
 }
 .wrapper .page .wbMap_points .point_btn:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 14px;
@@ -7432,7 +7443,7 @@ body .fancybox-container * {
   bottom: -2px;
   width: 100%;
   height: 0px;
-  border-bottom: 2px solid #E5E5E5;
+  border-bottom: 2px solid #e5e5e5;
   z-index: -1;
 }
 .wrapper .page .wbMap_points .point_location {
@@ -7468,20 +7479,20 @@ body .fancybox-container * {
   font-family: Helvetica Neue;
   font-size: 12px;
   line-height: 135%;
-  color: #8A8A8A;
+  color: #8a8a8a;
   display: inline-flex;
   align-items: center;
 }
-.wrapper .page .wbMap_points .point_tag:nth-child(n+2) {
+.wrapper .page .wbMap_points .point_tag:nth-child(n + 2) {
   margin-right: 5px;
 }
-.wrapper .page .wbMap_points .point_tag:nth-child(n+2):before {
-  content: '';
+.wrapper .page .wbMap_points .point_tag:nth-child(n + 2):before {
+  content: "";
   display: block;
   margin-right: 5px;
   width: 5px;
   height: 1px;
-  background: #8A8A8A;
+  background: #8a8a8a;
 }
 .wrapper .page .wbMap_points .point_content {
   opacity: 0;
@@ -7490,14 +7501,14 @@ body .fancybox-container * {
   transition: all 0.3s;
   overflow: hidden;
 }
-.wrapper .page .wbMap_points .point:nth-child(n+2) {
+.wrapper .page .wbMap_points .point:nth-child(n + 2) {
   border-bottom: 0;
 }
-.wrapper .page .wbMap_points .point:nth-child(n+2) .point_btn {
+.wrapper .page .wbMap_points .point:nth-child(n + 2) .point_btn {
   border-top: 0;
 }
 .wrapper .page .wbMap_points .point.active {
-  background: #F9F9F9;
+  background: #f9f9f9;
 }
 .wrapper .page .wbMap_points .point.active .point_btn:before {
   transform: translateY(-50%) rotate(0);
@@ -7508,8 +7519,199 @@ body .fancybox-container * {
   opacity: 1;
 }
 .wrapper .page .wbMap_map {
-  border-top: 1px solid #E5E5E5;
+  width: calc(100% - 199px);
+  left: 400px;
+  height: 100%;
+  top: 0;
+  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
   position: absolute;
+  z-index: 2;
+}
+.wrapper .page .wbMap_map #map {
+  width: 100%;
+  height: 100%;
+}
+.wrapper .page .wbMap_map #map .map_data {
+  display: none;
+}
+.wrapper .page .wbMap_map #map ymaps ymaps ymaps ymaps ymaps ymaps ymaps ymaps {
+  font-family: Helvetica Neue;
+  font-size: 14px;
+  line-height: 135%;
+  color: #ffffff;
+}
+@media (max-width: 1440px) {
+  .wrapper .page .wbMap_map {
+    width: calc(100% - 180px);
+  }
+}
+@media (max-width: 1240px) {
+  .wrapper .page .wbMap_map {
+    width: calc(100% - 50px);
+  }
+}
+@media (max-width: 950px) {
+  .wrapper .page .wbMap_map {
+    width: calc(100% - 15px);
+  }
+}
+.wrapper .page .sliderRight .content {
+  display: flex;
+}
+.wrapper .page .sliderRight_left {
+  width: 400px;
+  padding: 110px 40px;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper .page .sliderRight_left h2 {
+  margin: 0;
+  display: block;
+  font-family: Druk Wide Medium Cy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  text-align: right;
+  color: #292929;
+}
+.wrapper .page .sliderRight_right {
+  width: calc(100% - 400px);
+  padding: 110px 40px;
+}
+.wrapper .page .sliderRight_right .slider {
+  width: 100%;
+}
+.wrapper .page .sliderRight_right .swiper-slide p {
+  column-count: 2;
+  column-gap: 50px;
+  margin: 0;
+  font-family: Helvetica Neue;
+  font-size: 16px;
+  line-height: 28px;
+  color: #292929;
+}
+.wrapper .page .sliderRight .but_def {
+  border: 0;
+  background: transparent;
+  color: transparent;
+  height: 50px;
+  width: 50px;
+  border: 1px solid rgba(41, 41, 41, 0.13);
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.wrapper .page .sliderRight .but_def::before {
+  content: "";
+  display: block;
+  width: 79px;
+  transition: filter 0.4s ease-in-out;
+  height: 21px;
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translate(-5px, -50%) rotate(180deg);
+  filter: contrast(0);
+  background-image: url(../images/str.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.wrapper .page .sliderRight .but_def:hover {
+  width: 130px;
+  background: #ffffff;
+}
+.wrapper .page .sliderRight .but_def:hover::before {
+  filter: none;
+}
+.wrapper .page .sliderRight_buts {
+  display: flex;
+  margin-top: auto;
+  position: relative;
+}
+.wrapper .page .sliderRight_next {
+  border: 0;
+  background: transparent;
+  color: transparent;
+  height: 50px;
+  width: 50px;
+  border: 1px solid rgba(41, 41, 41, 0.13);
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  left: auto;
+  right: 0;
+}
+.wrapper .page .sliderRight_next::before {
+  content: "";
+  display: block;
+  width: 79px;
+  transition: filter 0.4s ease-in-out;
+  height: 21px;
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translate(-5px, -50%) rotate(180deg);
+  filter: contrast(0);
+  background-image: url(../images/str.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.wrapper .page .sliderRight_next:hover {
+  width: 130px;
+  background: #ffffff;
+}
+.wrapper .page .sliderRight_next:hover::before {
+  filter: none;
+}
+.wrapper .page .sliderRight_next:before {
+  transform: translate(3px, -50%);
+  left: auto;
+  right: 25px;
+}
+.wrapper .page .sliderRight_prev {
+  border: 0;
+  background: transparent;
+  color: transparent;
+  height: 50px;
+  width: 50px;
+  border: 1px solid rgba(41, 41, 41, 0.13);
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.wrapper .page .sliderRight_prev::before {
+  content: "";
+  display: block;
+  width: 79px;
+  transition: filter 0.4s ease-in-out;
+  height: 21px;
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translate(-5px, -50%) rotate(180deg);
+  filter: contrast(0);
+  background-image: url(../images/str.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.wrapper .page .sliderRight_prev:hover {
+  width: 130px;
+  background: #ffffff;
+}
+.wrapper .page .sliderRight_prev:hover::before {
+  filter: none;
 }
 .wrapper .footer {
   width: 100%;

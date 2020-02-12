@@ -156,8 +156,8 @@ html .def_scroll::-webkit-scrollbar-thumb,
 body .def_scroll::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html .def_scroll::-webkit-scrollbar-track,
-body .def_scroll::-webkit-scrollbar-track {
+html .def_scroll::-webkit-scrollbar-track:vertical,
+body .def_scroll::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
@@ -169,8 +169,8 @@ html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track:vertical,
+body::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
@@ -195,8 +195,8 @@ html *::-webkit-scrollbar-thumb,
 body *::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-html *::-webkit-scrollbar-track,
-body *::-webkit-scrollbar-track {
+html *::-webkit-scrollbar-track:vertical,
+body *::-webkit-scrollbar-track:vertical {
   background: white;
   border-left: 1px solid #e3e3e3;
 }
