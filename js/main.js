@@ -125,7 +125,7 @@ var custom = {
             var pos =  $(document).scrollTop() - $(this).offset().top- $(this).height();
             zoom = 1 - (pos) * k/10000;
           }
-          paralaxY = ($(document).scrollTop() -  $(this).offset().top)/5
+          paralaxY = ($(document).scrollTop() -  $(this).offset().top +$('.header').height())/5
           $(this).css("transform", "translateY("+paralaxY+"px) scale(" + zoom + ")");
         });
     },
@@ -324,9 +324,10 @@ var custom = {
         T.imgs.push(new PIXI.Sprite(texture));
         var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
         console.log($(this),$(this)[0],$(this)[0].naturalWidth,$(this)[0].naturalHeight,k)
-        if (T.renderer.width / k < T.renderer.height) {
-          T.imgs[T.imgs.length - 1].width = T.renderer.height * k;
-          T.imgs[T.imgs.length - 1].height = T.renderer.height;
+        var height_ = $(".blockCross").height() + 100;
+        if (T.renderer.width / k < height_) {
+          T.imgs[T.imgs.length - 1].width = height_ * k;
+          T.imgs[T.imgs.length - 1].height = height_;
         } else {
           T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
           T.imgs[T.imgs.length - 1].width = T.renderer.width;
@@ -425,6 +426,30 @@ var custom = {
           T.events();
           });
       }
+    }
+  },
+  animateChangeHoverBlockCross:{
+    events:function(){
+      $('.blockCross_item').hover(function(){
+        var img = $(this).find('.item_img img').eq(0);
+        $(this).find('.item_img').addClass('show')
+        var k = img[0].naturalWidth/img[0].naturalHeight;
+        img.width($(this).find('.item_img').width())
+        if(img.width()/k < $('.blockCross').height()+55){
+          img.height($('.blockCross').height()+55)
+          img.width(img.height()*k)
+        }else{
+          img.width($(this).find('.item_img').width())
+          img.height(img.width()/k)
+        }
+
+        
+      },function(){
+        $('.blockCross_item .item_img').removeClass('show')
+      })
+    },
+    init:function(){
+      this.events();
     }
   },
   animateScaleIn: {
@@ -996,11 +1021,12 @@ var custom = {
     if ($(".zoom-item").length > 0) this.animateZoomOut.init();
     if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
-    if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
+    //if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
     if ($(".anim-scale").length > 0) this.animateScaleIn.init();
     if ($('.point .point_btn').length > 0) this.mapPointsOpenClose.init();
     if ($('#map').length > 0) this.mapWhereBuy.init();
     if ($('.sliderRight_right').length > 0) this.mapSliderInf.init();
+    if ($('.blockCross').length > 0) this.animateChangeHoverBlockCross.init();
     this.preloaderInit();
   }
 };
@@ -1020,16 +1046,50 @@ var popups = {
 };
 var svgMap = {
   slider: function() {
-    $(".dillerMap_slider").slick({
+    var slider_ = $(".dillerMap_slider").slick({
       slidesToShow: 1,
       speed: 1000,
       dots: false,
       variableWidth: true,
       centerMode: false,
-      infinite: false,
+      infinite: true,
       arrows: true,
       swipe: false
     });
+    var setClasses = function(slider,id){
+      var id_next,id_after_next;
+      if(id == slider.$slides.length-1){
+        id_next = 0
+        id_after_next = 1
+      }else if(id == slider.$slides.length-2){
+        id_next = id+1
+        id_after_next = 0
+      }else {
+        id_next = id+1
+        id_after_next = id+2
+      }
+      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('current')
+      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('next')
+      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('after_next')
+
+      $('.dillerMap [data-slick-index="'+id+'"]').addClass('current')
+      $('.dillerMap [data-slick-index="'+id_next+'"]').addClass('next')
+      $('.dillerMap [data-slick-index="'+id_after_next+'"]').addClass('after_next')
+
+      $('.dillerMap .slick-cloned').eq(id+1).addClass('current')
+      $('.dillerMap .slick-cloned').eq(id_next+1).addClass('next')
+      $('.dillerMap .slick-cloned').eq(id_after_next+1).addClass('after_next')
+      console.log(id, slider.$slides.length)
+      if(id == slider.$slides.length-1){
+        $('.dillerMap .slick-cloned').eq(0).addClass('current')
+      }else{
+        $('.dillerMap .slick-cloned').eq(id+1).addClass('current')
+      }
+    }
+    $(document).on('beforeChange','.dillerMap_slider',function(e,slider,a,id){
+      setClasses(slider,id);
+    })
+    $(".dillerMap_slider").slick('slickGoTo',0);
   },
   setPos: function(target) {
     var imgs = $(".dillerMap_map .box");

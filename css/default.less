@@ -485,6 +485,17 @@ body {
       line-height: inherit;
       color: inherit;
       transition: all 0.3s @anim-function;
+      position: relative;
+      &:before {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        bottom: 0px;
+        left: 0%;
+        background: #ff570f;
+      }
     }
     &_plus {
       height: 40px;

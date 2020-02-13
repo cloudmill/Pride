@@ -500,6 +500,17 @@ body .fancybox-container * {
   line-height: inherit;
   color: inherit;
   transition: all 0.3s ease-out;
+  position: relative;
+}
+.wrapper .plusBox_link:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0px;
+  left: 0%;
+  background: #ff570f;
 }
 .wrapper .plusBox_plus {
   height: 40px;
