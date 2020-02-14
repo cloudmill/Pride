@@ -924,7 +924,7 @@ var custom = {
         slidesPerView: 1,
       });
       $(document).on('click','.sliderRight_prev',function(){
-        sliderInf.slidePrevz()
+        sliderInf.slidePrev()
       })
       $(document).on('click','.sliderRight_next',function(){
         sliderInf.slideNext()
@@ -932,6 +932,33 @@ var custom = {
     },
     init:function(){
       this.create();
+    }
+  },
+  setSizeImg:{
+    setSize:function(){
+      $('.img-full').each(function(){
+        var pwidth = $(this).width()
+        var pheight = $(this).height()
+        $(this).find('img').each(function(){
+          var nwidth = this.naturalWidth;
+          var nheight = this.naturalHeight;
+          
+          var k = nwidth/nheight
+          if($(this).height()*k < pwidth){
+            $(this).addClass('height-auto')
+          }
+          if($(this).width()/k <  pheight){
+            $(this).removeClass('height-auto')
+          }
+        })
+      })
+    },
+    init:function(){
+      var _this = this;
+      this.setSize();
+      $(window).on('resize',function(){
+        _this.setSize();
+      })
     }
   },
   preloaderInit: function() {
@@ -1027,6 +1054,7 @@ var custom = {
     if ($('#map').length > 0) this.mapWhereBuy.init();
     if ($('.sliderRight_right').length > 0) this.mapSliderInf.init();
     if ($('.blockCross').length > 0) this.animateChangeHoverBlockCross.init();
+    if ($('.img-full').length > 0) this.setSizeImg.init();
     this.preloaderInit();
   }
 };
