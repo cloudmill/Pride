@@ -117,15 +117,15 @@ var custom = {
         .each(function() {
           var zoom;
           var paralaxY = 0;
-            var k = 0.5;
+            var k = 1;
           if($(this).hasClass('in')){
             var pos = $(window).height() + $(document).scrollTop() - $(this).offset().top;
             zoom = 1 + (pos) * k/10000;
           }else{
-            var pos =  $(document).scrollTop() - $(this).offset().top- $(this).height();
+            var pos =  $(document).scrollTop() - $(this).offset().top /* - $(this).height() */;
             zoom = 1 - (pos) * k/10000;
           }
-          paralaxY = ($(document).scrollTop() -  $(this).offset().top +$('.header').height())/5
+          paralaxY = ($(document).scrollTop() -  $(this).offset().top + $('.header').height()-50)/5
           $(this).css("transform", "translateY("+paralaxY+"px) scale(" + zoom + ")");
         });
     },

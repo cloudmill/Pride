@@ -1899,8 +1899,10 @@
             }
           }
           &_img {
+            @animF: cubic-bezier(.19,.89,.62,1.01);
+            @duration: 1s;
             position: absolute;
-            opacity: 0;
+            //opacity: 0;
             height: 200%;
             min-width: 200%;
             min-height: 200%;
@@ -1908,10 +1910,10 @@
             z-index: -4;
             left: 0;
             pointer-events: none;
-            transition: opacity 0.6s ease-out;
+            transition: opacity @duration @animF;
             &-box{
-              transition: all 1.3s ease-out;
-              height: 20%;
+              transition: all @duration @animF;
+              height: 0%;
               width: 100%;
               overflow: hidden;
               position: absolute;
@@ -1921,21 +1923,20 @@
             img {
               position: absolute;
               left: 50%;
-              bottom: 0;
-              
+              bottom: 50%;
               transform-origin: bottom;
-              transform:translateX(-50%) scale(0.8);
-              transition: transform 2s ease-out;
+              transform:translateX(-50%) translateY(50%) scale(1.2);
+              transition: transform @duration @animF;
             }
             &.show {
-              transition: opacity 0.3s ease-out;
+              transition: opacity @duration @animF;
               opacity: 1;
               z-index: -3;
               .item_img-box{
                 height: 100%;
               }
               img {
-                transform:translateX(-50%) scale(1);
+                transform:translateX(-50%) translateY(50%) scale(1);
               }
             }
           }
@@ -2209,6 +2210,9 @@
                 left: -1px;
                 top: 0;
                 background: #e5e5e5;
+                @media(max-width: 1070px){
+                  left: 0;
+                }
               }
               &.slick-current {
                 &:before {
@@ -2218,6 +2222,9 @@
               &.slick-active + .slick-slide:not(.slick-active) {
                 &:before {
                   left: -2px;
+                  @media(max-width: 1070px){
+                    left: 0;
+                  }
                 }
               }
               &_content {
