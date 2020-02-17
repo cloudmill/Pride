@@ -119,7 +119,7 @@ var custom = {
           var paralaxY = 0;
             var k = 1;
           if($(this).hasClass('in')){
-            var pos = $(window).height() + $(document).scrollTop() - $(this).offset().top;
+            var pos = $(window).height() + $(document).scrollTop() - $(this).offset().top - $(this).height();
             zoom = 1 + (pos) * k/10000;
           }else{
             var pos =  $(document).scrollTop() - $(this).offset().top /* - $(this).height() */;
@@ -442,9 +442,9 @@ var custom = {
           img.width($(this).find('.item_img').width())
           img.height(img.width()/k)
         }
-
-        
       },function(){
+        $('.blockCross_item .item_img').removeClass('last')
+        $(this).find('.item_img').addClass('last')
         $('.blockCross_item .item_img').removeClass('show')
       })
     },

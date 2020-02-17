@@ -884,23 +884,27 @@
         justify-content: flex-end;
         &_box {
           height: 100%;
+          &-zoomed{
+            position: relative;
+            height: 100%;
+          }
         }
         img {
           height: 100%;
           width: auto;
           float: right;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translate(0,-50%);
           &.height-auto {
             height: auto;
-            width: 100%;
-          }
-          @media (min-width: 1601px) {
-            width: 100%;
-          }
-          @media (max-width: 1600px) {
-            height: 100%;
-          }
-          @media (min-width: 1440px) {
-            min-width: 100%;
+            width: ~'calc(100% + 135px)';
+            right: -135px;
+            @media (min-width: 1601px)  {
+              width: 100%;
+              right:0;
+            }
           }
         }
       }
@@ -1860,18 +1864,6 @@
             }
           }
         }
-        // &:nth-child(1){
-        //   img{transform-origin: left top;}
-        // }
-        // &:nth-child(2){
-        //   img{transform-origin: right top;}
-        // }
-        // &:nth-child(3){
-        //   img{transform-origin: left bottom;}
-        // }
-        // &:nth-child(4){
-        //   img{transform-origin: right bottom;}
-        // }
         .item {
           &_name {
             transition: all 0.3s ease-in-out;
@@ -1907,7 +1899,6 @@
             @animF: cubic-bezier(0.19, 0.89, 0.62, 1.01);
             @duration: 1s;
             position: absolute;
-            //opacity: 0;
             height: 200%;
             min-width: 200%;
             min-height: 200%;
@@ -1917,31 +1908,57 @@
             pointer-events: none;
             transition: opacity @duration @animF;
             &-box {
-              transition: all @duration @animF;
-              height: 0%;
+              transition: all 0.3 @animF;
+              height: 100%;
               width: 100%;
               overflow: hidden;
               position: absolute;
               bottom: 0;
               left: 0;
+              opacity: 0;
+              
             }
             img {
               position: absolute;
               left: 50%;
               bottom: 50%;
               transform-origin: bottom;
-              transform: translateX(-50%) translateY(50%) scale(1.2);
+              transform: translateX(-50%) translateY(50%) scale(1);
               transition: transform @duration @animF;
             }
             &.show {
               transition: opacity @duration @animF;
-              opacity: 1;
-              z-index: -3;
-              .item_img-box {
-                height: 100%;
+              z-index: -2;
+              img{
+                animation-name: img-scale-out;
+                animation-duration: @duration;
+                animation-timing-function: @animF;
+                animation-fill-mode: both;
               }
-              img {
+              .item_img-box{
+                animation-name: box-height-up;
+                animation-duration: @duration;
+                animation-timing-function: @animF;
+                animation-fill-mode: both;
+              }
+            }
+            &.last{
+              z-index: -3;
+            }
+            @keyframes img-scale-out {
+              0%{
+                transform: translateX(-50%) translateY(50%) scale(1.2);
+              }
+              100%{
                 transform: translateX(-50%) translateY(50%) scale(1);
+              }
+            }
+            @keyframes box-height-up {
+              0%{
+                height: 0%;
+              }
+              100%{
+                height: 100%;
               }
             }
           }
@@ -1976,7 +1993,7 @@
         }
       }
       &:hover {
-        canvas {
+        .item_img-box{
           opacity: 1;
         }
       }
