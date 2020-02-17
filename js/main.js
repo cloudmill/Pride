@@ -62,7 +62,7 @@ var custom = {
   animateHover: {
     events: function() {
       $(
-        ".hoverLineMoved,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white,.btn-orange-gray"
+        ".hoverLineMoved,.plusBox_link,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white,.btn-orange-gray"
       ).hover(function() {
         $(this).addClass("ready");
       });
@@ -1289,7 +1289,6 @@ var priceSlider = {
     this.create();
   }
 };
-
 (function() {
   custom.init();
   header.init();

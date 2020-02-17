@@ -331,6 +331,18 @@ body {
       width: 18px;
       height: 18px;
     }
+    &-google {
+      .def-icon;
+      background-image: url(../images/google.svg);
+      width: 21px;
+      height: 14px;
+    }
+    &-twitter {
+      .def-icon;
+      background-image: url(../images/twitter.svg);
+      width: 14px;
+      height: 12px;
+    }
     &-user {
       .def-icon;
       filter: contrast(0) brightness(0);
@@ -368,6 +380,31 @@ body {
     &.border {
       border-left: 1px solid #e5e5e5;
       border-right: 1px solid #e5e5e5;
+    }
+    &.lines{
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        left: ~"calc(100% /3)";
+        background: #e5e5e5;
+        z-index: -1;
+      }
+      &:after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        left: ~"calc(100% /3*2)";
+        background: #e5e5e5;
+        z-index: -1;
+      }
     }
   }
   .tabs {
@@ -491,17 +528,7 @@ body {
       line-height: inherit;
       color: inherit;
       transition: all 0.3s @anim-function;
-      position: relative;
-      &:before {
-        position: absolute;
-        content: "";
-        display: block;
-        width: 100%;
-        height: 2px;
-        bottom: 0px;
-        left: 0%;
-        background: #ff570f;
-      }
+      .hoverLineMoved;
     }
     &_plus {
       height: 40px;
@@ -539,13 +566,23 @@ body {
         animation-name: none;
       }
     }
-    &:hover {
+    &:hover,&.reverse {
       .plusBox {
         &_plus {
           transform: translateY(0);
         }
         &_link {
           transform: translateY(45px);
+        }
+      }
+    }
+    &.reverse{
+      &:hover{
+        &_plus {
+          transform: translateY(-45px);
+        }
+        &_link {
+          transform: translateY(0);
         }
       }
     }
@@ -576,6 +613,83 @@ body {
     .content {
       width: ~"calc(100% - 30px)";
     }
+  }
+}
+.hoverLineMoved {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 2px 0;
+  &.ready {
+    &:before {
+      animation-name: hoverBorderOutRight;
+    }
+  }
+  &.def-gray {
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      width: 100%;
+      height: 0px;
+      border-bottom: 2px solid #e5e5e5;
+      z-index: -1;
+    }
+  }
+  &:before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    left: 100%;
+    background: #ff570f;
+    animation-fill-mode: both;
+    animation-duration: 0.6s;
+    animation-iteration-count: 1;
+    transform: translateX(-100%);
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    left: 0;
+    z-index: 2;
+    background: #ff570f;
+    animation-fill-mode: both;
+    animation-duration: 0.6s;
+    animation-iteration-count: 1;
+    animation-delay: 0.3s;
+    transform: translateX(-100%);
+  }
+  &:hover {
+    &:after {
+      animation-name: hoverBorderInLeft;
+    }
+    &:before {
+      animation-name: hoverBorderInLeft;
+    }
+  }
+}
+@keyframes hoverBorderInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes hoverBorderOutRight {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 .fancybox-container{
