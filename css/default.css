@@ -372,6 +372,16 @@ body .fancybox-container * {
   width: 25px;
   height: 16px;
 }
+.wrapper .icon-str-left-black {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  width: 40px;
+  height: 16px;
+  background-image: url(../images/str_left_black.svg);
+}
 .wrapper .inner {
   width: calc(100% - 180px);
   margin: auto;
