@@ -1584,15 +1584,21 @@
               }
             }
             &.after_next {
-              transition: transform 1s;
-              transform: translateX(-100%);
-              z-index: -1;
-              @media (max-width: 1350px) {
-                transform: translateX(-75%);
+              .dillerMap_slider_item{
+                transition: transform 1s;
+                transform: translateX(-100%);
+                &.correct{
+                  transform: translateX(-80%);
+                }
+                z-index: -1;
+                @media (max-width: 1350px) {
+                  transform: translateX(-75%);
+                }
+                @media (max-width: 950px) {
+                  transform: translateX(0);
+                }
               }
-              @media (max-width: 950px) {
-                transform: translateX(0);
-              }
+              
             }
           }
           &-arrow {
@@ -5827,6 +5833,14 @@
           padding-top: 30px;
           padding-right: 20px;
           width: ~"calc(100% / 3)";
+          span{
+          font-family: Helvetica Neue;
+          font-size: 14px;
+          line-height: 135%;
+          color: #8A8A8A;
+          margin-bottom: 8px;
+          display: block;
+          }
         }
         &-img {
           overflow: hidden;

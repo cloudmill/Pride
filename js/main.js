@@ -162,7 +162,7 @@ var custom = {
           var stringCount = 0;
           var stringAr = [];
           var stringBeforeAppend = "";
-          for (var i = 0; i < wordsAr.length; i++) {
+          for (var i = 0; i <= wordsAr.length; i++) {
             if (stringBeforeAppend.length > 0) {
               stringBeforeAppend += " ";
             }
