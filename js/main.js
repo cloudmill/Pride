@@ -143,10 +143,11 @@ var custom = {
   animateFadeInLeftString: {
     create: function() {
       $(document)
-        .find(".string-anim")
+        .find(
+          ".string-anim,.string-anim-content p")
         .each(function() {
           var item = this;
-          var stiring = item.innerHTML.replace("\n", "").replace("\t", "");
+          var stiring = item.innerHTML.replace(/\r?\n/g, "")
           var _wordsAr = stiring.split(" ");
           var wordsAr = [];
           _wordsAr.forEach(function(item, key) {
@@ -154,15 +155,16 @@ var custom = {
               wordsAr.push(item);
             }
           });
+          console.log(wordsAr)
           var temp = document.createElement("div");
-          temp.innerWidth = item.innerWidth;
+          $(temp).width($(item).width())
           temp.className = "string-anim-temp";
           item.appendChild(temp);
           var height = 0;
           var stringCount = 0;
           var stringAr = [];
           var stringBeforeAppend = "";
-          for (var i = 0; i <= wordsAr.length; i++) {
+          for (var i = 0; i < wordsAr.length; i++) {
             if (stringBeforeAppend.length > 0) {
               stringBeforeAppend += " ";
             }
@@ -170,8 +172,12 @@ var custom = {
               temp.innerHTML += " ";
             }
             temp.innerHTML += wordsAr[i];
+            console.log(temp.innerHTML,temp.scrollHeight,height)
             if (height == temp.scrollHeight) {
               stringBeforeAppend += wordsAr[i];
+              if (wordsAr.length - 1 == i) {
+                stringAr.push(stringBeforeAppend);
+              }
             } else {
               height = temp.scrollHeight;
               stringCount++;
@@ -199,14 +205,14 @@ var custom = {
     checkAndDo: function() {
       var count = 0;
       var start_anim = function(item) {
-        if (count > 5) {
-          item.removeClass("is-hidden");
-        } else {
-          setTimeout(function() {
+          if (count > 5) {
             item.removeClass("is-hidden");
-          }, count * 100);
-        }
-        count++;
+          } else {
+            setTimeout(function() {
+              item.removeClass("is-hidden");
+            }, count * 100);
+          }
+          count++;
       };
       $(document)
         .find(".is-hidden.string-anim-line")
@@ -731,6 +737,14 @@ var custom = {
           dropdownParent: $(".wrapper .page"),
           dropdownCssClass: "title_select2"
         });
+      });
+      $('.title_select').on('select2:open', function (e) {
+        var openBox = $(document).find('.title_select2');
+        openBox.css('min-width',$(window).width()+'px')
+        var left = -openBox.offset().left + parseInt(openBox.css('left')?openBox.css('left').replace('px'):0)
+        var paddleft = $('.page_head .title').offset().left;
+        openBox.css('left',left+'px')
+        openBox.css('padding-left',paddleft+'px')
       });
     },
     init: function() {

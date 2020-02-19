@@ -402,6 +402,46 @@ body .fancybox-container * {
   height: 16px;
   background-image: url(../images/str_left_black.svg);
 }
+.wrapper .icon-geo {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/geo.svg);
+  width: 23px;
+  height: 28px;
+}
+.wrapper .icon-smartphone {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/smartphone.svg);
+  width: 20px;
+  height: 28px;
+}
+.wrapper .icon-mail {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/mail.svg);
+  width: 29px;
+  height: 21px;
+}
+.wrapper .icon-clock {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/clock.svg);
+  width: 28px;
+  height: 28px;
+}
 .wrapper .inner {
   width: calc(100% - 180px);
   margin: auto;
