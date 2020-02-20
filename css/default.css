@@ -479,6 +479,20 @@ body .fancybox-container * {
   background: #e5e5e5;
   z-index: -1;
 }
+.wrapper .content.line {
+  position: relative;
+}
+.wrapper .content.line:before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  background: #e5e5e5;
+  z-index: -1;
+}
 .wrapper .tabs {
   position: relative;
 }
@@ -1055,6 +1069,11 @@ body .fancybox-container * {
   border-bottom: 1px solid #e5e5e5;
   resize: none;
 }
+@media (max-width: 768px) {
+  .wrapper .def-form-textarea {
+    padding: 15px 0;
+  }
+}
 .wrapper .def-form-input {
   font-family: Helvetica Neue;
   width: 100%;
@@ -1097,6 +1116,11 @@ body .fancybox-container * {
   background-size: contain;
   background-position: center;
   background-image: url(../images/file.svg);
+}
+@media (max-width: 768px) {
+  .wrapper .def-form-input {
+    padding: 15px 0;
+  }
 }
 .wrapper .def-form-checkbox input {
   display: none;
@@ -1591,6 +1615,11 @@ body .fancybox-container * {
   border-bottom: 1px solid #e5e5e5;
   resize: none;
 }
+@media (max-width: 768px) {
+  .fancybox-container .def-form-textarea {
+    padding: 15px 0;
+  }
+}
 .fancybox-container .def-form-input {
   font-family: Helvetica Neue;
   width: 100%;
@@ -1633,6 +1662,11 @@ body .fancybox-container * {
   background-size: contain;
   background-position: center;
   background-image: url(../images/file.svg);
+}
+@media (max-width: 768px) {
+  .fancybox-container .def-form-input {
+    padding: 15px 0;
+  }
 }
 .fancybox-container .def-form-checkbox input {
   display: none;
@@ -2035,6 +2069,11 @@ body .fancybox-container * {
   border-bottom: 1px solid #e5e5e5;
   resize: none;
 }
+@media (max-width: 768px) {
+  .default-forms-textarea {
+    padding: 15px 0;
+  }
+}
 .default-forms-input {
   font-family: Helvetica Neue;
   width: 100%;
@@ -2077,6 +2116,11 @@ body .fancybox-container * {
   background-size: contain;
   background-position: center;
   background-image: url(../images/file.svg);
+}
+@media (max-width: 768px) {
+  .default-forms-input {
+    padding: 15px 0;
+  }
 }
 .default-forms-checkbox input {
   display: none;
@@ -2122,4 +2166,7 @@ body .fancybox-container * {
   background-repeat: no-repeat;
   top: 11px;
   left: 8px;
+}
+br.mobile {
+  display: none;
 }

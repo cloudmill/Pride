@@ -986,6 +986,18 @@ var custom = {
         })
     }
   },
+  rightMenuOpen:{
+    init:function(){
+      $(document).on('click','.rightMenu',function(){
+        $(this).toggleClass('open')
+        // if($(this).hasClass('open')){
+        //   $(this).css('height',$(this).find('.rightMenu-content').height())
+        // }else{
+        //   $(this).css('height','');
+        // }
+      })
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -1082,6 +1094,7 @@ var custom = {
     if ($('.blockCross').length > 0) this.animateChangeHoverBlockCross.init();
     if ($('.img-full').length > 0) this.setSizeImg.init();
     if ($('.newDetail_box .slider').length > 0) this.detailImgSlider.init();
+    if ($('.rightMenu').length > 0) this.rightMenuOpen.init();
     this.preloaderInit();
   }
 };

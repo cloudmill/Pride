@@ -430,6 +430,20 @@ body {
         z-index: -1;
       }
     }
+    &.line{
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        background: #e5e5e5;
+        z-index: -1;
+      }
+    }
   }
   .tabs {
     position: relative;
@@ -872,6 +886,9 @@ body {
     height: 100%;
     border-bottom: 1px solid #e5e5e5;
     resize: none;
+    @media(max-width: 768px){
+      padding: 15px 0;
+    }
   }
   &-input {
     font-family: Helvetica Neue;
@@ -914,6 +931,9 @@ body {
           background-image: url(../images/file.svg);
         }
       }
+    }
+    @media(max-width: 768px){
+      padding: 15px 0;
     }
   }
   &-checkbox {
@@ -967,4 +987,7 @@ body {
       }
     }
   }
+}
+br.mobile{
+  display: none;
 }
