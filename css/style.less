@@ -6418,10 +6418,9 @@
         z-index: -3;
         background: rgba(0, 0, 0, 0.27);
       }
-      &:hover{
-        img{
+      &:hover {
+        img {
           transform: scale(1.1);
-
         }
       }
       &-img {
@@ -6909,6 +6908,68 @@
       left: 100%;
       top: 73px;
       margin-left: 40px;
+      &-sub {
+        position: absolute;
+        left: 100%;
+        margin-left: 40px;
+        top: 300px;
+        &-content {
+        }
+        &-item {
+          display: block;
+          font-family: Helvetica Neue;
+          font-size: 16px;
+          line-height: 135%;
+          color: #292929;
+          margin-bottom: 22px;
+          position: relative;
+          &.active {
+            &:before {
+              position: absolute;
+              content: "";
+              display: block;
+              width: 100%;
+              height: 2px;
+              bottom: 0px;
+              left: 0;
+              background: #ff570f;
+              animation-fill-mode: both;
+              animation-duration: 0.6s;
+              animation-iteration-count: 1;
+              transform: translateX(0);
+            }
+          }
+        }
+        @media (max-width: 950px) {
+          overflow-x: scroll;
+          overflow-y: hidden;
+          position: relative;
+          left: 0;
+          margin-left: 0;
+          top: 0 !important;
+          margin-bottom: 30px;
+          &-content {
+            display: flex;
+          }
+          &-item {
+            margin-right: 15px;
+            white-space: nowrap;
+            margin-bottom: 4px;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      &-temp-wrapper{
+        width: 2000px;
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+        >*{
+          display: inline-flex !important;
+        }
+      }
       &-wrapper {
         border-top: 1px solid #e5e5e5;
       }
@@ -6997,6 +7058,7 @@
         width: ~"calc(100% + 30px)";
         transform: translateX(-15px);
         cursor: pointer;
+        z-index: 2;
         &:before {
           content: "";
           display: block;
@@ -7055,6 +7117,77 @@
           }
           span {
             display: none;
+          }
+        }
+      }
+    }
+    .docs_list {
+      &-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-bottom: 100px;
+      }
+      &-item {
+        background: #f5f5f5;
+        padding: 20px 40px;
+        width: ~"calc(50% - 10px)";
+        margin-bottom: 20px;
+        display: block;
+        position: relative;
+        transition: background 0.3s;
+        &:hover{
+          background: #DFDFDF;
+        }
+        &-title {
+          font-family: Helvetica Neue;
+          font-size: 16px;
+          line-height: 24px;
+          color: #292929;
+          margin-bottom: 16px;
+          font-weight: 500;
+        }
+        &-size {
+          position: absolute;
+          left: 40px;
+          bottom: 20px;
+          font-family: Helvetica Neue;
+          font-size: 14px;
+          line-height: 24px;
+          color: #292929;
+        }
+        &-type {
+          margin-left: auto;
+          width: 61px;
+          height: 71px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          &.pdf {
+            background-image: url(../images/type_pdf.svg);
+          }
+        }
+      }
+      @media (max-width: 950px){
+       &-box{
+        padding-bottom: 25px;
+       }
+      }
+      @media (max-width: 650px) {
+        &-item {
+          width: 100%;
+          padding: 14px 20px;
+          margin-bottom: 15px;
+          &-title {
+            font-size: 14px;
+            line-height: 150%;
+          }
+          &-size {
+            left: 20px;
+            bottom: 14px;
+          }
+          &-type {
+            width: 32.65px;
+            height: 38px;
           }
         }
       }
@@ -7311,7 +7444,7 @@
     width: 100%;
     height: 100%;
     background-color: #fff;
-    z-index: 1200;
+    z-index: 1500;
     transition: all 0.3s ease-in-out;
     .content {
       height: 100%;

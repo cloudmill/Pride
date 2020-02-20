@@ -155,7 +155,6 @@ var custom = {
               wordsAr.push(item);
             }
           });
-          console.log(wordsAr)
           var temp = document.createElement("div");
           $(temp).width($(item).width())
           temp.className = "string-anim-temp";
@@ -172,7 +171,6 @@ var custom = {
               temp.innerHTML += " ";
             }
             temp.innerHTML += wordsAr[i];
-            console.log(temp.innerHTML,temp.scrollHeight,height)
             if (height == temp.scrollHeight) {
               stringBeforeAppend += wordsAr[i];
               if (wordsAr.length - 1 == i) {
@@ -283,7 +281,6 @@ var custom = {
       var T = this;
       var _width = $(".blockCross").width();
       var _height = $(".blockCross").height()>$(window).height()?$(".blockCross").height():$(window).height();
-      console.log(_width, _height);
       this.animedThisMoment = false;
       this.app = new PIXI.Application({
         width: _width,
@@ -325,11 +322,9 @@ var custom = {
         var src = $(this).attr("src");
         var href = location.href.split('?')[0];
         var root = href.replace(href.split('/')[href.split('/').length-1],'');
-        console.log(root+src)
         var texture = new PIXI.Texture.fromImage(root+src);
         T.imgs.push(new PIXI.Sprite(texture));
         var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
-        console.log($(this),$(this)[0],$(this)[0].naturalWidth,$(this)[0].naturalHeight,k)
         var height_ = $(".blockCross").height() + 100;
         if (T.renderer.width / k < height_) {
           T.imgs[T.imgs.length - 1].width = height_ * k;
@@ -914,7 +909,6 @@ var custom = {
         }));
       },
     init:function(){
-      console.log("map_init");
       var _this = this;
       this.center =
         $(".map_data .placeMark").length > 0
@@ -924,7 +918,6 @@ var custom = {
               .split(",")
           : [55.751574, 37.573856];
       function initMap() {
-        console.log("map_ready");
         _this.create();
       }
       ymaps.ready(function() {
@@ -986,16 +979,36 @@ var custom = {
         })
     }
   },
-  rightMenuOpen:{
-    init:function(){
+  rightMenu:{
+    events:function(){
       $(document).on('click','.rightMenu',function(){
         $(this).toggleClass('open')
-        // if($(this).hasClass('open')){
-        //   $(this).css('height',$(this).find('.rightMenu-content').height())
-        // }else{
-        //   $(this).css('height','');
-        // }
       })
+    },
+    setWidth:function(){
+      var _ = this;
+      var tempBox = document.createElement('div')
+      tempBox.className = 'rightMenu-temp-wrapper';
+      $('.rightMenu-sub-content').css('width','')
+      tempBox.innerHTML = $('.rightMenu-sub-content').eq(0)[0].outerHTML
+      $('.page').append($(tempBox))
+      var width = $(tempBox).find('.rightMenu-sub-content').width();
+      $(tempBox).remove()
+      $('.rightMenu-sub-content').width(width)
+    },
+    init:function(){
+      var _ = this;
+      _.events()
+      //_.setWidth();
+      if($('.rightMenu-sub').length>0)
+      {
+        $(window).on('load',function(){
+          _.setWidth();
+        })
+        $(window).on('resize',function(){
+          _.setWidth();
+        })
+      }
     }
   },
   preloaderInit: function() {
@@ -1094,7 +1107,7 @@ var custom = {
     if ($('.blockCross').length > 0) this.animateChangeHoverBlockCross.init();
     if ($('.img-full').length > 0) this.setSizeImg.init();
     if ($('.newDetail_box .slider').length > 0) this.detailImgSlider.init();
-    if ($('.rightMenu').length > 0) this.rightMenuOpen.init();
+    if ($('.rightMenu').length > 0) this.rightMenu.init();
     this.preloaderInit();
   }
 };
@@ -1147,7 +1160,6 @@ var svgMap = {
       $('.dillerMap .slick-cloned').eq(id+1).addClass('current')
       $('.dillerMap .slick-cloned').eq(id_next+1).addClass('next')
       $('.dillerMap .slick-cloned').eq(id_after_next+1).addClass('after_next')
-      console.log(id, slider.$slides.length)
       if(id == slider.$slides.length-1){
         $('.dillerMap .slick-cloned').eq(0).addClass('current')
       }else{

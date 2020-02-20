@@ -221,6 +221,7 @@ body {
     scrollbar-width: 7px;
     &::-webkit-scrollbar {
       width: 7px;
+      height: 7px;
     }
     &::-webkit-scrollbar-thumb  {
       background: #ff570f;
@@ -671,8 +672,24 @@ body {
       bottom: 0px;
       width: 100%;
       height: 0px;
+      animation-name: none !important;
+      transform: translateX(0);
       border-bottom: 2px solid #e5e5e5;
       z-index: -1;
+    }
+    &::before{
+      transform: translateX(0);
+    }
+    &.ready {
+      &:before {
+        animation-name: hoverBorderInLeft;
+        
+      }
+      &:hover{
+        &:before {
+          animation-name: hoverBorderOutRight;
+        }
+      }
     }
   }
   &:before {
