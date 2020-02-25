@@ -1011,6 +1011,58 @@ var custom = {
       }
     }
   },
+  aboutSliders:{
+    years:function(){
+      var years = new Swiper(".yearSlider-years", {
+        //spaceBetween: 40,
+        slidesPerView: 1,
+        //freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+       // loop:true,
+        direction: "horizontal",
+        //centeredSlides: true,
+      });
+      var texts = new Swiper(".yearSlider-texts", {
+        slidesPerView: 1,
+        //loop:true,
+        thumbs: {
+          swiper: years
+        },
+        on:{
+          slideChange: function(a,b,c){
+            //console.log(this.realIndex)
+           // years.slideTo(this.realIndex)
+          }
+        }
+      });
+      $(document).on('click','.yearSlider-prev',function(){
+        texts.slidePrev()
+      })
+      $(document).on('click','.yearSlider-next',function(){
+        texts.slideNext()
+      })
+    },
+    imgs:function(){
+      var imgs = new Swiper(".imgSlider-slider", {
+        spaceBetween: 30,
+        slidesPerView: 'auto',
+        setWrapperSize: true,
+        direction: "horizontal",
+        centeredSlides: true,
+      });
+      $(document).on('click','.imgSlider-prev',function(){
+        imgs.slidePrev()
+      })
+      $(document).on('click','.imgSlider-next',function(){
+        imgs.slideNext()
+      })
+    },
+    init:function(){
+      if($('.yearSlider-years').length>0) this.years();
+      if($('.imgSlider-slider').length>0) this.imgs();
+    },
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -1108,6 +1160,7 @@ var custom = {
     if ($('.img-full').length > 0) this.setSizeImg.init();
     if ($('.newDetail_box .slider').length > 0) this.detailImgSlider.init();
     if ($('.rightMenu').length > 0) this.rightMenu.init();
+    this.aboutSliders.init()
     this.preloaderInit();
   }
 };

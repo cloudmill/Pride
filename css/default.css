@@ -303,16 +303,6 @@ body .fancybox-container * {
   width: 17px;
   height: 17px;
 }
-.wrapper .icon-phone {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  background-image: url(../images/phone.svg);
-  width: 17px;
-  height: 17px;
-}
 .wrapper .icon-fb {
   background-size: contain;
   background-repeat: no-repeat;
