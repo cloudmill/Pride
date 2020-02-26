@@ -1014,27 +1014,16 @@ var custom = {
   aboutSliders:{
     years:function(){
       var years = new Swiper(".yearSlider-years", {
-        //spaceBetween: 40,
         slidesPerView: 1,
-        //freeMode: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
-       // loop:true,
         direction: "horizontal",
-        //centeredSlides: true,
       });
       var texts = new Swiper(".yearSlider-texts", {
         slidesPerView: 1,
-        //loop:true,
         thumbs: {
           swiper: years
         },
-        on:{
-          slideChange: function(a,b,c){
-            //console.log(this.realIndex)
-           // years.slideTo(this.realIndex)
-          }
-        }
       });
       $(document).on('click','.yearSlider-prev',function(){
         texts.slidePrev()
@@ -1045,11 +1034,20 @@ var custom = {
     },
     imgs:function(){
       var imgs = new Swiper(".imgSlider-slider", {
-        spaceBetween: 30,
+        spaceBetween: 3,
         slidesPerView: 'auto',
         setWrapperSize: true,
         direction: "horizontal",
         centeredSlides: true,
+        loop:true,
+        breakpoints: {
+          768: {
+            spaceBetween: 30,
+          },
+          550: {
+            spaceBetween: 15,
+          }
+        }
       });
       $(document).on('click','.imgSlider-prev',function(){
         imgs.slidePrev()
