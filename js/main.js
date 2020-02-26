@@ -1002,12 +1002,14 @@ var custom = {
       //_.setWidth();
       if($('.rightMenu-sub').length>0)
       {
-        $(window).on('load',function(){
-          _.setWidth();
-        })
-        $(window).on('resize',function(){
-          _.setWidth();
-        })
+        if(!$('.rightMenu-sub').hasClass('mobile-col')){
+          $(window).on('load',function(){
+            _.setWidth();
+          })
+          $(window).on('resize',function(){
+            _.setWidth();
+          })
+        }
       }
     }
   },
