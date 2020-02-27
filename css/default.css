@@ -122,6 +122,12 @@
   font-weight: normal;
   font-style: italic;
 }
+@font-face {
+  font-family: "SK Primo";
+  src: url("../fonts/SK Primo.otf");
+  font-weight: 800;
+  font-style: normal;
+}
 html,
 body {
   scrollbar-color: #ff570f white;
