@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="libs/fancybox/fancybox.min.css" />
     <link rel="stylesheet" href="libs/NBrain/NBrain.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Список эллементов каталога</title>
+    <title>Результаты поиска</title>
   </head>
   <body>
     <div class="wrapper">
@@ -224,132 +224,30 @@
             <div class="breadcrumbs">
               <a href="/" class="b_link">Главная</a>
               <a href="/catalog.html" class="b_link">Каталог</a>
-              <span class="b_link">Головки торцевые</span>
+              <span class="b_link">Результаты поиска</span>
             </div>
-            <h1 class="title">Головки торцевые</h1>
+            <h1 class="title">Результаты поиска</h1>
           </div>
         </div>
-        <div class="filter">
-          <form action="" method="POST" class="content">
-            <div class="filter_item">
-              <label for="price" class="filter_label filter_slider_open">
-                Цена
-                <div class="filter_hide">
-                  <div class="filter_slider_wrapper">
-                    <div class="filter_slider_status">
-                      <div class="filter_slider_min">от <span>1</span></div>
-                      <div class="filter_slider_max">до <span>2</span></div>
+        <div class="searchPage-box">
+            <div class="content border">
+                <form method="POST" class="searchPage-form">
+                    <div class="searchPage-input">
+                        <input type="text" value="Ремонтный комплект">
                     </div>
-                    <input
-                      id="price"
-                      name="price"
-                      type="text"
-                      class="filter_slider_base"
-                      value=""
-                      data-slider-min="1000"
-                      data-slider-max="10000"
-                      data-slider-step="1"
-                      data-slider-value="[1000,10000]"
-                    />
+                    <div class="searchPage-button">
+                        <button class='btn-orange' type="submit">Поиск</button>
+                    </div>
+                </form>
+                <div class="searchPage-searchResult">
+                    По запросу «<b>Ремонтный комплект</b>» найдено 111 товаров в 10 категориях
                   </div>
-                  <div class="filter_slider_buts">
-                    <a href="" class="btn btn-gray filter_slider_clear">
-                      Сбросить
-                    </a>
-                    <a href="" class="btn btn-orange filter_slider_set">
-                      Применить
-                    </a>
-                  </div>
-                </div>
-              </label>
             </div>
-            <div class="filter_item">
-              <label for="brands" class="filter_label">
-                Бренды
-                <select id="brands" class="filter_select" name="brands">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize" class="filter_label">
-                Размер ключа
-                <select id="keySize" class="filter_select" name="keySize">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize3" class="filter_label">
-                Размер ключа
-                <select id="keySize3" class="filter_select" name="keySize3">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize4" class="filter_label">
-                Размер ключа
-                <select id="keySize4" class="filter_select" name="keySize4">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize5" class="filter_label">
-                Размер ключа
-                <select id="keySize5" class="filter_select" name="keySize5">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize2" class="filter_label">
-                Размер ключа2
-                <select id="keySize2" class="filter_select" name="keySize2">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <a href="" class="filter_showAll"
-              >Все фильтры <i class="icon-filter"></i
-            ></a>
-            <a href="" class="filter_close"
-              >Закрыть <i class="icon-close"></i
-            ></a>
-            <div class="filter_buts">
-              <button type="submit" class="btn btn-gray">Сбросить все</button>
-              <button type="submit" class="btn btn-orange">Применить</button>
-            </div>
-          </form>
         </div>
         <div class="example">
           <div class="content border">
-            <div class="example_box">
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
+            <div class="example_box full">
+              
               <a href="" class="example_item hoverLineMoved def-gray">
                 Головки торцевые 1/4''DR
               </a>
@@ -686,21 +584,6 @@
               </div>
             </div>
             <a href="" class="catList_showMore hoverLineMoved">Показать еще</a>
-          </div>
-        </div>
-        <div class="text">
-          <div class="content border">
-            <p>
-              Постоянная инновационная работа является одним из ведущих
-              направлений производства JONNESWAY®, что способствует
-              предвосхищению тенденций рынка и своевременному удовлетворению его
-              потребностей. При помощи слаженной постоянной работы
-              профессионалов технического отдела компания JONNESWAY®
-              разработала, внедрила и запатентовала множество совершенно
-              уникальных идей, предоставив поддержку своим дистрибьюторам по
-              всему миру. Такой подход позволяет JONNESWAY® всегда держаться в
-              авангарде рынка и уверено расширять занятую нишу.
-            </p>
           </div>
         </div>
       </div>
