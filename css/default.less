@@ -277,6 +277,12 @@ body {
       width: 17px;
       height: 20.5px;
     }
+    &-print {
+      .def-icon;
+      background-image: url(../images/print.svg);
+      width: 16px;
+      height: 15px;
+    }
     &-grid {
       .def-icon;
       background-image: url(../images/cat.svg);
@@ -731,22 +737,7 @@ body {
     }
   }
 }
-@keyframes hoverBorderInLeft {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-@keyframes hoverBorderOutRight {
-  0% {
-    transform: translateX(-200%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
+
 .fancybox-container{
   .btn {
     .default-buttons;
@@ -919,6 +910,17 @@ body {
     background: transparent;
     padding: 30px 0;
     border-bottom: 1px solid #e5e5e5;
+    transition: 0.3s;
+    &:hover{
+      border-color: #292929;;
+    }
+    &:focus{
+      border-color: #ff570f;
+    }
+    &.error{
+      color: #FF4C4B;
+      border-color: #FF4C4B;
+    }
     &-file {
       position: relative;
       padding-top: 30px;
@@ -1007,4 +1009,23 @@ body {
 }
 br.mobile{
   display: none;
+}
+
+
+
+@keyframes hoverBorderInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes hoverBorderOutRight {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

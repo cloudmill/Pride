@@ -1422,22 +1422,14 @@
                 />
               </div>
             </div>
-            <div class="popupCenter_row">
-              <div class="popupCenter_col">
-                <div class="popupCenter_input">
-                  <input
-                    class="def-form-input"
-                    type="text"
-                    name="mail"
-                    placeholder="Почта для ответа"
-                  />
-                </div>
-                <div class="popupCenter_input">
-                  <div class="def-form-input-file">
-                    <input type="file" name="file" id="file" />
-                    <label for="file"> Прикрепить файл </label>
-                  </div>
-                </div>
+            <div class="popupCenter_row grid">
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="mail"
+                  placeholder="Почта для ответа"
+                />
               </div>
               <div class="popupCenter_input">
                 <textarea
@@ -1445,14 +1437,139 @@
                   name="question"
                   id=""
                   placeholder="Ваш вопрос"
-                >
-                </textarea>
+                ></textarea>
+              </div>
+              <div class="popupCenter_input">
+                <div class="def-form-input-file">
+                  <input type="file" name="file" id="file" />
+                  <label for="file"> Прикрепить файл </label>
+                </div>
               </div>
             </div>
             <div class="popupCenter_row">
               <div class="popupCenter_pp def-form-checkbox">
                 <input type="checkbox" name="pp2" id="pp2" />
                 <label for="pp2">
+                  Согласие на обработку персональных данных в соответствии с
+                  <a href=""> политикой конфиденциальности </a>
+                </label>
+              </div>
+              <button type="submit" class="btn-orange popupCenter_btn">
+                Отправить
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- popup vacancy -->
+        <div  class="popup popupCenter" id="vacancy" >
+          <div class="popupCenter_title def-form-title">Откликнуться на вакансию</div>
+          <form action="">
+            <div class="popupCenter_row">
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="name"
+                  placeholder="Ваше имя"
+                />
+              </div>
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="phone"
+                  placeholder="Номер телефона"
+                />
+              </div>
+            </div>
+            <div class="popupCenter_row grid">
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="mail"
+                  placeholder="Почта для ответа"
+                />
+              </div>
+              <div class="popupCenter_input">
+                <textarea
+                  class="def-form-textarea"
+                  name="question"
+                  id=""
+                  placeholder="Ваш вопрос"
+                ></textarea>
+              </div>
+              <div class="popupCenter_input">
+                <div class="def-form-input-file">
+                  <input type="file" name="file" id="file" />
+                  <label for="file"> Прикрепить файл </label>
+                </div>
+              </div>
+            </div>
+            <div class="popupCenter_row">
+              <div class="popupCenter_pp def-form-checkbox">
+                <input type="checkbox" name="pp3" id="pp3" />
+                <label for="pp3">
+                  Согласие на обработку персональных данных в соответствии с
+                  <a href=""> политикой конфиденциальности </a>
+                </label>
+              </div>
+              <button type="submit" class="btn-orange popupCenter_btn">
+                Отправить
+              </button>
+            </div>
+          </form>
+        </div>
+         <!-- popup mess-summary -->
+         <div  class="popup popupCenter" id="mess-summary" >
+          <div class="popupCenter_title def-form-title">Отправить резюме</div>
+          <form action="">
+            <div class="popupCenter_row">
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="name"
+                  placeholder="Ваше имя"
+                />
+              </div>
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="phone"
+                  placeholder="Номер телефона"
+                />
+              </div>
+            </div>
+            <div class="popupCenter_row grid">
+              <div class="popupCenter_input">
+                <input
+                  class="def-form-input"
+                  type="text"
+                  name="mail"
+                  placeholder="Почта для ответа"
+                />
+              </div>
+              <div class="popupCenter_input">
+                <textarea
+                  class="def-form-textarea"
+                  name="question"
+                  id=""
+                  placeholder="Ваш вопрос"
+                ></textarea>
+              </div>
+              <div class="popupCenter_input">
+                <div class="def-form-input-file">
+                  <input type="file" name="file" id="file" />
+                  <label for="file"> Прикрепить файл </label>
+                </div>
+              </div>
+            </div>
+            <div class="popupCenter_row">
+              <div class="popupCenter_pp def-form-checkbox">
+                <input type="checkbox" name="pp4" id="pp4" />
+                <label for="pp4">
                   Согласие на обработку персональных данных в соответствии с
                   <a href=""> политикой конфиденциальности </a>
                 </label>
@@ -1476,8 +1593,10 @@
           <div class="popupCenter_title def-form-title">
             Ваш вопрос поступил в обработку. Ответим, как только сможем.
           </div>
-          <button type="submit" class="btn-orange">Понятно</button>
+          <button type="submit" data-fancybox-close class="btn-orange">Понятно</button>
         </div>
+        <a href="#question_success" class="modalbox"></a>
+        <a href="#vacancy" class="modalbox"></a>
       </div>
     </div>
   </body>

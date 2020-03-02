@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="libs/swiper/swiper.min.css">
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
-    <link rel="stylesheet" href="libs/boostrap_slider/boostrap_slider.min.css"/>
+    <link
+      rel="stylesheet"
+      href="libs/boostrap_slider/boostrap_slider.min.css"
+    />
+    <link rel="stylesheet" href="libs/swiper/swiper.min.css" />
     <link rel="stylesheet" href="libs/select2/select2.min.css" />
     <link rel="stylesheet" href="libs/slick/slick.css" />
     <link rel="stylesheet" href="libs/fancybox/fancybox.min.css" />
     <link rel="stylesheet" href="libs/NBrain/NBrain.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Подраздел каталога</title>
+    <title>Корзина</title>
   </head>
   <body>
     <div class="wrapper">
@@ -223,480 +226,111 @@
           <div class="page_head">
             <div class="breadcrumbs">
               <a href="/" class="b_link">Главная</a>
-              <a href="/catalog.html" class="b_link">Каталог</a>
-              <a href="/catalog.html" class="b_link">Головки торцевые</a>
-              <span class="b_link">Головки торцевые 1/4''DR</span>
+              <span class="b_link">
+                Корзина
+              </span>
             </div>
-            <h1 class="title">Головки торцевые 1/4''DR</h1>
+            <h1 class="title">
+              Корзина
+            </h1>
+            <a href="" class="page-print">
+              <i class="icon-print"></i> Распечатать заказ
+            </a>
           </div>
         </div>
-        <div class="filter">
-          <form action="" method="POST" class="content">
-            <div class="filter_item">
-              <label for="price" class="filter_label filter_slider_open">
-                Цена
-                <div class="filter_hide">
-                  <div class="filter_slider_wrapper">
-                    <div class="filter_slider_status">
-                      <div class="filter_slider_min">от <span>1</span></div>
-                      <div class="filter_slider_max">до <span>2</span></div>
-                    </div>
-                    <input
-                      id="price"
-                      name="price"
-                      type="text"
-                      class="filter_slider_base"
-                      value=""
-                      data-slider-min="1000"
-                      data-slider-max="10000"
-                      data-slider-step="1"
-                      data-slider-value="[1000,10000]"
-                    />
-                  </div>
-                  <div class="filter_slider_buts">
-                    <a href="" class="btn btn-gray filter_slider_clear">
-                      Сбросить
-                    </a>
-                    <a href="" class="btn btn-orange filter_slider_set">
-                      Применить
-                    </a>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="brands" class="filter_label">
-                Бренды
-                <select id="brands" class="filter_select" name="brands">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize" class="filter_label">
-                Размер ключа
-                <select id="keySize" class="filter_select" name="keySize">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize3" class="filter_label">
-                Размер ключа
-                <select id="keySize3" class="filter_select" name="keySize3">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize4" class="filter_label">
-                Размер ключа
-                <select id="keySize4" class="filter_select" name="keySize4">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize5" class="filter_label">
-                Размер ключа
-                <select id="keySize5" class="filter_select" name="keySize5">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <div class="filter_item">
-              <label for="keySize2" class="filter_label">
-                Размер ключа2
-                <select id="keySize2" class="filter_select" name="keySize2">
-                  <option value="1">aaaaa</option>
-                  <option value="2">bbbbb</option>
-                  <option value="3">ccccc</option>
-                </select>
-              </label>
-            </div>
-            <a href="" class="filter_showAll"
-              >Все фильтры <i class="icon-filter"></i
-            ></a>
-            <a href="" class="filter_close"
-              >Закрыть <i class="icon-close"></i
-            ></a>
-            <div class="filter_buts">
-              <button type="submit" class="btn btn-gray">Сбросить все</button>
-              <button type="submit" class="btn btn-orange">Применить</button>
-            </div>
-          </form>
-        </div>
-        <div class="example haveLink">
+        <div class="cart">
           <div class="content border">
-            <a href="" class="example_link"><i class="icon-str-left"></i>Головки торцевые</a>
-            <div class="example_box">
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-              <a href="" class="example_item hoverLineMoved def-gray">
-                Головки торцевые 1/4''DR
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="sort">
-          <div class="content border">
-            <div class="sort_pos">
-              <button class="sort_pos_grid active" data-class="grid">
-                <i class="icon-grid"></i>
-              </button>
-              <button class="sort_pos_list" data-class="list">
-                <i class="icon-list"></i>
-              </button>
-            </div>
-            <div class="sort_opts">
-              <div class="sort_item">
-                <label for="sort_type" class="sort_label">
-                  Сортировка
-                  <select id="sort_type" class="sort_select" name="sort_type">
-                    <option value="1">Новинки</option>
-                    <option value="2">Новинки2</option>
-                    <option value="3">Новинки3</option>
-                  </select>
-                </label>
-              </div>
-              <div class="sort_item">
-                <label for="sort_count" class="sort_label">
-                  На странице
-                  <select id="sort_count" class="sort_select" name="sort_count">
-                    <option value="1">12</option>
-                    <option value="2">24</option>
-                    <option value="3">36</option>
-                  </select>
-                </label>
-              </div>
-              <div class="sort_item">
-                <label class="sort_label">65 позиций</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="catList">
-          <div class="content border">
-            <div class="catList_typePos grid">
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
-                  <a href="" class="catList_item_cats_cat">скидка</a>
-                  <a href="" class="catList_item_cats_cat">выбор покупателей</a>
+            <div class="products">
+              <div class="products-head">
+                <div class="product-left">
+                  <div class="product-label">Товар</div>
+                  <div class="product-label">Кол-во</div>
                 </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_1.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Набор отверток шлиц и крест Hercules SL 4х80-8х150 PH#1-3, 6
-                  предметов
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
-                    </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
-                    </div>
-                  </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
-                  </div>
-                </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
-                  </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
-                  </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
-                  </a>
+                <div class="product-right">
+                  <div class="product-label">Цена</div>
+                  <div class="product-label">Сумма</div>
                 </div>
               </div>
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
+              <div class="product">
+                <div class="product-data">
+                  <input type="hidden" name="count" value="2">
+                  <input type="hidden" name="price" value="8660">
                 </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_2.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Ремонтный комплект для заклепочника V1002
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
-                    </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
-                    </div>
+                <div class="product-left">
+                  <div class="product-img">
+                    <img src="images/item_1.png" alt="" />
                   </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
+                  <div class="product-name">
+                    Набор отверток шлиц и крест Hercules SL 4х80-8х150 PH#1-3, 6
+                    предметов
+                  </div>
+                  <div class="product-count">
+                    <button class="count-minus"></button>
+                    <div class="count-value">2</div>
+                    
+                    <button class="count-plus"></button>
                   </div>
                 </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
+                <div class="product-right">
+                  <div class="product-price">
+                    <div class="price-value">8 660 ₽</div>
+                    <div class="price-old">9 410 ₽</div>
                   </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
+                  <div class="product-summ">
+                    <div class="summ-value"><span>134 660</span> ₽</div>
+                    <button class="summ-clear hoverLineMoved def-gray">Удалить</button>
                   </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
-                  </a>
                 </div>
               </div>
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
+              <div class="product">
+                <div class="product-data">
+                  <input type="hidden" name="count" value="2">
+                  <input type="hidden" name="price" value="8660">
                 </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_3.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Приспособление для замены трансмиссионных жидкостей. 7,5 л.
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
-                    </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
-                    </div>
+                <div class="product-left">
+                  <div class="product-img">
+                    <img src="images/item_1.png" alt="" />
                   </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
+                  <div class="product-name">
+                    Набор отверток шлиц и крест Hercules SL 4х80-8х150 PH#1-3, 6
+                    предметов
+                  </div>
+                  <div class="product-count">
+                    <button class="count-minus"></button>
+                    <div class="count-value">2</div>
+                    
+                    <button class="count-plus"></button>
                   </div>
                 </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
+                <div class="product-right">
+                  <div class="product-price">
+                    <div class="price-value">8 660 ₽</div>
+                    <div class="price-old">9 410 ₽</div>
                   </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
+                  <div class="product-summ">
+                    <div class="summ-value"><span>134 660</span> ₽</div>
+                    <button class="summ-clear hoverLineMoved def-gray">Удалить</button>
                   </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
-                  </a>
                 </div>
               </div>
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
-                  <a href="" class="catList_item_cats_cat">скидка</a>
-                  <a href="" class="catList_item_cats_cat">выбор покупателей</a>
-                </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_1.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Набор отверток шлиц и крест Hercules SL 4х80-8х150 PH#1-3, 6
-                  предметов
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
-                    </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
-                    </div>
-                  </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
-                  </div>
-                </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
-                  </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
-                  </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
+              <div class="products-result">
+                <div class="product-left">
+                  <a href="" class="products-formalise btn-orange">
+                    Перейти к оформлению заказа
                   </a>
                 </div>
-              </div>
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
-                </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_2.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Ремонтный комплект для заклепочника V1002
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
+                <div class="product-right">
+                  <div class="products-allSumm">
+                    <div class="allSumm-title">
+                      Итого
                     </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
+                    <div class="allSumm-value">
+                      <span>346 900</span> ₽
                     </div>
                   </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
-                  </div>
-                </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
-                  </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
-                  </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
-                  </a>
-                </div>
-              </div>
-              <div class="catList_item">
-                <div class="catList_item_cats">
-                  <a href="" class="catList_item_cats_cat">Новинка</a>
-                </div>
-                <a href="" class="catList_item_img">
-                  <img src="images/item_3.png" alt="" />
-                </a>
-                <a href="" class="catList_item_name">
-                  Приспособление для замены трансмиссионных жидкостей. 7,5 л.
-                </a>
-                <div class="catList_item_inf">
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      Артикул
-                    </div>
-                    <div class="catList_item_inf_value">
-                      D03PR06S
-                    </div>
-                  </div>
-                  <div class="catList_item_inf_box">
-                    <div class="catList_item_inf_name">
-                      в наличии
-                    </div>
-                    <div class="catList_item_inf_value">
-                      3 шт.
-                    </div>
-                  </div>
-                </div>
-                <div class="catList_item_price">
-                  <div class="catList_item_price_value">
-                    8 660 ₽
-                  </div>
-                  <div class="catList_item_price_old">
-                    9 410 ₽
-                  </div>
-                </div>
-                <div class="catList_item_buts">
-                  <a href="" class="btn-orange">
-                    <i class="icon-cart"></i>
-                    В корзину
-                  </a>
-                  <a href="" class="btn-gray">
-                    Купить в 1 клик
-                  </a>
                 </div>
               </div>
             </div>
-            <a href="" class="catList_showMore hoverLineMoved">Показать еще</a>
-          </div>
-        </div>
-        <div class="text">
-          <div class="content border">
-            <p>
-              Постоянная инновационная работа является одним из ведущих
-              направлений производства JONNESWAY®, что способствует
-              предвосхищению тенденций рынка и своевременному удовлетворению его
-              потребностей. При помощи слаженной постоянной работы
-              профессионалов технического отдела компания JONNESWAY®
-              разработала, внедрила и запатентовала множество совершенно
-              уникальных идей, предоставив поддержку своим дистрибьюторам по
-              всему миру. Такой подход позволяет JONNESWAY® всегда держаться в
-              авангарде рынка и уверено расширять занятую нишу.
-            </p>
           </div>
         </div>
       </div>
@@ -755,7 +389,7 @@
       </div>
       <div class="popups">
         <!-- popup buyOneClick -->
-        <div class="popup popupCenter"  id="buyOneClick"  >
+        <div class="popup popupCenter" id="buyOneClick">
           <div class="popupCenter_title def-form-title">Купить в 1 клик</div>
           <form action="">
             <div class="popupCenter_row">
@@ -791,7 +425,7 @@
           </form>
         </div>
         <!-- popup question -->
-        <div  class="popup popupCenter" id="question" >
+        <div class="popup popupCenter" id="question">
           <div class="popupCenter_title def-form-title">Задать свой вопрос</div>
           <form action="">
             <div class="popupCenter_row">
@@ -851,8 +485,10 @@
           </form>
         </div>
         <!-- popup vacancy -->
-        <div  class="popup popupCenter" id="vacancy" >
-          <div class="popupCenter_title def-form-title">Откликнуться на вакансию</div>
+        <div class="popup popupCenter" id="vacancy">
+          <div class="popupCenter_title def-form-title">
+            Откликнуться на вакансию
+          </div>
           <form action="">
             <div class="popupCenter_row">
               <div class="popupCenter_input">
@@ -910,8 +546,8 @@
             </div>
           </form>
         </div>
-         <!-- popup mess-summary -->
-         <div  class="popup popupCenter" id="mess-summary" >
+        <!-- popup mess-summary -->
+        <div class="popup popupCenter" id="mess-summary">
           <div class="popupCenter_title def-form-title">Отправить резюме</div>
           <form action="">
             <div class="popupCenter_row">
@@ -971,7 +607,7 @@
           </form>
         </div>
         <!-- popup collback_success -->
-        <div class="popup popupCenter" id="collback_success" >
+        <div class="popup popupCenter" id="collback_success">
           <div class="popupCenter_title def-form-title">
             Мы приняли вашу заявку и совсем скоро перезвоним для уточнения
             заказа.
@@ -979,11 +615,13 @@
           <button type="submit" class="btn-orange">Понятно</button>
         </div>
         <!-- popup question_success -->
-        <div class="popup popupCenter"  id="question_success" >
+        <div class="popup popupCenter" id="question_success">
           <div class="popupCenter_title def-form-title">
             Ваш вопрос поступил в обработку. Ответим, как только сможем.
           </div>
-          <button type="submit" data-fancybox-close class="btn-orange">Понятно</button>
+          <button type="submit" data-fancybox-close class="btn-orange">
+            Понятно
+          </button>
         </div>
         <a href="#question_success" class="modalbox"></a>
         <a href="#vacancy" class="modalbox"></a>
@@ -995,10 +633,13 @@
   <script src="libs/boostrap_slider/boostrap_slider.min.js"></script>
   <script src="libs/select2/select2.min.js"></script>
   <script src="libs/slick/slick.js"></script>
+  <script src="libs/NBrain/NBrain.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
   <script src="libs/pixijs/pixi.min.js"></script>
   <script src="libs/fancybox/fancybox.min.js"></script>
-  <script src="libs/NBrain/NBrain.js"></script>
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=efa45a74-34c6-4532-aa40-25baa3a1babd" type="text/javascript"></script>
+  <script
+    src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=efa45a74-34c6-4532-aa40-25baa3a1babd"
+    type="text/javascript"
+  ></script>
   <script src="js/main.js"></script>
 </html>

@@ -248,6 +248,16 @@ body .fancybox-container * {
   width: 17px;
   height: 20.5px;
 }
+.wrapper .icon-print {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  background-image: url(../images/print.svg);
+  width: 16px;
+  height: 15px;
+}
 .wrapper .icon-grid {
   background-size: contain;
   background-repeat: no-repeat;
@@ -1096,6 +1106,17 @@ body .fancybox-container * {
   background: transparent;
   padding: 30px 0;
   border-bottom: 1px solid #e5e5e5;
+  transition: 0.3s;
+}
+.wrapper .def-form-input:hover {
+  border-color: #292929;
+}
+.wrapper .def-form-input:focus {
+  border-color: #ff570f;
+}
+.wrapper .def-form-input.error {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
 }
 .wrapper .def-form-input-file {
   position: relative;
@@ -1263,22 +1284,6 @@ body .fancybox-container * {
 }
 .hoverLineMoved:hover:before {
   animation-name: hoverBorderInLeft;
-}
-@keyframes hoverBorderInLeft {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-@keyframes hoverBorderOutRight {
-  0% {
-    transform: translateX(-200%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
 }
 .fancybox-container .btn .def {
   font-size: 16px;
@@ -1653,6 +1658,17 @@ body .fancybox-container * {
   background: transparent;
   padding: 30px 0;
   border-bottom: 1px solid #e5e5e5;
+  transition: 0.3s;
+}
+.fancybox-container .def-form-input:hover {
+  border-color: #292929;
+}
+.fancybox-container .def-form-input:focus {
+  border-color: #ff570f;
+}
+.fancybox-container .def-form-input.error {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
 }
 .fancybox-container .def-form-input-file {
   position: relative;
@@ -2107,6 +2123,17 @@ body .fancybox-container * {
   background: transparent;
   padding: 30px 0;
   border-bottom: 1px solid #e5e5e5;
+  transition: 0.3s;
+}
+.default-forms-input:hover {
+  border-color: #292929;
+}
+.default-forms-input:focus {
+  border-color: #ff570f;
+}
+.default-forms-input.error {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
 }
 .default-forms-input-file {
   position: relative;
@@ -2190,4 +2217,20 @@ body .fancybox-container * {
 }
 br.mobile {
   display: none;
+}
+@keyframes hoverBorderInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes hoverBorderOutRight {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

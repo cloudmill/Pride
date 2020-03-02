@@ -117,16 +117,30 @@ var custom = {
         .each(function() {
           var zoom;
           var paralaxY = 0;
-            var k = 1;
-          if($(this).hasClass('in')){
-            var pos = $(window).height() + $(document).scrollTop() - $(this).offset().top - $(this).height();
-            zoom = 1 + (pos) * k/10000;
-          }else{
-            var pos =  $(document).scrollTop() - $(this).offset().top /* - $(this).height() */;
-            zoom = 1 - (pos) * k/10000;
+          var k = 1;
+          if ($(this).hasClass("in")) {
+            var pos =
+              $(window).height() +
+              $(document).scrollTop() -
+              $(this).offset().top -
+              $(this).height();
+            zoom = 1 + (pos * k) / 10000;
+          } else {
+            var pos =
+              $(document).scrollTop() -
+              $(this).offset().top; /* - $(this).height() */
+            zoom = 1 - (pos * k) / 10000;
           }
-          paralaxY = ($(document).scrollTop() -  $(this).offset().top + $('.header').height()-50)/5
-          $(this).css("transform", "translateY("+paralaxY+"px) scale(" + zoom + ")");
+          paralaxY =
+            ($(document).scrollTop() -
+              $(this).offset().top +
+              $(".header").height() -
+              50) /
+            5;
+          $(this).css(
+            "transform",
+            "translateY(" + paralaxY + "px) scale(" + zoom + ")"
+          );
         });
     },
     events: function() {
@@ -143,11 +157,10 @@ var custom = {
   animateFadeInLeftString: {
     create: function() {
       $(document)
-        .find(
-          ".string-anim,.string-anim-content p")
+        .find(".string-anim,.string-anim-content p")
         .each(function() {
           var item = this;
-          var stiring = item.innerHTML.replace(/\r?\n/g, "")
+          var stiring = item.innerHTML.replace(/\r?\n/g, "");
           var _wordsAr = stiring.split(" ");
           var wordsAr = [];
           _wordsAr.forEach(function(item, key) {
@@ -156,7 +169,7 @@ var custom = {
             }
           });
           var temp = document.createElement("div");
-          $(temp).width($(item).width())
+          $(temp).width($(item).width());
           temp.className = "string-anim-temp";
           item.appendChild(temp);
           var height = 0;
@@ -203,14 +216,14 @@ var custom = {
     checkAndDo: function() {
       var count = 0;
       var start_anim = function(item) {
-          if (count > 5) {
+        if (count > 10) {
+          item.removeClass("is-hidden");
+        } else {
+          setTimeout(function() {
             item.removeClass("is-hidden");
-          } else {
-            setTimeout(function() {
-              item.removeClass("is-hidden");
-            }, count * 100);
-          }
-          count++;
+          }, count * 100);
+        }
+        count++;
       };
       $(document)
         .find(".is-hidden.string-anim-line")
@@ -276,180 +289,44 @@ var custom = {
       });
     }
   },
-  animateChangeImgCanvas: {
-    createApp: function() {
-      var T = this;
-      var _width = $(".blockCross").width();
-      var _height = $(".blockCross").height()>$(window).height()?$(".blockCross").height():$(window).height();
-      this.animedThisMoment = false;
-      this.app = new PIXI.Application({
-        width: _width,
-        height: _height,
-        backgroundColor: 0xcdcdcd,
-        resolution: window.devicePixelRatio || 1
-      });
-      T.renderer = PIXI.autoDetectRenderer({
-        width: _width,
-        height: _height,
-        antialias: true,
-        transparent: true
-      });
-      //T.renderer.autoResize = true;
-      var href = location.href.split('?')[0];
-      var root = href.replace(href.split('/')[href.split('/').length-1],'');
-
-      T.container = new PIXI.Container();
-      T.sprite = new PIXI.Sprite.fromImage(root+"images/blur.jpg");
-      T.sprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-      T.sprite.x = 0;
-      T.sprite.y = 0;
-      T.filter = new PIXI.filters.DisplacementFilter(T.sprite);
-      T.filter.scale.x = 0;
-      T.filter.scale.y = 0;
-      T.container.filters = [T.filter];
-      T.container.addChild(T.sprite);
-      T.renderer.render(T.container);
-
-      $(document)
-        .find(".blockCross")
-        .append(T.renderer.view);
-    },
-    setImg: function() {
-      var T = this;
-      T.imgs = [];
-
-      $(".blockCross img").each(function() {
-        var src = $(this).attr("src");
-        var href = location.href.split('?')[0];
-        var root = href.replace(href.split('/')[href.split('/').length-1],'');
-        var texture = new PIXI.Texture.fromImage(root+src);
-        T.imgs.push(new PIXI.Sprite(texture));
-        var k = $(this)[0].naturalWidth / $(this)[0].naturalHeight;
-        var height_ = $(".blockCross").height() + 100;
-        if (T.renderer.width / k < height_) {
-          T.imgs[T.imgs.length - 1].width = height_ * k;
-          T.imgs[T.imgs.length - 1].height = height_;
-        } else {
-          T.imgs[T.imgs.length - 1].height = T.renderer.width / k;
-          T.imgs[T.imgs.length - 1].width = T.renderer.width;
-        }
-        
-        T.container.addChild(T.imgs[T.imgs.length - 1]);
-        T.imgs[T.imgs.length - 1].alpha = 0;
-      });
-      
-    },
-    updateFrame: function() {
-      var T = this;
-      cancelAnimationFrame(T.interval);
-      T.renderer.render(T.container);
-      T.interval = requestAnimationFrame(T.updateFrame.bind(T));
-    },
+  animateChangeHoverBlockCross: {
     events: function() {
-      var T = this;
       $(".blockCross_item").hover(
         function() {
-          T.update($(this).index());
+          var img = $(this)
+            .find(".item_img img")
+            .eq(0);
+          $(this)
+            .find(".item_img")
+            .addClass("show");
+          var k = img[0].naturalWidth / img[0].naturalHeight;
+          img.width(
+            $(this)
+              .find(".item_img")
+              .width()
+          );
+          if (img.width() / k < $(".blockCross").height() + 55) {
+            img.height($(".blockCross").height() + 55);
+            img.width(img.height() * k);
+          } else {
+            img.width(
+              $(this)
+                .find(".item_img")
+                .width()
+            );
+            img.height(img.width() / k);
+          }
         },
         function() {
-          //T.hide($(this).index())
+          $(".blockCross_item .item_img").removeClass("last");
+          $(this)
+            .find(".item_img")
+            .addClass("last");
+          $(".blockCross_item .item_img").removeClass("show");
         }
       );
-      $(".blockCross").hover(
-        function() {
-          T.updateFrame(true);
-        },
-        function() {
-          cancelAnimationFrame(T.interval);
-        }
-      );
-      $(document).on("scroll", function() {
-        var scroll = ($(document).scrollTop() - $('.blockCross canvas').offset().top )/5;
-        $('.blockCross canvas').css('transform','translateY('+scroll+'px)');
-      });
-      
-    },
-    hide: function(id) {
-      var T = this;
-      T.imgs[id].filter = [T.filterOut];
-    },
-    update: function(id) {
-      var T = this;
-      var time_r = 1;
-      var lenght = 150;
-      var offsetImg = lenght/10
-      if (T.active != id ) {
-        TweenMax.killAll(false, true, false);
-        if (!T.active && T.active != 0 ) {
-          T.filter.scale.x = -lenght;
-          T.imgs.forEach(function(item, key) {
-            TweenMax.to(item, time_r, { alpha: (key == id ?1:0 )});
-          });
-          TweenMax.to(T.filter.scale, time_r, { x: 0, onComplete:function(){
-          } });
-        } else {
-          T.imgs.forEach(function(item, key) {
-            if(key == id){
-              TweenMax.to(item, time_r/2, {ease: Power0.easeNone, x: offsetImg});
-              item.zIndex = -1;
-            }else{
-              TweenMax.to(item, time_r/2, {ease: Power0.easeNone, x: -offsetImg});
-              item.zIndex = 1;
-            }
-          });
-          TweenMax.to(T.filter.scale, time_r/2, {ease: Power0.easeNone, x: -lenght, onComplete:function(){
-            TweenMax.to(T.filter.scale, time_r/2, {ease: Power0.easeNone, x: 0 });
-              T.imgs.forEach(function(item,key) {
-                if(key != id){
-                  TweenMax.to(item, time_r, {ease: Power0.easeNone, alpha: 0 ,onComplete:function(){
-                  }});
-                }else{
-                  TweenMax.to(item, time_r, {ease: Power0.easeNone, alpha: 1});
-                  TweenMax.to(item, time_r/2, { x: 0});
-                }
-                
-              });
-            
-          }});
-          
-          
-          //TweenMax.to(T.filter.scale, time_r, { x: 0,delay: time_r });
-        }
-        T.active = id;
-      }
     },
     init: function() {
-      var T = this;
-      if ($(window).width() > 950) {
-          T.createApp();
-          $(document).on("preloadingFinish", function() {
-            T.setImg();
-          T.events();
-          });
-      }
-    }
-  },
-  animateChangeHoverBlockCross:{
-    events:function(){
-      $('.blockCross_item').hover(function(){
-        var img = $(this).find('.item_img img').eq(0);
-        $(this).find('.item_img').addClass('show')
-        var k = img[0].naturalWidth/img[0].naturalHeight;
-        img.width($(this).find('.item_img').width())
-        if(img.width()/k < $('.blockCross').height()+55){
-          img.height($('.blockCross').height()+55)
-          img.width(img.height()*k)
-        }else{
-          img.width($(this).find('.item_img').width())
-          img.height(img.width()/k)
-        }
-      },function(){
-        $('.blockCross_item .item_img').removeClass('last')
-        $(this).find('.item_img').addClass('last')
-        $('.blockCross_item .item_img').removeClass('show')
-      })
-    },
-    init:function(){
       this.events();
     }
   },
@@ -733,13 +610,15 @@ var custom = {
           dropdownCssClass: "title_select2"
         });
       });
-      $('.title_select').on('select2:open', function (e) {
-        var openBox = $(document).find('.title_select2');
-        openBox.css('min-width',$(window).width()+'px')
-        var left = -openBox.offset().left + parseInt(openBox.css('left')?openBox.css('left').replace('px'):0)
-        var paddleft = $('.page_head .title').offset().left;
-        openBox.css('left',left+'px')
-        openBox.css('padding-left',paddleft+'px')
+      $(".title_select").on("select2:open", function(e) {
+        var openBox = $(document).find(".title_select2");
+        openBox.css("min-width", $(window).width() + "px");
+        var left =
+          -openBox.offset().left +
+          parseInt(openBox.css("left") ? openBox.css("left").replace("px") : 0);
+        var paddleft = $(".page_head .title").offset().left;
+        openBox.css("left", left + "px");
+        openBox.css("padding-left", paddleft + "px");
       });
     },
     init: function() {
@@ -791,124 +670,141 @@ var custom = {
       this.events();
     }
   },
-  mapPointsOpenClose:{
-    events:function(){
-      $('.point .point_btn').click(function(){
-        $(this).parent().toggleClass('active');
-        if($(this).parent().hasClass('active')){
-          var height = $(this).parent().find('.point_item').height();
-          $(this).parent().find('.point_content').height(height+50)
-        }else{
-          $(this).parent().find('.point_content').attr('style','')
+  mapPointsOpenClose: {
+    events: function() {
+      $(".point .point_btn").click(function() {
+        $(this)
+          .parent()
+          .toggleClass("active");
+        if (
+          $(this)
+            .parent()
+            .hasClass("active")
+        ) {
+          var height = $(this)
+            .parent()
+            .find(".point_item")
+            .height();
+          $(this)
+            .parent()
+            .find(".point_content")
+            .height(height + 50);
+        } else {
+          $(this)
+            .parent()
+            .find(".point_content")
+            .attr("style", "");
         }
-      })
+      });
     },
-    init:function(){
+    init: function() {
       this.events();
     }
   },
-  mapWhereBuy:{
+  mapWhereBuy: {
     center: null,
-      createPlaceMark: function(coords, src, sity, name, link) {
-        var width = 400;
-        if ($(window).width() <= 600) width = 320;
-        return new ymaps.Placemark(
-          coords,
-          {
-            balloonContentHeader:
-              '<div class="yaMap_head">' +
-              '<img src="' +
-              src +
-              '" class="" height="174" width="' +
-              width +
-              '"/>' +
-              "</div>",
-            balloonContentBody:
-              '<div class="yaMap_content">' +
-              "<p>" +
-              sity +
-              "</p>" +
-              "<h3>" +
-              name +
-              "</h3>" +
-              '<a href="' +
-              link +
-              '" class="default-btn btn-gray">Перейти к проекту<a>' +
-              "</div>",
-            maxHeight: $(window).width() < 600 ? 174 : 260,
-            balloonContentFooter: "",
-            hintContent: name
-          },
-          {
-            hideIconOnBalloonOpen: false,
-            iconLayout: "default#image",
-            iconImageHref: "images/map.png",
-            iconImageSize: [44, 44],
-            iconImageOffset: [-22, -22]
-          }
-        );
-      },
-      create: function() {
-        var _this = this;
-        myMap = new ymaps.Map(
-          "map",
-          {
-            center: _this.center,
-            zoom: 6,
-            controls: [],
-          },
-          {
-            searchControlProvider: "yandex#search"
-          }
-        );
-        clusterer = new ymaps.Clusterer({
-          preset: 'islands#invertedVioletClusterIcons',
-          clusterIcons: [
-            {
-              href: "images/map.png",
-              size: [66, 66],
-              offset: [-33, -33]
-            }
-          ],
-          groupByCoordinates: false,
-          clusterIconColor: "black",
-          clusterHideIconOnBalloonOpen: false,
-          geoObjectHideIconOnBalloonOpen: false
-        });
-        if ($(".map_data .placeMark").length > 0) {
-          $(".map_data .placeMark").each(function() {
-            clusterer.add(
-              _this.createPlaceMark(
-                $(this)
-                  .attr("data-cords")
-                  .split(","),
-                $(this).attr("data-img"),
-                $(this).attr("data-sity"),
-                $(this).attr("data-name"),
-                $(this).attr("data-link")
-              )
-            );
-          });
+    createPlaceMark: function(coords, src, sity, name, link) {
+      var width = 400;
+      if ($(window).width() <= 600) width = 320;
+      return new ymaps.Placemark(
+        coords,
+        {
+          balloonContentHeader:
+            '<div class="yaMap_head">' +
+            '<img src="' +
+            src +
+            '" class="" height="174" width="' +
+            width +
+            '"/>' +
+            "</div>",
+          balloonContentBody:
+            '<div class="yaMap_content">' +
+            "<p>" +
+            sity +
+            "</p>" +
+            "<h3>" +
+            name +
+            "</h3>" +
+            '<a href="' +
+            link +
+            '" class="default-btn btn-gray">Перейти к проекту<a>' +
+            "</div>",
+          maxHeight: $(window).width() < 600 ? 174 : 260,
+          balloonContentFooter: "",
+          hintContent: name
+        },
+        {
+          hideIconOnBalloonOpen: false,
+          iconLayout: "default#image",
+          iconImageHref: "images/map.png",
+          iconImageSize: [44, 44],
+          iconImageOffset: [-22, -22]
         }
-        myMap.geoObjects.add(clusterer);
-        if ($("#map").hasClass("hasBalloon"))
-          myMap.geoObjects.options.set({ hasBalloon: false });
-        if ($(window).width() < 768) {
-          myMap.behaviors.disable("drag");
+      );
+    },
+    create: function() {
+      var _this = this;
+      myMap = new ymaps.Map(
+        "map",
+        {
+          center: _this.center,
+          zoom: 6,
+          controls: []
+        },
+        {
+          searchControlProvider: "yandex#search"
         }
-        myMap.events.add("click", function() {
-          myMap.balloon.close();
+      );
+      clusterer = new ymaps.Clusterer({
+        preset: "islands#invertedVioletClusterIcons",
+        clusterIcons: [
+          {
+            href: "images/map.png",
+            size: [66, 66],
+            offset: [-33, -33]
+          }
+        ],
+        groupByCoordinates: false,
+        clusterIconColor: "black",
+        clusterHideIconOnBalloonOpen: false,
+        geoObjectHideIconOnBalloonOpen: false
+      });
+      if ($(".map_data .placeMark").length > 0) {
+        $(".map_data .placeMark").each(function() {
+          clusterer.add(
+            _this.createPlaceMark(
+              $(this)
+                .attr("data-cords")
+                .split(","),
+              $(this).attr("data-img"),
+              $(this).attr("data-sity"),
+              $(this).attr("data-name"),
+              $(this).attr("data-link")
+            )
+          );
         });
-        myMap.behaviors.disable("scrollZoom");
-        myMap.controls.add(new ymaps.control.ZoomControl({
+      }
+      myMap.geoObjects.add(clusterer);
+      if ($("#map").hasClass("hasBalloon"))
+        myMap.geoObjects.options.set({ hasBalloon: false });
+      if ($(window).width() < 768) {
+        myMap.behaviors.disable("drag");
+      }
+      myMap.events.add("click", function() {
+        myMap.balloon.close();
+      });
+      myMap.behaviors.disable("scrollZoom");
+      myMap.controls.add(
+        new ymaps.control.ZoomControl({
           options: {
             size: "auto",
             float: "none",
             position: { right: 10, bottom: 40 }
           }
-        }));
-      },
-    init:function(){
+        })
+      );
+    },
+    init: function() {
       var _this = this;
       this.center =
         $(".map_data .placeMark").length > 0
@@ -925,143 +821,233 @@ var custom = {
       });
     }
   },
-  mapSliderInf:{
-    create:function(){
-      var sliderInf = new Swiper('.sliderRight_right .slider', {
-        slidesPerView: 1,
+  mapSliderInf: {
+    create: function() {
+      var sliderInf = new Swiper(".sliderRight_right .slider", {
+        slidesPerView: 1
       });
-      $(document).on('click','.sliderRight_prev',function(){
-        sliderInf.slidePrev()
-      })
-      $(document).on('click','.sliderRight_next',function(){
-        sliderInf.slideNext()
-      })
+      $(document).on("click", ".sliderRight_prev", function() {
+        sliderInf.slidePrev();
+      });
+      $(document).on("click", ".sliderRight_next", function() {
+        sliderInf.slideNext();
+      });
     },
-    init:function(){
+    init: function() {
       this.create();
     }
   },
-  setSizeImg:{
-    setSize:function(){
-      $('.img-full').each(function(){
-        var pwidth = $(this).width()
-        var pheight = $(this).height()
-        $(this).find('img').each(function(){
-          var nwidth = this.naturalWidth;
-          var nheight = this.naturalHeight;
-          
-          var k = nwidth/nheight
-          if($(this).height()*k < pwidth){
-            $(this).addClass('height-auto')
-          }
-          if($(this).width()/k <  pheight){
-            $(this).removeClass('height-auto')
-          }
-        })
-      })
+  setSizeImg: {
+    setSize: function() {
+      $(".img-full").each(function() {
+        var pwidth = $(this).width();
+        var pheight = $(this).height();
+        $(this)
+          .find("img")
+          .each(function() {
+            var nwidth = this.naturalWidth;
+            var nheight = this.naturalHeight;
+
+            var k = nwidth / nheight;
+            if ($(this).height() * k < pwidth) {
+              $(this).addClass("height-auto");
+            }
+            if ($(this).width() / k < pheight) {
+              $(this).removeClass("height-auto");
+            }
+          });
+      });
     },
-    init:function(){
+    init: function() {
       var _this = this;
       this.setSize();
-      $(window).on('resize',function(){
+      $(window).on("resize", function() {
         _this.setSize();
-      })
+      });
     }
   },
-  detailImgSlider:{
-    init:function(){
-        $('.newDetail_box .slider').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          speed: 600,
-          dots: true,
-          arrows: false,
-        })
+  detailImgSlider: {
+    init: function() {
+      $(".newDetail_box .slider").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        speed: 600,
+        dots: true,
+        arrows: false
+      });
     }
   },
-  rightMenu:{
-    events:function(){
-      $(document).on('click','.rightMenu',function(){
-        $(this).toggleClass('open')
+  rightMenu: {
+    events: function() {
+      $(document).on("click", ".rightMenu", function() {
+        $(this).toggleClass("open");
+      });
+      this.setFixedInScroll();
+      
+    },
+    setWidth: function() {
+      var _ = this;
+      var tempBox = document.createElement("div");
+      tempBox.className = "rightMenu-temp-wrapper";
+      $(".rightMenu-sub-content").css("width", "");
+      tempBox.innerHTML = $(".rightMenu-sub-content").eq(0)[0].outerHTML;
+      $(".page").append($(tempBox));
+      var width = $(tempBox)
+        .find(".rightMenu-sub-content")
+        .width();
+      $(tempBox).remove();
+      $(".rightMenu-sub-content").width(width);
+    },
+    updateRightMenu:function(){
+      var itemTop = $('.rightMenu-box').offset().top;
+      var itemLeft = $('.rightMenu-box').offset().left + $('.rightMenu-box').width();
+      var top = 73;
+      if($(window).width() > 950){
+        var topScroll = $(document).scrollTop() + $('.header').height();
+        
+        if(topScroll >= itemTop+top){
+          $('.rightMenu').addClass('fixed');
+          $('.rightMenu').css('left',itemLeft+'px')
+          $('.rightMenu').css('top',$('.header').height()+'px')
+        }
+      }else{
+        $('.rightMenu').removeClass('fixed');
+        $('.rightMenu').attr('style','')
+      }
+    },
+    setFixedInScroll:function(){
+      var _ = this;
+      $(document).on('scroll',function(){
+        _.updateRightMenu();
+      })
+      $(window).on('resize',function(){
+        _.updateRightMenu();
       })
     },
-    setWidth:function(){
+    init: function() {
       var _ = this;
-      var tempBox = document.createElement('div')
-      tempBox.className = 'rightMenu-temp-wrapper';
-      $('.rightMenu-sub-content').css('width','')
-      tempBox.innerHTML = $('.rightMenu-sub-content').eq(0)[0].outerHTML
-      $('.page').append($(tempBox))
-      var width = $(tempBox).find('.rightMenu-sub-content').width();
-      $(tempBox).remove()
-      $('.rightMenu-sub-content').width(width)
-    },
-    init:function(){
-      var _ = this;
-      _.events()
-      //_.setWidth();
-      if($('.rightMenu-sub').length>0)
-      {
-        if(!$('.rightMenu-sub').hasClass('mobile-col')){
-          $(window).on('load',function(){
+      _.events();
+      // _.setFixedInScroll();
+      // $(window).on("load", function() {
+      //   _.updateRightMenu();
+      // });
+      ///
+      if ($(".rightMenu-sub").length > 0) {
+        if (!$(".rightMenu-sub").hasClass("mobile-col")) {
+          $(window).on("load", function() {
             _.setWidth();
-          })
-          $(window).on('resize',function(){
+          });
+          $(window).on("resize", function() {
             _.setWidth();
-          })
+          });
         }
       }
+      
     }
   },
-  aboutSliders:{
-    years:function(){
+  aboutSliders: {
+    years: function() {
       var years = new Swiper(".yearSlider-years", {
         slidesPerView: 1,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
-        direction: "horizontal",
+        direction: "horizontal"
       });
       var texts = new Swiper(".yearSlider-texts", {
         slidesPerView: 1,
         thumbs: {
           swiper: years
-        },
+        }
       });
-      $(document).on('click','.yearSlider-prev',function(){
-        texts.slidePrev()
-      })
-      $(document).on('click','.yearSlider-next',function(){
-        texts.slideNext()
-      })
+      $(document).on("click", ".yearSlider-prev", function() {
+        texts.slidePrev();
+      });
+      $(document).on("click", ".yearSlider-next", function() {
+        texts.slideNext();
+      });
     },
-    imgs:function(){
+    imgs: function() {
       var imgs = new Swiper(".imgSlider-slider", {
         spaceBetween: 3,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         setWrapperSize: true,
         direction: "horizontal",
         centeredSlides: true,
-        loop:true,
+        loop: true,
         breakpoints: {
           768: {
-            spaceBetween: 30,
+            spaceBetween: 30
           },
           550: {
-            spaceBetween: 15,
+            spaceBetween: 15
           }
         }
       });
-      $(document).on('click','.imgSlider-prev',function(){
-        imgs.slidePrev()
-      })
-      $(document).on('click','.imgSlider-next',function(){
-        imgs.slideNext()
-      })
+      $(document).on("click", ".imgSlider-prev", function() {
+        imgs.slidePrev();
+      });
+      $(document).on("click", ".imgSlider-next", function() {
+        imgs.slideNext();
+      });
     },
-    init:function(){
-      if($('.yearSlider-years').length>0) this.years();
-      if($('.imgSlider-slider').length>0) this.imgs();
+    init: function() {
+      if ($(".yearSlider-years").length > 0) this.years();
+      if ($(".imgSlider-slider").length > 0) this.imgs();
+    }
+  },
+  cartCalcProd: {
+    events: function() {
+      var _ = this;
+      $(document).on("click", ".product .count-minus", function() {
+        var product = $(this).closest(".product");
+        var count = product.find("[name=count]");
+        var countNum = parseFloat(count.val())
+        if (countNum > 1) {
+          count.val(countNum - 1);
+          _.refresh();
+        } else {
+          _.removeItem(product);
+        }
+      });
+      $(document).on("click", ".product .count-plus", function() {
+        var product = $(this).closest(".product");
+        var count = product.find("[name=count]");
+        var countNum = parseFloat(count.val())
+        count.val(countNum + 1);
+        _.refresh();
+      });
+      $(document).on("click", ".product .summ-clear", function() {
+        var product = $(this).closest(".product");
+        _.removeItem(product);
+        _.refresh();
+      });
     },
+    refresh: function() {
+      var items = $(".product");
+      var allSumm = 0;
+      items.each(function() {
+        var price = parseFloat($(this).find("[name=price]").val());
+        var count = parseFloat($(this).find("[name=count]").val());
+        var summ = price * count;
+        $(this)
+          .find(".summ-value span")
+          .text(perfectNum(summ));
+        $(this)
+          .find(".count-value")
+          .text(count);
+        allSumm += summ;
+      });
+      $(".allSumm-value span").text(perfectNum(allSumm));
+    },
+    removeItem: function(item) {
+      console.log("Удаление эллемента: ", item.find(".product-name").text());
+      item.remove()
+      this.refresh()
+    },
+    init: function() {
+      this.events();
+      
+    }
   },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
@@ -1137,7 +1123,7 @@ var custom = {
       });
     });
   },
-  
+
   init: function() {
     this.animateHover.init();
     if ($(".filter_select").length > 0) this.filter.init();
@@ -1151,16 +1137,16 @@ var custom = {
     if ($(".zoom-item").length > 0) this.animateZoomOut.init();
     if ($(".string-anim").length > 0) this.animateFadeInLeftString.init();
     if ($(".paralax-child").length > 0) this.animateParalaxString.init();
-    //if ($(".blockCross").length > 0) this.animateChangeImgCanvas.init();
     if ($(".anim-scale").length > 0) this.animateScaleIn.init();
-    if ($('.point .point_btn').length > 0) this.mapPointsOpenClose.init();
-    if ($('#map').length > 0) this.mapWhereBuy.init();
-    if ($('.sliderRight_right').length > 0) this.mapSliderInf.init();
-    if ($('.blockCross').length > 0) this.animateChangeHoverBlockCross.init();
-    if ($('.img-full').length > 0) this.setSizeImg.init();
-    if ($('.newDetail_box .slider').length > 0) this.detailImgSlider.init();
-    if ($('.rightMenu').length > 0) this.rightMenu.init();
-    this.aboutSliders.init()
+    if ($(".point .point_btn").length > 0) this.mapPointsOpenClose.init();
+    if ($("#map").length > 0) this.mapWhereBuy.init();
+    if ($(".sliderRight_right").length > 0) this.mapSliderInf.init();
+    if ($(".blockCross").length > 0) this.animateChangeHoverBlockCross.init();
+    if ($(".img-full").length > 0) this.setSizeImg.init();
+    if ($(".newDetail_box .slider").length > 0) this.detailImgSlider.init();
+    if ($(".rightMenu").length > 0) this.rightMenu.init();
+    if ($(".product").length > 0) this.cartCalcProd.init();
+    this.aboutSliders.init();
     this.preloaderInit();
   }
 };
@@ -1168,10 +1154,36 @@ var popups = {
   setup: function() {
     $(".modalbox").fancybox();
   },
-  submits:function(){
-    $(document).on('submit','#question form',function(){
-      $.fancybox.open({type:'modal', href:'#question_success'})
-    })
+  submits: function() {
+    $(document).on("submit", "#question form", function(e) {
+      e.preventDefault();
+      var name = $(this).find('[name=name]')
+      var phone = $(this).find('[name=phone]')
+      var mail = $(this).find('[name=mail]')
+      var text = $(this).find('[name=text]')
+      var error = 0;
+      $(this).find('textarea,input').removeClass('error')
+      if(name.val() == ''){
+        error++;
+        name.addClass('error')
+      }
+      if(phone.val() == ''){
+        error++;
+        phone.addClass('error')
+      }
+      if(mail.val() == ''){
+        error++;
+        mail.addClass('error')
+      }
+      if(text.val() == ''){
+        error++;
+        text.addClass('error')
+      }
+      
+      $(document)
+        .find('[href="#question_success"]')
+        .click();
+    });
   },
   init: function() {
     this.setup();
@@ -1190,39 +1202,60 @@ var svgMap = {
       arrows: true,
       swipe: false
     });
-    var setClasses = function(slider,id){
-      var id_next,id_after_next;
-      if(id == slider.$slides.length-1){
-        id_next = 0
-        id_after_next = 1
-      }else if(id == slider.$slides.length-2){
-        id_next = id+1
-        id_after_next = 0
-      }else {
-        id_next = id+1
-        id_after_next = id+2
+    var setClasses = function(slider, id) {
+      var id_next, id_after_next;
+      if (id == slider.$slides.length - 1) {
+        id_next = 0;
+        id_after_next = 1;
+      } else if (id == slider.$slides.length - 2) {
+        id_next = id + 1;
+        id_after_next = 0;
+      } else {
+        id_next = id + 1;
+        id_after_next = id + 2;
       }
-      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('current')
-      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('next')
-      $('.dillerMap .slick-slide,.dillerMap .slick-cloned').removeClass('after_next')
+      $(".dillerMap .slick-slide,.dillerMap .slick-cloned").removeClass(
+        "current"
+      );
+      $(".dillerMap .slick-slide,.dillerMap .slick-cloned").removeClass("next");
+      $(".dillerMap .slick-slide,.dillerMap .slick-cloned").removeClass(
+        "after_next"
+      );
 
-      $('.dillerMap [data-slick-index="'+id+'"]').addClass('current')
-      $('.dillerMap [data-slick-index="'+id_next+'"]').addClass('next')
-      $('.dillerMap [data-slick-index="'+id_after_next+'"]').addClass('after_next')
+      $('.dillerMap [data-slick-index="' + id + '"]').addClass("current");
+      $('.dillerMap [data-slick-index="' + id_next + '"]').addClass("next");
+      $('.dillerMap [data-slick-index="' + id_after_next + '"]').addClass(
+        "after_next"
+      );
 
-      $('.dillerMap .slick-cloned').eq(id+1).addClass('current')
-      $('.dillerMap .slick-cloned').eq(id_next+1).addClass('next')
-      $('.dillerMap .slick-cloned').eq(id_after_next+1).addClass('after_next')
-      if(id == slider.$slides.length-1){
-        $('.dillerMap .slick-cloned').eq(0).addClass('current')
-      }else{
-        $('.dillerMap .slick-cloned').eq(id+1).addClass('current')
+      $(".dillerMap .slick-cloned")
+        .eq(id + 1)
+        .addClass("current");
+      $(".dillerMap .slick-cloned")
+        .eq(id_next + 1)
+        .addClass("next");
+      $(".dillerMap .slick-cloned")
+        .eq(id_after_next + 1)
+        .addClass("after_next");
+      if (id == slider.$slides.length - 1) {
+        $(".dillerMap .slick-cloned")
+          .eq(0)
+          .addClass("current");
+      } else {
+        $(".dillerMap .slick-cloned")
+          .eq(id + 1)
+          .addClass("current");
       }
-    }
-    $(document).on('beforeChange','.dillerMap_slider',function(e,slider,a,id){
-      setClasses(slider,id);
-    })
-    $(".dillerMap_slider").slick('slickGoTo',0);
+    };
+    $(document).on("beforeChange", ".dillerMap_slider", function(
+      e,
+      slider,
+      a,
+      id
+    ) {
+      setClasses(slider, id);
+    });
+    $(".dillerMap_slider").slick("slickGoTo", 0);
   },
   setPos: function(target) {
     var imgs = $(".dillerMap_map .box");
@@ -1388,3 +1421,7 @@ var priceSlider = {
   popups.init();
   priceSlider.init();
 })(jQuery);
+
+function perfectNum(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
