@@ -1153,6 +1153,14 @@ body .fancybox-container * {
     padding: 15px 0;
   }
 }
+.wrapper .def-form-box {
+  width: 100%;
+}
+.wrapper .def-form-box.error input,
+.wrapper .def-form-box.error textarea {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
+}
 .wrapper .def-form-checkbox input {
   display: none;
 }
@@ -1705,6 +1713,14 @@ body .fancybox-container * {
     padding: 15px 0;
   }
 }
+.fancybox-container .def-form-box {
+  width: 100%;
+}
+.fancybox-container .def-form-box.error input,
+.fancybox-container .def-form-box.error textarea {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
+}
 .fancybox-container .def-form-checkbox input {
   display: none;
 }
@@ -2170,6 +2186,14 @@ body .fancybox-container * {
     padding: 15px 0;
   }
 }
+.default-forms-box {
+  width: 100%;
+}
+.default-forms-box.error input,
+.default-forms-box.error textarea {
+  color: #FF4C4B;
+  border-color: #FF4C4B;
+}
 .default-forms-checkbox input {
   display: none;
 }
@@ -2232,5 +2256,15 @@ br.mobile {
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
   }
 }

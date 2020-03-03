@@ -912,7 +912,7 @@ body {
     border-bottom: 1px solid #e5e5e5;
     transition: 0.3s;
     &:hover{
-      border-color: #292929;;
+      border-color: #292929;
     }
     &:focus{
       border-color: #ff570f;
@@ -921,6 +921,7 @@ body {
       color: #FF4C4B;
       border-color: #FF4C4B;
     }
+    
     &-file {
       position: relative;
       padding-top: 30px;
@@ -953,6 +954,15 @@ body {
     }
     @media(max-width: 768px){
       padding: 15px 0;
+    }
+  }
+  &-box{
+    width: 100%;
+    &.error{
+      input,textarea{
+        color: #FF4C4B;
+        border-color: #FF4C4B;
+      }
     }
   }
   &-checkbox {
@@ -1029,3 +1039,14 @@ br.mobile{
     transform: translateX(-100%);
   }
 }
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
+}
+ 

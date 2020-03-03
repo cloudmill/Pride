@@ -879,70 +879,71 @@ var custom = {
   },
   rightMenu: {
     events: function() {
-      $(document).on("click", ".rightMenu", function() {
+      $(document).on("click", ".rightMenu-wrapper", function() {
         $(this).toggleClass("open");
       });
       this.setFixedInScroll();
-      
     },
-    setWidth: function() {
-      var _ = this;
-      var tempBox = document.createElement("div");
-      tempBox.className = "rightMenu-temp-wrapper";
-      $(".rightMenu-sub-content").css("width", "");
-      tempBox.innerHTML = $(".rightMenu-sub-content").eq(0)[0].outerHTML;
-      $(".page").append($(tempBox));
-      var width = $(tempBox)
-        .find(".rightMenu-sub-content")
-        .width();
-      $(tempBox).remove();
-      $(".rightMenu-sub-content").width(width);
-    },
-    updateRightMenu:function(){
-      var itemTop = $('.rightMenu-box').offset().top;
-      var itemLeft = $('.rightMenu-box').offset().left + $('.rightMenu-box').width();
-      var top = 73;
-      if($(window).width() > 950){
-        var topScroll = $(document).scrollTop() + $('.header').height();
-        
-        if(topScroll >= itemTop+top){
-          $('.rightMenu').addClass('fixed');
-          $('.rightMenu').css('left',itemLeft+'px')
-          $('.rightMenu').css('top',$('.header').height()+'px')
+    posRightMenu: {
+      update: function() {
+        var _ = this;
+        var itemTop = $(".rightMenu-box").offset().top;
+        var headerheight = $(".header").height() - 70;
+        var topScroll = $(document).scrollTop() + headerheight;
+        if ($(window).width() > 950) {
+          if (topScroll >= itemTop) {
+            _.setFixed();
+          } else {
+            _.clearFixed();
+          }
+        } else {
+          _.clearFixed();
         }
-      }else{
-        $('.rightMenu').removeClass('fixed');
-        $('.rightMenu').attr('style','')
+      },
+      setFixed: function() {
+        var itemLeft = $(".rightMenu-box").offset().left - 1;
+        var width = $(".rightMenu-box").outerWidth() / 2;
+        var headerheight = $(".header").height() - 70;
+        var offsetTop = 73;
+        var offsetBottom = 120;
+        $(".rightMenu-container").addClass("fixed");
+        $(".rightMenu-container").css("right", itemLeft + "px");
+        $(".rightMenu-container").css("left", "auto");
+        $(".rightMenu-container").css("top", headerheight + offsetTop + "px");
+        $(".rightMenu-container").width(width);
+        var offseTop = headerheight + offsetTop + $(document).scrollTop();
+        var heightBox = $(".rightMenu-container").height();
+        var offsetTopFooter = $(".footer").offset().top;
+
+        if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
+          var translate = offsetTopFooter - offsetBottom - (offseTop + heightBox);
+          $(".rightMenu-container").css(
+            "transform",
+            "translateY(" + translate + "px)"
+          );
+        }
+      },
+      clearFixed: function() {
+        $(".rightMenu-container").removeClass("fixed");
+        $(".rightMenu-container").attr("style", "");
       }
     },
-    setFixedInScroll:function(){
+    setFixedInScroll: function() {
       var _ = this;
-      $(document).on('scroll',function(){
-        _.updateRightMenu();
-      })
-      $(window).on('resize',function(){
-        _.updateRightMenu();
-      })
+      $(document).on("scroll", function() {
+        _.posRightMenu.update();
+      });
+      $(window).on("resize", function() {
+        _.posRightMenu.update();
+      });
     },
     init: function() {
       var _ = this;
       _.events();
-      // _.setFixedInScroll();
-      // $(window).on("load", function() {
-      //   _.updateRightMenu();
-      // });
+      $(window).on("load", function() {
+        _.posRightMenu.update();
+      });
       ///
-      if ($(".rightMenu-sub").length > 0) {
-        if (!$(".rightMenu-sub").hasClass("mobile-col")) {
-          $(window).on("load", function() {
-            _.setWidth();
-          });
-          $(window).on("resize", function() {
-            _.setWidth();
-          });
-        }
-      }
-      
     }
   },
   aboutSliders: {
@@ -1001,7 +1002,7 @@ var custom = {
       $(document).on("click", ".product .count-minus", function() {
         var product = $(this).closest(".product");
         var count = product.find("[name=count]");
-        var countNum = parseFloat(count.val())
+        var countNum = parseFloat(count.val());
         if (countNum > 1) {
           count.val(countNum - 1);
           _.refresh();
@@ -1012,7 +1013,7 @@ var custom = {
       $(document).on("click", ".product .count-plus", function() {
         var product = $(this).closest(".product");
         var count = product.find("[name=count]");
-        var countNum = parseFloat(count.val())
+        var countNum = parseFloat(count.val());
         count.val(countNum + 1);
         _.refresh();
       });
@@ -1026,8 +1027,16 @@ var custom = {
       var items = $(".product");
       var allSumm = 0;
       items.each(function() {
-        var price = parseFloat($(this).find("[name=price]").val());
-        var count = parseFloat($(this).find("[name=count]").val());
+        var price = parseFloat(
+          $(this)
+            .find("[name=price]")
+            .val()
+        );
+        var count = parseFloat(
+          $(this)
+            .find("[name=count]")
+            .val()
+        );
         var summ = price * count;
         $(this)
           .find(".summ-value span")
@@ -1041,12 +1050,11 @@ var custom = {
     },
     removeItem: function(item) {
       console.log("Удаление эллемента: ", item.find(".product-name").text());
-      item.remove()
-      this.refresh()
+      item.remove();
+      this.refresh();
     },
     init: function() {
       this.events();
-      
     }
   },
   preloaderInit: function() {
@@ -1144,7 +1152,7 @@ var custom = {
     if ($(".blockCross").length > 0) this.animateChangeHoverBlockCross.init();
     if ($(".img-full").length > 0) this.setSizeImg.init();
     if ($(".newDetail_box .slider").length > 0) this.detailImgSlider.init();
-    if ($(".rightMenu").length > 0) this.rightMenu.init();
+    if ($(".rightMenu-container").length > 0) this.rightMenu.init();
     if ($(".product").length > 0) this.cartCalcProd.init();
     this.aboutSliders.init();
     this.preloaderInit();
@@ -1157,29 +1165,31 @@ var popups = {
   submits: function() {
     $(document).on("submit", "#question form", function(e) {
       e.preventDefault();
-      var name = $(this).find('[name=name]')
-      var phone = $(this).find('[name=phone]')
-      var mail = $(this).find('[name=mail]')
-      var text = $(this).find('[name=text]')
+      var name = $(this).find("[name=name]");
+      var phone = $(this).find("[name=phone]");
+      var mail = $(this).find("[name=mail]");
+      var text = $(this).find("[name=text]");
       var error = 0;
-      $(this).find('textarea,input').removeClass('error')
-      if(name.val() == ''){
+      $(this)
+        .find("textarea,input")
+        .removeClass("error");
+      if (name.val() == "") {
         error++;
-        name.addClass('error')
+        name.addClass("error");
       }
-      if(phone.val() == ''){
+      if (phone.val() == "") {
         error++;
-        phone.addClass('error')
+        phone.addClass("error");
       }
-      if(mail.val() == ''){
+      if (mail.val() == "") {
         error++;
-        mail.addClass('error')
+        mail.addClass("error");
       }
-      if(text.val() == ''){
+      if (text.val() == "") {
         error++;
-        text.addClass('error')
+        text.addClass("error");
       }
-      
+
       $(document)
         .find('[href="#question_success"]')
         .click();
