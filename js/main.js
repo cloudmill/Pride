@@ -364,7 +364,7 @@ var custom = {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           closeOnSelect: false,
-          multiple: true,
+          //multiple: true,
           dropdownParent: $(".wrapper .page"),
           dropdownCssClass: "filter_select2"
         });
@@ -390,9 +390,11 @@ var custom = {
           $(".select2-results")
             .find(".select2_buts")
             .remove();
+            
           var buts =
             "<div class='select2_buts'><a href='' class='btn btn-gray select2_clear'>Сбросить</a><a href='' class='btn btn-orange select2_set'>Применить</a></div>";
-          $(".select2-results").append(buts);
+            if(this.hasAttribute('setButs'))
+            $(".select2-results").append(buts);
         });
         $(document).on("click", ".select2_clear,.select2_set", function(e) {
           e.preventDefault();

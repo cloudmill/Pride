@@ -3729,11 +3729,30 @@
             &__rendered {
               display: none;
             }
+            .select2-selection__arrow{
+              display: none;
+            }
           }
         }
         .filter_label {
           &.active {
             color: @orange;
+          }
+        }
+        &.border{
+          background: #ffffff;
+          border: 1px solid @gray;
+          height: 60px;
+          .select2 {
+            &:before {
+              pointer-events: none;
+              left: ~"calc(100% - 20px)";
+            }
+          }
+          .filter_slider_open {
+            &:before {
+              left: ~"calc(100% - 20px)";
+            }
           }
         }
       }
@@ -7169,8 +7188,79 @@
         }
       }
       &-order{
-        &-title{
+        margin-left: 40px;
+        margin-right: 40px;
+        .order-title{
           margin-bottom: 10px;
+        }
+        .rightMenu-order-link{
+          margin-bottom: 25px;
+        }
+        &-item{
+          position: relative;
+          padding: 15px 0;
+          padding-left: 90px;
+          border-bottom: 1px solid #E5E5E5;
+          &-title{
+            position: absolute;
+            left: 0;
+            top: 15px;
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 135%;
+            color: #8A8A8A;
+          }
+          &-inf{
+            text-align: right;
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 135%;
+            text-align: right;
+            color: #292929;
+            margin-bottom: 10px;
+          }
+          &-value{
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 34px;
+            text-align: right;
+            color: #292929;
+          }
+        }
+        &-result{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 0;
+          border-bottom: 1px solid #E5E5E5;
+          margin-bottom: 20px;
+          &-text{
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 135%;
+            color: #292929;
+          }
+          &-value{
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 34px;
+            text-align: right;
+            color: #292929;
+          }
+        }
+        &-btn{
+          width: 100%;
+          margin-bottom: 20px;
         }
       }
       &-item {
@@ -7236,6 +7326,7 @@
           }
         }
       }
+      
       @media (max-width: 950px) {
         &-container{
           position: relative;
@@ -7318,6 +7409,9 @@
           span {
             display: none;
           }
+        }
+        &-order{
+          display: none;
         }
       }
     }
@@ -9529,6 +9623,148 @@
         display: grid;
         grid-column-gap: 30px;
         grid-template-columns: 1fr 1fr;
+      }
+      &-form{
+        &-select{
+            margin-top: 30px;
+            .filter_label{
+              font-family: Helvetica Neue;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 18px;
+              line-height: 28px;
+              color: #292929;
+            }
+        }
+      }
+      &-check{
+        min-height: 28px;
+        margin-bottom: 40px;
+        label{
+         line-height: 29px;
+        }
+        .sub{
+          display: block;
+          text-decoration: none !important;
+          font-family: Helvetica Neue;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 21px;
+          color: #8A8A8A;
+          margin-top: 3px;
+          a{
+            text-decoration: none;
+            color: #292929;
+            margin-top: 18px;
+          }
+        }
+        
+      }
+      &-label-value{
+        display: flex;
+        justify-self: end;
+      }
+      &-succes{
+        &-title{
+          font-family: Druk Wide Medium Cy;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 30px;
+          line-height: 130%;
+          color: #292929;
+          margin-bottom: 60px;
+        }
+        &-buts{
+          display: flex;
+          margin-bottom: 100px;
+          a{
+            margin-right: 10px;
+            padding: 0 40px;
+          }
+        }
+      }
+      .rightMenu-box{
+        padding-bottom: 120px;
+      }
+      @media(max-width: 950px){
+        &-title{
+          margin-bottom: 30px;
+          &:not(:nth-child(1)){
+            margin-top: 40px;
+          }
+        }
+        .rightMenu-box{
+          padding-bottom: 40px;
+        }
+        &-succes{
+          &-title{
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 130%;
+            margin-bottom: 30px;
+          }
+          &-buts{
+            margin-bottom: 0;
+          }
+        }
+      }
+      @media(max-width: 768px){
+        &-title{
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 130%;
+        }
+        &-form{
+          &-select{
+            margin-top: 1px;
+          }
+        }
+        &-succes{
+          &-title{
+            font-size: 13px;
+          }
+        }
+      }
+      @media(max-width: 650px){
+        &-row{
+          display: block;
+        }
+        .def-form-input{
+          margin-bottom: 10px;
+        }
+        &-check{
+          margin-bottom: 20px
+        }
+        &-label-value{
+          margin-top: -10px;
+          margin-bottom: 30px;
+          margin-left: 50px;
+        }
+        &-type{
+          font-size: 14px;
+          a{
+           margin-right: 15px;
+          }
+        }
+        &-succes{
+          &-buts{
+            flex-wrap: wrap;
+            a{
+              line-height: 40px;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+      @media(max-width: 450px){
+        &-succes{
+          &-buts{
+            a{
+              width: 100%;
+            }
+          }
+        }
       }
     }
     #map {

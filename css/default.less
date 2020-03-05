@@ -921,7 +921,43 @@ body {
       color: #FF4C4B;
       border-color: #FF4C4B;
     }
-    
+    &-select{
+      background: #ffffff;
+      border: 1px solid @gray;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      margin:  30px 0;
+      width: 100%;
+      font-family: Helvetica Neue;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 28px;
+      color: #292929;
+      position: relative;
+      cursor: pointer;
+      padding: 0 25px;
+      &:before {
+        content: "";
+        height: 6px;
+        width: 13px;
+        background-image: url(../images/str_down.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: 0;
+        border-radius: 0;
+        transition: transform 0.3s ease-in-out;
+        filter: contrast(0) brightness(0);
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%) rotate(180deg);
+      }
+      @media(max-width: 768px){
+        margin:0;
+      }
+    }
     &-file {
       position: relative;
       padding-top: 30px;
@@ -966,6 +1002,7 @@ body {
     }
   }
   &-checkbox {
+    cursor: pointer;
     input {
       display: none;
       &:checked {
@@ -973,10 +1010,14 @@ body {
           &::after {
             opacity: 1;
           }
+          &:before{
+            border-color: #ff570f;
+          }
         }
       }
     }
     label {
+      cursor: pointer;
       font-family: Helvetica Neue;
       font-style: normal;
       font-weight: normal;
@@ -997,6 +1038,7 @@ body {
         height: 28px;
         border: 1px solid #e5e5e5;
         position: absolute;
+        transition: all 0.3s;
         top: 0;
         left: 0;
       }

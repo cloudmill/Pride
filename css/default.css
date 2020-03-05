@@ -1161,13 +1161,20 @@ body .fancybox-container * {
   color: #FF4C4B;
   border-color: #FF4C4B;
 }
+.wrapper .def-form-checkbox {
+  cursor: pointer;
+}
 .wrapper .def-form-checkbox input {
   display: none;
 }
 .wrapper .def-form-checkbox input:checked + label::after {
   opacity: 1;
 }
+.wrapper .def-form-checkbox input:checked + label:before {
+  border-color: #ff570f;
+}
 .wrapper .def-form-checkbox label {
+  cursor: pointer;
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
@@ -1189,6 +1196,7 @@ body .fancybox-container * {
   height: 28px;
   border: 1px solid #e5e5e5;
   position: absolute;
+  transition: all 0.3s;
   top: 0;
   left: 0;
 }
@@ -1721,13 +1729,20 @@ body .fancybox-container * {
   color: #FF4C4B;
   border-color: #FF4C4B;
 }
+.fancybox-container .def-form-checkbox {
+  cursor: pointer;
+}
 .fancybox-container .def-form-checkbox input {
   display: none;
 }
 .fancybox-container .def-form-checkbox input:checked + label::after {
   opacity: 1;
 }
+.fancybox-container .def-form-checkbox input:checked + label:before {
+  border-color: #ff570f;
+}
 .fancybox-container .def-form-checkbox label {
+  cursor: pointer;
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
@@ -1749,6 +1764,7 @@ body .fancybox-container * {
   height: 28px;
   border: 1px solid #e5e5e5;
   position: absolute;
+  transition: all 0.3s;
   top: 0;
   left: 0;
 }
@@ -2194,13 +2210,20 @@ body .fancybox-container * {
   color: #FF4C4B;
   border-color: #FF4C4B;
 }
+.default-forms-checkbox {
+  cursor: pointer;
+}
 .default-forms-checkbox input {
   display: none;
 }
 .default-forms-checkbox input:checked + label::after {
   opacity: 1;
 }
+.default-forms-checkbox input:checked + label:before {
+  border-color: #ff570f;
+}
 .default-forms-checkbox label {
+  cursor: pointer;
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
@@ -2222,6 +2245,7 @@ body .fancybox-container * {
   height: 28px;
   border: 1px solid #e5e5e5;
   position: absolute;
+  transition: all 0.3s;
   top: 0;
   left: 0;
 }
