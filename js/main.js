@@ -137,10 +137,14 @@ var custom = {
               $(".header").height() -
               50) /
             5;
-          $(this).css(
-            "transform",
-            "translateY(" + paralaxY + "px) scale(" + zoom + ")"
-          );
+          if ($(this).hasClass("no-translate")) {
+            $(this).css("transform", " scale(" + (parseFloat(zoom)+0.03) + ")");
+          } else {
+            $(this).css(
+              "transform",
+              "translateY(" + paralaxY + "px) scale(" + zoom + ")"
+            );
+          }
         });
     },
     events: function() {
@@ -390,11 +394,10 @@ var custom = {
           $(".select2-results")
             .find(".select2_buts")
             .remove();
-            
+
           var buts =
             "<div class='select2_buts'><a href='' class='btn btn-gray select2_clear'>Сбросить</a><a href='' class='btn btn-orange select2_set'>Применить</a></div>";
-            if(this.hasAttribute('setButs'))
-            $(".select2-results").append(buts);
+          if (this.hasAttribute("setButs")) $(".select2-results").append(buts);
         });
         $(document).on("click", ".select2_clear,.select2_set", function(e) {
           e.preventDefault();
@@ -918,7 +921,8 @@ var custom = {
         var offsetTopFooter = $(".footer").offset().top;
 
         if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
-          var translate = offsetTopFooter - offsetBottom - (offseTop + heightBox);
+          var translate =
+            offsetTopFooter - offsetBottom - (offseTop + heightBox);
           $(".rightMenu-container").css(
             "transform",
             "translateY(" + translate + "px)"

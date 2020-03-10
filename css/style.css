@@ -3658,6 +3658,10 @@ input:-webkit-autofill {
 .wrapper .page .choice_item:nth-child(4) {
   transform: translateX(-1px);
 }
+.wrapper .page .choice_item:hover .item_img img {
+  filter: none;
+  opacity: 1;
+}
 .wrapper .page .choice_item .item_head {
   display: flex;
   align-items: center;
@@ -3681,6 +3685,9 @@ input:-webkit-autofill {
 }
 .wrapper .page .choice_item .item_img img {
   max-height: 50px;
+  transition: 0.3s;
+  filter: grayscale(1);
+  opacity: 0.8;
 }
 .wrapper .page .choice_item .item_name {
   font-family: Druk Wide Medium Cy;
@@ -5221,12 +5228,14 @@ input:-webkit-autofill {
 }
 .wrapper .page .breadcrumbs .b_link:nth-child(n + 2) {
   margin-left: 10px;
-  color: #292929;
 }
 .wrapper .page .breadcrumbs .b_link:nth-child(n + 2):before {
   content: "—";
   margin-right: 10px;
   color: #8a8a8a;
+}
+.wrapper .page .breadcrumbs .b_link:last-child {
+  color: #292929;
 }
 @media (max-width: 950px) {
   .wrapper .page .breadcrumbs {
@@ -9141,9 +9150,6 @@ input:-webkit-autofill {
   z-index: -3;
   background: rgba(0, 0, 0, 0.27);
 }
-.wrapper .page .miniBanner:hover img {
-  transform: scale(1.1);
-}
 .wrapper .page .miniBanner-img {
   width: 50%;
   height: 100%;
@@ -9155,7 +9161,6 @@ input:-webkit-autofill {
 .wrapper .page .miniBanner-img img {
   width: auto;
   height: 100%;
-  transition: all 10s;
 }
 .wrapper .page .miniBanner-title {
   font-family: Druk Wide Medium Cy;
@@ -12850,7 +12855,7 @@ input:-webkit-autofill {
     font-size: 18px;
   }
   .wrapper .footer:before {
-    left: calc(50% - (100% - 360px)/6) ;
+    left: calc(50% - (100% - 365px)/6) ;
   }
 }
 @media (max-width: 1240px) {
