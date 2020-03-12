@@ -11805,6 +11805,7 @@ input:-webkit-autofill {
 }
 .wrapper .page .p404-content .content {
   height: 100%;
+  border-left: 0;
   display: flex;
   align-items: center;
 }
@@ -11813,7 +11814,7 @@ input:-webkit-autofill {
   overflow: hidden;
   display: inline-block;
   padding: 2px 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .wrapper .page .p404-content .content a.ready:before {
   animation-name: hoverBorderOutRight;
@@ -11883,6 +11884,7 @@ input:-webkit-autofill {
   left: 0;
   top: 0;
   z-index: 3;
+  border: 1px solid #333333;
 }
 .wrapper .page .p404-border .def-all:before {
   content: '';
@@ -11892,6 +11894,14 @@ input:-webkit-autofill {
   background: #FF570F;
   width: 100%;
   height: 100%;
+}
+.wrapper .page .p404-border .def-all:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
 }
 .wrapper .page .p404-border .def-v {
   width: 60px;
@@ -11912,9 +11922,23 @@ input:-webkit-autofill {
   width: 100%;
   height: 100%;
 }
+.wrapper .page .p404-border .def-v:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .def-v:after {
+  height: calc(100% - 60px);
+}
 @media (max-width: 768px) {
   .wrapper .page .p404-border .def-v {
     width: 30px;
+    height: calc(100% - 30px);
+  }
+  .wrapper .page .p404-border .def-v:after {
     height: calc(100% - 30px);
   }
 }
@@ -11928,12 +11952,6 @@ input:-webkit-autofill {
   background-position: center;
   background-image: url(../images/404-border-h.svg);
 }
-@media (max-width: 768px) {
-  .wrapper .page .p404-border .def-h {
-    width: calc(100% - 30px);
-    height: 30px;
-  }
-}
 .wrapper .page .p404-border .def-h:before {
   content: '';
   display: block;
@@ -11942,6 +11960,26 @@ input:-webkit-autofill {
   background: #FF570F;
   width: 100%;
   height: 100%;
+}
+.wrapper .page .p404-border .def-h:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .def-h:after {
+  width: calc(100% - 60px);
+}
+@media (max-width: 768px) {
+  .wrapper .page .p404-border .def-h {
+    width: calc(100% - 30px);
+    height: 30px;
+  }
+  .wrapper .page .p404-border .def-h:after {
+    width: calc(100% - 30px);
+  }
 }
 .wrapper .page .p404-border .left {
   width: 60px;
@@ -11953,6 +11991,7 @@ input:-webkit-autofill {
   background-position: center;
   background-image: url(../images/404-border.svg);
   left: 0;
+  animation: verticalMoving reverse linear 10s infinite;
 }
 .wrapper .page .p404-border .left:before {
   content: '';
@@ -11963,11 +12002,29 @@ input:-webkit-autofill {
   width: 100%;
   height: 100%;
 }
+.wrapper .page .p404-border .left:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .left:after {
+  height: calc(100% - 60px);
+}
 @media (max-width: 768px) {
   .wrapper .page .p404-border .left {
     width: 30px;
     height: calc(100% - 30px);
   }
+  .wrapper .page .p404-border .left:after {
+    height: calc(100% - 30px);
+  }
+}
+.wrapper .page .p404-border .left:after {
+  right: 0;
+  bottom: 0;
 }
 .wrapper .page .p404-border .right {
   width: 60px;
@@ -11980,6 +12037,7 @@ input:-webkit-autofill {
   background-image: url(../images/404-border.svg);
   right: 0;
   margin-top: 60px;
+  animation: verticalMoving linear 10s infinite;
 }
 .wrapper .page .p404-border .right:before {
   content: '';
@@ -11990,11 +12048,29 @@ input:-webkit-autofill {
   width: 100%;
   height: 100%;
 }
+.wrapper .page .p404-border .right:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .right:after {
+  height: calc(100% - 60px);
+}
 @media (max-width: 768px) {
   .wrapper .page .p404-border .right {
     width: 30px;
     height: calc(100% - 30px);
   }
+  .wrapper .page .p404-border .right:after {
+    height: calc(100% - 30px);
+  }
+}
+.wrapper .page .p404-border .right:after {
+  left: 0;
+  top: 0;
 }
 @media (max-width: 768px) {
   .wrapper .page .p404-border .right {
@@ -12011,13 +12087,8 @@ input:-webkit-autofill {
   background-position: center;
   background-image: url(../images/404-border-h.svg);
   margin-left: 60px;
+  animation: horisontalMoving linear 10s infinite;
   top: 0;
-}
-@media (max-width: 768px) {
-  .wrapper .page .p404-border .top {
-    width: calc(100% - 30px);
-    height: 30px;
-  }
 }
 .wrapper .page .p404-border .top:before {
   content: '';
@@ -12027,6 +12098,30 @@ input:-webkit-autofill {
   background: #FF570F;
   width: 100%;
   height: 100%;
+}
+.wrapper .page .p404-border .top:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .top:after {
+  width: calc(100% - 60px);
+}
+@media (max-width: 768px) {
+  .wrapper .page .p404-border .top {
+    width: calc(100% - 30px);
+    height: 30px;
+  }
+  .wrapper .page .p404-border .top:after {
+    width: calc(100% - 30px);
+  }
+}
+.wrapper .page .p404-border .top:after {
+  bottom: 0;
+  left: 0;
 }
 @media (max-width: 768px) {
   .wrapper .page .p404-border .top {
@@ -12043,12 +12138,7 @@ input:-webkit-autofill {
   background-position: center;
   background-image: url(../images/404-border-h.svg);
   bottom: 0;
-}
-@media (max-width: 768px) {
-  .wrapper .page .p404-border .bottom {
-    width: calc(100% - 30px);
-    height: 30px;
-  }
+  animation: horisontalMoving reverse linear 10s infinite;
 }
 .wrapper .page .p404-border .bottom:before {
   content: '';
@@ -12058,6 +12148,46 @@ input:-webkit-autofill {
   background: #FF570F;
   width: 100%;
   height: 100%;
+}
+.wrapper .page .p404-border .bottom:after {
+  content: '';
+  position: absolute;
+  background: black;
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+.wrapper .page .p404-border .bottom:after {
+  width: calc(100% - 60px);
+}
+@media (max-width: 768px) {
+  .wrapper .page .p404-border .bottom {
+    width: calc(100% - 30px);
+    height: 30px;
+  }
+  .wrapper .page .p404-border .bottom:after {
+    width: calc(100% - 30px);
+  }
+}
+.wrapper .page .p404-border .bottom:after {
+  top: 0;
+  right: 0;
+}
+@keyframes verticalMoving {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 560px;
+  }
+}
+@keyframes horisontalMoving {
+  0% {
+    background-position: 0% center ;
+  }
+  100% {
+    background-position: 570px center ;
+  }
 }
 .wrapper .page .p404-title {
   max-width: 255px;
