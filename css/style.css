@@ -3329,7 +3329,7 @@ input:-webkit-autofill {
   font-size: 24px;
   line-height: 40px;
   color: #292929;
-  margin-left: 60px;
+  margin-left: 110px;
   max-width: 550px;
   margin-top: 27px;
 }
@@ -9120,7 +9120,7 @@ input:-webkit-autofill {
   }
 }
 .wrapper .page .miniBanner {
-  padding-left: 440px;
+  padding-left: calc(100% / 3);
   padding-top: 80px;
   position: relative;
   margin-bottom: 80px;
@@ -10063,6 +10063,22 @@ input:-webkit-autofill {
   align-items: center;
   justify-content: space-between;
 }
+.wrapper .page .about-yearSlider .yearSlider-gradient {
+  width: 100%;
+  position: relative;
+}
+.wrapper .page .about-yearSlider .yearSlider-gradient:before {
+  bottom: 0;
+  right: 0;
+  content: '';
+  display: block;
+  height: 70px;
+  pointer-events: none;
+  z-index: 5;
+  width: 50%;
+  position: absolute;
+  background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 105.09%);
+}
 .wrapper .page .about-yearSlider .yearSlider-title {
   font-family: Druk Wide Medium Cy;
   font-style: normal;
@@ -10349,10 +10365,11 @@ input:-webkit-autofill {
 }
 .wrapper .page .about-imgSlider .imgSlider .def_but i {
   width: 11px;
-  height: 22px;
+  height: 20px;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(../images/str_right_black.svg);
+  transition: 0.3s;
 }
 .wrapper .page .about-imgSlider .imgSlider .def_but:hover i {
   background-image: url(../images/str_right_orange.svg);
@@ -10369,10 +10386,11 @@ input:-webkit-autofill {
 }
 .wrapper .page .about-imgSlider .imgSlider-prev i {
   width: 11px;
-  height: 22px;
+  height: 20px;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(../images/str_right_black.svg);
+  transition: 0.3s;
 }
 .wrapper .page .about-imgSlider .imgSlider-prev:hover i {
   background-image: url(../images/str_right_orange.svg);
@@ -10391,10 +10409,11 @@ input:-webkit-autofill {
 }
 .wrapper .page .about-imgSlider .imgSlider-next i {
   width: 11px;
-  height: 22px;
+  height: 20px;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(../images/str_right_black.svg);
+  transition: 0.3s;
 }
 .wrapper .page .about-imgSlider .imgSlider-next:hover i {
   background-image: url(../images/str_right_orange.svg);
@@ -10461,12 +10480,12 @@ input:-webkit-autofill {
   font-size: 30px;
   line-height: 120%;
   color: #292929;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 .wrapper .page .about-inf ul {
   margin: 0;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 .wrapper .page .about-inf ul li {
   list-style: none;
@@ -10554,7 +10573,7 @@ input:-webkit-autofill {
   line-height: 34px;
   color: #ffffff;
   margin: 0;
-  max-width: 320px;
+  max-width: 288px;
 }
 .wrapper .page .about-map .content h3 {
   font-family: Druk Wide Medium Cy;
@@ -10572,13 +10591,13 @@ input:-webkit-autofill {
   width: calc(100% /3);
   margin-bottom: 130px;
   margin-top: 110px;
-  padding-left: 20px;
+  padding-left: 30px;
   border-left: 1px solid #ffffff;
 }
 .wrapper .page .about-map-right {
   height: 327px;
   width: calc(100% /3);
-  padding-left: 20px;
+  padding-left: 30px;
   border-left: 1px solid #ffffff;
 }
 @media (max-width: 768px) {
