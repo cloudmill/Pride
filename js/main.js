@@ -624,6 +624,7 @@ var custom = {
         var paddleft = $(".page_head .title").offset().left;
         openBox.css("left", left + "px");
         openBox.css("padding-left", paddleft + "px");
+        openBox.css("padding-right", paddleft + "px");
       });
     },
     init: function() {
@@ -714,29 +715,30 @@ var custom = {
       return new ymaps.Placemark(
         coords,
         {
-          balloonContentHeader:
-            '<div class="yaMap_head">' +
-            '<img src="' +
-            src +
-            '" class="" height="174" width="' +
-            width +
-            '"/>' +
-            "</div>",
-          balloonContentBody:
-            '<div class="yaMap_content">' +
-            "<p>" +
-            sity +
-            "</p>" +
-            "<h3>" +
-            name +
-            "</h3>" +
-            '<a href="' +
-            link +
-            '" class="default-btn btn-gray">Перейти к проекту<a>' +
-            "</div>",
-          maxHeight: $(window).width() < 600 ? 174 : 260,
-          balloonContentFooter: "",
-          hintContent: name
+          hasBalloon : false 
+          // balloonContentHeader:
+          //   '<div class="yaMap_head">' +
+          //   '<img src="' +
+          //   src +
+          //   '" class="" height="174" width="' +
+          //   width +
+          //   '"/>' +
+          //   "</div>",
+          // balloonContentBody:
+          //   '<div class="yaMap_content">' +
+          //   "<p>" +
+          //   sity +
+          //   "</p>" +
+          //   "<h3>" +
+          //   name +
+          //   "</h3>" +
+          //   '<a href="' +
+          //   link +
+          //   '" class="default-btn btn-gray">Перейти к проекту<a>' +
+          //   "</div>",
+          // maxHeight: $(window).width() < 600 ? 174 : 260,
+          // balloonContentFooter: "",
+          // hintContent: name
         },
         {
           hideIconOnBalloonOpen: false,
@@ -829,7 +831,8 @@ var custom = {
   mapSliderInf: {
     create: function() {
       var sliderInf = new Swiper(".sliderRight_right .slider", {
-        slidesPerView: 1
+        slidesPerView: 1,
+
       });
       $(document).on("click", ".sliderRight_prev", function() {
         sliderInf.slidePrev();
