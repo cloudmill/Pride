@@ -161,7 +161,7 @@ var custom = {
   animateFadeInLeftString: {
     create: function() {
       $(document)
-        .find(".string-anim,.string-anim-content p")
+        .find(".string-anim,.string-anim-content > p")
         .each(function() {
           var item = this;
           var stiring = item.innerHTML.replace(/\r?\n/g, "");
@@ -955,6 +955,80 @@ var custom = {
       ///
     }
   },
+  fixedContainerLeft:{
+    events: function() {
+      this.setFixedInScroll();
+    },
+    pos: {
+      update: function() {
+        var _ = this;
+        var itemTop = $(".fixed-box-root").offset().top;
+        var headerheight = $(".header").height() - 70;
+        var topScroll = $(document).scrollTop() + headerheight;
+        if ($(window).width() > 768) {
+          if (topScroll >= itemTop) {
+            _.setFixed();
+          } else {
+            _.clearFixed();
+          }
+        } else {
+          _.clearFixed();
+        }
+      },
+      setFixed: function() {
+        
+        var width = $(".fixed-box-root").outerWidth() / 2;
+
+        var itemLeft = $(".fixed-box-root").offset().left - width;
+        var headerheight = $(".header").height() - 70;
+        var offsetTop = 73;
+        var offsetBottom = 0;
+        $('.fixed-conteiner')
+        $(".fixed-container").addClass("fixed");
+        $(".fixed-container").css("left", itemLeft + "px");
+        $(".fixed-container").css("top", headerheight + offsetTop + "px");
+        $(".fixed-container").width(width);
+        var offseTop = headerheight + offsetTop + $(document).scrollTop();
+        
+        var offsetTopFooter = $(".fixed-box-root").offset().top + $(".fixed-box-root").outerHeight();
+        $(".fixed-container").each(function(){
+          var heightBox = $(this).height();
+
+          if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
+            var translate =
+              offsetTopFooter - offsetBottom - (offseTop + heightBox);
+              $(this).css(
+              "transform",
+              "translateY(" + translate + "px)"
+            );
+          }
+        })
+
+        
+      },
+      clearFixed: function() {
+        $(".fixed-container").removeClass("fixed");
+        $(".fixed-container").attr("style", "");
+      }
+    },
+    setFixedInScroll: function() {
+      var _ = this;
+      $(document).on("scroll", function() {
+        _.pos.update();
+      });
+      $(window).on("resize", function() {
+        _.pos.update();
+      });
+    },
+    init: function() {
+      var _ = this;
+      _.events();
+      $(window).on("load", function() {
+        _.pos.update();
+      });
+      ///
+    }
+  },
   aboutSliders: {
     years: function() {
       var years = new Swiper(".yearSlider-years", {
@@ -1163,6 +1237,7 @@ var custom = {
     if ($(".newDetail_box .slider").length > 0) this.detailImgSlider.init();
     if ($(".rightMenu-container").length > 0) this.rightMenu.init();
     if ($(".product").length > 0) this.cartCalcProd.init();
+    if ($(".fixed-container").length > 0) this.fixedContainerLeft.init();
     this.aboutSliders.init();
     this.preloaderInit();
   }

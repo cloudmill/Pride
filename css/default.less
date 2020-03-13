@@ -375,6 +375,12 @@ body {
         height: 16px;
         background-image: url(../images/str_left_black.svg);
       }
+      &-orange{
+        .def-icon;
+        width: 40px;
+        height: 16px;
+        background-image: url(../images/str_left_orange.svg);
+      }
     }
     &-geo {
       .def-icon;
@@ -1102,4 +1108,22 @@ input:-webkit-autofill {
     background: transparent;
   }
 }
- 
+.fixed{
+  &-container{
+    &.fixed{
+      position: fixed;
+      &>*{
+        left: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        position: relative !important;
+        width: auto;
+        display: flex;
+        &.right-pos{
+          margin-left: auto;
+          max-width: 100px;
+        }
+      }
+    }
+  }
+}
