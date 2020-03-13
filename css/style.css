@@ -2473,6 +2473,9 @@ input:-webkit-autofill {
   width: 123px;
   height: 42px;
 }
+.wrapper .header.scrolled .basket_list {
+  max-height: calc(100vh - 78px);
+}
 .wrapper .header .logo {
   border-right: 1px solid #e5e5e5;
   height: 100%;
@@ -2653,12 +2656,6 @@ input:-webkit-autofill {
 }
 .wrapper .header .cart.active {
   background: #ff570f;
-}
-.wrapper .header .cart.active i {
-  filter: contrast(0) brightness(2);
-}
-.wrapper .header .cart.active .count {
-  color: #ffffff;
 }
 .wrapper .header .cart .count {
   font-style: normal;
@@ -2906,7 +2903,7 @@ input:-webkit-autofill {
 }
 @media (max-width: 1920px) {
   .wrapper .header .basket:before {
-    right: 269px;
+    right: 151px;
   }
 }
 @media (max-width: 1440px) {
@@ -3133,7 +3130,7 @@ input:-webkit-autofill {
   background: #ff570f;
 }
 .wrapper .header .basket_list {
-  max-height: 670px;
+  max-height: calc(100vh - 150px);
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 70px;
