@@ -634,6 +634,7 @@
         overflow-x: hidden;
         padding-top: 70px;
         padding-bottom: 200px;
+        transition: all 0.3s ease-in-out;
         &::-webkit-scrollbar-track {
           background: #e8e8e8;
         }
@@ -2689,6 +2690,7 @@
         position: relative;
         transition: all 0.8s ease-in-out;
         overflow: hidden;
+        
         &_box {
           align-items: flex-start;
           position: unset;
@@ -2978,7 +2980,6 @@
       &_item {
         flex-basis: 25%;
         padding: 35px 40px;
-        background-color: #ffffff;
         min-height: 400px;
         border-right: 1px solid @gray;
         border-top: 1px solid @gray;
@@ -2986,6 +2987,8 @@
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        .grayBgHover;
         &:nth-child(4n) {
           border-right: 0;
         }
@@ -2994,9 +2997,13 @@
           .catalog_item {
             &_img {
               opacity: 0;
+              .plus{
+                transform: translateX(200%);
+              }
             }
             &_content {
               opacity: 1;
+              transform: translateX(0);
             }
           }
         }
@@ -3018,14 +3025,11 @@
           padding: 35px 40px;
           height: 200px;
           transition: all 0.3s ease-in-out;
-          img {
-            max-width: 140px;
-            max-height: 140px;
-          }
           .plus {
             height: 40px;
             width: 40px;
             position: relative;
+            transition: 0.6s ease-in-out;;
             &:before {
               content: "";
               display: block;
@@ -3055,7 +3059,8 @@
           z-index: 2;
           position: relative;
           opacity: 0;
-          transition: all 0.3s ease-in-out;
+          transform: translateX(-100%);
+          transition: all 0.6s ease-in-out;
         }
         &_list {
           margin-bottom: 20px;
@@ -3516,13 +3521,14 @@
         }
         &_num {
           font-size: 16px;
-          line-height: 135%;
+          line-height: 50px;
           text-align: center;
           color: #292929;
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 50px;
+          height: 48px;
+          padding-top: 2px;
           width: 50px;
           min-width: 50px;
           position: absolute;
@@ -3554,6 +3560,7 @@
           font-size: 16px;
           line-height: 135%;
           color: #292929;
+          margin-bottom: 15px;
         }
       }
 

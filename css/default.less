@@ -1127,3 +1127,47 @@ input:-webkit-autofill {
     }
   }
 }
+
+.grayBgHover{
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #f9f9f9;
+    animation-name: newBlur;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+  &.ready {
+    &::before {
+      animation-name: newBlur;
+    }
+  }
+  &:hover{
+    &::before {
+      animation-name: newHover;
+    }
+  }
+}
+@keyframes newHover {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes newBlur {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
