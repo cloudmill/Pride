@@ -657,6 +657,19 @@ body .fancybox-container * {
 .wrapper .plusBox_link.def-gray.ready:hover:before {
   animation-name: hoverBorderOutRight;
 }
+.wrapper .plusBox_link.typeHide:before {
+  animation-name: none !important;
+}
+.wrapper .plusBox_link.typeHide:after {
+  animation-name: hoverBorderOutRightD;
+  animation-duration: 0.3s;
+}
+.wrapper .plusBox_link.typeHide:hover:before {
+  animation-name: none !important;
+}
+.wrapper .plusBox_link.typeHide:hover:after {
+  animation-name: hoverBorderInLeft;
+}
 .wrapper .plusBox_link:before {
   position: absolute;
   content: "";
@@ -1222,6 +1235,12 @@ body .fancybox-container * {
 .wrapper .def-form-checkbox input:checked + label:before {
   border-color: #ff570f;
 }
+.wrapper .def-form-checkbox input[type='radio'] + label:after {
+  width: 14px;
+  top: 8px;
+  height: 14px;
+  background: #ff570f;
+}
 .wrapper .def-form-checkbox label {
   cursor: pointer;
   font-family: Helvetica Neue;
@@ -1313,6 +1332,19 @@ body .fancybox-container * {
 }
 .hoverLineMoved.def-gray.ready:hover:before {
   animation-name: hoverBorderOutRight;
+}
+.hoverLineMoved.typeHide:before {
+  animation-name: none !important;
+}
+.hoverLineMoved.typeHide:after {
+  animation-name: hoverBorderOutRightD;
+  animation-duration: 0.3s;
+}
+.hoverLineMoved.typeHide:hover:before {
+  animation-name: none !important;
+}
+.hoverLineMoved.typeHide:hover:after {
+  animation-name: hoverBorderInLeft;
 }
 .hoverLineMoved:before {
   position: absolute;
@@ -1828,6 +1860,12 @@ body .fancybox-container * {
 }
 .fancybox-container .def-form-checkbox input:checked + label:before {
   border-color: #ff570f;
+}
+.fancybox-container .def-form-checkbox input[type='radio'] + label:after {
+  width: 14px;
+  top: 8px;
+  height: 14px;
+  background: #ff570f;
 }
 .fancybox-container .def-form-checkbox label {
   cursor: pointer;
@@ -2349,6 +2387,12 @@ body .fancybox-container * {
 .default-forms-checkbox input:checked + label:before {
   border-color: #ff570f;
 }
+.default-forms-checkbox input[type='radio'] + label:after {
+  width: 14px;
+  top: 8px;
+  height: 14px;
+  background: #ff570f;
+}
 .default-forms-checkbox label {
   cursor: pointer;
   font-family: Helvetica Neue;
@@ -2410,6 +2454,14 @@ br.mobile {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+@keyframes hoverBorderOutRightD {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 @keyframes hoverBorderOutRight {
@@ -6190,7 +6242,7 @@ input:-webkit-autofill {
   z-index: 1152;
 }
 .wrapper .page .filter_select2:before {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 100%;
@@ -7378,6 +7430,11 @@ input:-webkit-autofill {
   width: 100%;
   height: 100%;
 }
+.wrapper .page .detail_imgs_box .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .wrapper .page .detail_imgs .swiper-slide {
   vertical-align: middle;
   text-align: center;
@@ -7792,14 +7849,14 @@ input:-webkit-autofill {
   border: 0;
   background: none;
   cursor: pointer;
-  padding-bottom: 1px;
+  padding-bottom: 3px;
   text-align: right;
 }
 .wrapper .page .tabsBox_item.active {
   cursor: default;
 }
-.wrapper .page .tabsBox_item.active::before {
-  animation-name: none;
+.wrapper .page .tabsBox_item:not(.active)::before {
+  animation-name: none !important;
   transform: translate(0) !important;
 }
 .wrapper .page .tabsBox_item:last-child {
@@ -8984,9 +9041,9 @@ input:-webkit-autofill {
   position: absolute;
   left: 0;
   top: 0;
-  content: '';
+  content: "";
   z-index: -1;
-  background: #FF570F;
+  background: #ff570f;
 }
 .wrapper .page .newDetail_box .video .play:before {
   content: "";
@@ -11349,6 +11406,19 @@ input:-webkit-autofill {
 .wrapper .page .partners-text p a.def-gray.ready:hover:before {
   animation-name: hoverBorderOutRight;
 }
+.wrapper .page .partners-text p a.typeHide:before {
+  animation-name: none !important;
+}
+.wrapper .page .partners-text p a.typeHide:after {
+  animation-name: hoverBorderOutRightD;
+  animation-duration: 0.3s;
+}
+.wrapper .page .partners-text p a.typeHide:hover:before {
+  animation-name: none !important;
+}
+.wrapper .page .partners-text p a.typeHide:hover:after {
+  animation-name: hoverBorderInLeft;
+}
 .wrapper .page .partners-text p a:before {
   position: absolute;
   content: "";
@@ -11879,6 +11949,19 @@ input:-webkit-autofill {
 .wrapper .page .searchPage-searchResult.not-found a.def-gray.ready:hover:before {
   animation-name: hoverBorderOutRight;
 }
+.wrapper .page .searchPage-searchResult.not-found a.typeHide:before {
+  animation-name: none !important;
+}
+.wrapper .page .searchPage-searchResult.not-found a.typeHide:after {
+  animation-name: hoverBorderOutRightD;
+  animation-duration: 0.3s;
+}
+.wrapper .page .searchPage-searchResult.not-found a.typeHide:hover:before {
+  animation-name: none !important;
+}
+.wrapper .page .searchPage-searchResult.not-found a.typeHide:hover:after {
+  animation-name: hoverBorderInLeft;
+}
 .wrapper .page .searchPage-searchResult.not-found a:before {
   position: absolute;
   content: "";
@@ -12070,6 +12153,19 @@ input:-webkit-autofill {
 }
 .wrapper .page .p404-content .content a.def-gray.ready:hover:before {
   animation-name: hoverBorderOutRight;
+}
+.wrapper .page .p404-content .content a.typeHide:before {
+  animation-name: none !important;
+}
+.wrapper .page .p404-content .content a.typeHide:after {
+  animation-name: hoverBorderOutRightD;
+  animation-duration: 0.3s;
+}
+.wrapper .page .p404-content .content a.typeHide:hover:before {
+  animation-name: none !important;
+}
+.wrapper .page .p404-content .content a.typeHide:hover:after {
+  animation-name: hoverBorderInLeft;
 }
 .wrapper .page .p404-content .content a:before {
   position: absolute;
@@ -13386,6 +13482,17 @@ input:-webkit-autofill {
 .wrapper .hidden-inf {
   display: none !important;
 }
+.fancybox-container.fancybox-is-closing .popupFadeInRight {
+  animation-name: hideInRightPopup !important;
+}
+@keyframes hideInRightPopup {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 .fancybox-container .popupCenter {
   max-width: 100%;
   width: 800px;
@@ -13462,6 +13569,9 @@ input:-webkit-autofill {
   max-height: 100%;
   margin-left: auto;
   overflow: auto;
+  animation-name: fadeInRightPopup;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
 }
 .fancybox-container .popupFadeInRight::-webkit-scrollbar-track {
   background: #e8e8e8;
@@ -13472,6 +13582,14 @@ input:-webkit-autofill {
 }
 .fancybox-container .popupFadeInRight::-webkit-scrollbar-thumb {
   background: #ff570f;
+}
+@keyframes fadeInRightPopup {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 @media (max-width: 850px) {
   .fancybox-container .popupCenter {
@@ -13550,6 +13668,11 @@ input:-webkit-autofill {
 .fancybox-container .detail_imgs_box {
   width: 100%;
   height: 100%;
+}
+.fancybox-container .detail_imgs_box .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fancybox-container .detail_imgs .swiper-slide {
   vertical-align: middle;
@@ -13962,6 +14085,11 @@ input:-webkit-autofill {
 .detailPageBlock_imgs_box {
   width: 100%;
   height: 100%;
+}
+.detailPageBlock_imgs_box .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .detailPageBlock_imgs .swiper-slide {
   vertical-align: middle;

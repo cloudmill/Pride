@@ -707,6 +707,23 @@ body {
       }
     }
   }
+  &.typeHide{
+      &:before{
+        animation-name: none !important;
+      }
+    &:after {
+      animation-name: hoverBorderOutRightD;
+      animation-duration: 0.3s;
+    }
+    &:hover{
+      &:before{
+        animation-name: none !important;
+      }
+      &:after{
+        animation-name: hoverBorderInLeft;
+      }
+    }
+  }
   &:before {
     position: absolute;
     content: "";
@@ -1024,6 +1041,16 @@ body {
           }
         }
       }
+      &[type='radio'] {
+        & + label {
+          &:after {
+            width: 14px;
+            top: 8px;
+            height: 14px;
+            background: @orange;
+          }
+        }
+      }
     }
     label {
       cursor: pointer;
@@ -1089,6 +1116,14 @@ br.mobile {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+@keyframes hoverBorderOutRightD {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 @keyframes hoverBorderOutRight {

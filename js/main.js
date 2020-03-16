@@ -138,7 +138,10 @@ var custom = {
               50) /
             5;
           if ($(this).hasClass("no-translate")) {
-            $(this).css("transform", " scale(" + (parseFloat(zoom)+0.03) + ")");
+            $(this).css(
+              "transform",
+              " scale(" + (parseFloat(zoom) + 0.03) + ")"
+            );
           } else {
             $(this).css(
               "transform",
@@ -174,6 +177,7 @@ var custom = {
           });
           var temp = document.createElement("div");
           $(temp).width($(item).width());
+          var d = document.querySelector(temp);
           temp.className = "string-anim-temp";
           item.appendChild(temp);
           var height = 0;
@@ -715,7 +719,7 @@ var custom = {
       return new ymaps.Placemark(
         coords,
         {
-          hasBalloon : false 
+          hasBalloon: false
           // balloonContentHeader:
           //   '<div class="yaMap_head">' +
           //   '<img src="' +
@@ -831,8 +835,7 @@ var custom = {
   mapSliderInf: {
     create: function() {
       var sliderInf = new Swiper(".sliderRight_right .slider", {
-        slidesPerView: 1,
-
+        slidesPerView: 1
       });
       $(document).on("click", ".sliderRight_prev", function() {
         sliderInf.slidePrev();
@@ -955,7 +958,7 @@ var custom = {
       ///
     }
   },
-  fixedContainerLeft:{
+  fixedContainerLeft: {
     events: function() {
       this.setFixedInScroll();
     },
@@ -976,35 +979,31 @@ var custom = {
         }
       },
       setFixed: function() {
-        
         var width = $(".fixed-box-root").outerWidth() / 2;
 
         var itemLeft = $(".fixed-box-root").offset().left - width;
         var headerheight = $(".header").height() - 70;
         var offsetTop = 73;
         var offsetBottom = 0;
-        $('.fixed-conteiner')
+        $(".fixed-conteiner");
         $(".fixed-container").addClass("fixed");
         $(".fixed-container").css("left", itemLeft + "px");
         $(".fixed-container").css("top", headerheight + offsetTop + "px");
         $(".fixed-container").width(width);
         var offseTop = headerheight + offsetTop + $(document).scrollTop();
-        
-        var offsetTopFooter = $(".fixed-box-root").offset().top + $(".fixed-box-root").outerHeight();
-        $(".fixed-container").each(function(){
+
+        var offsetTopFooter =
+          $(".fixed-box-root").offset().top +
+          $(".fixed-box-root").outerHeight();
+        $(".fixed-container").each(function() {
           var heightBox = $(this).height();
 
           if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
             var translate =
               offsetTopFooter - offsetBottom - (offseTop + heightBox);
-              $(this).css(
-              "transform",
-              "translateY(" + translate + "px)"
-            );
+            $(this).css("transform", "translateY(" + translate + "px)");
           }
-        })
-
-        
+        });
       },
       clearFixed: function() {
         $(".fixed-container").removeClass("fixed");
@@ -1077,6 +1076,27 @@ var custom = {
     init: function() {
       if ($(".yearSlider-years").length > 0) this.years();
       if ($(".imgSlider-slider").length > 0) this.imgs();
+    }
+  },
+  detailCalcProd: {
+    update: function(delta) {
+      var count = parseInt($("input[name=count]").eq(0).val());
+      if (delta) count += delta;
+      if (count < 0) count = 0;
+      $(".detail_count-value").text(count);
+      $("input[name=count]").val(count);
+    },
+    events: function() {
+      var _ = this;
+      $(document).on("click", ".detail_count-minus", function() {
+        _.update(-1);
+      });
+      $(document).on("click", ".detail_count-plus", function() {
+        _.update(1);
+      });
+    },
+    init: function() {
+      this.events();
     }
   },
   cartCalcProd: {
@@ -1237,6 +1257,7 @@ var custom = {
     if ($(".newDetail_box .slider").length > 0) this.detailImgSlider.init();
     if ($(".rightMenu-container").length > 0) this.rightMenu.init();
     if ($(".product").length > 0) this.cartCalcProd.init();
+    if ($(".detail_count").length > 0) this.detailCalcProd.init();
     if ($(".fixed-container").length > 0) this.fixedContainerLeft.init();
     this.aboutSliders.init();
     this.preloaderInit();

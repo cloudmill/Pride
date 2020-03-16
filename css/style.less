@@ -36,8 +36,8 @@
           height: 42px;
         }
       }
-      .basket{
-        &_list{
+      .basket {
+        &_list {
           max-height: ~"calc(100vh - 78px)";
         }
       }
@@ -2690,7 +2690,7 @@
         position: relative;
         transition: all 0.8s ease-in-out;
         overflow: hidden;
-        
+
         &_box {
           align-items: flex-start;
           position: unset;
@@ -2997,7 +2997,7 @@
           .catalog_item {
             &_img {
               opacity: 0;
-              .plus{
+              .plus {
                 transform: translateX(200%);
               }
             }
@@ -3029,7 +3029,7 @@
             height: 40px;
             width: 40px;
             position: relative;
-            transition: 0.6s ease-in-out;;
+            transition: 0.6s ease-in-out;
             &:before {
               content: "";
               display: block;
@@ -3873,8 +3873,8 @@
         border: 0;
         border-radius: 0;
         z-index: 1152;
-        &:before{
-          content: '';
+        &:before {
+          content: "";
           display: block;
           width: 100%;
           height: 100%;
@@ -5129,12 +5129,14 @@
         border: 0;
         background: none;
         cursor: pointer;
-        padding-bottom: 1px;
+        padding-bottom: 3px;
         text-align: right;
         &.active {
           cursor: default;
+        }
+        &:not(.active){
           &::before {
-            animation-name: none;
+            animation-name: none !important;
             transform: translate(0) !important;
           }
         }
@@ -6274,14 +6276,15 @@
             border: 14px solid rgba(255, 87, 15, 0.6);
             transform: translate(-50%, -50%);
             cursor: pointer;
-            &:after{
+            &:after {
               width: 100%;
               height: 100%;
               position: absolute;
-              left:0;
-              top:0;
-              content:'';z-index: -1;;
-              background: #FF570F;
+              left: 0;
+              top: 0;
+              content: "";
+              z-index: -1;
+              background: #ff570f;
             }
             &:before {
               content: "";
@@ -6299,8 +6302,8 @@
               left: 50%;
               top: 50%;
               transform: translate(-50%, -16px);
-              width:40px;
-              height:32px;
+              width: 40px;
+              height: 32px;
               transition: 0.3s;
               overflow: hidden;
               &:after {
@@ -6315,8 +6318,8 @@
                 transform: translate(-50%, 0);
               }
             }
-            &:hover{
-              span{
+            &:hover {
+              span {
                 height: 0;
               }
             }
@@ -6594,8 +6597,8 @@
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -13px);
-                width:32px;
-                height:26px;
+                width: 32px;
+                height: 26px;
                 transition: 0.3s;
                 overflow: hidden;
                 &:after {
@@ -10356,6 +10359,21 @@
 }
 .fancybox {
   &-container {
+    &.fancybox-is-closing{
+      .popup {
+        &FadeInRight {
+          animation-name: hideInRightPopup !important;
+          @keyframes hideInRightPopup {
+            0% {
+              transform: translateX(0%);
+            }
+            100% {
+              transform: translateX(100%);
+            }
+          }
+        }
+      }
+    }
     .popup {
       &Center {
         max-width: 100%;
@@ -10437,6 +10455,9 @@
         max-height: 100%;
         margin-left: auto;
         overflow: auto;
+        animation-name: fadeInRightPopup;
+        animation-duration: 0.6s;
+        animation-fill-mode: both;
         &::-webkit-scrollbar-track {
           background: #e8e8e8;
         }
@@ -10446,6 +10467,14 @@
         }
         &::-webkit-scrollbar-thumb {
           background: @orange;
+        }
+        @keyframes fadeInRightPopup {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
         }
       }
       @media (max-width: 850px) {
@@ -10537,11 +10566,19 @@
     &_box {
       width: 100%;
       height: 100%;
+      .swiper {
+        &-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
     }
     .swiper {
       &-slide {
         vertical-align: middle;
         text-align: center;
+
         &-thumb {
           &-active {
             border-color: @orange;
