@@ -3444,6 +3444,9 @@ input:-webkit-autofill {
   right: 0;
   width: 100%;
 }
+.wrapper .page .banner.inside:before {
+  content: none;
+}
 .wrapper .page .banner .page_head {
   border: 0;
 }
@@ -3462,12 +3465,21 @@ input:-webkit-autofill {
   position: absolute;
   left: 0;
   bottom: 60px;
-  height: 80px;
+  height: 56px;
   width: 100%;
-  background-image: url(../images/word_prode.svg);
+  background-image: url(../images/pride_line.png);
   background-repeat: repeat-x;
-  background-position: center;
+  background-position: 0 center;
   background-size: contain;
+  animation: lineMoveLeft 5s infinite linear;
+}
+@keyframes lineMoveLeft {
+  0% {
+    background-position: 346px center ;
+  }
+  100% {
+    background-position: 0px center ;
+  }
 }
 .wrapper .page .banner_content {
   font-family: "Druk Wide Medium Cy";
@@ -8258,6 +8270,14 @@ input:-webkit-autofill {
     border: 0;
   }
 }
+.wrapper .page_head .title.typeLeft {
+  margin-left: -110px;
+}
+@media (max-width: 1240px) {
+  .wrapper .page_head .title.typeLeft {
+    margin-left: 0px;
+  }
+}
 .wrapper .page-print {
   position: absolute;
   right: 40px;
@@ -11374,6 +11394,7 @@ input:-webkit-autofill {
   font-size: 16px;
   line-height: 26px;
   color: #292929;
+  max-width: 600px;
 }
 .wrapper .page .partners-text p a {
   transform: translateY(10px);
@@ -11573,9 +11594,7 @@ input:-webkit-autofill {
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  background-position: left center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  overflow: hidden;
   margin-bottom: 20px;
 }
 .wrapper .page .partners-img-block-list {
@@ -11592,9 +11611,19 @@ input:-webkit-autofill {
   right: auto;
   left: 40px;
 }
-.wrapper .page .partners-img-block.left .partners-img-block-plus {
+.wrapper .page .partners-img-block.left .plusBox {
   right: auto;
   left: 40px;
+}
+.wrapper .page .partners-img-block.left .plusBox_plus {
+  right: auto;
+  left: 0;
+}
+.wrapper .page .partners-img-block:hover .plusBox_plus {
+  transform: translateY(0);
+}
+.wrapper .page .partners-img-block:hover .plusBox_link {
+  transform: translateY(45px);
 }
 .wrapper .page .partners-img-block:before {
   content: "";
@@ -11642,39 +11671,32 @@ input:-webkit-autofill {
   width: 80%;
   background: #ff570f;
 }
-.wrapper .page .partners-img-block-plus {
-  height: 40px;
-  width: 40px;
+.wrapper .page .partners-img-block .plusBox {
   position: absolute;
   right: 40px;
   bottom: 40px;
   z-index: 3;
 }
-.wrapper .page .partners-img-block-plus:before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s;
-  background: #ff570f;
-  position: absolute;
-  animation-name: none;
+.wrapper .page .partners-img-block .plusBox_plus {
+  left: auto;
+  right: 0;
 }
-.wrapper .page .partners-img-block-plus:after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
-  background: #ff570f;
-  transition: all 0.3s;
+.wrapper .page .partners-img-block .plusBox_link {
+  color: white;
+}
+.wrapper .page .partners-img-container {
   position: absolute;
-  animation-name: none;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .wrapper .page .partners-corp {
   display: flex;
@@ -11846,17 +11868,15 @@ input:-webkit-autofill {
     right: 20px;
     font-size: 20px;
   }
-  .wrapper .page .partners-img-block-plus {
+  .wrapper .page .partners-img-block .plusBox {
     bottom: 20px;
     right: 20px;
-    height: 20px;
-    width: 20px;
   }
   .wrapper .page .partners-img-block.left .partners-img-block-num {
     right: auto;
     left: 20px;
   }
-  .wrapper .page .partners-img-block.left .partners-img-block-plus {
+  .wrapper .page .partners-img-block.left .plusBox {
     left: 20px;
     right: auto;
   }

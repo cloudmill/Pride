@@ -177,7 +177,6 @@ var custom = {
           });
           var temp = document.createElement("div");
           $(temp).width($(item).width());
-          var d = document.querySelector(temp);
           temp.className = "string-anim-temp";
           item.appendChild(temp);
           var height = 0;

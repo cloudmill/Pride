@@ -880,6 +880,11 @@
           }
         }
       }
+      &.inside{
+        &:before{
+          content: none;
+        }
+      }
       .page_head {
         border: 0;
         p {
@@ -898,12 +903,22 @@
         position: absolute;
         left: 0;
         bottom: 60px;
-        height: 80px;
+        height: 56px;
         width: 100%;
-        background-image: url(../images/word_prode.svg);
+        background-image: url(../images/pride_line.png);
         background-repeat: repeat-x;
-        background-position: center;
+        background-position: 0 center;
         background-size: contain;
+        animation: lineMoveLeft 5s infinite linear;
+        @keyframes lineMoveLeft {
+          0%{
+            background-position:346px center ;
+          }
+          100%{
+            background-position:0px center ;
+          }
+          
+        }
       }
       &_content {
         font-family: "Druk Wide Medium Cy";
@@ -5557,6 +5572,14 @@
       @media (max-width: 950px) {
         border: 0;
       }
+      .title{
+        &.typeLeft{
+          margin-left: -110px;
+          @media (max-width: 1240px) {
+            margin-left: 0px;
+          }
+        }
+      }
     }
     &-print {
       position: absolute;
@@ -8632,6 +8655,7 @@
           font-size: 16px;
           line-height: 26px;
           color: #292929;
+          max-width: 600px;
           a {
             transform: translateY(10px);
             .hoverLineMoved;
@@ -8757,9 +8781,7 @@
         justify-content: flex-end;
         align-items: center;
         position: relative;
-        background-position: left center;
-        background-size: cover;
-        background-repeat: no-repeat;
+        overflow: hidden;
         margin-bottom: 20px;
         &-list {
           margin-bottom: 60px;
@@ -8775,9 +8797,23 @@
               right: auto;
               left: 40px;
             }
-            &-plus {
+          }
+          .plusBox {
+            right: auto;
+            left: 40px;
+            &_plus{
               right: auto;
-              left: 40px;
+              left: 0;
+            }
+          }
+        }
+        &:hover{
+          .plusBox {
+            &_plus {
+              transform: translateY(0);
+            }
+            &_link {
+              transform: translateY(45px);
             }
           }
         }
@@ -8827,40 +8863,33 @@
             background: @orange;
           }
         }
-        &-plus {
-          height: 40px;
-          width: 40px;
+        .plusBox {
           position: absolute;
           right: 40px;
           bottom: 40px;
           z-index: 3;
-          &:before {
-            content: "";
-            display: block;
-            width: 100%;
-            height: 1px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.3s;
-            background: @orange;
-            position: absolute;
-            animation-name: none;
+          &_plus{
+            left: auto;
+            right: 0;
           }
-          &:after {
-            content: "";
-            display: block;
-            width: 100%;
-            height: 1px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(90deg);
-            background: @orange;
-            transition: all 0.3s;
-            position: absolute;
-            animation-name: none;
+          &_link{
+            color: white;
           }
         }
+      }
+      &-img-container{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        left: 0;
+        top:0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-position: left center;
+        background-size: cover;
+        background-repeat: no-repeat;
       }
       &-corp {
         display: flex;
@@ -9039,11 +9068,9 @@
             right: 20px;
             font-size: 20px;
           }
-          &-plus {
+          .plusBox {
             bottom: 20px;
             right: 20px;
-            height: 20px;
-            width: 20px;
           }
           &.left {
             .partners-img-block {
@@ -9051,10 +9078,10 @@
                 right: auto;
                 left: 20px;
               }
-              &-plus {
-                left: 20px;
-                right: auto;
-              }
+            }
+            .plusBox {
+              left: 20px;
+              right: auto;
             }
           }
         }
