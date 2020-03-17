@@ -4224,7 +4224,7 @@ input:-webkit-autofill {
 }
 @media (max-width: 950px) {
   .wrapper .page .dillerMap_slider .slick-slide.after_next .dillerMap_slider_item {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
 }
 .wrapper .page .dillerMap_slider .slick-arrow {
@@ -4357,15 +4357,15 @@ input:-webkit-autofill {
     content: none;
   }
   .wrapper .page .dillerMap_slider_item .bigger {
-    font-size: 26px;
+    font-size: 30px;
   }
   .wrapper .page .dillerMap_slider_item .normal {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: -1px;
   }
-  .wrapper .page .dillerMap_slider .slick-current .dillerMap_slider_item .normal {
-    font-size: 26px;
-    margin-top: -3px;
+  .wrapper .page .dillerMap_slider .slick-slide.current .dillerMap_slider_item .normal {
+    font-size: 30px;
+    margin-top: 6px;
   }
   .wrapper .page .dillerMap_slider .slick-next {
     left: auto;
@@ -4416,6 +4416,17 @@ input:-webkit-autofill {
     flex-direction: column;
     padding: 20px 30px;
     align-items: center;
+  }
+  .wrapper .page .dillerMap_slider_item .bigger {
+    font-size: 26px;
+  }
+  .wrapper .page .dillerMap_slider_item .normal {
+    font-size: 15px;
+    margin-top: -1px;
+  }
+  .wrapper .page .dillerMap_slider .slick-slide.current .dillerMap_slider_item .normal {
+    font-size: 26px;
+    margin-top: 6px;
   }
   .wrapper .page .dillerMap_link {
     text-align: center;
