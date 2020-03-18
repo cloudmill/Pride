@@ -170,7 +170,7 @@
       height: ~"calc(100% + 1px)";
       &.active {
         background: @orange;
-        &:before{
+        &:before {
           animation-name: BtnHover;
         }
         i {
@@ -404,7 +404,7 @@
         background-image: url(../images/angle.svg);
         z-index: 3;
         @media (min-width: 1801px) {
-          right:  270px;
+          right: 270px;
         }
         @media (max-width: 1620px) {
           right: 151px;
@@ -886,8 +886,8 @@
           }
         }
       }
-      &.inside{
-        &:before{
+      &.inside {
+        &:before {
           content: none;
         }
       }
@@ -917,13 +917,12 @@
         background-size: contain;
         animation: lineMoveLeft 5s infinite linear;
         @keyframes lineMoveLeft {
-          0%{
-            background-position:346px center ;
+          0% {
+            background-position: 346px center;
           }
-          100%{
-            background-position:0px center ;
+          100% {
+            background-position: 0px center;
           }
-          
         }
       }
       &_content {
@@ -996,8 +995,8 @@
         left: 50%;
         transform: translate(-50%, -80px);
         z-index: 1;
-        &.right-pos{
-          @media(min-width:951px){
+        &.right-pos {
+          @media (min-width: 951px) {
             margin-left: 100px;
           }
         }
@@ -1836,7 +1835,6 @@
       }
       @media (max-width: 950px) {
         padding-top: 35px;
-        height: 763px;
         &_box {
           padding-top: 35px;
           &:before {
@@ -1889,7 +1887,7 @@
         }
         &_conditions {
           position: absolute;
-          bottom: 100px;
+          bottom: 140px;
           margin: 0;
           width: auto;
           padding-left: 0;
@@ -1930,7 +1928,7 @@
           padding: 20px 30px;
           align-items: center;
         }
-        &_slider{
+        &_slider {
           &_item {
             .bigger {
               font-size: 26px;
@@ -2173,6 +2171,9 @@
         &_item {
           .item {
             &_img {
+              &-box {
+                opacity: 1;
+              }
               img {
                 width: auto;
                 height: 106%;
@@ -2193,6 +2194,19 @@
           border-bottom: 1px solid @gray;
           border-left: 0 !important;
           overflow: hidden;
+          .item {
+            &_img {
+              min-width: 100%;
+              min-height: 100%;
+              height: 100%;
+              width: 100%;
+              transform: none !important;
+              img {
+                width: 100%;
+                height: auto;
+              }
+            }
+          }
           &:before {
             content: "";
             display: block;
@@ -2224,9 +2238,11 @@
         &_item {
           .item {
             &_img {
-              height: 100%;
-              width: auto;
               min-width: auto;
+              img {
+                height: 100%;
+                width: auto;
+              }
             }
           }
         }
@@ -2558,6 +2574,22 @@
         &.offsetBottom {
           padding-bottom: 70px;
         }
+        &_box {
+          .content {
+            &::-webkit-scrollbar {
+              width: 0;
+            }
+            -ms-overflow-style: none;
+            overflow: -moz-scrollbars-none;
+            &::-webkit-scrollbar {
+              width: 0 !important;
+              height: 0 !important;
+            }
+            &::-webkit-scrollbar-thumb {
+              background: transparent;
+            }
+          }
+        }
         & > .priceSlider_box > .content:first-child {
           overflow-x: scroll;
           overflow-y: hidden;
@@ -2600,11 +2632,12 @@
             .slider {
               &_item {
                 z-index: 1;
-                padding-bottom: 130px;
+                padding-bottom: 75px !important;
                 &_buts {
                   opacity: 1;
                   top: auto;
                   bottom: 0px;
+                  height: 50px;
                 }
                 &:hover {
                   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
@@ -3309,6 +3342,7 @@
           line-height: 135%;
           color: #292929;
           margin-bottom: 20px;
+          text-align: left;
         }
         &_inf {
           display: flex;
@@ -3450,6 +3484,19 @@
           margin: 20px 0;
         }
       }
+      @media (max-width: 768px) {
+        &_typePos {
+          padding: 0 15px;
+        }
+        &_item {
+          &:nth-child(2n) {
+            border-right: 1px solid @gray !important;
+          }
+          &:nth-child(2n-1) {
+            border-left: 1px solid @gray !important;
+          }
+        }
+      }
       @media (max-width: 650px) {
         .content {
           border: 0;
@@ -3568,6 +3615,14 @@
         &:nth-child(3) {
           transform: translateX(-1px);
         }
+        &:hover {
+          .brand_img {
+            img {
+              filter: none;
+              opacity: 1;
+            }
+          }
+        }
         &_head {
           display: flex;
           align-items: center;
@@ -3592,6 +3647,9 @@
         &_img {
           img {
             max-height: 50px;
+            transition: 0.3s;
+            filter: grayscale(1);
+            opacity: 0.8;
           }
         }
         &_name {
@@ -4075,6 +4133,19 @@
           background: #ffffff;
           box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.09);
           padding: 20px 30px;
+          &:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: content-box;
+            background: #fff;
+            position: absolute;
+            z-index: -1;
+            left: -1px;
+            top: 0;
+            padding: 0 1px;
+          }
           .tooltip {
             display: none !important;
           }
@@ -4633,6 +4704,7 @@
         }
       }
       @media (max-width: 650px) {
+        border-bottom: 1px solid @gray;
         .content {
           width: 100%;
           margin: 0;
@@ -4653,11 +4725,11 @@
         }
       }
       @media (max-width: 500px) {
-        height: 45px;
+        height: 50px;
         overflow: hidden;
         cursor: pointer;
         position: relative;
-        border-bottom: 1px solid @gray;
+        border-top: 1px solid @gray;
         &.haveLink {
           padding-top: 45px;
           height: 90px;
@@ -4675,7 +4747,7 @@
           content: "";
           position: absolute;
           right: 15px;
-          top: 17px;
+          top: 21px;
           background-repeat: no-repeat;
           background-image: url(../images/str_down.svg);
           background-position: center;
@@ -5102,6 +5174,16 @@
           }
         }
       }
+      @media (max-width: 650px) {
+        &_select2 {
+          .select2 {
+            &-results__option {
+              width: 100%;
+              flex-basis: 100%;
+            }
+          }
+        }
+      }
       @media (max-width: 500px) {
         &_input {
           input {
@@ -5186,7 +5268,7 @@
         &.active {
           cursor: default;
         }
-        &:not(.active){
+        &:not(.active) {
           &::before {
             animation-name: none !important;
             transform: translate(0) !important;
@@ -5323,8 +5405,8 @@
             &:nth-of-type(2n-1) {
               margin-right: 10px;
             }
-            &:hover{
-              background-color: #DFDFDF;
+            &:hover {
+              background-color: #dfdfdf;
             }
           }
           &_name {
@@ -5613,8 +5695,8 @@
       @media (max-width: 950px) {
         border: 0;
       }
-      .title{
-        &.typeLeft{
+      .title {
+        &.typeLeft {
           margin-left: -110px;
           @media (max-width: 1240px) {
             margin-left: 0px;
@@ -7233,25 +7315,25 @@
         left: 100%;
         top: 73px;
         width: 50%;
-        @media(min-width: 951px){
+        @media (min-width: 951px) {
           height: ~"calc(100vh - 240px)";
-          &.solo{
-            height:auto
+          &.solo {
+            height: auto;
           }
         }
         &.fixed {
           position: fixed;
         }
-        &>*{
-          &:nth-child(2){
+        & > * {
+          &:nth-child(2) {
             margin-top: auto;
           }
         }
       }
       &-wrapper {
         margin-left: 40px;
-       
-        @media(min-width: 951px){
+
+        @media (min-width: 951px) {
           height: 100%;
           display: flex;
           flex-direction: column;
@@ -8853,13 +8935,13 @@
           .plusBox {
             right: auto;
             left: 40px;
-            &_plus{
+            &_plus {
               right: auto;
               left: 0;
             }
           }
         }
-        &:hover{
+        &:hover {
           .plusBox {
             &_plus {
               transform: translateY(0);
@@ -8920,22 +9002,22 @@
           right: 40px;
           bottom: 40px;
           z-index: 3;
-          &_plus{
+          &_plus {
             left: auto;
             right: 0;
           }
-          &_link{
+          &_link {
             color: white;
           }
         }
       }
-      &-img-container{
+      &-img-container {
         position: absolute;
         width: 100%;
         height: 100%;
         z-index: -1;
         left: 0;
-        top:0;
+        top: 0;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -9289,6 +9371,7 @@
         }
         &-searchResult {
           margin: 0;
+          border-bottom: 0;
           font-size: 14px;
         }
       }
@@ -10304,6 +10387,7 @@
         margin-bottom: 0;
       }
       &_copyright {
+        margin-top: 15px;
         &.mobile {
           display: block;
         }
@@ -10438,7 +10522,7 @@
 }
 .fancybox {
   &-container {
-    &.fancybox-is-closing{
+    &.fancybox-is-closing {
       .popup {
         &FadeInRight {
           animation-name: hideInRightPopup !important;
@@ -10557,11 +10641,15 @@
         }
       }
       @media (max-width: 850px) {
+        padding: 70px 100px;
         &Center {
           width: 100%;
         }
       }
       @media (max-width: 650px) {
+        &FadeInRight {
+          padding: 35px 30px;
+        }
         &Center {
           padding: 30px 15px;
           &_col {

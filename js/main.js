@@ -300,28 +300,33 @@ var custom = {
     events: function() {
       $(".blockCross_item").hover(
         function() {
-          var img = $(this)
-            .find(".item_img img")
-            .eq(0);
-          $(this)
-            .find(".item_img")
-            .addClass("show");
-          var k = img[0].naturalWidth / img[0].naturalHeight;
-          img.width(
+          if ($(window).width() > 950) {
+            var img = $(this)
+              .find(".item_img img")
+              .eq(0);
             $(this)
               .find(".item_img")
-              .width()
-          );
-          if (img.width() / k < $(".blockCross").height() + 55) {
-            img.height($(".blockCross").height() + 55);
-            img.width(img.height() * k);
-          } else {
+              .addClass("show");
+            var k = img[0].naturalWidth / img[0].naturalHeight;
             img.width(
               $(this)
                 .find(".item_img")
                 .width()
             );
-            img.height(img.width() / k);
+            if (img.width() / k < $(".blockCross").height() + 55) {
+              img.height($(".blockCross").height() + 55);
+              img.width(img.height() * k);
+            } else {
+              img.width(
+                $(this)
+                  .find(".item_img")
+                  .width()
+              );
+              img.height(img.width() / k);
+            }
+          }else{
+            var img = $(this)
+            img.attr('style','')
           }
         },
         function() {
@@ -798,7 +803,7 @@ var custom = {
       if ($("#map").hasClass("hasBalloon"))
         myMap.geoObjects.options.set({ hasBalloon: false });
       if ($(window).width() < 768) {
-        myMap.behaviors.disable("drag");
+       // myMap.behaviors.disable("drag");
       }
       myMap.events.add("click", function() {
         myMap.balloon.close();
@@ -946,8 +951,8 @@ var custom = {
           $(".rightMenu-box").height() - 120
         ) {
           $(".rightMenu-container").height($(".rightMenu-box").height() - 120);
-        }else{
-          $(".rightMenu-container").css('height','')
+        } else {
+          $(".rightMenu-container").css("height", "");
         }
       },
       clearFixed: function() {
