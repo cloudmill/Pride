@@ -170,11 +170,14 @@
       height: ~"calc(100% + 1px)";
       &.active {
         background: @orange;
+        &:before{
+          animation-name: BtnHover;
+        }
         i {
-          //filter: contrast(0) brightness(2);
+          filter: contrast(0) brightness(2);
         }
         .count {
-          //color: #ffffff;
+          color: #ffffff;
         }
       }
       .count {
@@ -400,7 +403,10 @@
         background-size: contain;
         background-image: url(../images/angle.svg);
         z-index: 3;
-        @media (max-width: 1920px) {
+        @media (min-width: 1801px) {
+          right:  270px;
+        }
+        @media (max-width: 1620px) {
           right: 151px;
         }
         @media (max-width: 1440px) {
@@ -730,7 +736,7 @@
     .only-mob {
       display: none;
     }
-    @media (max-width: 1920px) and (min-width: 1800px) {
+    @media (min-width: 1801px) {
       .box {
         &_col {
           &-1 {
@@ -990,6 +996,11 @@
         left: 50%;
         transform: translate(-50%, -80px);
         z-index: 1;
+        &.right-pos{
+          @media(min-width:951px){
+            margin-left: 100px;
+          }
+        }
         img {
           animation: rotatePrint 30s linear infinite;
           user-select: none;
@@ -3070,7 +3081,7 @@
             height: 40px;
             width: 40px;
             position: relative;
-            transition: 0.6s ease-in-out;
+            transition: 0.3s ease-in-out;
             &:before {
               content: "";
               display: block;
@@ -3101,7 +3112,7 @@
           position: relative;
           opacity: 0;
           transform: translateX(-100%);
-          transition: all 0.6s ease-in-out;
+          transition: all 0.3s ease-in-out;
         }
         &_list {
           margin-bottom: 20px;
@@ -5221,7 +5232,7 @@
               width: 40px;
               height: 1px;
               right: 40px;
-              top: 40px;
+              top: 62px;
               display: block;
               position: absolute;
               background: @orange;
@@ -5232,7 +5243,7 @@
               height: 40px;
               width: 1px;
               right: 60px;
-              top: 20px;
+              top: 41px;
               display: block;
               position: absolute;
               background: @orange;
@@ -5307,9 +5318,13 @@
             position: relative;
             padding-bottom: 60px;
             min-height: 180px;
+            transition: 0.3s;
             margin-bottom: 10px;
             &:nth-of-type(2n-1) {
               margin-right: 10px;
+            }
+            &:hover{
+              background-color: #DFDFDF;
             }
           }
           &_name {
@@ -7218,12 +7233,30 @@
         left: 100%;
         top: 73px;
         width: 50%;
+        @media(min-width: 951px){
+          height: ~"calc(100vh - 240px)";
+          &.solo{
+            height:auto
+          }
+        }
         &.fixed {
           position: fixed;
+        }
+        &>*{
+          &:nth-child(2){
+            margin-top: auto;
+          }
         }
       }
       &-wrapper {
         margin-left: 40px;
+       
+        @media(min-width: 951px){
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
       }
       &-sub {
         position: absolute;
@@ -7234,9 +7267,6 @@
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          &.only-desc {
-            margin-top: 200px;
-          }
         }
         &-item {
           display: inline-block;
@@ -7314,10 +7344,6 @@
         max-width: 300px;
         width: ~"calc(50% - 73px)";
         &-content {
-          &.only-desc {
-            margin-top: 200px;
-            margin-left: 40px;
-          }
           p {
             font-family: Helvetica Neue;
             font-size: 16px;
@@ -10239,7 +10265,7 @@
     }
     @media (max-width: 1240px) {
       &:before {
-        left: ~"calc(50% - (100% - 100px)/6) ";
+        left: ~"calc(50% - (100% - 105px)/6) ";
       }
     }
     @media (max-width: 950px) {

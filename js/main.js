@@ -897,10 +897,14 @@ var custom = {
     posRightMenu: {
       update: function() {
         var _ = this;
+        console.log("ssss");
         var itemTop = $(".rightMenu-box").offset().top;
         var headerheight = $(".header").height() - 70;
         var topScroll = $(document).scrollTop() + headerheight;
         if ($(window).width() > 950) {
+          if ($(".rightMenu-wrapper > *").length == 1) {
+            $(".rightMenu-container").addClass("solo");
+          }
           if (topScroll >= itemTop) {
             _.setFixed();
           } else {
@@ -915,7 +919,7 @@ var custom = {
         var width = $(".rightMenu-box").outerWidth() / 2;
         var headerheight = $(".header").height() - 70;
         var offsetTop = 73;
-        var offsetBottom = 120;
+        var offsetBottom = 40;
         $(".rightMenu-container").addClass("fixed");
         $(".rightMenu-container").css("right", itemLeft + "px");
         $(".rightMenu-container").css("left", "auto");
@@ -923,8 +927,9 @@ var custom = {
         $(".rightMenu-container").width(width);
         var offseTop = headerheight + offsetTop + $(document).scrollTop();
         var heightBox = $(".rightMenu-container").height();
-        var offsetTopFooter = $(".footer").offset().top;
-
+        var offsetTopFooter =
+          $(".rightMenu-box").offset().top + $(".rightMenu-box").height();
+        //var offsetTopFooter = $(".footer").offset().top;
         if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
           var translate =
             offsetTopFooter - offsetBottom - (offseTop + heightBox);
@@ -932,11 +937,27 @@ var custom = {
             "transform",
             "translateY(" + translate + "px)"
           );
+        } else {
+          $(".rightMenu-container").css("transform", "translateY(" + 0 + "px)");
+        }
+
+        if (
+          $(".rightMenu-container").height() >=
+          $(".rightMenu-box").height() - 120
+        ) {
+          $(".rightMenu-container").height($(".rightMenu-box").height() - 120);
+        }else{
+          $(".rightMenu-container").css('height','')
         }
       },
       clearFixed: function() {
         $(".rightMenu-container").removeClass("fixed");
-        $(".rightMenu-container").attr("style", "");
+        $(".rightMenu-container").css("right", "");
+        $(".rightMenu-container").css("transform", "");
+        $(".rightMenu-container").css("left", "");
+        $(".rightMenu-container").css("top", "");
+        $(".rightMenu-container").css("width", "");
+        //$(".rightMenu-container").attr("style", "");
       }
     },
     setFixedInScroll: function() {
@@ -1079,7 +1100,11 @@ var custom = {
   },
   detailCalcProd: {
     update: function(delta) {
-      var count = parseInt($("input[name=count]").eq(0).val());
+      var count = parseInt(
+        $("input[name=count]")
+          .eq(0)
+          .val()
+      );
       if (delta) count += delta;
       if (count < 0) count = 0;
       $(".detail_count-value").text(count);
