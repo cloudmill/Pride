@@ -324,9 +324,9 @@ var custom = {
               );
               img.height(img.width() / k);
             }
-          }else{
-            var img = $(this)
-            img.attr('style','')
+          } else {
+            var img = $(this);
+            img.attr("style", "");
           }
         },
         function() {
@@ -803,7 +803,7 @@ var custom = {
       if ($("#map").hasClass("hasBalloon"))
         myMap.geoObjects.options.set({ hasBalloon: false });
       if ($(window).width() < 768) {
-       // myMap.behaviors.disable("drag");
+        // myMap.behaviors.disable("drag");
       }
       myMap.events.add("click", function() {
         myMap.balloon.close();
@@ -1189,6 +1189,119 @@ var custom = {
       this.events();
     }
   },
+  openOrderRegister: {
+    center: null,
+    createPlaceMark: function(coords, id) {
+      var width = 400;
+      if ($(window).width() <= 600) width = 320;
+      var p = new ymaps.Placemark(
+        coords,
+        {
+          hasBalloon: false
+        },
+        {
+          hideIconOnBalloonOpen: false,
+          iconLayout: "default#image",
+          iconImageHref: "images/map.png",
+          iconImageSize: [44, 44],
+          iconImageOffset: [-22, -22]
+        }
+      );
+      p.id = id;
+      return p
+    },
+    create: function() {
+      var _this = this;
+      myMap = new ymaps.Map(
+        "map",
+        {
+          center: _this.center,
+          zoom: 6,
+          controls: []
+        },
+        {
+          searchControlProvider: "yandex#search"
+        }
+      );
+      clusterer = new ymaps.Clusterer({
+        preset: "islands#invertedVioletClusterIcons",
+        clusterIcons: [
+          {
+            href: "images/map.png",
+            size: [66, 66],
+            offset: [-33, -33]
+          }
+        ],
+        groupByCoordinates: false,
+        clusterIconColor: "black",
+        clusterHideIconOnBalloonOpen: false,
+        geoObjectHideIconOnBalloonOpen: false
+      });
+      if ($(".map_data .placeMark").length > 0) {
+        $(".map_data .placeMark").each(function() {
+          var mark = _this.createPlaceMark(
+            $(this)
+              .attr("data-cords")
+              .split(","),
+            $(this).attr("data-id"),
+          );
+          if(mark.events.add)
+          mark.events.add("click", function(e) {
+            var item = $('.popupOrder-list [data-id='+e.get('target').id+']');
+            if(item.length){
+              var inpt = item.find('input').eq(0)[0]
+              inpt.checked = !inpt.checked
+            }
+          });
+          clusterer.add(mark);
+        });
+      }
+
+      myMap.geoObjects.add(clusterer);
+      if ($("#map").hasClass("hasBalloon"))
+        myMap.geoObjects.options.set({ hasBalloon: false });
+      if ($(window).width() < 768) {
+        // myMap.behaviors.disable("drag");
+      }
+      myMap.events.add("click", function() {
+        myMap.balloon.close();
+      });
+      myMap.behaviors.disable("scrollZoom");
+      myMap.controls.add(
+        new ymaps.control.ZoomControl({
+          options: {
+            size: "auto",
+            float: "none",
+            position: { right: 10, bottom: 40 }
+          }
+        })
+      );
+    },
+    open: function() {
+      var _ = this;
+      this.center =
+        $(".map_data .placeMark").length > 0
+          ? $(".map_data .placeMark")
+              .eq(0)
+              .attr("data-cords")
+              .split(",")
+          : [55.751574, 37.573856];
+      _.create();
+    },
+    events: function() {
+      var _ = this;
+      $(document).on("click", ".setCity", function() {
+        if ($("#map ymaps").length > 0) {
+          $("#map ymaps").remove();
+        }ymaps.ready(function() {
+          _.open();
+        })
+      });
+    },
+    init: function() {
+      this.events();
+    }
+  },
   preloaderInit: function() {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
@@ -1288,6 +1401,7 @@ var custom = {
     if ($(".product").length > 0) this.cartCalcProd.init();
     if ($(".detail_count").length > 0) this.detailCalcProd.init();
     if ($(".fixed-container").length > 0) this.fixedContainerLeft.init();
+    if ($(".popupOrder-map").length > 0) this.openOrderRegister.init();
     this.aboutSliders.init();
     this.preloaderInit();
   }
@@ -1558,6 +1672,7 @@ var priceSlider = {
     this.create();
   }
 };
+
 (function() {
   custom.init();
   header.init();
