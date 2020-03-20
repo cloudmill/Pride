@@ -386,13 +386,16 @@ var custom = {
       }
     },
     events: function() {
+      var opened = null;
       function selects() {
         $(".filter_select").on("select2:close", function() {
+          opened = null
           $(this)
             .parent()
             .removeClass("active");
         });
         $(".filter_select").on("select2:open", function() {
+          opened = $(this)
           $(this)
             .parent()
             .addClass("active");
@@ -407,7 +410,15 @@ var custom = {
             "<div class='select2_buts'><a href='' class='btn btn-gray select2_clear'>Сбросить</a><a href='' class='btn btn-orange select2_set'>Применить</a></div>";
           if (this.hasAttribute("setButs")) $(".select2-results").append(buts);
         });
-        $(document).on("click", ".select2_clear,.select2_set", function(e) {
+        $(document).on('click','.select2_clear',function(e){
+          e.preventDefault();
+          if(opened){
+            opened.val('').trigger('change')
+            opened.select2('close')
+          }
+            
+        })
+        $(document).on("click", ".select2_set", function(e) {
           e.preventDefault();
           var count = 1;
           if (
@@ -503,9 +514,22 @@ var custom = {
           $(".filter_slider_min span").text(slideEvt.value[0]);
           $(".filter_slider_max span").text(slideEvt.value[1]);
         });
+        $(document).on('click','.filter_slider_clear',function(e){
+          e.preventDefault();
+          console.log($('.filter_slider_base'))
+          var minValue = $('.filter_slider_base').eq(0).attr('data-slider-min')
+          var maxValue = $('.filter_slider_base').eq(0).attr('data-slider-max')
+          var defaultValue = '['+minValue + ',' + maxValue+']';
+          $(".filter_slider_base").attr('data-slider-value', defaultValue)
+          $(".filter_slider_max span").text(maxValue);
+          $(".filter_slider_min span").text(minValue);
+         // $(".filter_slider_base").slider('setValue', defaultValue, true);
+          $(".filter_slider_base").slider('refresh');
+          $(".filter_slider_open").click()
+        })
         $(document).on(
           "click",
-          ".filter_slider_clear,.filter_slider_set",
+          ".filter_slider_set",
           function(e) {
             e.preventDefault();
             var count = 1;
