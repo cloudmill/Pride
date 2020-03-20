@@ -328,7 +328,7 @@
                       Контактные данные
                     </div>
                     <div class="order-row">
-                      <div class="def-form-box setCity">
+                      <div class="def-form-box" id="setCity">
                         <label
                         data-options='{"touch" : false}'
                           for="sity"
@@ -342,14 +342,15 @@
                           type="hidden"
                           id="sity"
                           name="sity"
-                          placeholder="Индекс"
                         />
                       </div>
                       <div class="def-form-box">
                         <input
                           class="def-form-input"
                           type="text"
+                          disabled
                           name="index"
+                          id="indexPosition"
                           placeholder="Индекс"
                         />
                       </div>
@@ -358,7 +359,9 @@
                       <input
                         class="def-form-input"
                         type="text"
+                        disabled
                         name="adress"
+                        id="adresPosition"
                         placeholder="Адрес"
                       />
                     </div>
@@ -765,6 +768,7 @@
               <input
                 type="text"
                 class="popupOrder-input"
+                id='orderCitySearch'
                 placeholder="Введите название, телефон или адрес"
               />
             </div>
@@ -801,72 +805,57 @@
                     data-id='5'
                     data-cords="53.763390, 38.641393"
                   />
-                  <input
-                    class="placeMark"
-                    type="hidden"
-                    data-id='6'
-                    data-cords="55.773390, 38.641393"
-                  />
-                  <input
-                    class="placeMark"
-                    type="hidden"
-                    data-id='8'
-                    data-cords="55.363390, 38.641393"
-                  />
                 </div>
               </div>
             </div>
             <div class="popupOrder-list">
               <div class=" def-form-checkbox order-check" data-id=0>
-                <input type="radio" name="location" id="location1" selected />
-                <label for="location1">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
+                <input type="hidden" name="city" value='Москва'/>
+                <input type="hidden" name="adress" value='ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект'/>
+                <input type="hidden" name="adressIndex" value='333222' />
+                <input type="radio" name="phone" value='89142223344' />
+                <input type="radio" name="cityId" id="location1"  value='333222' />
+                <label for="location1">ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
                 </label>
               </div>
               <div class=" def-form-checkbox order-check" data-id=1>
-                <input type="radio" name="location" id="location12" selected />
-                <label for="location12">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
+                <input type="hidden" name="city" value='Москва'/>
+                <input type="hidden" name="adress" value='ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект'/>
+                <input type="hidden" name="adressIndex" value='333222' />
+                <input type="radio" name="phone" value='89202223344' />
+                <input type="radio" name="cityId" id="location2"  value='333222' />
+                <label for="location2">ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
                 </label>
               </div>
               <div class=" def-form-checkbox order-check" data-id=2>
-                <input type="radio" name="location" id="location11" selected />
-                <label for="location11">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
-                </label>
-              </div>
-              <div class=" def-form-checkbox order-check" data-id=3>
-                <input type="radio" name="location" id="location2" selected />
-                <label for="location2">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
+                <input type="hidden" name="city" value='Москва'/>
+                <input type="hidden" name="adress" value='ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект'/>
+                <input type="hidden" name="adressIndex" value='333222' />
+                <input type="radio" name="phone" value='89222223344' />
+                <input type="radio" name="cityId" id="location3"  value='333222' />
+                <label for="location3">ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
                 </label>
               </div>
               <div class=" def-form-checkbox order-check" data-id=4>
-                <input type="radio" name="location" id="location3" selected />
-                <label for="location3">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
+                <input type="hidden" name="city" value='Москва'/>
+                <input type="hidden" name="adress" value='ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект'/>
+                <input type="hidden" name="adressIndex" value='333222' />
+                <input type="radio" name="phone" value='89502223344' />
+                <input type="radio" name="cityId" id="location5"  value='333222' />
+                <label for="location5">ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
                 </label>
               </div>
               <div class=" def-form-checkbox order-check" data-id=5>
-                <input type="radio" name="location" id="location4" selected />
-                <label for="location4">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
-                </label>
-              </div>
-              <div class=" def-form-checkbox order-check" data-id=6>
-                <input type="radio" name="location" id="location5" selected />
-                <label for="location5">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
-                </label>
-              </div>
-              <div class=" def-form-checkbox order-check" data-id=7> 
-                <input type="radio" name="location" id="location56" selected />
-                <label for="location56">
-                  ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
+                <input type="hidden" name="city" value='Москва'/>
+                <input type="hidden" name="adress" value='ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект'/>
+                <input type="hidden" name="adressIndex" value='333222' />
+                <input type="radio" name="phone" value='89092223344' />
+                <input type="radio" name="cityId" id="location6"  value='333222' />
+                <label for="location6">ул. Брянцева, 20 1, литера А, 23Н, м. Гражданский проспект
                 </label>
               </div>
             </div>
-            <button type="submit" data-fancybox-close class="btn-orange">
+            <button type="submit" id="selectAdress" class="btn-orange">
               Выбрать
             </button>
           </div>

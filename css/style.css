@@ -13753,7 +13753,7 @@ input:-webkit-autofill {
   width: 100%;
 }
 .fancybox-container .popupOrder-list {
-  max-height: 270px;
+  height: 270px;
   margin-left: -40px;
   overflow: hidden;
   overflow-y: scroll;
@@ -13763,6 +13763,9 @@ input:-webkit-autofill {
   padding-right: 20px;
   padding-left: 40px;
   border-bottom: 1px solid #E5E5E5;
+}
+.fancybox-container .popupOrder-list .order-check.hide {
+  display: none;
 }
 .fancybox-container .popupOrder-list .order-check label {
   line-height: 135%;
@@ -13837,7 +13840,7 @@ input:-webkit-autofill {
     height: 380px;
   }
   .fancybox-container .popupOrder-list {
-    max-height: none;
+    height: auto;
     margin-left: -15px;
     overflow: visible !important;
   }

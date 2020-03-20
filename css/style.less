@@ -10660,7 +10660,7 @@
           width: 100%;
         }
         &-list{
-          max-height: 270px;
+          height: 270px;
           margin-left: -40px;
           overflow: hidden;
           overflow-y: scroll;
@@ -10669,6 +10669,9 @@
             padding-right: 20px;
             padding-left: 40px;
             border-bottom: 1px solid #E5E5E5;
+            &.hide{
+              display: none;
+            }
             label{
               line-height: 135%;
               &:before{
@@ -10743,7 +10746,7 @@
             height: 380px;
           }
           &-list{
-            max-height: none;
+            height: auto;
             margin-left: -15px;
             overflow: visible !important;
             .order-check{

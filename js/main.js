@@ -1208,7 +1208,7 @@ var custom = {
         }
       );
       p.id = id;
-      return p
+      return p;
     },
     create: function() {
       var _this = this;
@@ -1243,14 +1243,15 @@ var custom = {
             $(this)
               .attr("data-cords")
               .split(","),
-            $(this).attr("data-id"),
+            $(this).attr("data-id")
           );
-          if(mark.events.add)
           mark.events.add("click", function(e) {
-            var item = $('.popupOrder-list [data-id='+e.get('target').id+']');
-            if(item.length){
-              var inpt = item.find('input').eq(0)[0]
-              inpt.checked = !inpt.checked
+            var item = $(
+              ".popupOrder-list [data-id=" + e.get("target").id + "]"
+            );
+            if (item.length) {
+              var inpt = item.find("input").eq(0)[0];
+              inpt.checked = !inpt.checked;
             }
           });
           clusterer.add(mark);
@@ -1290,15 +1291,99 @@ var custom = {
     },
     events: function() {
       var _ = this;
-      $(document).on("click", ".setCity", function() {
+      $(document).on("click", "#setCity", function() {
         if ($("#map ymaps").length > 0) {
           $("#map ymaps").remove();
-        }ymaps.ready(function() {
+        }
+        ymaps.ready(function() {
           _.open();
-        })
+        });
+      });
+      $(document).on("click", "#selectAdress", function() {
+        var box = $(document)
+          .find(".popupOrder-list")
+          .find("input:checked")
+          .parent();
+        var adress = box.find("[name=adress]").val();
+        var val = box.find("[name=cityId]").val();
+        var city = box.find("[name=city]").val();
+        var index = box.find("[name=adressIndex]").val();
+        if (val) {
+          $(document)
+            .find("#setCity label")
+            .text(city);
+          $(document)
+            .find("#setCity input")
+            .val(val);
+          $(document)
+            .find("#indexPosition")
+            .val(index);
+          $(document)
+            .find("#adresPosition")
+            .val(adress);
+        } else {
+          $(document)
+            .find("#setCity label")
+            .text("Выберите город");
+          $(document)
+            .find("#setCity input")
+            .val("");
+          $(document)
+            .find("#indexPosition")
+            .val("");
+          $(document)
+            .find("#adresPosition")
+            .val("");
+        }
+        $('#orderCitySearch').val('')
+        $(".popupOrder-list").find('.hide').removeClass('hide')
+        _.search.s = null;
+        $.fancybox.close();
       });
     },
+    search: {
+      s: null,
+      trim: function(s) {
+        s = s.replace(/^\s+/g, "");
+        return s.replace(/\s+$/g, "");
+      },
+      find: function(str) {
+        if (str.toUpperCase().indexOf(this.s.toUpperCase()) != -1) {
+          return true;
+        } else return false;
+      },
+      update: function() {
+        var _ = this;
+        $(".popupOrder-list")
+          .find(".order-check")
+          .each(function() {
+            var find = false;
+            $(this)
+              .find("input")
+              .each(function() {
+                var str = $(this).val();
+                if (_.find(str)) find = true;
+              });
+            if (find) {
+              $(this).removeClass("hide");
+            } else {
+              $(this).addClass("hide");
+            }
+          });
+      },
+      events: function() {
+        var _ = this;
+        $(document).on("keyup", "#orderCitySearch", function(e) {
+          _.s = _.trim($(this).val());
+          _.update();
+        });
+      },
+      init: function() {
+        this.events();
+      }
+    },
     init: function() {
+      this.search.init();
       this.events();
     }
   },
