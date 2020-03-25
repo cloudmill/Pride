@@ -207,8 +207,8 @@
         font-family: Helvetica Neue;
         font-style: normal;
         font-weight: normal;
-        font-size: 12px;
-        line-height: 135%;
+        font-size: 16px;
+        line-height: 100%;
         color: #8A8A8A;
       }
       button{
@@ -335,6 +335,27 @@
         padding-bottom: 50px;
         flex-direction: column;
       }
+      &-catalog{
+        display: block;
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 100%;
+        color: #FF570F;
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 15px;
+        margin-top: 2px;
+        margin-left: -30px;
+        transform: translateX(15px);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        i{
+          margin-right: 20px;
+        }
+      }
       &-but {
         position: relative;
         span {
@@ -378,7 +399,6 @@
         }
       }
       &_menu {
-        padding-top: 30px;
         padding-bottom: 10px;
         &_item {
           display: block;
@@ -851,6 +871,7 @@
       }
     }
     @media (max-width: 950px) {
+      height: 50px;
       .box {
         &_col {
           &-1 {
@@ -862,9 +883,6 @@
           }
         }
       }
-    }
-    @media (max-width: 950px) {
-      height: 50px;
       &.scrolled {
         top: 0px;
         .logo {
@@ -888,7 +906,7 @@
       .search {
         &_input {
           padding: 0 15px;
-          font-size: 15px;
+          font-size: 16px;
         }
       }
       .catalog,
@@ -4373,7 +4391,7 @@
             }
             &_label {
               width: 100%;
-              font-size: 14px;
+              font-size: 16px;
               line-height: 150%;
               padding: 0 10px;
             }
@@ -5044,7 +5062,7 @@
           margin: 0;
         }
         &_label {
-          font-size: 14px;
+          font-size: 16px;
         }
         &_item {
           margin: 0;
@@ -5052,7 +5070,7 @@
         &_select2 {
           &-results {
             &__option {
-              font-size: 14px;
+              font-size: 16px;
             }
           }
         }

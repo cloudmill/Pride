@@ -54,12 +54,12 @@ var header = {
   },
   searchMob: function() {
     $(document).on('click',".header .search_but",function(e) {
-      if ($(window).width() <= 950) {
+      if ($(window).width() <= 500) {
         e.preventDefault();
       }
     });
     $(window).on('resize',function(){
-      if ($(window).width() > 950){
+      if ($(window).width() > 500){
         $(".header .searchMob").removeClass("active");
       }
     })
@@ -69,7 +69,7 @@ var header = {
       if (!searchPlace.contains(e.target) && !searchBut.contains(e.target)) {
         searchPlace.classList.remove('active');
       }else{
-        if ($(window).width() <= 950 && !searchPlace.contains(e.target)) {
+        if ($(window).width() <= 500 && !searchPlace.contains(e.target)) {
           $(".burger").removeClass("active");
           $(".burger-but").removeClass("active");
           $(".basket").removeClass("active");

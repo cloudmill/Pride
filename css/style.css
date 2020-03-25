@@ -2780,8 +2780,8 @@ input:-webkit-autofill {
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 135%;
+  font-size: 16px;
+  line-height: 100%;
   color: #8A8A8A;
 }
 .wrapper .header .searchMob button {
@@ -2917,6 +2917,27 @@ input:-webkit-autofill {
   padding-bottom: 50px;
   flex-direction: column;
 }
+.wrapper .header .burger-catalog {
+  display: block;
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  color: #FF570F;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px;
+  margin-top: 2px;
+  margin-left: -30px;
+  transform: translateX(15px);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.wrapper .header .burger-catalog i {
+  margin-right: 20px;
+}
 .wrapper .header .burger-but {
   position: relative;
 }
@@ -2976,7 +2997,6 @@ input:-webkit-autofill {
   background: #ffffff;
 }
 .wrapper .header .burger_menu {
-  padding-top: 30px;
   padding-bottom: 10px;
 }
 .wrapper .header .burger_menu_item {
@@ -3433,17 +3453,15 @@ input:-webkit-autofill {
   }
 }
 @media (max-width: 950px) {
+  .wrapper .header {
+    height: 50px;
+  }
   .wrapper .header .box_col-1 {
     min-width: 50px;
     max-height: 49px;
   }
   .wrapper .header .box_col-2 {
     min-width: 120px;
-  }
-}
-@media (max-width: 950px) {
-  .wrapper .header {
-    height: 50px;
   }
   .wrapper .header.scrolled {
     top: 0px;
@@ -3465,7 +3483,7 @@ input:-webkit-autofill {
   }
   .wrapper .header .search_input {
     padding: 0 15px;
-    font-size: 15px;
+    font-size: 16px;
   }
   .wrapper .header .catalog,
   .wrapper .header .map,
@@ -6707,7 +6725,7 @@ input:-webkit-autofill {
   }
   .wrapper .page .filter.opened .filter_label {
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 150%;
     padding: 0 10px;
   }
@@ -7356,13 +7374,13 @@ input:-webkit-autofill {
     margin: 0;
   }
   .wrapper .page .sort_label {
-    font-size: 14px;
+    font-size: 16px;
   }
   .wrapper .page .sort_item {
     margin: 0;
   }
   .wrapper .page .sort_select2-results__option {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .wrapper .page .title {
