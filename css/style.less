@@ -162,6 +162,74 @@
         }
       }
     }
+    .searchMob{
+      display: none;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      left: 0;
+      height: 50px;
+      padding: 0 15px;
+      background: white;
+      border-top: 1px solid #E5E5E5;
+      border-bottom: 1px solid #E5E5E5;
+      &:before{
+        content: "";
+        display: block;
+        width: 21px;
+        height: 8px;
+        position: absolute;
+        top: -1px;
+        right: 175px;
+        transform: translateX(50%);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url(../images/angle.svg);
+        z-index: 3;
+      }
+      &.active{
+        display: block;
+      }
+      form{
+        display: block;
+        height: 100%;
+        
+        position: relative;
+      }
+      input{
+        padding: 0;
+        border: 0;
+        background: none;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 135%;
+        color: #8A8A8A;
+      }
+      button{
+        padding: 0;
+        border: 0;
+        background: none;
+        width: 15px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: absolute;
+        top:50%;
+        right: 0;
+        transform: translateY(-50%);
+        i{
+          filter: contrast(1) brightness(1);
+        }
+      }
+    }
     .cart {
       .defBut;
       position: relative;
