@@ -56,7 +56,6 @@ var header = {
     $(document).on('click',".header .search_but",function(e) {
       if ($(window).width() <= 950) {
         e.preventDefault();
-        $(".header .searchMob").toggleClass("active");
       }
     });
     $(window).on('resize',function(){
@@ -64,6 +63,19 @@ var header = {
         $(".header .searchMob").removeClass("active");
       }
     })
+    window.addEventListener('click', function (e) {
+      var searchPlace = document.querySelector(".header .searchMob")
+      var searchBut = document.querySelector(".header .search_but")
+      if (!searchPlace.contains(e.target) && !searchBut.contains(e.target)) {
+        searchPlace.classList.remove('active');
+        console.log('out')
+      }else{
+        console.log('in')
+        if ($(window).width() <= 950 && !searchPlace.contains(e.target)) {
+          searchPlace.classList.toggle('active');
+        }
+      }
+  });
   },
   init: function() {
     this.events();
