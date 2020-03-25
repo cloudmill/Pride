@@ -68,10 +68,12 @@ var header = {
       var searchBut = document.querySelector(".header .search_but")
       if (!searchPlace.contains(e.target) && !searchBut.contains(e.target)) {
         searchPlace.classList.remove('active');
-        console.log('out')
       }else{
-        console.log('in')
         if ($(window).width() <= 950 && !searchPlace.contains(e.target)) {
+          $(".burger").removeClass("active");
+          $(".burger-but").removeClass("active");
+          $(".basket").removeClass("active");
+        $(".header .cart").removeClass("active");
           searchPlace.classList.toggle('active');
         }
       }
