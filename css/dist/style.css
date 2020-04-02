@@ -3482,6 +3482,7 @@ input:-webkit-autofill {
   }
   .wrapper .header .box_col-1 {
     min-width: 50px;
+    width: 50px;
     max-height: 49px;
   }
   .wrapper .header .box_col-2 {
