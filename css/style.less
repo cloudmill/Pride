@@ -39,6 +39,10 @@
       .basket {
         &_list {
           max-height: ~"calc(100vh - 78px)";
+          @media (max-width: 950px){
+              max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+              height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+          }
         }
       }
     }
@@ -723,7 +727,7 @@
         }
       }
       &_list {
-        max-height: ~"calc(100vh - 150px)";
+        max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
         overflow-y: scroll;
         overflow-x: hidden;
         padding-top: 70px;
@@ -779,6 +783,12 @@
           }
         }
       }
+      @media (max-width: 950px){
+        &_list{
+          max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+          height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+        }
+      }
       @media (max-width: 500px) {
         width: 100%;
         &_title {
@@ -790,8 +800,7 @@
         &_list {
           padding-top: 50px;
           padding-bottom: 127px;
-          max-height: ~"calc(100vh - 50px)";
-          height: ~"calc(100vh - 50px)";
+          
         }
         &_item {
           padding: 15px;
@@ -816,6 +825,26 @@
             padding: 10px;
             .btn {
               height: 45px;
+            }
+          }
+        }
+      }
+      @media (max-width: 400px){
+        &_result{
+          &_buts{
+            margin: 0 -3px;
+            .btn{
+              margin: 3px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      @media (max-width: 360px){
+        &_result{
+          &_buts{
+            .btn{
+              font-size: 13px;
             }
           }
         }

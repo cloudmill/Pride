@@ -1810,8 +1810,25 @@ var priceSlider = {
     this.create();
   }
 };
-
+var configSet = {
+  init: function(){
+    this.events();
+  },
+  events: function(){
+    var setWindowHeight = function() {
+      var vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", vh + "px");
+      console.log(window.innerHeight)
+    };
+    setWindowHeight();
+    $(window).on("resize", function() {
+      setWindowHeight();
+    });
+  }
+};
 (function() {
+  configSet.init();
+
   custom.init();
   header.init();
   svgMap.init();
