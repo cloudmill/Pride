@@ -3100,6 +3100,12 @@ input:-webkit-autofill {
   overflow-x: hidden;
   max-height: calc(var(--vh, 1vh) * 100 - 150px);
 }
+@media (max-width: 950px) {
+  .wrapper .header .basket {
+    max-height: calc(var(--vh, 1vh) * 100 - 50px);
+    height: calc(var(--vh, 1vh) * 100 - 50px);
+  }
+}
 .wrapper .header .basket::-webkit-scrollbar-track {
   background: transparent;
 }
@@ -3157,6 +3163,12 @@ input:-webkit-autofill {
   position: relative;
   min-height: 450px;
   max-height: calc(var(--vh, 1vh) * 100 - 150px);
+}
+@media (max-width: 950px) {
+  .wrapper .header .basket_content {
+    max-height: calc(var(--vh, 1vh) * 100 - 50px);
+    height: calc(var(--vh, 1vh) * 100 - 50px);
+  }
 }
 @media (max-width: 500px) {
   .wrapper .header .basket_content {

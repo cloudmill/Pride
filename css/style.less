@@ -496,6 +496,10 @@
       overflow-y: auto;
       overflow-x: hidden;
       max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
+      @media (max-width: 950px){
+        max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+        height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+      }
       &::-webkit-scrollbar-track {
         background: transparent;
       }
@@ -543,6 +547,10 @@
         position: relative;
         min-height: 450px;
         max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
+        @media (max-width: 950px){
+          max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+          height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+        }
         @media (max-width: 500px){
           min-height: 323px;
         }
