@@ -3157,7 +3157,7 @@ input:-webkit-autofill {
 }
 .wrapper .header .basket.active {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: all;
 }
 .wrapper .header .basket_content {
   position: relative;
