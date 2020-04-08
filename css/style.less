@@ -42,13 +42,6 @@
             max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
             height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
         }
-        &_content{
-          max-height: ~"calc(100vh - 78px)";
-          @media (max-width: 950px){
-              max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
-              height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
-          }
-        }
         &_list {
           max-height: ~"calc(100vh - 78px)";
           @media (max-width: 950px){
@@ -493,8 +486,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.3s ease-in-out;
-      overflow-y: scroll;
-      overflow-x: hidden;
+      overflow: hidden;
       max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
       @media (max-width: 950px){
         max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
@@ -542,18 +534,6 @@
       &.active {
         opacity: 1;
         pointer-events: all;
-      }
-      &_content{
-        position: relative;
-        min-height: 450px;
-        max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
-        @media (max-width: 950px){
-          max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
-          height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
-        }
-        @media (max-width: 500px){
-          min-height: 323px;
-        }
       }
       &_title {
         position: absolute;
@@ -768,7 +748,6 @@
       }
       &_list {
         max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
-        min-height: 450px;
         overflow-y: scroll;
         overflow-x: hidden;
         padding-top: 70px;
@@ -784,8 +763,8 @@
         &::-webkit-scrollbar-thumb {
           background: @orange;
         }
-        @media (max-width: 500px){
-          min-height: 323px;
+        @media(max-height: 512px) and (min-width: 501px){
+          padding-bottom: 0;
         }
       }
       &_result {
@@ -797,6 +776,16 @@
         background: #fff;
         box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
         border-top: 1px solid @gray;
+        @media(max-height: 512px)  and (min-width: 501px){
+          position: relative;
+          width: 100%;
+          margin-top: -1px;
+        }
+        @media(max-height: 380px) and (max-width: 500px){
+          position: relative;
+          width: 100%;
+          margin-top: -1px;
+        }
         &_value {
           height: 78px;
           font-style: normal;
@@ -844,7 +833,9 @@
         &_list {
           padding-top: 50px;
           padding-bottom: 127px;
-          
+          @media(max-height: 380px) and (max-width: 500px){
+            padding-bottom: 0;
+          }
         }
         &_item {
           padding: 15px;

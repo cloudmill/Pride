@@ -2573,15 +2573,6 @@ input:-webkit-autofill {
     height: calc(var(--vh, 1vh) * 100 - 50px);
   }
 }
-.wrapper .header.scrolled .basket_content {
-  max-height: calc(100vh - 78px);
-}
-@media (max-width: 950px) {
-  .wrapper .header.scrolled .basket_content {
-    max-height: calc(var(--vh, 1vh) * 100 - 50px);
-    height: calc(var(--vh, 1vh) * 100 - 50px);
-  }
-}
 .wrapper .header.scrolled .basket_list {
   max-height: calc(100vh - 78px);
 }
@@ -3096,8 +3087,7 @@ input:-webkit-autofill {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease-in-out;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
   max-height: calc(var(--vh, 1vh) * 100 - 150px);
 }
 @media (max-width: 950px) {
@@ -3158,22 +3148,6 @@ input:-webkit-autofill {
 .wrapper .header .basket.active {
   opacity: 1;
   pointer-events: all;
-}
-.wrapper .header .basket_content {
-  position: relative;
-  min-height: 450px;
-  max-height: calc(var(--vh, 1vh) * 100 - 150px);
-}
-@media (max-width: 950px) {
-  .wrapper .header .basket_content {
-    max-height: calc(var(--vh, 1vh) * 100 - 50px);
-    height: calc(var(--vh, 1vh) * 100 - 50px);
-  }
-}
-@media (max-width: 500px) {
-  .wrapper .header .basket_content {
-    min-height: 323px;
-  }
 }
 .wrapper .header .basket_title {
   position: absolute;
@@ -3381,7 +3355,6 @@ input:-webkit-autofill {
 }
 .wrapper .header .basket_list {
   max-height: calc(var(--vh, 1vh) * 100 - 150px);
-  min-height: 450px;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 70px;
@@ -3398,9 +3371,9 @@ input:-webkit-autofill {
 .wrapper .header .basket_list::-webkit-scrollbar-thumb {
   background: #ff570f;
 }
-@media (max-width: 500px) {
+@media (max-height: 512px) and (min-width: 501px) {
   .wrapper .header .basket_list {
-    min-height: 323px;
+    padding-bottom: 0;
   }
 }
 .wrapper .header .basket_result {
@@ -3412,6 +3385,20 @@ input:-webkit-autofill {
   background: #fff;
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
   border-top: 1px solid #e5e5e5;
+}
+@media (max-height: 512px) and (min-width: 501px) {
+  .wrapper .header .basket_result {
+    position: relative;
+    width: 100%;
+    margin-top: -1px;
+  }
+}
+@media (max-height: 380px) and (max-width: 500px) {
+  .wrapper .header .basket_result {
+    position: relative;
+    width: 100%;
+    margin-top: -1px;
+  }
 }
 .wrapper .header .basket_result_value {
   height: 78px;
@@ -3485,6 +3472,11 @@ input:-webkit-autofill {
   }
   .wrapper .header .basket_result_buts .btn {
     height: 45px;
+  }
+}
+@media (max-width: 500px) and (max-height: 380px) and (max-width: 500px) {
+  .wrapper .header .basket_list {
+    padding-bottom: 0;
   }
 }
 @media (max-width: 400px) {
