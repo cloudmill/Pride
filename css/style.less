@@ -37,6 +37,18 @@
         }
       }
       .basket {
+        max-height: ~"calc(100vh - 78px)";
+        @media (max-width: 950px){
+            max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+            height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+        }
+        &_content{
+          max-height: ~"calc(100vh - 78px)";
+          @media (max-width: 950px){
+              max-height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+              height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
+          }
+        }
         &_list {
           max-height: ~"calc(100vh - 78px)";
           @media (max-width: 950px){
@@ -322,8 +334,6 @@
       top: 100%;
       margin-top: 1px;
       left: 0;
-      height: 100vh;
-      padding-bottom: 50px;
       background-color: #fff;
       width: 100%;
       opacity: 0;
@@ -335,9 +345,10 @@
       }
       .content {
         display: flex;
-        height: 100vh;
-        padding-bottom: 50px;
+        height: ~"calc(var(--vh, 1vh) * 100 - 50px)";
         flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
       &-catalog{
         display: block;
@@ -482,6 +493,19 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.3s ease-in-out;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: transparent;
+      }
       &:before {
         content: "";
         display: block;
@@ -514,6 +538,14 @@
       &.active {
         opacity: 1;
         pointer-events: auto;
+      }
+      &_content{
+        position: relative;
+        min-height: 450px;
+        max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
+        @media (max-width: 500px){
+          min-height: 323px;
+        }
       }
       &_title {
         position: absolute;
@@ -728,6 +760,7 @@
       }
       &_list {
         max-height: ~"calc(var(--vh, 1vh) * 100 - 150px)";
+        min-height: 450px;
         overflow-y: scroll;
         overflow-x: hidden;
         padding-top: 70px;
@@ -742,6 +775,9 @@
         }
         &::-webkit-scrollbar-thumb {
           background: @orange;
+        }
+        @media (max-width: 500px){
+          min-height: 323px;
         }
       }
       &_result {
