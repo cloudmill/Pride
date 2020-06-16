@@ -2540,6 +2540,9 @@ input:-webkit-autofill {
   width: 100%;
   min-height: 100vh;
 }
+.wrapper.admin .header:not(.scrolled) {
+  margin-top: 150px;
+}
 .wrapper .header {
   display: flex;
   width: 100%;
