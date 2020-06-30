@@ -9312,6 +9312,9 @@ input:-webkit-autofill {
 .wrapper .page .newDetail_box .video video {
   margin: 0;
 }
+.wrapper .page .newDetail_box .video.active .play {
+  opacity: 0;
+}
 .wrapper .page .newDetail_box .video .play {
   display: block;
   width: 140px;

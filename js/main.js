@@ -1,12 +1,12 @@
 var header = {
-  scrolling: function(scroll) {
+  scrolling: function (scroll) {
     if (scroll > 100) {
       $(".header").addClass("scrolled");
     } else {
       $(".header").removeClass("scrolled");
     }
   },
-  closeEnother: function(name) {
+  closeEnother: function (name) {
     if (name != "burger") {
       $(".burger").removeClass("active");
       $(".burger-but").removeClass("active");
@@ -16,97 +16,97 @@ var header = {
       $(".header .cart").removeClass("active");
     }
   },
-  burgerOpen: function() {
+  burgerOpen: function () {
     var _this = this;
-    $(document).on("click", ".burger-but", function(e) {
+    $(document).on("click", ".burger-but", function (e) {
       e.preventDefault();
       $(".burger").toggleClass("active");
       $(this).toggleClass("active");
 
       _this.closeEnother("burger");
     });
-    $(window).resize(function() {
+    $(window).resize(function () {
       if ($(window).width() > 950) {
         $(".burger").removeClass("active");
         $(".burger-but").removeClass("active");
       }
     });
   },
-  cartOpen: function() {
+  cartOpen: function () {
     var _this = this;
-    $(document).on("click", ".header .cart", function(e) {
+    $(document).on("click", ".header .cart", function (e) {
       e.preventDefault();
       $(".basket").toggleClass("active");
       $(this).toggleClass("active");
       _this.closeEnother("basket");
     });
-    $(document).on("click", ".basket_close", function(e) {
+    $(document).on("click", ".basket_close", function (e) {
       e.preventDefault();
       $(".basket").removeClass("active");
       $(".header .cart").removeClass("active");
     });
   },
-  events: function() {
+  events: function () {
     var _this = this;
-    $(document).on("scroll", function() {
+    $(document).on("scroll", function () {
       _this.scrolling($(document).scrollTop());
     });
   },
-  searchMob: function() {
-    $(document).on('click',".header .search_but",function(e) {
+  searchMob: function () {
+    $(document).on("click", ".header .search_but", function (e) {
       if ($(window).width() <= 500) {
         e.preventDefault();
       }
     });
-    $(window).on('resize',function(){
-      if ($(window).width() > 500){
+    $(window).on("resize", function () {
+      if ($(window).width() > 500) {
         $(".header .searchMob").removeClass("active");
       }
-    })
-    window.addEventListener('click', function (e) {
-      var searchPlace = document.querySelector(".header .searchMob")
-      var searchBut = document.querySelector(".header .search_but")
+    });
+    window.addEventListener("click", function (e) {
+      var searchPlace = document.querySelector(".header .searchMob");
+      var searchBut = document.querySelector(".header .search_but");
       if (!searchPlace.contains(e.target) && !searchBut.contains(e.target)) {
-        searchPlace.classList.remove('active');
-      }else{
+        searchPlace.classList.remove("active");
+      } else {
         if ($(window).width() <= 500 && !searchPlace.contains(e.target)) {
           $(".burger").removeClass("active");
           $(".burger-but").removeClass("active");
           $(".basket").removeClass("active");
-        $(".header .cart").removeClass("active");
-          searchPlace.classList.toggle('active');
+          $(".header .cart").removeClass("active");
+          searchPlace.classList.toggle("active");
         }
       }
-  });
+    });
   },
-  init: function() {
+  init: function () {
     this.events();
     this.burgerOpen();
     this.cartOpen();
     this.searchMob();
-  }
+  },
 };
 var custom = {
   animateHover: {
-    events: function() {
+    events: function () {
       $(
         ".hoverLineMoved,.plusBox_link,.btn-orange,.btn-gray,.news_item,.btn-orange-white,.btn-gray-white,.btn-orange-gray"
-      ).hover(function() {
+      ).hover(function () {
         $(this).addClass("ready");
       });
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   animateScroll: {
-    checkAndDo: function() {
+    checkAndDo: function () {
       var count = 0;
-      var start_anim = function(item) {
+      var start_anim = function (item) {
         if (count > 5) {
           item.removeClass("is-hidden");
         } else {
-          setTimeout(function() {
+          setTimeout(function () {
             item.removeClass("is-hidden");
           }, count * 100);
         }
@@ -114,7 +114,7 @@ var custom = {
       };
       $(document)
         .find(".is-hidden.anim-item")
-        .each(function() {
+        .each(function () {
           if (
             $(this).offset().top <
               $(document).scrollTop() + $(window).height() &&
@@ -124,25 +124,25 @@ var custom = {
           }
         });
     },
-    events: function() {
+    events: function () {
       var _this = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _this.checkAndDo();
       });
     },
-    init: function() {
+    init: function () {
       this.events();
       var _this = this;
-      $(document).on("preloadingFinish", function() {
+      $(document).on("preloadingFinish", function () {
         _this.checkAndDo();
       });
-    }
+    },
   },
   animateZoomOut: {
-    zoomed: function() {
+    zoomed: function () {
       $(document)
         .find(".zoom-item")
-        .each(function() {
+        .each(function () {
           var zoom;
           var paralaxY = 0;
           var k = 1;
@@ -178,27 +178,27 @@ var custom = {
           }
         });
     },
-    events: function() {
+    events: function () {
       var _this = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _this.zoomed();
       });
     },
-    init: function() {
+    init: function () {
       this.events();
       this.zoomed();
-    }
+    },
   },
   animateFadeInLeftString: {
-    create: function() {
+    create: function () {
       $(document)
         .find(".string-anim,.string-anim-content > p")
-        .each(function() {
+        .each(function () {
           var item = this;
           var stiring = item.innerHTML.replace(/\r?\n/g, "");
           var _wordsAr = stiring.split(" ");
           var wordsAr = [];
-          _wordsAr.forEach(function(item, key) {
+          _wordsAr.forEach(function (item, key) {
             if (item != "") {
               wordsAr.push(item);
             }
@@ -239,7 +239,7 @@ var custom = {
             }
           }
           item.innerHTML = "";
-          stringAr.forEach(function(line) {
+          stringAr.forEach(function (line) {
             item.innerHTML +=
               '<span class="string-anim-paralax"><span class="string-anim-line is-hidden">' +
               line +
@@ -248,13 +248,13 @@ var custom = {
           temp.remove();
         });
     },
-    checkAndDo: function() {
+    checkAndDo: function () {
       var count = 0;
-      var start_anim = function(item) {
+      var start_anim = function (item) {
         if (count > 10) {
           item.removeClass("is-hidden");
         } else {
-          setTimeout(function() {
+          setTimeout(function () {
             item.removeClass("is-hidden");
           }, count * 100);
         }
@@ -262,7 +262,7 @@ var custom = {
       };
       $(document)
         .find(".is-hidden.string-anim-line")
-        .each(function() {
+        .each(function () {
           if (
             $(this).offset().top <
               $(document).scrollTop() + $(window).height() &&
@@ -272,30 +272,30 @@ var custom = {
           }
         });
     },
-    events: function() {
+    events: function () {
       var _this = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _this.checkAndDo();
       });
     },
-    init: function() {
+    init: function () {
       var _this = this;
-      $(document).on("preloadingFinish", function() {
+      $(document).on("preloadingFinish", function () {
         _this.create();
         _this.events();
         _this.checkAndDo();
       });
-    }
+    },
   },
   animateParalaxString: {
-    paralax: function() {
+    paralax: function () {
       $(document)
         .find(".paralax-child")
-        .each(function() {
+        .each(function () {
           var count = 0;
           $(this)
             .find(".string-anim-paralax")
-            .each(function() {
+            .each(function () {
               var pos =
                 $(this).offset().top +
                 $(this).height() / 2 -
@@ -310,46 +310,34 @@ var custom = {
             });
         });
     },
-    events: function() {
+    events: function () {
       var _this = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _this.paralax();
       });
     },
-    init: function() {
+    init: function () {
       var _this = this;
-      $(document).on("preloadingFinish", function() {
+      $(document).on("preloadingFinish", function () {
         _this.events();
         _this.paralax();
       });
-    }
+    },
   },
   animateChangeHoverBlockCross: {
-    events: function() {
+    events: function () {
       $(".blockCross_item").hover(
-        function() {
+        function () {
           if ($(window).width() > 950) {
-            var img = $(this)
-              .find(".item_img img")
-              .eq(0);
-            $(this)
-              .find(".item_img")
-              .addClass("show");
+            var img = $(this).find(".item_img img").eq(0);
+            $(this).find(".item_img").addClass("show");
             var k = img[0].naturalWidth / img[0].naturalHeight;
-            img.width(
-              $(this)
-                .find(".item_img")
-                .width()
-            );
+            img.width($(this).find(".item_img").width());
             if (img.width() / k < $(".blockCross").height() + 55) {
               img.height($(".blockCross").height() + 55);
               img.width(img.height() * k);
             } else {
-              img.width(
-                $(this)
-                  .find(".item_img")
-                  .width()
-              );
+              img.width($(this).find(".item_img").width());
               img.height(img.width() / k);
             }
           } else {
@@ -357,27 +345,25 @@ var custom = {
             img.attr("style", "");
           }
         },
-        function() {
+        function () {
           $(".blockCross_item .item_img").removeClass("last");
-          $(this)
-            .find(".item_img")
-            .addClass("last");
+          $(this).find(".item_img").addClass("last");
           $(".blockCross_item .item_img").removeClass("show");
         }
       );
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   animateScaleIn: {
-    checkAndDo: function() {
+    checkAndDo: function () {
       var count = 0;
-      var start_anim = function(item) {
+      var start_anim = function (item) {
         if (count > 5) {
           item.removeClass("is-hidden");
         } else {
-          setTimeout(function() {
+          setTimeout(function () {
             item.removeClass("is-hidden");
           }, count * 100);
         }
@@ -385,67 +371,59 @@ var custom = {
       };
       $(document)
         .find(".is-hidden.anim-scale")
-        .each(function() {
+        .each(function () {
           {
             start_anim($(this));
           }
         });
     },
-    init: function() {
+    init: function () {
       var _this = this;
-      $(document).on("preloadingFinish", function() {
+      $(document).on("preloadingFinish", function () {
         _this.checkAndDo();
       });
-    }
+    },
   },
   filter: {
-    setup: function() {
-      $(".filter_select").each(function() {
+    setup: function () {
+      $(".filter_select").each(function () {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           closeOnSelect: false,
           //multiple: true,
           dropdownParent: $(".wrapper .page"),
-          dropdownCssClass: "filter_select2"
+          dropdownCssClass: "filter_select2",
         });
       });
       if ($(".filter").height() < $(".filter .content").height()) {
         $(".filter_showAll").addClass("active");
       }
     },
-    events: function() {
+    events: function () {
       var opened = null;
       function selects() {
-        $(".filter_select").on("select2:close", function() {
+        $(".filter_select").on("select2:close", function () {
           opened = null;
-          $(this)
-            .parent()
-            .removeClass("active");
+          $(this).parent().removeClass("active");
         });
-        $(".filter_select").on("select2:open", function() {
+        $(".filter_select").on("select2:open", function () {
           opened = $(this);
-          $(this)
-            .parent()
-            .addClass("active");
-          $(".select2-results")
-            .find(".select2_products-count")
-            .remove();
-          $(".select2-results")
-            .find(".select2_buts")
-            .remove();
+          $(this).parent().addClass("active");
+          $(".select2-results").find(".select2_products-count").remove();
+          $(".select2-results").find(".select2_buts").remove();
 
           var buts =
             "<div class='select2_buts'><a href='' class='btn btn-gray select2_clear'>Сбросить</a><a href='' class='btn btn-orange select2_set'>Применить</a></div>";
           if (this.hasAttribute("setButs")) $(".select2-results").append(buts);
         });
-        $(document).on("click", ".select2_clear", function(e) {
+        $(document).on("click", ".select2_clear", function (e) {
           e.preventDefault();
           if (opened) {
             opened.val("").trigger("change");
             opened.select2("close");
           }
         });
-        $(document).on("click", ".select2_set", function(e) {
+        $(document).on("click", ".select2_set", function (e) {
           e.preventDefault();
           var count = 1;
           if (
@@ -456,14 +434,12 @@ var custom = {
                 count +
                 "</div>"
             );
-            $(".select2-results")
-              .find(".select2_products-count")
-              .animate(
-                {
-                  height: "50px"
-                },
-                300
-              );
+            $(".select2-results").find(".select2_products-count").animate(
+              {
+                height: "50px",
+              },
+              300
+            );
           } else {
             $(".select2-results")
               .find(".select2_products-count")
@@ -472,7 +448,7 @@ var custom = {
         });
       }
       function sliders() {
-        close = function(item) {
+        close = function (item) {
           if ($(".filter_slider_box .filter_slider_base").attr("data-value")) {
             var val = $(".filter_slider_box .filter_slider_base")
               .attr("data-value")
@@ -487,20 +463,14 @@ var custom = {
             .remove();
           if ($(".filter_slider_box").length > 0)
             $(".filter_slider_base").slider("destroy");
-          var newHtml = $(".page")
-            .find(".filter_slider_box")
-            .html();
+          var newHtml = $(".page").find(".filter_slider_box").html();
           item.find(".filter_hide").html(newHtml);
-          $(".page")
-            .find(".filter_slider_box")
-            .remove();
+          $(".page").find(".filter_slider_box").remove();
         };
-        $(".filter_slider_open").click(function(e) {
+        $(".filter_slider_open").click(function (e) {
           e.preventDefault();
 
-          var html = $(this)
-            .find(".filter_hide")
-            .html();
+          var html = $(this).find(".filter_hide").html();
           if (!$(this).hasClass("active")) {
             $(".wrapper .page").append(
               '<div class="filter_slider_box">' + html + "</div>"
@@ -508,11 +478,7 @@ var custom = {
             $(".page")
               .find(".filter_slider_box")
               .css("left", $(this).offset().left)
-              .width(
-                $(this)
-                  .parent()
-                  .width() - 60
-              );
+              .width($(this).parent().width() - 60);
             $(".page")
               .find(".filter_slider_box")
               .css("top", $(this).offset().top + $(this).height());
@@ -530,26 +496,22 @@ var custom = {
           }
           $(this).toggleClass("active");
         });
-        $(document).mouseup(function(e) {
+        $(document).mouseup(function (e) {
           var container = $(".filter_slider_open,.filter_slider_box");
           if (!container.is(e.target) && container.has(e.target).length === 0) {
             close($(this));
             $(".filter_slider_open").removeClass("active");
           }
         });
-        $(document).on("slide", ".filter_slider_base", function(slideEvt) {
+        $(document).on("slide", ".filter_slider_base", function (slideEvt) {
           $(".filter_slider_min span").text(slideEvt.value[0]);
           $(".filter_slider_max span").text(slideEvt.value[1]);
         });
-        $(document).on("click", ".filter_slider_clear", function(e) {
+        $(document).on("click", ".filter_slider_clear", function (e) {
           e.preventDefault();
           console.log($(".filter_slider_base"));
-          var minValue = $(".filter_slider_base")
-            .eq(0)
-            .attr("data-slider-min");
-          var maxValue = $(".filter_slider_base")
-            .eq(0)
-            .attr("data-slider-max");
+          var minValue = $(".filter_slider_base").eq(0).attr("data-slider-min");
+          var maxValue = $(".filter_slider_base").eq(0).attr("data-slider-max");
           var defaultValue = "[" + minValue + "," + maxValue + "]";
           $(".filter_slider_base").attr("data-slider-value", defaultValue);
           $(".filter_slider_max span").text(maxValue);
@@ -558,7 +520,7 @@ var custom = {
           $(".filter_slider_base").slider("refresh");
           $(".filter_slider_open").click();
         });
-        $(document).on("click", ".filter_slider_set", function(e) {
+        $(document).on("click", ".filter_slider_set", function (e) {
           e.preventDefault();
           var count = 1;
           if (
@@ -574,7 +536,7 @@ var custom = {
               .find(".filter_slider_products-count")
               .animate(
                 {
-                  height: "50px"
+                  height: "50px",
                 },
                 300
               );
@@ -586,11 +548,11 @@ var custom = {
         });
       }
 
-      $(".filter_showAll").click(function(e) {
+      $(".filter_showAll").click(function (e) {
         e.preventDefault();
         $(".filter").addClass("opened");
       });
-      $(".filter_close").click(function(e) {
+      $(".filter_close").click(function (e) {
         e.preventDefault();
         $(".filter").removeClass("opened");
         $(".filter").attr("style", "");
@@ -599,56 +561,56 @@ var custom = {
       sliders();
       selects();
     },
-    init: function() {
+    init: function () {
       this.setup();
       this.events();
-    }
+    },
   },
   filterInMap: {
-    setup: function() {
-      $(".filterMap_select").each(function() {
+    setup: function () {
+      $(".filterMap_select").each(function () {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           closeOnSelect: false,
           dropdownParent: $(".wrapper .page"),
-          dropdownCssClass: "filterMap_select2"
+          dropdownCssClass: "filterMap_select2",
         });
       });
     },
-    init: function() {
+    init: function () {
       this.setup();
-    }
+    },
   },
   example: {
-    events: function() {
-      $(document).on("click", ".example", function() {
+    events: function () {
+      $(document).on("click", ".example", function () {
         $(this).toggleClass("opened");
       });
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   sort: {
-    setup: function() {
-      $(".sort_select").each(function() {
+    setup: function () {
+      $(".sort_select").each(function () {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           multiple: false,
           dropdownParent: $(".wrapper .page"),
-          dropdownCssClass: "sort_select2"
+          dropdownCssClass: "sort_select2",
         });
       });
     },
-    events: function() {
-      $(document).on("click", ".sort_pos button", function() {
+    events: function () {
+      $(document).on("click", ".sort_pos button", function () {
         $(".sort_pos button").removeClass("active");
         $(".catList_typePos").removeClass("grid");
         $(".catList_typePos").removeClass("list");
         $(".catList_typePos").addClass($(this).attr("data-class"));
         $(this).addClass("active");
       });
-      $(window).on("resize", function() {
+      $(window).on("resize", function () {
         if (
           $(".catList_typePos").length > 0 &&
           $(".catList_typePos").hasClass("list") &&
@@ -659,22 +621,22 @@ var custom = {
         }
       });
     },
-    init: function() {
+    init: function () {
       this.setup();
       this.events();
-    }
+    },
   },
   title_select: {
-    setup: function() {
-      $(".title_select").each(function() {
+    setup: function () {
+      $(".title_select").each(function () {
         $(this).select2({
           minimumResultsForSearch: Infinity,
           multiple: false,
           dropdownParent: $(".wrapper .page"),
-          dropdownCssClass: "title_select2"
+          dropdownCssClass: "title_select2",
         });
       });
-      $(".title_select").on("select2:open", function(e) {
+      $(".title_select").on("select2:open", function (e) {
         var openBox = $(document).find(".title_select2");
         openBox.css("min-width", $(window).width() + "px");
         var left =
@@ -686,12 +648,12 @@ var custom = {
         openBox.css("padding-right", paddleft + "px");
       });
     },
-    init: function() {
+    init: function () {
       this.setup();
-    }
+    },
   },
   detailGaleryImgs: {
-    setup: function() {
+    setup: function () {
       var galleryThumbs = new Swiper(".detail_imgs_list", {
         spaceBetween: 30,
         slidesPerView: 4,
@@ -703,78 +665,66 @@ var custom = {
         breakpoints: {
           1000: {
             slidesPerView: 6,
-            direction: "vertical"
+            direction: "vertical",
           },
           768: {
-            slidesPerView: 5
-          }
-        }
+            slidesPerView: 5,
+          },
+        },
       });
       var galleryTop = new Swiper(".detail_imgs_box", {
         spaceBetween: 30,
         slidesPerView: 1,
         thumbs: {
-          swiper: galleryThumbs
-        }
+          swiper: galleryThumbs,
+        },
       });
     },
-    events: function() {},
-    init: function() {
+    events: function () {},
+    init: function () {
       this.setup();
-    }
+    },
   },
   detailTabsDoing: {
-    events: function() {
-      $(document).on("click", ".tabsBox_menu", function() {
+    events: function () {
+      $(document).on("click", ".tabsBox_menu", function () {
         if ($(window).width() < 768) {
           $(this).toggleClass("active");
         }
       });
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   mapPointsOpenClose: {
-    events: function() {
-      $(".point .point_btn").click(function() {
-        $(this)
-          .parent()
-          .toggleClass("active");
-        if (
-          $(this)
-            .parent()
-            .hasClass("active")
-        ) {
-          var height = $(this)
-            .parent()
-            .find(".point_item")
-            .height();
+    events: function () {
+      $(".point .point_btn").click(function () {
+        $(this).parent().toggleClass("active");
+        if ($(this).parent().hasClass("active")) {
+          var height = $(this).parent().find(".point_item").height();
           $(this)
             .parent()
             .find(".point_content")
             .height(height + 50);
         } else {
-          $(this)
-            .parent()
-            .find(".point_content")
-            .attr("style", "");
+          $(this).parent().find(".point_content").attr("style", "");
         }
       });
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   mapWhereBuy: {
     center: null,
-    createPlaceMark: function(coords, src, sity, name, link) {
+    createPlaceMark: function (coords, src, sity, name, link) {
       var width = 400;
       if ($(window).width() <= 600) width = 320;
       return new ymaps.Placemark(
         coords,
         {
-          hasBalloon: false
+          hasBalloon: false,
           // balloonContentHeader:
           //   '<div class="yaMap_head">' +
           //   '<img src="' +
@@ -804,21 +754,21 @@ var custom = {
           iconLayout: "default#image",
           iconImageHref: "images/map.png",
           iconImageSize: [44, 44],
-          iconImageOffset: [-22, -22]
+          iconImageOffset: [-22, -22],
         }
       );
     },
-    create: function() {
+    create: function () {
       var _this = this;
       myMap = new ymaps.Map(
         "map",
         {
           center: _this.center,
           zoom: 6,
-          controls: []
+          controls: [],
         },
         {
-          searchControlProvider: "yandex#search"
+          searchControlProvider: "yandex#search",
         }
       );
       clusterer = new ymaps.Clusterer({
@@ -827,21 +777,19 @@ var custom = {
           {
             href: "images/map.png",
             size: [66, 66],
-            offset: [-33, -33]
-          }
+            offset: [-33, -33],
+          },
         ],
         groupByCoordinates: false,
         clusterIconColor: "black",
         clusterHideIconOnBalloonOpen: false,
-        geoObjectHideIconOnBalloonOpen: false
+        geoObjectHideIconOnBalloonOpen: false,
       });
       if ($(".map_data .placeMark").length > 0) {
-        $(".map_data .placeMark").each(function() {
+        $(".map_data .placeMark").each(function () {
           clusterer.add(
             _this.createPlaceMark(
-              $(this)
-                .attr("data-cords")
-                .split(","),
+              $(this).attr("data-cords").split(","),
               $(this).attr("data-img"),
               $(this).attr("data-sity"),
               $(this).attr("data-name"),
@@ -856,7 +804,7 @@ var custom = {
       if ($(window).width() < 768) {
         // myMap.behaviors.disable("drag");
       }
-      myMap.events.add("click", function() {
+      myMap.events.add("click", function () {
         myMap.balloon.close();
       });
       myMap.behaviors.disable("scrollZoom");
@@ -865,52 +813,49 @@ var custom = {
           options: {
             size: "auto",
             float: "none",
-            position: { right: 10, bottom: 40 }
-          }
+            position: { right: 10, bottom: 40 },
+          },
         })
       );
     },
-    init: function() {
+    init: function () {
       var _this = this;
       this.center =
         $(".map_data .placeMark").length > 0
-          ? $(".map_data .placeMark")
-              .eq(0)
-              .attr("data-cords")
-              .split(",")
+          ? $(".map_data .placeMark").eq(0).attr("data-cords").split(",")
           : [55.751574, 37.573856];
       function initMap() {
         _this.create();
       }
-      ymaps.ready(function() {
+      ymaps.ready(function () {
         initMap();
       });
-    }
+    },
   },
   mapSliderInf: {
-    create: function() {
+    create: function () {
       var sliderInf = new Swiper(".sliderRight_right .slider", {
-        slidesPerView: 1
+        slidesPerView: 1,
       });
-      $(document).on("click", ".sliderRight_prev", function() {
+      $(document).on("click", ".sliderRight_prev", function () {
         sliderInf.slidePrev();
       });
-      $(document).on("click", ".sliderRight_next", function() {
+      $(document).on("click", ".sliderRight_next", function () {
         sliderInf.slideNext();
       });
     },
-    init: function() {
+    init: function () {
       this.create();
-    }
+    },
   },
   setSizeImg: {
-    setSize: function() {
-      $(".img-full").each(function() {
+    setSize: function () {
+      $(".img-full").each(function () {
         var pwidth = $(this).width();
         var pheight = $(this).height();
         $(this)
           .find("img")
-          .each(function() {
+          .each(function () {
             var nwidth = this.naturalWidth;
             var nheight = this.naturalHeight;
 
@@ -924,34 +869,34 @@ var custom = {
           });
       });
     },
-    init: function() {
+    init: function () {
       var _this = this;
       this.setSize();
-      $(window).on("resize", function() {
+      $(window).on("resize", function () {
         _this.setSize();
       });
-    }
+    },
   },
   detailImgSlider: {
-    init: function() {
+    init: function () {
       $(".newDetail_box .slider").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         speed: 600,
         dots: true,
-        arrows: false
+        arrows: false,
       });
-    }
+    },
   },
   rightMenu: {
-    events: function() {
-      $(document).on("click", ".rightMenu-wrapper", function() {
+    events: function () {
+      $(document).on("click", ".rightMenu-wrapper", function () {
         $(this).toggleClass("open");
       });
       this.setFixedInScroll();
     },
     posRightMenu: {
-      update: function() {
+      update: function () {
         var _ = this;
         console.log("ssss");
         var itemTop = $(".rightMenu-box").offset().top;
@@ -970,7 +915,7 @@ var custom = {
           _.clearFixed();
         }
       },
-      setFixed: function() {
+      setFixed: function () {
         var itemLeft = $(".rightMenu-box").offset().left - 1;
         var width = $(".rightMenu-box").outerWidth() / 2;
         var headerheight = $(".header").height() - 70;
@@ -1006,7 +951,7 @@ var custom = {
           $(".rightMenu-container").css("height", "");
         }
       },
-      clearFixed: function() {
+      clearFixed: function () {
         $(".rightMenu-container").removeClass("fixed");
         $(".rightMenu-container").css("right", "");
         $(".rightMenu-container").css("transform", "");
@@ -1014,32 +959,32 @@ var custom = {
         $(".rightMenu-container").css("top", "");
         $(".rightMenu-container").css("width", "");
         //$(".rightMenu-container").attr("style", "");
-      }
+      },
     },
-    setFixedInScroll: function() {
+    setFixedInScroll: function () {
       var _ = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _.posRightMenu.update();
       });
-      $(window).on("resize", function() {
+      $(window).on("resize", function () {
         _.posRightMenu.update();
       });
     },
-    init: function() {
+    init: function () {
       var _ = this;
       _.events();
-      $(window).on("load", function() {
+      $(window).on("load", function () {
         _.posRightMenu.update();
       });
       ///
-    }
+    },
   },
   fixedContainerLeft: {
-    events: function() {
+    events: function () {
       this.setFixedInScroll();
     },
     pos: {
-      update: function() {
+      update: function () {
         var _ = this;
         var itemTop = $(".fixed-box-root").offset().top;
         var headerheight = $(".header").height() - 70;
@@ -1054,7 +999,7 @@ var custom = {
           _.clearFixed();
         }
       },
-      setFixed: function() {
+      setFixed: function () {
         var width = $(".fixed-box-root").outerWidth() / 2;
 
         var itemLeft = $(".fixed-box-root").offset().left - width;
@@ -1071,7 +1016,7 @@ var custom = {
         var offsetTopFooter =
           $(".fixed-box-root").offset().top +
           $(".fixed-box-root").outerHeight();
-        $(".fixed-container").each(function() {
+        $(".fixed-container").each(function () {
           var heightBox = $(this).height();
 
           if (offseTop + heightBox >= offsetTopFooter - offsetBottom) {
@@ -1081,51 +1026,51 @@ var custom = {
           }
         });
       },
-      clearFixed: function() {
+      clearFixed: function () {
         $(".fixed-container").removeClass("fixed");
         $(".fixed-container").attr("style", "");
-      }
+      },
     },
-    setFixedInScroll: function() {
+    setFixedInScroll: function () {
       var _ = this;
-      $(document).on("scroll", function() {
+      $(document).on("scroll", function () {
         _.pos.update();
       });
-      $(window).on("resize", function() {
+      $(window).on("resize", function () {
         _.pos.update();
       });
     },
-    init: function() {
+    init: function () {
       var _ = this;
       _.events();
-      $(window).on("load", function() {
+      $(window).on("load", function () {
         _.pos.update();
       });
       ///
-    }
+    },
   },
   aboutSliders: {
-    years: function() {
+    years: function () {
       var years = new Swiper(".yearSlider-years", {
         slidesPerView: 1,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
-        direction: "horizontal"
+        direction: "horizontal",
       });
       var texts = new Swiper(".yearSlider-texts", {
         slidesPerView: 1,
         thumbs: {
-          swiper: years
-        }
+          swiper: years,
+        },
       });
-      $(document).on("click", ".yearSlider-prev", function() {
+      $(document).on("click", ".yearSlider-prev", function () {
         texts.slidePrev();
       });
-      $(document).on("click", ".yearSlider-next", function() {
+      $(document).on("click", ".yearSlider-next", function () {
         texts.slideNext();
       });
     },
-    imgs: function() {
+    imgs: function () {
       var imgs = new Swiper(".imgSlider-slider", {
         spaceBetween: 3,
         slidesPerView: "auto",
@@ -1135,54 +1080,50 @@ var custom = {
         loop: true,
         breakpoints: {
           768: {
-            spaceBetween: 30
+            spaceBetween: 30,
           },
           550: {
-            spaceBetween: 15
-          }
-        }
+            spaceBetween: 15,
+          },
+        },
       });
-      $(document).on("click", ".imgSlider-prev", function() {
+      $(document).on("click", ".imgSlider-prev", function () {
         imgs.slidePrev();
       });
-      $(document).on("click", ".imgSlider-next", function() {
+      $(document).on("click", ".imgSlider-next", function () {
         imgs.slideNext();
       });
     },
-    init: function() {
+    init: function () {
       if ($(".yearSlider-years").length > 0) this.years();
       if ($(".imgSlider-slider").length > 0) this.imgs();
-    }
+    },
   },
   detailCalcProd: {
-    update: function(delta) {
-      var count = parseInt(
-        $("input[name=count]")
-          .eq(0)
-          .val()
-      );
+    update: function (delta) {
+      var count = parseInt($("input[name=count]").eq(0).val());
       if (delta) count += delta;
       if (count < 0) count = 0;
       $(".detail_count-value").text(count);
       $("input[name=count]").val(count);
     },
-    events: function() {
+    events: function () {
       var _ = this;
-      $(document).on("click", ".detail_count-minus", function() {
+      $(document).on("click", ".detail_count-minus", function () {
         _.update(-1);
       });
-      $(document).on("click", ".detail_count-plus", function() {
+      $(document).on("click", ".detail_count-plus", function () {
         _.update(1);
       });
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   cartCalcProd: {
-    events: function() {
+    events: function () {
       var _ = this;
-      $(document).on("click", ".product .count-minus", function() {
+      $(document).on("click", ".product .count-minus", function () {
         var product = $(this).closest(".product");
         var count = product.find("[name=count]");
         var countNum = parseFloat(count.val());
@@ -1193,85 +1134,73 @@ var custom = {
           _.removeItem(product);
         }
       });
-      $(document).on("click", ".product .count-plus", function() {
+      $(document).on("click", ".product .count-plus", function () {
         var product = $(this).closest(".product");
         var count = product.find("[name=count]");
         var countNum = parseFloat(count.val());
         count.val(countNum + 1);
         _.refresh();
       });
-      $(document).on("click", ".product .summ-clear", function() {
+      $(document).on("click", ".product .summ-clear", function () {
         var product = $(this).closest(".product");
         _.removeItem(product);
         _.refresh();
       });
     },
-    refresh: function() {
+    refresh: function () {
       var items = $(".product");
       var allSumm = 0;
-      items.each(function() {
-        var price = parseFloat(
-          $(this)
-            .find("[name=price]")
-            .val()
-        );
-        var count = parseFloat(
-          $(this)
-            .find("[name=count]")
-            .val()
-        );
+      items.each(function () {
+        var price = parseFloat($(this).find("[name=price]").val());
+        var count = parseFloat($(this).find("[name=count]").val());
         var summ = price * count;
-        $(this)
-          .find(".summ-value span")
-          .text(perfectNum(summ));
-        $(this)
-          .find(".count-value")
-          .text(count);
+        $(this).find(".summ-value span").text(perfectNum(summ));
+        $(this).find(".count-value").text(count);
         allSumm += summ;
       });
       $(".allSumm-value span").text(perfectNum(allSumm));
     },
-    removeItem: function(item) {
+    removeItem: function (item) {
       console.log("Удаление эллемента: ", item.find(".product-name").text());
       item.remove();
       this.refresh();
     },
-    init: function() {
+    init: function () {
       this.events();
-    }
+    },
   },
   openOrderRegister: {
     center: null,
-    createPlaceMark: function(coords, id) {
+    createPlaceMark: function (coords, id) {
       var width = 400;
       if ($(window).width() <= 600) width = 320;
       var p = new ymaps.Placemark(
         coords,
         {
-          hasBalloon: false
+          hasBalloon: false,
         },
         {
           hideIconOnBalloonOpen: false,
           iconLayout: "default#image",
           iconImageHref: "images/map.png",
           iconImageSize: [44, 44],
-          iconImageOffset: [-22, -22]
+          iconImageOffset: [-22, -22],
         }
       );
       p.id = id;
       return p;
     },
-    create: function() {
+    create: function () {
       var _this = this;
       myMap = new ymaps.Map(
         "map",
         {
           center: _this.center,
           zoom: 6,
-          controls: []
+          controls: [],
         },
         {
-          searchControlProvider: "yandex#search"
+          searchControlProvider: "yandex#search",
         }
       );
       clusterer = new ymaps.Clusterer({
@@ -1280,23 +1209,21 @@ var custom = {
           {
             href: "images/map.png",
             size: [66, 66],
-            offset: [-33, -33]
-          }
+            offset: [-33, -33],
+          },
         ],
         groupByCoordinates: false,
         clusterIconColor: "black",
         clusterHideIconOnBalloonOpen: false,
-        geoObjectHideIconOnBalloonOpen: false
+        geoObjectHideIconOnBalloonOpen: false,
       });
       if ($(".map_data .placeMark").length > 0) {
-        $(".map_data .placeMark").each(function() {
+        $(".map_data .placeMark").each(function () {
           var mark = _this.createPlaceMark(
-            $(this)
-              .attr("data-cords")
-              .split(","),
+            $(this).attr("data-cords").split(","),
             $(this).attr("data-id")
           );
-          mark.events.add("click", function(e) {
+          mark.events.add("click", function (e) {
             var item = $(
               ".popupOrder-list [data-id=" + e.get("target").id + "]"
             );
@@ -1315,7 +1242,7 @@ var custom = {
       if ($(window).width() < 768) {
         // myMap.behaviors.disable("drag");
       }
-      myMap.events.add("click", function() {
+      myMap.events.add("click", function () {
         myMap.balloon.close();
       });
       myMap.behaviors.disable("scrollZoom");
@@ -1324,33 +1251,30 @@ var custom = {
           options: {
             size: "auto",
             float: "none",
-            position: { right: 10, bottom: 40 }
-          }
+            position: { right: 10, bottom: 40 },
+          },
         })
       );
     },
-    open: function() {
+    open: function () {
       var _ = this;
       this.center =
         $(".map_data .placeMark").length > 0
-          ? $(".map_data .placeMark")
-              .eq(0)
-              .attr("data-cords")
-              .split(",")
+          ? $(".map_data .placeMark").eq(0).attr("data-cords").split(",")
           : [55.751574, 37.573856];
       _.create();
     },
-    events: function() {
+    events: function () {
       var _ = this;
-      $(document).on("click", "#setCity", function() {
+      $(document).on("click", "#setCity", function () {
         if ($("#map ymaps").length > 0) {
           $("#map ymaps").remove();
         }
-        ymaps.ready(function() {
+        ymaps.ready(function () {
           _.open();
         });
       });
-      $(document).on("click", "#selectAdress", function() {
+      $(document).on("click", "#selectAdress", function () {
         var box = $(document)
           .find(".popupOrder-list")
           .find("input:checked")
@@ -1360,60 +1284,42 @@ var custom = {
         var city = box.find("[name=city]").val();
         var index = box.find("[name=adressIndex]").val();
         if (val) {
-          $(document)
-            .find("#setCity label")
-            .text(city);
-          $(document)
-            .find("#setCity input")
-            .val(val);
-          $(document)
-            .find("#indexPosition")
-            .val(index);
-          $(document)
-            .find("#adresPosition")
-            .val(adress);
+          $(document).find("#setCity label").text(city);
+          $(document).find("#setCity input").val(val);
+          $(document).find("#indexPosition").val(index);
+          $(document).find("#adresPosition").val(adress);
         } else {
-          $(document)
-            .find("#setCity label")
-            .text("Выберите город");
-          $(document)
-            .find("#setCity input")
-            .val("");
-          $(document)
-            .find("#indexPosition")
-            .val("");
-          $(document)
-            .find("#adresPosition")
-            .val("");
+          $(document).find("#setCity label").text("Выберите город");
+          $(document).find("#setCity input").val("");
+          $(document).find("#indexPosition").val("");
+          $(document).find("#adresPosition").val("");
         }
         $("#orderCitySearch").val("");
-        $(".popupOrder-list")
-          .find(".hide")
-          .removeClass("hide");
+        $(".popupOrder-list").find(".hide").removeClass("hide");
         _.search.s = null;
         $.fancybox.close();
       });
     },
     search: {
       s: null,
-      trim: function(s) {
+      trim: function (s) {
         s = s.replace(/^\s+/g, "");
         return s.replace(/\s+$/g, "");
       },
-      find: function(str) {
+      find: function (str) {
         if (str.toUpperCase().indexOf(this.s.toUpperCase()) != -1) {
           return true;
         } else return false;
       },
-      update: function() {
+      update: function () {
         var _ = this;
         $(".popupOrder-list")
           .find(".order-check")
-          .each(function() {
+          .each(function () {
             var find = false;
             $(this)
               .find("input")
-              .each(function() {
+              .each(function () {
                 var str = $(this).val();
                 if (_.find(str)) find = true;
               });
@@ -1424,32 +1330,30 @@ var custom = {
             }
           });
       },
-      events: function() {
+      events: function () {
         var _ = this;
-        $(document).on("keyup", "#orderCitySearch", function(e) {
+        $(document).on("keyup", "#orderCitySearch", function (e) {
           _.s = _.trim($(this).val());
           _.update();
         });
       },
-      init: function() {
+      init: function () {
         this.events();
-      }
+      },
     },
-    init: function() {
+    init: function () {
       this.search.init();
       this.events();
-    }
+    },
   },
-  preloaderInit: function() {
+  preloaderInit: function () {
     var imgs = $(".wrapper").find("*:not(script)");
     var items = [];
-    imgs.each(function() {
+    imgs.each(function () {
       var url = "";
       if (
         $(this).css("background-image") != "none" &&
-        $(this)
-          .css("background-image")
-          .split("-")[0] != "linear"
+        $(this).css("background-image").split("-")[0] != "linear"
       ) {
         var url = $(this).css("background-image");
       } else if (
@@ -1478,44 +1382,84 @@ var custom = {
       $(".preloader_progress .bar").css("height", percent + "%");
       $({
         numberValue: parseInt(
-          $(".preloader_progress .count")
-            .text()
-            .replace("%", "")
-        )
+          $(".preloader_progress .count").text().replace("%", "")
+        ),
       }).animate(
         { numberValue: percent },
         {
           duration: 300,
           easing: "linear",
-          step: function(val) {
+          step: function (val) {
             $(".preloader_progress .count").text(Math.ceil(val) + "%");
-          }
+          },
         }
       );
       if (imgCount == progress) {
-        setTimeout(function() {
+        setTimeout(function () {
           document.querySelector(".preloader").className =
             document.querySelector(".preloader").className + " loaded";
           $n(document).trigger("preloadingFinish");
         }, 100);
       }
     }
-    setTimeout(function() {
+    setTimeout(function () {
       document.querySelector(".preloader").className =
         document.querySelector(".preloader").className + " loaded";
     }, 40000);
 
-    items.forEach(function(item) {
+    items.forEach(function (item) {
       var imgLoad = $("<img></img>");
       $(imgLoad).attr("src", item);
       $(imgLoad).unbind("load");
-      $(imgLoad).bind("load", function() {
+      $(imgLoad).bind("load", function () {
         refreshPreloader();
       });
     });
   },
+  videoControlelr: {
+    init: function () {
+      var that = this;
+      $(window).resize(function () {
+        that.resize();
+      });
+      this.resize();
+      $(".video").each(function () {
+        if ($(this).find("iframe").length > 0) {
+          var frame = $(this).find("iframe").eq(0)[0];
+          var that = this;
+          console.log($(this).find("iframe"));
+          frame.onload = function () {
+            this.contentWindow.document.body.onclick = function () {
+              $(that).toggleClass("active");
+            };
+          };
+        }
+      });
 
-  init: function() {
+      $(".video").click(function () {
+        $(this).toggleClass("active");
+      });
+      $(".video .play").click(function () {
+        if ($(this).parent().find("iframe").length > 0) {
+          var frame = $(this).parent().find("iframe");
+          src = frame.attr("src");
+          frame.attr("src", src + "&autoplay=1");
+        }
+      });
+    },
+    resize: function () {
+      $(".video").each(function () {
+        if ($(this).find("iframe").length > 0) {
+          var frame = $(this).find("iframe");
+          var k = frame.width() / frame.height();
+          frame.width($(this).width());
+          frame.height(frame.width() / k);
+        }
+      });
+    },
+  },
+
+  init: function () {
     this.animateHover.init();
     if ($(".filter_select").length > 0) this.filter.init();
     if ($(".filterMap").length > 0) this.filterInMap.init();
@@ -1540,25 +1484,24 @@ var custom = {
     if ($(".detail_count").length > 0) this.detailCalcProd.init();
     if ($(".fixed-container").length > 0) this.fixedContainerLeft.init();
     if ($(".popupOrder-map").length > 0) this.openOrderRegister.init();
+    if ($(".video").length > 0) this.videoControlelr.init();
     this.aboutSliders.init();
     this.preloaderInit();
-  }
+  },
 };
 var popups = {
-  setup: function() {
+  setup: function () {
     $(".modalbox").fancybox();
   },
-  submits: function() {
-    $(document).on("submit", "#question form", function(e) {
+  submits: function () {
+    $(document).on("submit", "#question form", function (e) {
       e.preventDefault();
       var name = $(this).find("[name=name]");
       var phone = $(this).find("[name=phone]");
       var mail = $(this).find("[name=mail]");
       var text = $(this).find("[name=text]");
       var error = 0;
-      $(this)
-        .find("textarea,input")
-        .removeClass("error");
+      $(this).find("textarea,input").removeClass("error");
       if (name.val() == "") {
         error++;
         name.addClass("error");
@@ -1576,18 +1519,16 @@ var popups = {
         text.addClass("error");
       }
 
-      $(document)
-        .find('[href="#question_success"]')
-        .click();
+      $(document).find('[href="#question_success"]').click();
     });
   },
-  init: function() {
+  init: function () {
     this.setup();
     this.submits();
-  }
+  },
 };
 var svgMap = {
-  slider: function() {
+  slider: function () {
     var slider_ = $(".dillerMap_slider").slick({
       slidesToShow: 1,
       speed: 1000,
@@ -1596,9 +1537,9 @@ var svgMap = {
       centerMode: false,
       infinite: true,
       arrows: true,
-      swipe: false
+      swipe: false,
     });
-    var setClasses = function(slider, id) {
+    var setClasses = function (slider, id) {
       var id_next, id_after_next;
       if (id == slider.$slides.length - 1) {
         id_next = 0;
@@ -1634,16 +1575,14 @@ var svgMap = {
         .eq(id_after_next + 1)
         .addClass("after_next");
       if (id == slider.$slides.length - 1) {
-        $(".dillerMap .slick-cloned")
-          .eq(0)
-          .addClass("current");
+        $(".dillerMap .slick-cloned").eq(0).addClass("current");
       } else {
         $(".dillerMap .slick-cloned")
           .eq(id + 1)
           .addClass("current");
       }
     };
-    $(document).on("beforeChange", ".dillerMap_slider", function(
+    $(document).on("beforeChange", ".dillerMap_slider", function (
       e,
       slider,
       a,
@@ -1653,7 +1592,7 @@ var svgMap = {
     });
     $(".dillerMap_slider").slick("slickGoTo", 0);
   },
-  setPos: function(target) {
+  setPos: function (target) {
     var imgs = $(".dillerMap_map .box");
     var img = $(".dillerMap_map img");
     var imgOne = $(".dillerMap_map img").eq(0);
@@ -1744,28 +1683,28 @@ var svgMap = {
       "translate(" + left + "px," + top + "px) scale(" + scale + ")"
     );
   },
-  events: function() {
+  events: function () {
     var _this = this;
-    $(".dillerMap_slider").on("beforeChange", function(slider, a, b, target) {
+    $(".dillerMap_slider").on("beforeChange", function (slider, a, b, target) {
       _this.setPos(target);
     });
-    $(document).on("click", ".slick-slide:not(.slick-current)", function() {
+    $(document).on("click", ".slick-slide:not(.slick-current)", function () {
       $(".dillerMap_slider").slick(
         "slickGoTo",
         $(this).attr("data-slick-index")
       );
     });
   },
-  init: function() {
+  init: function () {
     if ($(".dillerMap_slider").length > 0) {
       this.slider();
       this.events();
       var _this = this;
-      $(document).on("preloadingFinish", function() {
+      $(document).on("preloadingFinish", function () {
         if (document.readyState === "complete") {
           _this.setPos(0);
         } else {
-          window.onload = function() {
+          window.onload = function () {
             _this.setPos(0);
             window.onload = null;
           };
@@ -1773,11 +1712,11 @@ var svgMap = {
         _this.setPos(0);
       });
     }
-  }
+  },
 };
 var priceSlider = {
-  create: function() {
-    $(".pS_slider").each(function() {
+  create: function () {
+    $(".pS_slider").each(function () {
       $(this).slick({
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -1792,40 +1731,40 @@ var priceSlider = {
             breakpoint: 951,
             settings: {
               slidesToShow: 2,
-              slidesToScroll: 2
-            }
+              slidesToScroll: 2,
+            },
           },
           {
             breakpoint: 621,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
+              slidesToScroll: 1,
+            },
+          },
+        ],
       });
     });
   },
-  init: function() {
+  init: function () {
     this.create();
-  }
+  },
 };
 var configSet = {
-  init: function(){
+  init: function () {
     this.events();
   },
-  events: function(){
-    var setWindowHeight = function() {
+  events: function () {
+    var setWindowHeight = function () {
       var vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty("--vh", vh + "px");
     };
     setWindowHeight();
-    $(window).on("resize", function() {
+    $(window).on("resize", function () {
       setWindowHeight();
     });
-  }
+  },
 };
-(function() {
+(function () {
   configSet.init();
 
   custom.init();
