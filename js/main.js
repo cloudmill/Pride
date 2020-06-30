@@ -1430,14 +1430,14 @@ var custom = {
           console.log($(this).find("iframe"));
           frame.onload = function () {
             this.contentWindow.document.body.onclick = function () {
-              $(that).toggleClass("active");
+              $(that).addClass("active");
             };
           };
         }
       });
 
       $(".video").click(function () {
-        $(this).toggleClass("active");
+        $(this).addClass("active");
       });
       $(".video .play").click(function () {
         if ($(this).parent().find("iframe").length > 0) {
