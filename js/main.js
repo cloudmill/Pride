@@ -1443,7 +1443,11 @@ var custom = {
         if ($(this).parent().find("iframe").length > 0) {
           var frame = $(this).parent().find("iframe");
           src = frame.attr("src");
-          frame.attr("src", src + "&autoplay=1");
+          if(src.split('?').length > 1){
+            frame.attr("src", src + "&autoplay=1");
+          }else{
+            frame.attr("src", src + "?autoplay=1");
+          }
         }
       });
     },
