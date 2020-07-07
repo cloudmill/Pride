@@ -1112,6 +1112,10 @@ body .fancybox-container * {
   border-bottom: 1px solid #e5e5e5;
   resize: none;
 }
+.wrapper .def-form-textarea.error {
+  color: #ff4c4b;
+  border-color: #ff4c4b;
+}
 @media (max-width: 768px) {
   .wrapper .def-form-textarea {
     padding: 15px 0;
@@ -1738,6 +1742,10 @@ body .fancybox-container * {
   border-bottom: 1px solid #e5e5e5;
   resize: none;
 }
+.fancybox-container .def-form-textarea.error {
+  color: #ff4c4b;
+  border-color: #ff4c4b;
+}
 @media (max-width: 768px) {
   .fancybox-container .def-form-textarea {
     padding: 15px 0;
@@ -2263,6 +2271,10 @@ body .fancybox-container * {
   height: 100%;
   border-bottom: 1px solid #e5e5e5;
   resize: none;
+}
+.default-forms-textarea.error {
+  color: #ff4c4b;
+  border-color: #ff4c4b;
 }
 @media (max-width: 768px) {
   .default-forms-textarea {
